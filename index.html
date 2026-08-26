@@ -39,6 +39,11 @@
       <p class="q-count" id="q-count"></p>
       <h2 class="question-text" id="question-text"></h2>
       <div class="options" id="options" role="group"></div>
+      <div class="text-answer" id="text-answer" hidden>
+        <textarea class="text-answer-input" id="text-answer-input" rows="4"></textarea>
+        <p class="error" id="text-answer-error" role="alert" hidden></p>
+        <button class="btn-primary" type="button" id="text-answer-continue">Continue</button>
+      </div>
     </section>
 
     <!-- CONTACT -->
@@ -46,10 +51,6 @@
       <p class="eyebrow">Almost there</p>
       <h2 class="display">Where should we send your decision?</h2>
       <form id="contact-form" novalidate>
-        <label class="field">
-          <span>First name</span>
-          <input required name="firstName" type="text" autocomplete="given-name" placeholder="Jordan">
-        </label>
         <label class="field">
           <span>Email</span>
           <input required name="email" type="email" autocomplete="email" placeholder="you@email.com">

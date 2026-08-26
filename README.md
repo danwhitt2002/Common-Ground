@@ -7,7 +7,7 @@ A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into week
 
 Two static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → 3 multiple-choice questions → name/email/IG → a short "reviewing your application" beat → approved screen with a CTA to pay for the Grounds Pass.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → 3 open-ended application questions → email/IG → a short "reviewing your application" beat → approved screen with a CTA to pay for the Grounds Pass.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
 
 ### Payment: Pix + WhatsApp
@@ -24,7 +24,7 @@ If you ever change the Pix key or the R$120 price, you'll need a new QR — rege
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
 2. **`price`** — currently `R$120`, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
 3. **`instagramHandle`** — shown on the approved screen.
-4. **`questions`** — the 3 multiple-choice questions and their answer options.
+4. **`questions`** — the 3 application questions. Each is `type: "choice"` (needs an `options` array, shown as tappable buttons) or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
 ### Drinks menu — edit `menu.js` → `MENU_CONFIG`
 

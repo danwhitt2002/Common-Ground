@@ -282,6 +282,34 @@ h2.display { font-size: clamp(30px, 8vw, 38px); }
   box-shadow: 0 0 0 1px var(--accent);
 }
 
+.text-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.text-answer-input {
+  width: 100%;
+  resize: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.text-answer-input.short { min-height: 52px; }
+.text-answer-input:not(.short) { min-height: 120px; }
+
+.text-answer-input::placeholder { color: #7c85c2; }
+.text-answer-input:focus { border-color: var(--accent); }
+
 /* Contact form */
 #contact-form {
   width: 100%;

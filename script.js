@@ -23,33 +23,30 @@ const CONFIG = {
   //   Example: "https://formspree.io/f/abcdEFGH"
   formEndpoint: "https://formspree.io/f/mbgjrjnp",
 
+  // Each question is either type "choice" (needs an `options` array,
+  // rendered as tappable buttons) or type "text"/"textarea" (a free-response
+  // field — "text" is a single short line, "textarea" is a longer answer).
+  // An optional `key` surfaces that answer as its own field in the saved
+  // application (in addition to the full `answers` list), which is handy
+  // for a question like name/email you want to read at a glance.
   questions: [
     {
-      text: "What are you actually looking for in a community?",
-      options: [
-        "Deep, real friendships",
-        "Creative collaborators",
-        "A reason to leave the house more",
-        "Honestly, all of the above",
-      ],
+      text: "What's your name?",
+      type: "text",
+      key: "name",
+      placeholder: "Your first name",
     },
     {
-      text: "How do you usually show up to a room full of strangers?",
-      options: [
-        "I find the person standing alone",
-        "I make an entrance",
-        "I scope it out for a minute first",
-        "I bring my people with me",
-      ],
+      text: "Where are you from, and why did you decide to move to Rio de Janeiro?",
+      type: "textarea",
+      key: "hometown",
+      placeholder: "Tell us a little about your story...",
     },
     {
-      text: "Pick your ideal Saturday.",
-      options: [
-        "Rooftop, golden hour",
-        "Bookstore, then a wine bar",
-        "Hosting everyone at my place",
-        "Wherever the group ends up",
-      ],
+      text: "Why do you want to find Common Ground?",
+      type: "textarea",
+      key: "motivation",
+      placeholder: "Tell us a little about what you're looking for...",
     },
   ],
 };
@@ -96,6 +93,10 @@ const progressEl = document.getElementById("progress");
 const qCountEl = document.getElementById("q-count");
 const questionTextEl = document.getElementById("question-text");
 const optionsEl = document.getElementById("options");
+const textAnswerEl = document.getElementById("text-answer");
+const textAnswerInput = document.getElementById("text-answer-input");
+const textAnswerError = document.getElementById("text-answer-error");
+const textAnswerContinue = document.getElementById("text-answer-continue");
 
 function renderProgress() {
   progressEl.innerHTML = "";
@@ -111,16 +112,39 @@ function renderQuestion() {
   renderProgress();
   qCountEl.textContent = `Question ${state.questionIndex + 1} of ${CONFIG.questions.length}`;
   questionTextEl.textContent = q.text;
-  optionsEl.innerHTML = "";
 
-  q.options.forEach((opt) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "option-btn";
-    btn.textContent = opt;
-    btn.addEventListener("click", () => selectOption(opt));
-    optionsEl.appendChild(btn);
-  });
+  if (q.type === "text" || q.type === "textarea") {
+    optionsEl.hidden = true;
+    optionsEl.innerHTML = "";
+    textAnswerEl.hidden = false;
+    textAnswerInput.value = "";
+    textAnswerInput.placeholder = q.placeholder || "";
+    textAnswerInput.rows = q.type === "text" ? 1 : 4;
+    textAnswerInput.classList.toggle("short", q.type === "text");
+    textAnswerError.hidden = true;
+    textAnswerInput.focus();
+  } else {
+    textAnswerEl.hidden = true;
+    optionsEl.hidden = false;
+    optionsEl.innerHTML = "";
+    q.options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "option-btn";
+      btn.textContent = opt;
+      btn.addEventListener("click", () => selectOption(opt));
+      optionsEl.appendChild(btn);
+    });
+  }
+}
+
+function advanceQuestion() {
+  if (state.questionIndex < CONFIG.questions.length - 1) {
+    state.questionIndex += 1;
+    renderQuestion();
+  } else {
+    showScreen("contact");
+  }
 }
 
 function selectOption(answer) {
@@ -135,15 +159,36 @@ function selectOption(answer) {
     answer,
   };
 
-  setTimeout(() => {
-    if (state.questionIndex < CONFIG.questions.length - 1) {
-      state.questionIndex += 1;
-      renderQuestion();
-    } else {
-      showScreen("contact");
-    }
-  }, 320);
+  setTimeout(advanceQuestion, 320);
 }
+
+function submitTextAnswer() {
+  const answer = textAnswerInput.value.trim();
+  if (!answer) {
+    textAnswerError.textContent = "Please answer to continue.";
+    textAnswerError.hidden = false;
+    textAnswerInput.focus();
+    return;
+  }
+  textAnswerError.hidden = true;
+
+  state.answers[state.questionIndex] = {
+    question: CONFIG.questions[state.questionIndex].text,
+    answer,
+  };
+
+  advanceQuestion();
+}
+
+textAnswerContinue.addEventListener("click", submitTextAnswer);
+
+textAnswerInput.addEventListener("keydown", (e) => {
+  // Single-line "text" questions submit on Enter; textareas keep Enter as a newline.
+  if (e.key === "Enter" && !e.shiftKey && textAnswerInput.classList.contains("short")) {
+    e.preventDefault();
+    submitTextAnswer();
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Contact form
@@ -154,18 +199,17 @@ const contactError = document.getElementById("contact-error");
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(contactForm);
-  const firstName = (data.get("firstName") || "").toString().trim();
   const email = (data.get("email") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
 
-  if (!firstName || !email) {
-    contactError.textContent = "Please fill in your name and email.";
+  if (!email) {
+    contactError.textContent = "Please fill in your email.";
     contactError.hidden = false;
     return;
   }
   contactError.hidden = true;
 
-  state.contact = { firstName, email, instagram };
+  state.contact = { email, instagram };
   showScreen("reviewing");
   runReviewSequence();
 });
@@ -207,6 +251,14 @@ function submitApplication() {
     ...state.contact,
     answers: state.answers,
   };
+
+  // Surface any keyed question (e.g. name) as its own top-level field too,
+  // so it's readable at a glance alongside the full Q&A list above.
+  CONFIG.questions.forEach((q, i) => {
+    if (q.key && state.answers[i]) {
+      payload[q.key] = state.answers[i].answer;
+    }
+  });
 
   // Local backup so nothing is lost even without a remote endpoint configured.
   try {
