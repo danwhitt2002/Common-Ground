@@ -33,7 +33,8 @@ Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**, plus the
 ### Brand identity
 
 - **Colors** (`styles.css` → `:root`): deep cobalt blue background (`--bg`) with a warm tan/sand accent (`--accent`), matching the Common Ground drink-menu graphic.
-- **Fonts**: `Permanent Marker` for the wordmark, `Fraunces` (serif) for headlines/questions/price, `Inter` for body copy, labels, and buttons. `Caveat` (handwritten script) is kept only for the drinks menu — category labels and drink names — matching the real menu graphic; it was originally used site-wide but pulled back after it read as too much everywhere else. All self-hosted as `.woff2` files in `assets/fonts/` (see `LICENSES.md` there) rather than loaded from Google Fonts, so the site never depends on an external font CDN to look right.
+- **Wordmark**: `assets/logo-common-ground.png` is the *actual* "COMMON GROUND" logo, cropped directly out of the drink-menu photo (background keyed to transparent so it drops onto the site's blue cleanly) rather than a font approximation — used in the topbar on every page, and larger in the "Functional Mocktails By" lockup at the top of the menu page. If you ever get a proper vector/high-res version of the logo, swap this file out (keep the same filename, or update the `<img src>` references in `index.html`/`menu.html`).
+- **Fonts**: `Fraunces` (serif) for headlines/questions/price, `Inter` for body copy, labels, and buttons. `Caveat` (handwritten script) is kept only for the drinks menu — category labels and drink names — matching the real menu graphic; it was originally used site-wide but pulled back after it read as too much everywhere else. All self-hosted as `.woff2` files in `assets/fonts/` (see `LICENSES.md` there) rather than loaded from Google Fonts, so the site never depends on an external font CDN to look right.
 
 ### Deploying
 
