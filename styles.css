@@ -147,13 +147,29 @@ main {
 .screen.is-active { display: flex; }
 
 .screen[data-screen="landing"] {
+  position: relative;
   align-self: stretch;
   justify-content: space-evenly;
   padding: 8px 0;
 }
 
+.landing-accent {
+  position: absolute;
+  z-index: 0;
+  top: 64%;
+  right: -20%;
+  transform: translateY(-50%);
+  width: 72%;
+  max-width: 320px;
+  height: auto;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
 .landing-hero,
 .landing-cta {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
