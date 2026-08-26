@@ -156,13 +156,13 @@ main {
 .landing-accent {
   position: absolute;
   z-index: 0;
-  top: 64%;
-  right: -20%;
-  transform: translateY(-50%);
-  width: 72%;
-  max-width: 320px;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 420px;
   height: auto;
-  opacity: 0.32;
+  opacity: 0.38;
   pointer-events: none;
 }
 
