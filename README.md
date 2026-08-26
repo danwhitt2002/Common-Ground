@@ -3,9 +3,12 @@ Find your common ground. A social club.
 
 ## Grounds Pass application page
 
-A single mobile-first landing page (`index.html`, `styles.css`, `script.js`) for the Instagram bio link. Flow: hero → 3 multiple-choice questions → name/email/IG → a short "reviewing your application" beat → approved screen with a CTA to pay for the Grounds Pass.
+A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into weekly events with coffee-based and matcha-based mocktails included.
 
-No build step, no backend required — just static files.
+Two static pages, no build step, no backend required:
+
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → 3 multiple-choice questions → name/email/IG → a short "reviewing your application" beat → approved screen with a CTA to pay for the Grounds Pass.
+- **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
@@ -14,6 +17,10 @@ No build step, no backend required — just static files.
 3. **`price`** — currently `R$120`, shown on the landing and approved screens (should match your Stripe link's price).
 4. **`instagramHandle`** — shown on the approved screen.
 5. **`questions`** — the 3 multiple-choice questions and their answer options.
+
+### Drinks menu — edit `menu.js` → `MENU_CONFIG`
+
+Currently filled with placeholder drinks tagged "Coming Soon" under two categories, **Coffee-Based Mocktails** and **Matcha-Based Mocktails**. Once you send over the real menu, replace each item's `name`/`description`/`tag` (or add/remove items and categories — the page renders whatever's in `MENU_CONFIG`).
 
 ### Deploying
 

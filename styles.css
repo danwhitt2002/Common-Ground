@@ -281,15 +281,22 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
 /* Approved */
 .price-card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
   max-width: 340px;
   padding: 18px 22px;
   border-radius: var(--radius);
   border: 1px solid var(--line);
   background: var(--card);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+}
+
+.price-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .price-label {
@@ -305,6 +312,136 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
   color: var(--accent);
 }
 
+.price-sub {
+  font-size: 12.5px;
+  color: var(--ink-dim);
+  text-align: left;
+}
+
+/* Secondary text link */
+.link-secondary {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.link-secondary:hover {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
 @media (min-width: 640px) {
   main { padding: 56px 24px 80px; }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Menu page                                                               */
+/* ---------------------------------------------------------------------- */
+
+.menu-main {
+  align-items: flex-start;
+  padding: 32px 24px 64px;
+}
+
+.menu-page {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  text-decoration: none;
+}
+
+.back-link:hover { color: var(--accent); }
+
+.menu-page .eyebrow,
+.menu-page .display,
+.menu-page .lede {
+  text-align: left;
+}
+
+.menu-page .lede { margin-bottom: 36px; }
+
+.menu-category {
+  margin-bottom: 36px;
+}
+
+.menu-category-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--accent);
+  margin: 0 0 4px;
+}
+
+.menu-category-note {
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin: 0 0 18px;
+}
+
+.menu-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.menu-item {
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  text-align: left;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.menu-item-name {
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--ink);
+}
+
+.menu-item-tag {
+  flex: none;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.menu-item-desc {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+}
+
+.menu-footer {
+  margin-top: 8px;
+  text-align: left;
+  width: 100%;
 }
