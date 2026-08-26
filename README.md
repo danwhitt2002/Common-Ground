@@ -33,7 +33,7 @@ Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**, plus the
 ### Brand identity
 
 - **Colors** (`styles.css` → `:root`): deep cobalt blue background (`--bg`) with a warm tan/sand accent (`--accent`), matching the Common Ground drink-menu graphic.
-- **Fonts**: `Permanent Marker` for the wordmark, `Caveat` (handwritten script) for headlines/questions/menu items, `Inter` for body copy, labels, and buttons.
+- **Fonts**: `Permanent Marker` for the wordmark, `Caveat` (handwritten script) for headlines/questions/menu items, `Inter` for body copy, labels, and buttons — self-hosted as `.woff2` files in `assets/fonts/` (see `LICENSES.md` there) rather than loaded from Google Fonts, so the site never depends on an external font CDN to look right.
 
 ### Deploying
 
