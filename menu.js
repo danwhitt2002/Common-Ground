@@ -45,7 +45,6 @@ const MENU_CONFIG = {
       image: "assets/menu/add-shot-of-cachaca.png",
     },
   ],
-  footnote: "All coffee-based mocktails consumed are product of Unique.",
 };
 
 const categoriesEl = document.getElementById("menu-categories");
@@ -128,4 +127,5 @@ if (MENU_CONFIG.addOns && MENU_CONFIG.addOns.length) {
 
 if (MENU_CONFIG.footnote) {
   noteEl.textContent = `{ ${MENU_CONFIG.footnote} }`;
+  noteEl.hidden = false;
 }
