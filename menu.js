@@ -25,25 +25,25 @@ const MENU_CONFIG = {
       name: "Matcha-Based",
       image: "assets/menu/matcha-based.png",
       items: [
-        { name: "The Greenhaus", image: "assets/menu/the-greenhaus.png" },
-        { name: "Moonshine Matcha", image: "assets/menu/moonshine-matcha.png" },
+        { name: "The Greenhaus", image: "assets/menu/the-greenhaus.png", description: "Earthy, fresh, green." },
+        { name: "Moonshine Matcha", image: "assets/menu/moonshine-matcha.png", description: "Smoky, wild, nocturnal." },
       ],
     },
     {
       name: "Coffee-Based",
       image: "assets/menu/coffee-based.png",
       items: [
-        { name: "CG x Unique Cold Brew", image: "assets/menu/cg-x-unique-cold-brew.png" },
-        { name: "Sweettalk by Unique", image: "assets/menu/sweettalk-by-unique.png" },
-        { name: "Shaken Guyanese Dirty Chai", image: "assets/menu/shaken-guyanese-dirty-chai.png" },
+        { name: "CG x Unique Cold Brew", image: "assets/menu/cg-x-unique-cold-brew.png", description: "Dark, smooth, bold." },
+        { name: "Sweettalk by Unique", image: "assets/menu/sweettalk-by-unique.png", description: "Silky, warm, flirty." },
+        { name: "Shaken Guyanese Dirty Chai", image: "assets/menu/shaken-guyanese-dirty-chai.png", description: "Spiced, punchy, rich." },
       ],
     },
     {
       name: "Other",
       image: "assets/menu/other.png",
       items: [
-        { name: "Posto 9", image: "assets/menu/posto-9.png" },
-        { name: "Carioca Kick", image: "assets/menu/carioca-kick.png" },
+        { name: "Posto 9", image: "assets/menu/posto-9.png", description: "Fiery, bright, sweet." },
+        { name: "Carioca Kick", image: "assets/menu/carioca-kick.png", description: "Zesty, sharp, lively." },
       ],
     },
   ],

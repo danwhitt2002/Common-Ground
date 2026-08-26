@@ -641,9 +641,10 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 }
 
 .menu-item-desc {
-  margin: 6px 0 0;
-  font-size: 13.5px;
-  line-height: 1.5;
+  margin: 4px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
   color: var(--ink-dim);
 }
 
