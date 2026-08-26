@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Common Ground — Apply for Your Grounds Pass</title>
+<meta name="description" content="Apply for your Grounds Pass — the ticket into Common Ground, a curated social club.">
+
+<meta property="og:title" content="Common Ground — Apply for Your Grounds Pass">
+<meta property="og:description" content="Applications are reviewed, not guaranteed. Apply in under a minute.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="bg-texture" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <span class="wordmark">COMMON GROUND</span>
+  </header>
+
+  <main id="main">
+
+    <!-- LANDING -->
+    <section class="screen is-active" data-screen="landing">
+      <p class="eyebrow">Membership Applications Open</p>
+      <h1 class="display">The Grounds&nbsp;Pass</h1>
+      <p class="lede">Your way into Common Ground — the people, the plans, the parties nobody posts about until after. Applications are reviewed, not guaranteed.</p>
+      <button class="btn-primary" id="start-btn" type="button">Apply for Your Grounds Pass</button>
+      <p class="fine-print">Takes about a minute. <span id="landing-price"></span> if approved.</p>
+    </section>
+
+    <!-- QUESTION (template, re-rendered per question) -->
+    <section class="screen" data-screen="question">
+      <div class="progress" id="progress" aria-hidden="true"></div>
+      <p class="q-count" id="q-count"></p>
+      <h2 class="question-text" id="question-text"></h2>
+      <div class="options" id="options" role="group"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="screen" data-screen="contact">
+      <p class="eyebrow">Almost there</p>
+      <h2 class="display">Where should we send your decision?</h2>
+      <form id="contact-form" novalidate>
+        <label class="field">
+          <span>First name</span>
+          <input required name="firstName" type="text" autocomplete="given-name" placeholder="Jordan">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input required name="email" type="email" autocomplete="email" placeholder="you@email.com">
+        </label>
+        <label class="field">
+          <span>Instagram handle <em>(optional)</em></span>
+          <input name="instagram" type="text" placeholder="@yourname">
+        </label>
+        <button class="btn-primary" type="submit">Submit Application</button>
+        <p class="error" id="contact-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- REVIEWING -->
+    <section class="screen" data-screen="reviewing">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2 class="display" id="reviewing-text">Reviewing your application&hellip;</h2>
+    </section>
+
+    <!-- APPROVED -->
+    <section class="screen" data-screen="approved">
+      <p class="eyebrow">Application Approved</p>
+      <h1 class="display">Welcome to<br>Common Ground.</h1>
+      <p class="lede">You're in. Lock in your spot with your Grounds Pass — your ticket to every gathering this season.</p>
+      <div class="price-card">
+        <span class="price-label">Grounds Pass</span>
+        <span class="price-amount" id="approved-price"></span>
+      </div>
+      <a class="btn-primary" id="pay-btn" href="#" target="_blank" rel="noopener">Get My Grounds Pass</a>
+      <p class="fine-print">Questions? DM us on Instagram <span id="ig-handle"></span>.</p>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

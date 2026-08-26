@@ -1,0 +1,310 @@
+:root {
+  --bg: #0e0d0b;
+  --bg-alt: #17140f;
+  --ink: #f3ede2;
+  --ink-dim: #b8afa0;
+  --accent: #d98b4a;
+  --accent-dim: #8a5a2e;
+  --line: #2b271f;
+  --card: #1b1712;
+  --error: #e2685a;
+  --radius: 14px;
+  --max-w: 480px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100dvh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.app {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bg-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(60% 45% at 50% 0%, rgba(217,139,74,0.14), transparent 70%),
+    radial-gradient(80% 60% at 100% 100%, rgba(217,139,74,0.06), transparent 60%),
+    var(--bg);
+  pointer-events: none;
+}
+
+.topbar {
+  position: relative;
+  z-index: 1;
+  padding: 24px 24px 0;
+  text-align: center;
+}
+
+.wordmark {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+  font-weight: 600;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 56px;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: rise 0.45s ease both;
+}
+
+.screen.is-active { display: flex; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.display {
+  font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+h1.display { font-size: clamp(34px, 9vw, 46px); }
+h2.display { font-size: clamp(24px, 6.5vw, 30px); }
+
+.lede {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+  margin: 0 0 32px;
+  max-width: 38ch;
+}
+
+.fine-print {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.btn-primary {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 340px;
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a1208;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 24px -8px rgba(217,139,74,0.55);
+}
+
+.btn-primary:hover { background: #e79c5e; }
+.btn-primary:active { transform: scale(0.97); }
+
+/* Question screen */
+.progress {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+
+.progress .dot {
+  width: 34px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: background 0.25s ease;
+}
+
+.progress .dot.filled { background: var(--accent); }
+
+.q-count {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-weight: 600;
+}
+
+.question-text {
+  font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(22px, 6vw, 27px);
+  line-height: 1.25;
+  margin: 0 0 28px;
+  color: var(--ink);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.option-btn {
+  appearance: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.option-btn:hover { border-color: var(--accent-dim); background: #221c14; }
+.option-btn:active { transform: scale(0.98); }
+.option-btn.selected {
+  border-color: var(--accent);
+  background: #241a0f;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Contact form */
+#contact-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+.field em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--ink-dim);
+  opacity: 0.75;
+}
+
+.field input {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.field input::placeholder { color: #6b6255; }
+.field input:focus { border-color: var(--accent); }
+
+.error {
+  color: var(--error);
+  font-size: 13px;
+  margin: 0;
+  text-align: left;
+}
+
+/* Reviewing */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  margin-bottom: 26px;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Approved */
+.price-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 340px;
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  margin-bottom: 24px;
+}
+
+.price-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+
+.price-amount {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  main { padding: 56px 24px 80px; }
+}
