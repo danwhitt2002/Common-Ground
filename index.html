@@ -84,9 +84,22 @@
         </div>
         <span class="price-sub">Weekly events · coffee &amp; matcha mocktails included</span>
       </div>
-      <a class="btn-primary" id="pay-btn" href="#" target="_blank" rel="noopener">Get My Grounds Pass</a>
+
+      <div class="pix-card">
+        <img class="pix-qr-img" id="pix-qr" src="assets/pix-qr.png" alt="Pix QR code to pay for your Grounds Pass">
+        <p class="pix-scan-hint">Scan with your bank app, or copy the Pix key below</p>
+        <div class="pix-key-row">
+          <span class="pix-key-label">Pix key (email)</span>
+          <div class="pix-key-value-row">
+            <code class="pix-key-value" id="pix-key-value"></code>
+            <button type="button" class="copy-btn" id="copy-pix-btn">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn-primary" id="whatsapp-btn" href="#" target="_blank" rel="noopener">Send Payment Proof on WhatsApp</a>
       <a class="link-secondary" href="menu.html">See the drinks menu →</a>
-      <p class="fine-print">Questions? DM us on Instagram <span id="ig-handle"></span>.</p>
+      <p class="fine-print">Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram <span id="ig-handle"></span>.</p>
     </section>
 
   </main>

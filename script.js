@@ -4,9 +4,14 @@
 const CONFIG = {
   price: "R$120",
 
-  // Paste your Stripe Payment Link here (Stripe Dashboard > Payment Links > +New).
-  // Leave as-is and the button will show a setup reminder instead of charging anyone.
-  stripeLink: "https://buy.stripe.com/REPLACE_WITH_YOUR_LINK",
+  // Your Pix key (shown as text, and encoded into assets/pix-qr.png).
+  // If you ever change the key or amount, regenerate that QR image to match.
+  pixKey: "danwhitt2002@gmail.com",
+
+  // WhatsApp number applicants send payment proof to, digits only with
+  // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
+  whatsappNumber: "447830067043",
+  whatsappMessage: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
 
   // Shown at the bottom of the "approved" screen. Update to your real handle.
   instagramHandle: "@commonground",
@@ -225,16 +230,25 @@ function submitApplication() {
 }
 
 // ---------------------------------------------------------------------------
-// Payment
+// Payment — Pix key + WhatsApp payment proof
 // ---------------------------------------------------------------------------
-const payBtn = document.getElementById("pay-btn");
-if (CONFIG.stripeLink.includes("REPLACE_WITH_YOUR_LINK")) {
-  payBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    alert(
-      "Set CONFIG.stripeLink in script.js to your real Stripe Payment Link before going live."
-    );
-  });
-} else {
-  payBtn.href = CONFIG.stripeLink;
-}
+document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
+
+const whatsappBtn = document.getElementById("whatsapp-btn");
+whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
+
+const copyPixBtn = document.getElementById("copy-pix-btn");
+copyPixBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(CONFIG.pixKey);
+  } catch (err) {
+    // Clipboard API can be unavailable (e.g. insecure context) — fall back silently,
+    // the key is still selectable/copyable by hand from the page.
+  }
+  copyPixBtn.textContent = "Copied";
+  copyPixBtn.classList.add("copied");
+  setTimeout(() => {
+    copyPixBtn.textContent = "Copy";
+    copyPixBtn.classList.remove("copied");
+  }, 1600);
+});
