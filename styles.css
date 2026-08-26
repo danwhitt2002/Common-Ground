@@ -551,36 +551,22 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
   margin-bottom: 36px;
 }
 
-.menu-hero {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 18px;
-  margin: 0 0 28px;
-}
-
-.menu-hero-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: 0.01em;
-  color: var(--ink-dim);
-  text-align: right;
-  text-transform: uppercase;
-}
-
-.menu-hero-logo {
-  height: 64px;
-  width: auto;
-}
-
 .menu-category {
   margin-bottom: 32px;
 }
 
 .menu-category-title {
   display: inline-block;
+  margin: 0 0 14px;
+}
+
+.menu-category-title-img {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+.menu-category-title-text {
   font-family: 'Caveat', cursive;
   font-size: 30px;
   font-weight: 700;
@@ -588,7 +574,6 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-underline-offset: 4px;
-  margin: 0 0 14px;
 }
 
 .menu-category-note {
@@ -628,6 +613,12 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
   color: var(--ink);
 }
 
+.menu-item-name-img {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
 .menu-item-tag {
   flex: none;
   font-size: 11px;
@@ -648,20 +639,17 @@ h2.display { font-size: clamp(24px, 6.5vw, 30px); }
 
 .menu-addon {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  align-items: center;
   padding: 14px 18px;
   border-radius: var(--radius);
   border: 1px dashed var(--line);
   margin-bottom: 32px;
 }
 
-.menu-addon-label {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  font-weight: 600;
+.menu-addon-img {
+  display: block;
+  height: 26px;
+  width: auto;
 }
 
 .menu-addon-name {

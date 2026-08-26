@@ -30,11 +30,13 @@ If you ever change the Pix key or the R$120 price, you'll need a new QR — rege
 
 Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**, plus the cachaça add-on and the "product of Unique" footnote. Add/remove items, categories, or add-ons freely — the page renders whatever's in `MENU_CONFIG`. Each item also accepts an optional `description` and `tag` (e.g. "Seasonal") if you want to add tasting notes later.
 
+Every category and item currently renders as an `image` — cropped directly out of the real menu photo (`assets/menu/*.png`, background keyed transparent) instead of typed text, so the handwriting is pixel-exact rather than a font approximation. This only works for lines that exist in that source photo. A category or item added later without a matching photo (drop the `image` field) falls back to typed text in `Caveat`, the closest font match — still on-brand, just not pixel-exact.
+
 ### Brand identity
 
 - **Colors** (`styles.css` → `:root`): deep cobalt blue background (`--bg`) with a warm tan/sand accent (`--accent`), matching the Common Ground drink-menu graphic.
-- **Wordmark**: `assets/logo-common-ground.png` is the *actual* "COMMON GROUND" logo, cropped directly out of the drink-menu photo (background keyed to transparent so it drops onto the site's blue cleanly) rather than a font approximation — used in the topbar on every page, and larger in the "Functional Mocktails By" lockup at the top of the menu page. If you ever get a proper vector/high-res version of the logo, swap this file out (keep the same filename, or update the `<img src>` references in `index.html`/`menu.html`).
-- **Fonts**: `Fraunces` (serif) for headlines/questions/price, `Inter` for body copy, labels, and buttons. `Caveat` (handwritten script) is kept only for the drinks menu — category labels and drink names — matching the real menu graphic; it was originally used site-wide but pulled back after it read as too much everywhere else. All self-hosted as `.woff2` files in `assets/fonts/` (see `LICENSES.md` there) rather than loaded from Google Fonts, so the site never depends on an external font CDN to look right.
+- **Wordmark**: `assets/logo-common-ground.png` is the *actual* "COMMON GROUND" logo, cropped directly out of the drink-menu photo (background keyed to transparent so it drops onto the site's blue cleanly) rather than a font approximation — used once per page, centered in the topbar. If you ever get a proper vector/high-res version of the logo, swap this file out (keep the same filename, or update the `<img src>` references in `index.html`/`menu.html`).
+- **Fonts**: `Fraunces` (serif) for headlines/questions/price, `Inter` for body copy, labels, and buttons. `Caveat` (handwritten script) is the fallback font for any drinks-menu text that doesn't have a cropped photo (see above); it was originally used site-wide but pulled back after it read as too much everywhere else. All self-hosted as `.woff2` files in `assets/fonts/` (see `LICENSES.md` there) rather than loaded from Google Fonts, so the site never depends on an external font CDN to look right.
 
 ### Deploying
 
