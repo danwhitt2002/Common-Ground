@@ -1,57 +1,43 @@
 // ---------------------------------------------------------------------------
-// MENU CONFIG — replace these placeholder drinks with the real menu whenever
-// it's ready. Each category needs a `name`, an optional `note`, and a list
-// of `items` ({ name, description, tag }). `tag` is optional (e.g. "Iced",
-// "Seasonal") and shows as a small pill next to the drink name.
+// MENU CONFIG — edit this to update what's on the menu. Each category needs
+// a `name` and a list of `items` ({ name, description, tag }) — `description`
+// and `tag` are optional (e.g. a "New" or "Seasonal" pill) and only render
+// when present. `addOns` and `footnote` are optional too.
 // ---------------------------------------------------------------------------
-const MENU_CONFIG = [
-  {
-    name: "Coffee-Based Mocktails",
-    note: "Full lineup coming soon — placeholders below.",
-    items: [
-      {
-        name: "Cafezinho Spritz",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-      {
-        name: "Cold Brew Tonic",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-      {
-        name: "Espresso Cream Soda",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-    ],
-  },
-  {
-    name: "Matcha-Based Mocktails",
-    note: "Full lineup coming soon — placeholders below.",
-    items: [
-      {
-        name: "Matcha Citrus Fizz",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-      {
-        name: "Coconut Matcha Cooler",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-      {
-        name: "Matcha Berry Smash",
-        description: "Placeholder description — swap in the real recipe/tasting notes.",
-        tag: "Coming Soon",
-      },
-    ],
-  },
-];
+const MENU_CONFIG = {
+  categories: [
+    {
+      name: "Matcha-Based",
+      items: [
+        { name: "The Greenhaus" },
+        { name: "Moonshine Matcha" },
+      ],
+    },
+    {
+      name: "Coffee-Based",
+      items: [
+        { name: "CG x Unique Cold Brew" },
+        { name: "Sweettalk by Unique" },
+        { name: "Shaken Guyanese Dirty Chai" },
+      ],
+    },
+    {
+      name: "Other",
+      items: [
+        { name: "Posto 9" },
+        { name: "Carioca Kick" },
+      ],
+    },
+  ],
+  addOns: [{ label: "Add", name: "a shot of cachaça" }],
+  footnote: "All coffee-based mocktails consumed are product of Unique.",
+};
 
-const container = document.getElementById("menu-categories");
+const categoriesEl = document.getElementById("menu-categories");
+const addonEl = document.getElementById("menu-addon");
+const noteEl = document.getElementById("menu-note");
 
-MENU_CONFIG.forEach((category) => {
+MENU_CONFIG.categories.forEach((category) => {
   const section = document.createElement("section");
   section.className = "menu-category";
 
@@ -102,5 +88,28 @@ MENU_CONFIG.forEach((category) => {
   });
 
   section.appendChild(list);
-  container.appendChild(section);
+  categoriesEl.appendChild(section);
 });
+
+if (MENU_CONFIG.addOns && MENU_CONFIG.addOns.length) {
+  MENU_CONFIG.addOns.forEach((addOn) => {
+    const row = document.createElement("div");
+    row.className = "menu-addon";
+
+    const label = document.createElement("span");
+    label.className = "menu-addon-label";
+    label.textContent = addOn.label || "Add";
+    row.appendChild(label);
+
+    const name = document.createElement("span");
+    name.className = "menu-addon-name";
+    name.textContent = addOn.name;
+    row.appendChild(name);
+
+    addonEl.appendChild(row);
+  });
+}
+
+if (MENU_CONFIG.footnote) {
+  noteEl.textContent = `{ ${MENU_CONFIG.footnote} }`;
+}

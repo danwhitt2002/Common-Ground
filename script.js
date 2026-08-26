@@ -16,7 +16,7 @@ const CONFIG = {
   // accepts a JSON POST. Leave blank to disable remote saving (answers still
   // get kept in the browser's localStorage as a local-only backup).
   //   Example: "https://formspree.io/f/abcdEFGH"
-  formEndpoint: "",
+  formEndpoint: "https://formspree.io/f/mbgjrjnp",
 
   questions: [
     {

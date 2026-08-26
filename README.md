@@ -13,14 +13,19 @@ Two static pages, no build step, no backend required:
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`stripeLink`** — create a free [Stripe Payment Link](https://dashboard.stripe.com/payment-links) for the Grounds Pass price and paste the URL in. Until you do, the button shows a setup reminder instead of a broken checkout.
-2. **`formEndpoint`** — where applications get saved. Easiest no-code option: [Formspree](https://formspree.io) (free tier, create a form, paste the endpoint URL, e.g. `https://formspree.io/f/abcdEFGH`). Leave blank and applications still get kept as a local-only backup in the browser's `localStorage`, but you won't see them anywhere.
+2. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
 3. **`price`** — currently `R$120`, shown on the landing and approved screens (should match your Stripe link's price).
 4. **`instagramHandle`** — shown on the approved screen.
 5. **`questions`** — the 3 multiple-choice questions and their answer options.
 
 ### Drinks menu — edit `menu.js` → `MENU_CONFIG`
 
-Currently filled with placeholder drinks tagged "Coming Soon" under two categories, **Coffee-Based Mocktails** and **Matcha-Based Mocktails**. Once you send over the real menu, replace each item's `name`/`description`/`tag` (or add/remove items and categories — the page renders whatever's in `MENU_CONFIG`).
+Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**, plus the cachaça add-on and the "product of Unique" footnote. Add/remove items, categories, or add-ons freely — the page renders whatever's in `MENU_CONFIG`. Each item also accepts an optional `description` and `tag` (e.g. "Seasonal") if you want to add tasting notes later.
+
+### Brand identity
+
+- **Colors** (`styles.css` → `:root`): deep cobalt blue background (`--bg`) with a warm tan/sand accent (`--accent`), matching the Common Ground drink-menu graphic.
+- **Fonts**: `Permanent Marker` for the wordmark, `Caveat` (handwritten script) for headlines/questions/menu items, `Inter` for body copy, labels, and buttons.
 
 ### Deploying
 
