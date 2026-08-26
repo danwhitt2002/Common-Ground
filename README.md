@@ -28,7 +28,7 @@ If you ever change the Pix key or the R$120 price, you'll need a new QR — rege
 
 ### Drinks menu — edit `menu.js` → `MENU_CONFIG`
 
-Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**, plus the cachaça add-on and the "product of Unique" footnote. Add/remove items, categories, or add-ons freely — the page renders whatever's in `MENU_CONFIG`. Each item also accepts an optional `description` and `tag` (e.g. "Seasonal") if you want to add tasting notes later.
+Holds the real menu: **Matcha-Based**, **Coffee-Based**, and **Other**. Add/remove items and categories freely — the page renders whatever's in `MENU_CONFIG`. Each item also accepts an optional `description` and `tag` (e.g. "Seasonal") if you want to add tasting notes later. `addOns` and `footnote` are still supported (an add-on and a footnote were on the menu earlier and got cut) if you want to bring either back.
 
 Every category and item currently renders as an `image` — cropped directly out of the real menu photo (`assets/menu/*.png`, background keyed transparent) instead of typed text, so the handwriting is pixel-exact rather than a font approximation. This only works for lines that exist in that source photo. A category or item added later without a matching photo (drop the `image` field) falls back to typed text in `Caveat`, the closest font match — still on-brand, just not pixel-exact.
 

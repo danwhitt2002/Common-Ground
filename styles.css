@@ -572,8 +572,8 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 
 .menu-category-title-img {
   display: block;
-  height: 28px;
   width: auto;
+  /* height is set inline by menu.js (half natural size — see menu.js) */
 }
 
 .menu-category-title-text {
@@ -625,8 +625,8 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 
 .menu-item-name-img {
   display: block;
-  height: 17px;
   width: auto;
+  /* height is set inline by menu.js (half natural size — see menu.js) */
 }
 
 .menu-item-tag {
@@ -658,8 +658,8 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 
 .menu-addon-img {
   display: block;
-  height: 17px;
   width: auto;
+  /* height is set inline by menu.js (half natural size — see menu.js) */
 }
 
 .menu-addon-name {

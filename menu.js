@@ -10,6 +10,14 @@
 // `image` is present its `name` is still required as the alt text; add a
 // new item/category without an `image` and it just renders as text in the
 // closest matching font instead — no image is required to extend the menu.
+//
+// Each image is saved at 2x with its letters' x-height normalized to the
+// same pixel count as every other image in its tier (items vs. category
+// titles) — that's what makes "Moonshine Matcha" and "Sweettalk by Unique"
+// read as the same size despite one having deep descenders and the other
+// not. renderHandwriting() below displays each at half its natural size
+// (crisp at 2x, and every image's letters now line up at that scale) —
+// don't apply a fixed CSS height to these images, it would undo that.
 // ---------------------------------------------------------------------------
 const MENU_CONFIG = {
   categories: [
@@ -39,12 +47,6 @@ const MENU_CONFIG = {
       ],
     },
   ],
-  addOns: [
-    {
-      name: "Add — a shot of cachaça",
-      image: "assets/menu/add-shot-of-cachaca.png",
-    },
-  ],
 };
 
 const categoriesEl = document.getElementById("menu-categories");
@@ -57,6 +59,11 @@ function renderHandwriting(el, node, imgClass, textClass) {
     img.className = imgClass;
     img.src = node.image;
     img.alt = node.name;
+    // Images are saved at 2x — display at half their natural size so the
+    // x-height normalization baked into the file actually takes effect.
+    img.addEventListener("load", () => {
+      img.style.height = img.naturalHeight / 2 + "px";
+    });
     el.appendChild(img);
   } else {
     const span = document.createElement("span");
