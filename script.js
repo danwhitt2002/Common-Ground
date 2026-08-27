@@ -120,6 +120,7 @@ document.getElementById("start-btn").addEventListener("click", () => {
 // ---------------------------------------------------------------------------
 // Questions
 // ---------------------------------------------------------------------------
+const qBackBtn = document.getElementById("q-back-btn");
 const progressEl = document.getElementById("progress");
 const qCountEl = document.getElementById("q-count");
 const questionTextEl = document.getElementById("question-text");
@@ -144,6 +145,7 @@ function renderProgress() {
 
 function renderQuestion() {
   const q = CONFIG.questions[state.questionIndex];
+  const prev = state.answers[state.questionIndex]; // restore on back-navigation
   renderProgress();
   qCountEl.textContent = `Question ${state.questionIndex + 1} of ${CONFIG.questions.length}`;
   questionTextEl.textContent = q.text;
@@ -156,7 +158,7 @@ function renderQuestion() {
     optionsEl.innerHTML = "";
     multiAnswerEl.hidden = true;
     textAnswerEl.hidden = false;
-    textAnswerInput.value = "";
+    textAnswerInput.value = prev ? prev.answer : "";
     textAnswerInput.placeholder = q.placeholder || "";
     textAnswerInput.rows = q.type === "text" ? 1 : 4;
     textAnswerInput.classList.toggle("short", q.type === "text");
@@ -170,6 +172,9 @@ function renderQuestion() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option-btn";
+      if (prev && Array.isArray(prev.answer) && prev.answer.includes(opt)) {
+        btn.classList.add("selected");
+      }
       btn.textContent = opt;
       btn.addEventListener("click", () => {
         btn.classList.toggle("selected");
@@ -188,6 +193,9 @@ function renderQuestion() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option-btn";
+      if (prev && prev.answer === opt) {
+        btn.classList.add("selected");
+      }
       btn.textContent = opt;
       btn.addEventListener("click", () => selectOption(opt));
       optionsEl.appendChild(btn);
@@ -195,11 +203,23 @@ function renderQuestion() {
   }
 }
 
+function goToPreviousQuestion() {
+  if (state.questionIndex > 0) {
+    state.questionIndex -= 1;
+    renderQuestion();
+  } else {
+    showScreen("landing");
+  }
+}
+
+qBackBtn.addEventListener("click", goToPreviousQuestion);
+
 function advanceQuestion() {
   if (state.questionIndex < CONFIG.questions.length - 1) {
     state.questionIndex += 1;
     renderQuestion();
   } else {
+    prefillContact();
     showScreen("contact");
   }
 }
@@ -274,6 +294,22 @@ textAnswerInput.addEventListener("keydown", (e) => {
 // ---------------------------------------------------------------------------
 const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
+
+function prefillContact() {
+  contactForm.email.value = state.contact.email || "";
+  contactForm.instagram.value = state.contact.instagram || "";
+}
+
+document.getElementById("contact-back-btn").addEventListener("click", () => {
+  // Save whatever's been typed so it's still there if they come back forward.
+  state.contact = {
+    email: contactForm.email.value.trim(),
+    instagram: contactForm.instagram.value.trim(),
+  };
+  state.questionIndex = CONFIG.questions.length - 1;
+  renderQuestion();
+  showScreen("question");
+});
 
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();

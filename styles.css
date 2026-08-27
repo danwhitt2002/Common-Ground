@@ -594,6 +594,21 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 
 .back-link:hover { color: var(--accent); }
 
+button.back-link {
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+}
+
+.screen[data-screen="question"] .back-link,
+.screen[data-screen="contact"] .back-link {
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
 .menu-page .lede {
   text-align: left;
   margin-bottom: 28px;

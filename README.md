@@ -7,7 +7,7 @@ A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into week
 
 Two static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → 3 open-ended application questions → email/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → application questions (name, then multiple-choice/multi-select) → email/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the email/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the email/IG fields) are restored, not cleared, when they go back. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
 
 ### Applications aren't auto-approved — how payment actually happens
