@@ -14,7 +14,7 @@ const CONFIG = {
   whatsappMessage: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
 
   // Shown at the bottom of the "approved" screen. Update to your real handle.
-  instagramHandle: "@commonground",
+  instagramHandle: "@dansdigitaldiaries",
 
   // Where application answers get saved. Point this at a Formspree endpoint
   // (https://formspree.io — free tier, no backend needed) or any endpoint that
