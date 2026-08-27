@@ -31,22 +31,34 @@ const CONFIG = {
   // for a question like name/email you want to read at a glance.
   questions: [
     {
-      text: "What's your name?",
+      text: "What is your full name?",
       type: "text",
       key: "name",
-      placeholder: "Your first name",
+      placeholder: "Your full name",
     },
     {
-      text: "Where are you from, and why did you decide to move to Rio de Janeiro?",
-      type: "textarea",
-      key: "hometown",
-      placeholder: "Tell us a little about your story...",
+      text: "What brings you to Rio?",
+      type: "choice",
+      key: "reason",
+      options: [
+        "I'm from Rio (Carioca)",
+        "I moved here for work",
+        "I moved here for a partner",
+        "I'm travelling / backpacking",
+        "I'm studying here",
+        "Something else",
+      ],
     },
     {
       text: "Why do you want to find Common Ground?",
-      type: "textarea",
+      type: "choice",
       key: "motivation",
-      placeholder: "Tell us a little about what you're looking for...",
+      options: [
+        "Looking for real friendships",
+        "Want to meet like-minded people",
+        "New to the city, need a community",
+        "Honestly? Just here for the mocktails",
+      ],
     },
   ],
 };
