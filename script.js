@@ -79,6 +79,7 @@ function showScreen(name) {
 document.getElementById("landing-price").textContent = CONFIG.price;
 document.getElementById("approved-price").textContent = CONFIG.price;
 document.getElementById("ig-handle").textContent = CONFIG.instagramHandle;
+document.getElementById("ig-handle-pending").textContent = CONFIG.instagramHandle;
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;
@@ -221,7 +222,7 @@ const reviewingText = document.getElementById("reviewing-text");
 const REVIEW_MESSAGES = [
   "Reviewing your application…",
   "Checking group fit…",
-  "Finalizing decision…",
+  "Submitting your application…",
 ];
 
 function runReviewSequence() {
@@ -238,7 +239,7 @@ function runReviewSequence() {
 
   setTimeout(() => {
     clearInterval(interval);
-    showScreen("approved");
+    showScreen("pending");
   }, REVIEW_MESSAGES.length * 850 + 250);
 }
 
@@ -304,3 +305,13 @@ copyPixBtn.addEventListener("click", async () => {
     copyPixBtn.classList.remove("copied");
   }, 1600);
 });
+
+// ---------------------------------------------------------------------------
+// Direct link to the payment screen for approved applicants — send someone
+// "yoursite.com/#approved" (e.g. by email or Instagram DM) once you've
+// reviewed their application, and it opens straight to the Pix/WhatsApp
+// screen, skipping the whole questionnaire.
+// ---------------------------------------------------------------------------
+if (window.location.hash === "#approved") {
+  showScreen("approved");
+}
