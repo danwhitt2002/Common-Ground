@@ -23,12 +23,14 @@ const CONFIG = {
   //   Example: "https://formspree.io/f/abcdEFGH"
   formEndpoint: "https://formspree.io/f/mbgjrjnp",
 
-  // Each question is either type "choice" (needs an `options` array,
-  // rendered as tappable buttons) or type "text"/"textarea" (a free-response
-  // field — "text" is a single short line, "textarea" is a longer answer).
-  // An optional `key` surfaces that answer as its own field in the saved
-  // application (in addition to the full `answers` list), which is handy
-  // for a question like name/email you want to read at a glance.
+  // Each question is type "choice" (single-select, needs an `options` array,
+  // tapping one auto-advances), "multi" (multi-select — same `options`
+  // array, but tap any number then hit Continue; set `hint` to show a small
+  // note like "Choose one or more" under the question), or "text"/"textarea"
+  // (a free-response field — "text" is a single short line, "textarea" is a
+  // longer answer). An optional `key` surfaces that answer as its own field
+  // in the saved application (in addition to the full `answers` list), which
+  // is handy for a question like name/email you want to read at a glance.
   questions: [
     {
       text: "What is your full name?",
@@ -50,14 +52,30 @@ const CONFIG = {
       ],
     },
     {
-      text: "Why do you want to find Common Ground?",
-      type: "choice",
+      text: "Why do you want to join Common Ground?",
+      type: "multi",
       key: "motivation",
+      hint: "Choose one or more",
       options: [
-        "Looking for real friendships",
-        "Want to meet like-minded people",
-        "New to the city, need a community",
-        "Honestly? Just here for the mocktails",
+        "Discover cool new places/cafes in Rio",
+        "Meet new people",
+        "Build a more international social circle",
+        "Put myself out of my comfort zone",
+        "Try new things",
+      ],
+    },
+    {
+      text: "Who are you hoping to meet through Common Ground?",
+      type: "multi",
+      key: "lookingFor",
+      hint: "Choose one or more",
+      options: [
+        "Cariocas/locals",
+        "Digital nomads",
+        "Romantic connections",
+        "Backpackers",
+        "Founders/entrepreneurs",
+        "I'm open to meeting anyone",
       ],
     },
   ],
@@ -105,7 +123,11 @@ document.getElementById("start-btn").addEventListener("click", () => {
 const progressEl = document.getElementById("progress");
 const qCountEl = document.getElementById("q-count");
 const questionTextEl = document.getElementById("question-text");
+const qHintEl = document.getElementById("q-hint");
 const optionsEl = document.getElementById("options");
+const multiAnswerEl = document.getElementById("multi-answer");
+const multiAnswerError = document.getElementById("multi-answer-error");
+const multiAnswerContinue = document.getElementById("multi-answer-continue");
 const textAnswerEl = document.getElementById("text-answer");
 const textAnswerInput = document.getElementById("text-answer-input");
 const textAnswerError = document.getElementById("text-answer-error");
@@ -126,9 +148,13 @@ function renderQuestion() {
   qCountEl.textContent = `Question ${state.questionIndex + 1} of ${CONFIG.questions.length}`;
   questionTextEl.textContent = q.text;
 
+  qHintEl.textContent = q.hint || "";
+  qHintEl.hidden = !q.hint;
+
   if (q.type === "text" || q.type === "textarea") {
     optionsEl.hidden = true;
     optionsEl.innerHTML = "";
+    multiAnswerEl.hidden = true;
     textAnswerEl.hidden = false;
     textAnswerInput.value = "";
     textAnswerInput.placeholder = q.placeholder || "";
@@ -136,8 +162,26 @@ function renderQuestion() {
     textAnswerInput.classList.toggle("short", q.type === "text");
     textAnswerError.hidden = true;
     textAnswerInput.focus();
+  } else if (q.type === "multi") {
+    textAnswerEl.hidden = true;
+    optionsEl.hidden = false;
+    optionsEl.innerHTML = "";
+    q.options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "option-btn";
+      btn.textContent = opt;
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("selected");
+        multiAnswerError.hidden = true;
+      });
+      optionsEl.appendChild(btn);
+    });
+    multiAnswerError.hidden = true;
+    multiAnswerEl.hidden = false;
   } else {
     textAnswerEl.hidden = true;
+    multiAnswerEl.hidden = true;
     optionsEl.hidden = false;
     optionsEl.innerHTML = "";
     q.options.forEach((opt) => {
@@ -192,6 +236,28 @@ function submitTextAnswer() {
 
   advanceQuestion();
 }
+
+function submitMultiAnswer() {
+  const selected = Array.from(optionsEl.children)
+    .filter((btn) => btn.classList.contains("selected"))
+    .map((btn) => btn.textContent);
+
+  if (selected.length === 0) {
+    multiAnswerError.textContent = "Please choose at least one option.";
+    multiAnswerError.hidden = false;
+    return;
+  }
+  multiAnswerError.hidden = true;
+
+  state.answers[state.questionIndex] = {
+    question: CONFIG.questions[state.questionIndex].text,
+    answer: selected,
+  };
+
+  advanceQuestion();
+}
+
+multiAnswerContinue.addEventListener("click", submitMultiAnswer);
 
 textAnswerContinue.addEventListener("click", submitTextAnswer);
 

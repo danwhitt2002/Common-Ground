@@ -280,6 +280,14 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   color: var(--ink);
 }
 
+.q-hint {
+  margin: -16px 0 20px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.q-hint[hidden] { display: none; }
+
 .options {
   display: flex;
   flex-direction: column;
@@ -313,6 +321,16 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   background: #1c3fa0;
   box-shadow: 0 0 0 1px var(--accent);
 }
+
+.multi-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+.multi-answer[hidden] { display: none; }
 
 .text-answer {
   display: flex;

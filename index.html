@@ -43,7 +43,12 @@
       <div class="progress" id="progress" aria-hidden="true"></div>
       <p class="q-count" id="q-count"></p>
       <h2 class="question-text" id="question-text"></h2>
+      <p class="q-hint" id="q-hint" hidden>Choose one or more</p>
       <div class="options" id="options" role="group"></div>
+      <div class="multi-answer" id="multi-answer" hidden>
+        <p class="error" id="multi-answer-error" role="alert" hidden></p>
+        <button class="btn-primary" type="button" id="multi-answer-continue">Continue</button>
+      </div>
       <div class="text-answer" id="text-answer" hidden>
         <textarea class="text-answer-input" id="text-answer-input" rows="4"></textarea>
         <p class="error" id="text-answer-error" role="alert" hidden></p>
