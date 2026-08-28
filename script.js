@@ -92,7 +92,7 @@ const CONFIG = {
       text: "Tell us about yourself",
       type: "textarea",
       key: "aboutYou",
-      placeholder: "A sentence or two is plenty.",
+      placeholder: "Describe yourself in a few sentences.",
     },
   ],
 };
