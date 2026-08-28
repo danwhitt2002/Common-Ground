@@ -28,7 +28,7 @@ If you ever change the Pix key or the R$120 price, you'll need a new QR — rege
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
 2. **`price`** — currently `R$120`, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
 3. **`instagramHandle`** — shown on the pending and approved screens.
-4. **`questions`** — the 3 application questions. Each is `type: "choice"` (needs an `options` array, shown as tappable buttons) or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
+4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the exact text of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
 ### Drinks menu — edit `menu.js` → `MENU_CONFIG`
 

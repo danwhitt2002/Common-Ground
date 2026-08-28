@@ -39,6 +39,12 @@ const CONFIG = {
       placeholder: "Your full name",
     },
     {
+      text: "What's your age?",
+      type: "choice",
+      key: "age",
+      options: ["18–24", "25–34", "35–44", "45–54", "55+"],
+    },
+    {
       text: "What brings you to Rio?",
       type: "choice",
       key: "reason",
@@ -81,6 +87,12 @@ const CONFIG = {
         "💡 Founders/entrepreneurs",
         "🤗 I'm open to meeting anyone",
       ],
+    },
+    {
+      text: "Tell us about yourself",
+      type: "textarea",
+      key: "aboutYou",
+      placeholder: "A sentence or two is plenty.",
     },
   ],
 };
