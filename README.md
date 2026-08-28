@@ -7,7 +7,7 @@ A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into week
 
 Two static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: **choose a language** (English/Português/Español, flag buttons) → hero → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the approved/payment screen already uses. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the approved/payment screen already uses. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
 
 ### Applications aren't auto-approved — how payment actually happens
@@ -32,12 +32,12 @@ If you ever change the Pix key or the R$120 price, you'll need a new QR — rege
 
 ### Languages — English, Português, Español
 
-The very first screen is a language picker (🇬🇧/🇧🇷/🇪🇸 flag buttons) — picking one translates the entire application flow (every question, button, error message, and the contact/pending/approved screens). Two places hold the translated text, both in `script.js`:
+Three small flag buttons (🇬🇧/🇧🇷/🇪🇸) sit in the top-right corner of the landing screen — tapping one translates the entire application flow in place (every question, button, error message, and the contact/pending/approved screens) without navigating anywhere. Two places hold the translated text, both in `script.js`:
 
 - **`CONFIG.questions`** — each question's `text`/`hint`/`placeholder`/`writeInPlaceholder`, and every entry in an `options` array, is an `{ en, pt, es }` object instead of a plain string. Add a fourth language by adding its key to each of these objects (and to `TRANSLATIONS` below) — nothing else needs to change structurally.
 - **`TRANSLATIONS`** — every other on-screen string (landing copy, buttons, error messages, the pending/approved screens, the WhatsApp pre-filled message), one block per language, looked up by dot-path (e.g. `t("landing.apply")`). A handful of strings are templated with `{price}`/`{handle}`/`{current}`/`{total}` placeholders, filled in with a plain `.replace()` where they're used.
 
-Multiple-choice answers are saved in whichever language the applicant used (so their own words come through), plus an `answerEn` field with the canonical English option text, so you can review applications consistently regardless of which language someone applied in. The saved application also includes a top-level `language` field. The direct `#approved` payment link (see below) always shows in English, since it's reached by skipping the language picker entirely.
+Multiple-choice answers are saved in whichever language the applicant used (so their own words come through), plus an `answerEn` field with the canonical English option text, so you can review applications consistently regardless of which language someone applied in. The saved application also includes a top-level `language` field. The direct `#approved` payment link (see below) always shows in English, since that path never touches the landing screen's flag switcher.
 
 ### Drinks menu — edit `menu.js` → `MENU_CONFIG`
 

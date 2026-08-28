@@ -23,27 +23,13 @@
 
   <main id="main">
 
-    <!-- LANGUAGE (first screen — English, Português, Español) -->
-    <section class="screen is-active" data-screen="language">
-      <p class="eyebrow">Choose your language · Escolha seu idioma · Elige tu idioma</p>
-      <div class="lang-options">
-        <button class="lang-btn" type="button" data-lang="en">
-          <span class="lang-flag" aria-hidden="true">🇬🇧</span>
-          <span class="lang-name">English</span>
-        </button>
-        <button class="lang-btn" type="button" data-lang="pt">
-          <span class="lang-flag" aria-hidden="true">🇧🇷</span>
-          <span class="lang-name">Português</span>
-        </button>
-        <button class="lang-btn" type="button" data-lang="es">
-          <span class="lang-flag" aria-hidden="true">🇪🇸</span>
-          <span class="lang-name">Español</span>
-        </button>
-      </div>
-    </section>
-
     <!-- LANDING -->
-    <section class="screen" data-screen="landing">
+    <section class="screen is-active" data-screen="landing">
+      <div class="lang-switch" role="group" aria-label="Language · Idioma">
+        <button class="lang-switch-btn" type="button" data-lang="en" aria-label="English">🇬🇧</button>
+        <button class="lang-switch-btn" type="button" data-lang="pt" aria-label="Português">🇧🇷</button>
+        <button class="lang-switch-btn" type="button" data-lang="es" aria-label="Español">🇪🇸</button>
+      </div>
       <img class="landing-accent" src="assets/people-holding-hands.png" alt="" aria-hidden="true">
       <div class="landing-hero">
         <p class="eyebrow" data-i18n="landing.eyebrow">Rio de Janeiro · Applications Open Now</p>

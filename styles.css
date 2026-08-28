@@ -244,44 +244,34 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 .btn-primary:hover { background: #ddd0a8; }
 .btn-primary:active { transform: scale(0.97); }
 
-/* Language select */
-.lang-options {
+/* Language switch — small flag buttons, top-right of the landing screen */
+.lang-switch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
   display: flex;
-  gap: 14px;
-  width: 100%;
-  justify-content: center;
-  margin-top: 8px;
+  gap: 4px;
 }
 
-.lang-btn {
+.lang-switch-btn {
   appearance: none;
   cursor: pointer;
-  flex: 1;
-  max-width: 130px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 24px 12px;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--ink);
-  font-family: 'Inter', sans-serif;
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
-}
-
-.lang-btn:hover { border-color: var(--accent-dim); background: #1c3fa0; }
-.lang-btn:active { transform: scale(0.97); }
-
-.lang-flag {
-  font-size: 40px;
+  border: 1px solid transparent;
+  background: none;
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 19px;
   line-height: 1;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.lang-name {
-  font-size: 14px;
-  font-weight: 600;
+.lang-switch-btn:hover { opacity: 0.85; }
+.lang-switch-btn.active {
+  opacity: 1;
+  border-color: var(--line);
+  background: var(--card);
 }
 
 /* Question screen */

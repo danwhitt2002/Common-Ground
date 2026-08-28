@@ -342,8 +342,8 @@ function t(key) {
 // State machine
 // ---------------------------------------------------------------------------
 const state = {
-  screen: "language", // language | landing | question | contact | reviewing | approved
-  lang: undefined, // "en" | "pt" | "es" — set by the language screen
+  screen: "landing", // landing | question | contact | reviewing | approved
+  lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
@@ -361,10 +361,15 @@ function showScreen(name) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// The WhatsApp payment-proof button's text is language-dependent, so it's
+// declared up here (instead of down in the "Payment" section) so applyLang()
+// below — including its initial call — can safely reference it.
+const whatsappBtn = document.getElementById("whatsapp-btn");
+
 // ---------------------------------------------------------------------------
-// Language select — the first screen. Picking one translates every static
-// string on the page (via [data-i18n]/[data-i18n-placeholder]) and moves on
-// to the landing screen.
+// Language switch — small flag buttons in the top-right corner of the
+// landing screen. Picking one translates every static string on the page
+// (via [data-i18n]/[data-i18n-placeholder]) without changing screens.
 // ---------------------------------------------------------------------------
 function renderLandingFinePrint() {
   document.getElementById("landing-fine-print").textContent = t("landing.finePrint").replace("{price}", CONFIG.price);
@@ -394,30 +399,27 @@ function applyLang(lang) {
     const val = t(el.dataset.i18nPlaceholder);
     if (val !== undefined) el.placeholder = val;
   });
+  document.querySelectorAll(".lang-switch-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
 
   renderLandingFinePrint();
   renderPendingFinePrint();
   renderApprovedFinePrint();
   renderWhatsappBtn();
-
-  showScreen("landing");
 }
 
-document.querySelectorAll(".lang-btn").forEach((btn) => {
+document.querySelectorAll(".lang-switch-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
+
+applyLang("en"); // default on load; the flag buttons switch it from here
 
 // ---------------------------------------------------------------------------
 // Landing
 // ---------------------------------------------------------------------------
 document.getElementById("approved-price").textContent = CONFIG.price;
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
-
-// Render once up front (English) so the direct "#approved" link — which
-// skips language selection entirely — still shows real text, not blanks.
-renderLandingFinePrint();
-renderPendingFinePrint();
-renderApprovedFinePrint();
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;
@@ -776,10 +778,8 @@ function submitApplication() {
 
 // ---------------------------------------------------------------------------
 // Payment — Pix key + WhatsApp payment proof
+// (whatsappBtn itself is declared earlier, alongside applyLang())
 // ---------------------------------------------------------------------------
-const whatsappBtn = document.getElementById("whatsapp-btn");
-renderWhatsappBtn();
-
 const copyPixBtn = document.getElementById("copy-pix-btn");
 copyPixBtn.addEventListener("click", async () => {
   try {
@@ -800,9 +800,9 @@ copyPixBtn.addEventListener("click", async () => {
 // Direct link to the payment screen for approved applicants — send someone
 // "yoursite.com/#approved" (e.g. on WhatsApp, using the number they gave you)
 // once you've reviewed their application, and it opens straight to the
-// Pix/WhatsApp screen, skipping language selection and the whole
-// questionnaire. Shows in English (the default fallback), since no language
-// was ever chosen on this path.
+// Pix/WhatsApp screen, skipping the whole questionnaire. Shows in English
+// (the default language), since this path never touches the landing screen's
+// flag switcher.
 // ---------------------------------------------------------------------------
 if (window.location.hash === "#approved") {
   showScreen("approved");
