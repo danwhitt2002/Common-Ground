@@ -359,6 +359,14 @@ function showScreen(name) {
   Object.values(screens).forEach((el) => el.classList.remove("is-active"));
   screens[name].classList.add("is-active");
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // No-op on the real site (there's no "menu" screen here — that link is a
+  // real page navigation to menu.html). Only fires in the trial bundle,
+  // where menu.js is merged into this same page as a "menu" screen, so a
+  // language switched after that screen was first built still comes through.
+  if (name === "menu" && typeof renderMenuPage === "function") {
+    renderMenuPage();
+  }
 }
 
 // The WhatsApp payment-proof button's text is language-dependent, so it's
@@ -387,6 +395,15 @@ function renderWhatsappBtn() {
   whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(t("whatsappMessage"))}`;
 }
 
+// menu.html is a separate page with no shared JS state, so the chosen
+// language is carried across via a "?lang=" URL param on the way there —
+// and read back below on the way back, so the round trip stays in sync.
+function renderMenuLinks() {
+  document.querySelectorAll("[data-menu-link]").forEach((a) => {
+    a.href = `menu.html?lang=${state.lang}`;
+  });
+}
+
 function applyLang(lang) {
   state.lang = lang;
   document.documentElement.lang = lang;
@@ -407,13 +424,17 @@ function applyLang(lang) {
   renderPendingFinePrint();
   renderApprovedFinePrint();
   renderWhatsappBtn();
+  renderMenuLinks();
 }
 
 document.querySelectorAll(".lang-switch-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
 
-applyLang("en"); // default on load; the flag buttons switch it from here
+// Default to English, unless we're arriving back from menu.html with its
+// "?lang=" param set (so following its "back" link doesn't reset to English).
+const urlLang = new URLSearchParams(window.location.search).get("lang");
+applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 
 // ---------------------------------------------------------------------------
 // Landing
