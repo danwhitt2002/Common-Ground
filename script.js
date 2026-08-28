@@ -42,7 +42,7 @@ const CONFIG = {
       text: "What's your age?",
       type: "choice",
       key: "age",
-      options: ["18–22", "23–27", "28–35", "36–44", "45+"],
+      options: ["18–22", "23–27", "28–34", "35+"],
     },
     {
       text: "What brings you to Rio?",
