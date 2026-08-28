@@ -363,14 +363,14 @@ const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
 
 function prefillContact() {
-  contactForm.email.value = state.contact.email || "";
+  contactForm.whatsapp.value = state.contact.whatsapp || "";
   contactForm.instagram.value = state.contact.instagram || "";
 }
 
 document.getElementById("contact-back-btn").addEventListener("click", () => {
   // Save whatever's been typed so it's still there if they come back forward.
   state.contact = {
-    email: contactForm.email.value.trim(),
+    whatsapp: contactForm.whatsapp.value.trim(),
     instagram: contactForm.instagram.value.trim(),
   };
   state.questionIndex = CONFIG.questions.length - 1;
@@ -381,17 +381,17 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(contactForm);
-  const email = (data.get("email") || "").toString().trim();
+  const whatsapp = (data.get("whatsapp") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
 
-  if (!email) {
-    contactError.textContent = "Please fill in your email.";
+  if (!whatsapp) {
+    contactError.textContent = "Please fill in your WhatsApp number.";
     contactError.hidden = false;
     return;
   }
   contactError.hidden = true;
 
-  state.contact = { email, instagram };
+  state.contact = { whatsapp, instagram };
   showScreen("reviewing");
   runReviewSequence();
 });
@@ -489,9 +489,9 @@ copyPixBtn.addEventListener("click", async () => {
 
 // ---------------------------------------------------------------------------
 // Direct link to the payment screen for approved applicants — send someone
-// "yoursite.com/#approved" (e.g. by email or Instagram DM) once you've
-// reviewed their application, and it opens straight to the Pix/WhatsApp
-// screen, skipping the whole questionnaire.
+// "yoursite.com/#approved" (e.g. on WhatsApp, using the number they gave you)
+// once you've reviewed their application, and it opens straight to the
+// Pix/WhatsApp screen, skipping the whole questionnaire.
 // ---------------------------------------------------------------------------
 if (window.location.hash === "#approved") {
   showScreen("approved");

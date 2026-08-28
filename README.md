@@ -7,14 +7,14 @@ A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into week
 
 Two static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → application questions (name, then multiple-choice/multi-select) → email/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the email/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the email/IG fields) are restored, not cleared, when they go back. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the approved/payment screen already uses. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
 
 ### Applications aren't auto-approved — how payment actually happens
 
 Since applicants answer real, open-ended questions, there's no way to auto-decide who gets in — a person has to read the answers. So the public flow ends at a "Thank You, your application is under review" screen (`data-screen="pending"`), not at payment.
 
-Once you've reviewed someone's application (check your Formspree inbox) and decided to let them in, send them **`yoursite.com/#approved`** — by email, Instagram DM, wherever — and that link drops them straight onto the payment screen (`data-screen="approved"`), skipping the whole questionnaire. One tap from your message to the Pix QR code. No backend, no accounts, no per-person unique links — just the one shared hash link you send manually to whoever you've accepted.
+Once you've reviewed someone's application (check your Formspree inbox) and decided to let them in, send them **`yoursite.com/#approved`** — on WhatsApp (using the number they gave you), Instagram DM, wherever — and that link drops them straight onto the payment screen (`data-screen="approved"`), skipping the whole questionnaire. One tap from your message to the Pix QR code. No backend, no accounts, no per-person unique links — just the one shared hash link you send manually to whoever you've accepted.
 
 That payment screen shows a **Pix QR code + copyable Pix key** to pay directly in any Brazilian bank app, then a **"Send Payment Proof on WhatsApp"** button so you can manually confirm and let them into the group. It's already set up:
 
