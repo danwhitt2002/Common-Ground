@@ -11,7 +11,6 @@ const CONFIG = {
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
   whatsappNumber: "447830067043",
-  whatsappMessage: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
 
   // Shown at the bottom of the "approved" screen. Update to your real handle.
   instagramHandle: "@dansdigitaldiaries",
@@ -28,82 +27,325 @@ const CONFIG = {
   // array, but tap any number then hit Continue; set `hint` to show a small
   // note like "Choose one or more" under the question), or "text"/"textarea"
   // (a free-response field — "text" is a single short line, "textarea" is a
-  // longer answer). An optional `key` surfaces that answer as its own field
-  // in the saved application (in addition to the full `answers` list), which
-  // is handy for a question like name/email you want to read at a glance.
+  // longer answer). `text`/`hint`/`placeholder`/`writeInPlaceholder` are each
+  // { en, pt, es } — same for every string inside an `options` entry. A
+  // "choice" question can set `writeIn` to the `en` value of one option (e.g.
+  // "Something else") — selecting it opens a text box instead of submitting
+  // right away, so you get a real answer instead of a vague catch-all. An
+  // optional `key` surfaces that answer as its own field in the saved
+  // application (in addition to the full `answers` list).
   questions: [
     {
-      text: "What is your full name?",
+      text: {
+        en: "What is your full name?",
+        pt: "Qual é o seu nome completo?",
+        es: "¿Cuál es tu nombre completo?",
+      },
       type: "text",
       key: "name",
-      placeholder: "Your full name",
+      placeholder: {
+        en: "Your full name",
+        pt: "Seu nome completo",
+        es: "Tu nombre completo",
+      },
     },
     {
-      text: "What's your age?",
+      text: {
+        en: "What's your age?",
+        pt: "Qual é a sua idade?",
+        es: "¿Cuál es tu edad?",
+      },
       type: "choice",
       key: "age",
-      options: ["18–22", "23–27", "28–34", "35–39", "40+"],
+      options: [
+        { en: "18–22", pt: "18–22", es: "18–22" },
+        { en: "23–27", pt: "23–27", es: "23–27" },
+        { en: "28–34", pt: "28–34", es: "28–34" },
+        { en: "35–39", pt: "35–39", es: "35–39" },
+        { en: "40+", pt: "40+", es: "40+" },
+      ],
     },
     {
-      text: "What brings you to Rio?",
+      text: {
+        en: "What brings you to Rio?",
+        pt: "O que te trouxe ao Rio?",
+        es: "¿Qué te trajo a Río?",
+      },
       type: "choice",
       key: "reason",
       // Selecting this exact option opens a text box asking them to specify —
-      // see `writeIn`/`openWriteIn()` below.
+      // see `writeIn`/`openWriteIn()` below. Matched against an option's `en`
+      // value, so it works no matter which language is on screen.
       writeIn: "✨ Something else",
-      writeInPlaceholder: "Tell us what brought you here",
+      writeInPlaceholder: {
+        en: "Tell us what brought you here",
+        pt: "Conte-nos o que te trouxe aqui",
+        es: "Cuéntanos qué te trajo aquí",
+      },
       options: [
-        "🏖️ I'm from Rio (Carioca)",
-        "💼 I moved here for work",
-        "❤️ I moved here for a partner",
-        "🎒 I'm travelling / backpacking",
-        "🎓 I'm studying here",
-        "✨ Something else",
+        { en: "🏖️ I'm from Rio (Carioca)", pt: "🏖️ Sou do Rio (Carioca)", es: "🏖️ Soy de Río (Carioca)" },
+        { en: "💼 I moved here for work", pt: "💼 Me mudei para cá a trabalho", es: "💼 Me mudé aquí por trabajo" },
+        { en: "❤️ I moved here for a partner", pt: "❤️ Me mudei para cá por causa de um(a) parceiro(a)", es: "❤️ Me mudé aquí por una pareja" },
+        { en: "🎒 I'm travelling / backpacking", pt: "🎒 Estou viajando / mochilão", es: "🎒 Estoy viajando / de mochilero" },
+        { en: "🎓 I'm studying here", pt: "🎓 Estou estudando aqui", es: "🎓 Estoy estudiando aquí" },
+        { en: "✨ Something else", pt: "✨ Outro motivo", es: "✨ Otro motivo" },
       ],
     },
     {
-      text: "Why do you want to join Common Ground?",
+      text: {
+        en: "Why do you want to join Common Ground?",
+        pt: "Por que você quer participar da Common Ground?",
+        es: "¿Por qué quieres unirte a Common Ground?",
+      },
       type: "multi",
       key: "motivation",
-      hint: "Choose one or more",
+      hint: {
+        en: "Choose one or more",
+        pt: "Escolha uma ou mais opções",
+        es: "Elige una o más opciones",
+      },
       options: [
-        "☕ Discover cool new places/cafes in Rio",
-        "🤝 Meet new people",
-        "🌍 Build a more international social circle",
-        "💪 Put myself out of my comfort zone",
-        "🌱 Try new things",
+        { en: "☕ Discover cool new places/cafes in Rio", pt: "☕ Descobrir lugares e cafés legais no Rio", es: "☕ Descubrir lugares y cafés geniales en Río" },
+        { en: "🤝 Meet new people", pt: "🤝 Conhecer pessoas novas", es: "🤝 Conocer gente nueva" },
+        { en: "🌍 Build a more international social circle", pt: "🌍 Construir um círculo social mais internacional", es: "🌍 Construir un círculo social más internacional" },
+        { en: "💪 Put myself out of my comfort zone", pt: "💪 Sair da minha zona de conforto", es: "💪 Salir de mi zona de confort" },
+        { en: "🌱 Try new things", pt: "🌱 Experimentar coisas novas", es: "🌱 Probar cosas nuevas" },
       ],
     },
     {
-      text: "Who are you hoping to meet through Common Ground?",
+      text: {
+        en: "Who are you hoping to meet through Common Ground?",
+        pt: "Quem você espera conhecer na Common Ground?",
+        es: "¿A quién esperas conocer en Common Ground?",
+      },
       type: "multi",
       key: "lookingFor",
-      hint: "Choose one or more",
+      hint: {
+        en: "Choose one or more",
+        pt: "Escolha uma ou mais opções",
+        es: "Elige una o más opciones",
+      },
       options: [
-        "🏖️ Cariocas/locals",
-        "💻 Digital nomads",
-        "💕 Romantic connections",
-        "🎒 Backpackers",
-        "💡 Founders/entrepreneurs",
-        "🤗 I'm open to meeting anyone",
+        { en: "🏖️ Cariocas/locals", pt: "🏖️ Cariocas/locais", es: "🏖️ Cariocas/locales" },
+        { en: "💻 Digital nomads", pt: "💻 Nômades digitais", es: "💻 Nómadas digitales" },
+        { en: "💕 Romantic connections", pt: "💕 Conexões românticas", es: "💕 Conexiones románticas" },
+        { en: "🎒 Backpackers", pt: "🎒 Mochileiros", es: "🎒 Mochileros" },
+        { en: "💡 Founders/entrepreneurs", pt: "💡 Fundadores/empreendedores", es: "💡 Fundadores/emprendedores" },
+        { en: "🤗 I'm open to meeting anyone", pt: "🤗 Estou aberto(a) a conhecer qualquer pessoa", es: "🤗 Estoy abierto/a a conocer a cualquier persona" },
       ],
     },
     {
-      text: "Tell us about yourself",
+      text: {
+        en: "Tell us about yourself",
+        pt: "Conte-nos sobre você",
+        es: "Cuéntanos sobre ti",
+      },
       type: "textarea",
       key: "aboutYou",
-      placeholder: "Describe yourself in a few sentences.",
+      placeholder: {
+        en: "Describe yourself in a few sentences.",
+        pt: "Descreva-se em algumas frases.",
+        es: "Descríbete en algunas frases.",
+      },
     },
   ],
 };
 
 // ---------------------------------------------------------------------------
+// Translations — every other on-screen string, keyed by dot-path and looked
+// up with t("some.key"). Templated strings use {price}/{handle}/{current}/
+// {total} placeholders, substituted with a plain .replace() where used.
+// ---------------------------------------------------------------------------
+const TRANSLATIONS = {
+  en: {
+    landing: {
+      eyebrow: "Rio de Janeiro · Applications Open Now",
+      lede: "Find your common ground — weekly meetups, international circle, functional mocktails included every time. Membership is by application only.",
+      apply: "Apply for Your Grounds Pass",
+      finePrint: "Takes about a minute. {price} if approved.",
+      menuLink: "See what's included — the drinks menu →",
+    },
+    question: {
+      back: "← Back",
+      continue: "Continue",
+      countTemplate: "Question {current} of {total}",
+      textError: "Please answer to continue.",
+      multiError: "Please choose at least one option.",
+      writeInError: "Please tell us a bit more.",
+      writeInDefaultPlaceholder: "Tell us more...",
+    },
+    contact: {
+      eyebrow: "Final Step",
+      heading: "What's your WhatsApp number, so we can reach you?",
+      whatsappLabel: "WhatsApp number",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      instagramLabel: "Instagram handle",
+      instagramPlaceholder: "@yourname",
+      optional: "(optional)",
+      submit: "Submit Application",
+      error: "Please fill in your WhatsApp number.",
+    },
+    reviewing: {
+      messages: [
+        "Reviewing your application…",
+        "Checking group fit…",
+        "Submitting your application…",
+      ],
+    },
+    pending: {
+      eyebrow: "Application Received",
+      heading: "Thank You",
+      lede: "Your application is being reviewed. If you're a good fit, we'll message you on WhatsApp soon with your invitation and payment details.",
+      menuLink: "See what's included — the drinks menu →",
+      finePrint: "Questions in the meantime? DM us on Instagram {handle}.",
+    },
+    approved: {
+      eyebrow: "Application Approved",
+      heading: "Welcome to Common Ground.",
+      lede: "You're in. Lock in your spot with your Grounds Pass — access to every weekly event, with coffee & matcha‑based mocktails included.",
+      priceLabel: "Grounds Pass",
+      priceSub: "Weekly events · coffee & matcha mocktails included",
+      pixScanHint: "Scan with your bank app, or copy the Pix key below",
+      pixKeyLabel: "Pix key (email)",
+      copy: "Copy",
+      copied: "Copied",
+      whatsappBtn: "Send Payment Proof on WhatsApp",
+      menuLink: "See the drinks menu →",
+      finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
+    },
+    whatsappMessage: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
+  },
+  pt: {
+    landing: {
+      eyebrow: "Rio de Janeiro · Inscrições Abertas",
+      lede: "Encontre seu common ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. A associação é somente por inscrição.",
+      apply: "Inscreva-se para o seu Grounds Pass",
+      finePrint: "Leva cerca de um minuto. {price} se aprovado(a).",
+      menuLink: "Veja o que está incluído — o cardápio de bebidas →",
+    },
+    question: {
+      back: "← Voltar",
+      continue: "Continuar",
+      countTemplate: "Pergunta {current} de {total}",
+      textError: "Responda para continuar.",
+      multiError: "Escolha pelo menos uma opção.",
+      writeInError: "Conte-nos um pouco mais.",
+      writeInDefaultPlaceholder: "Conte-nos mais...",
+    },
+    contact: {
+      eyebrow: "Última Etapa",
+      heading: "Qual é o seu número de WhatsApp, para conseguirmos falar com você?",
+      whatsappLabel: "Número de WhatsApp",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      instagramLabel: "Instagram",
+      instagramPlaceholder: "@seunome",
+      optional: "(opcional)",
+      submit: "Enviar Inscrição",
+      error: "Preencha seu número de WhatsApp.",
+    },
+    reviewing: {
+      messages: [
+        "Analisando sua inscrição…",
+        "Verificando se combina com o grupo…",
+        "Enviando sua inscrição…",
+      ],
+    },
+    pending: {
+      eyebrow: "Inscrição Recebida",
+      heading: "Obrigado(a)!",
+      lede: "Sua inscrição está sendo analisada. Se for um bom encaixe, mandaremos uma mensagem no WhatsApp em breve com seu convite e os detalhes do pagamento.",
+      menuLink: "Veja o que está incluído — o cardápio de bebidas →",
+      finePrint: "Dúvidas enquanto isso? Chame no Instagram {handle}.",
+    },
+    approved: {
+      eyebrow: "Inscrição Aprovada",
+      heading: "Bem-vindo(a) à Common Ground.",
+      lede: "Você entrou. Garanta sua vaga com o seu Grounds Pass — acesso a todos os encontros semanais, com mocktails de café e matchá incluídos.",
+      priceLabel: "Grounds Pass",
+      priceSub: "Encontros semanais · mocktails de café e matchá incluídos",
+      pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
+      pixKeyLabel: "Chave Pix (e-mail)",
+      copy: "Copiar",
+      copied: "Copiado",
+      whatsappBtn: "Enviar Comprovante no WhatsApp",
+      menuLink: "Veja o cardápio de bebidas →",
+      finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
+    },
+    whatsappMessage: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground:",
+  },
+  es: {
+    landing: {
+      eyebrow: "Río de Janeiro · Inscripciones Abiertas",
+      lede: "Encuentra tu common ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. La membresía es solo por solicitud.",
+      apply: "Solicita tu Grounds Pass",
+      finePrint: "Toma cerca de un minuto. {price} si eres aprobado/a.",
+      menuLink: "Mira qué está incluido — el menú de bebidas →",
+    },
+    question: {
+      back: "← Atrás",
+      continue: "Continuar",
+      countTemplate: "Pregunta {current} de {total}",
+      textError: "Responde para continuar.",
+      multiError: "Elige al menos una opción.",
+      writeInError: "Cuéntanos un poco más.",
+      writeInDefaultPlaceholder: "Cuéntanos más...",
+    },
+    contact: {
+      eyebrow: "Último Paso",
+      heading: "¿Cuál es tu número de WhatsApp, para poder contactarte?",
+      whatsappLabel: "Número de WhatsApp",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      instagramLabel: "Instagram",
+      instagramPlaceholder: "@tunombre",
+      optional: "(opcional)",
+      submit: "Enviar Solicitud",
+      error: "Completa tu número de WhatsApp.",
+    },
+    reviewing: {
+      messages: [
+        "Revisando tu solicitud…",
+        "Verificando que encajes con el grupo…",
+        "Enviando tu solicitud…",
+      ],
+    },
+    pending: {
+      eyebrow: "Solicitud Recibida",
+      heading: "¡Gracias!",
+      lede: "Tu solicitud está siendo revisada. Si encajas bien, te escribiremos pronto por WhatsApp con tu invitación y los detalles de pago.",
+      menuLink: "Mira qué está incluido — el menú de bebidas →",
+      finePrint: "¿Dudas mientras tanto? Escríbenos por Instagram {handle}.",
+    },
+    approved: {
+      eyebrow: "Solicitud Aprobada",
+      heading: "Bienvenido/a a Common Ground.",
+      lede: "Ya estás dentro. Asegura tu lugar con tu Grounds Pass — acceso a todos los encuentros semanales, con mocktails de café y matcha incluidos.",
+      priceLabel: "Grounds Pass",
+      priceSub: "Encuentros semanales · mocktails de café y matcha incluidos",
+      pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
+      pixKeyLabel: "Clave Pix (correo)",
+      copy: "Copiar",
+      copied: "Copiado",
+      whatsappBtn: "Enviar Comprobante por WhatsApp",
+      menuLink: "Mira el menú de bebidas →",
+      finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
+    },
+    whatsappMessage: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground:",
+  },
+};
+
+function t(key) {
+  const dict = TRANSLATIONS[state.lang] || TRANSLATIONS.en;
+  return key.split(".").reduce((obj, k) => (obj ? obj[k] : undefined), dict);
+}
+
+// ---------------------------------------------------------------------------
 // State machine
 // ---------------------------------------------------------------------------
 const state = {
-  screen: "landing", // landing | question | contact | reviewing | approved
+  screen: "language", // language | landing | question | contact | reviewing | approved
+  lang: undefined, // "en" | "pt" | "es" — set by the language screen
   questionIndex: 0,
-  answers: [], // { question, answer }
+  answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
 };
 
@@ -120,12 +362,62 @@ function showScreen(name) {
 }
 
 // ---------------------------------------------------------------------------
+// Language select — the first screen. Picking one translates every static
+// string on the page (via [data-i18n]/[data-i18n-placeholder]) and moves on
+// to the landing screen.
+// ---------------------------------------------------------------------------
+function renderLandingFinePrint() {
+  document.getElementById("landing-fine-print").textContent = t("landing.finePrint").replace("{price}", CONFIG.price);
+}
+
+function renderPendingFinePrint() {
+  document.getElementById("pending-fine-print").textContent = t("pending.finePrint").replace("{handle}", CONFIG.instagramHandle);
+}
+
+function renderApprovedFinePrint() {
+  document.getElementById("approved-fine-print").textContent = t("approved.finePrint").replace("{handle}", CONFIG.instagramHandle);
+}
+
+function renderWhatsappBtn() {
+  whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(t("whatsappMessage"))}`;
+}
+
+function applyLang(lang) {
+  state.lang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const val = t(el.dataset.i18n);
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const val = t(el.dataset.i18nPlaceholder);
+    if (val !== undefined) el.placeholder = val;
+  });
+
+  renderLandingFinePrint();
+  renderPendingFinePrint();
+  renderApprovedFinePrint();
+  renderWhatsappBtn();
+
+  showScreen("landing");
+}
+
+document.querySelectorAll(".lang-btn").forEach((btn) => {
+  btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+});
+
+// ---------------------------------------------------------------------------
 // Landing
 // ---------------------------------------------------------------------------
-document.getElementById("landing-price").textContent = CONFIG.price;
 document.getElementById("approved-price").textContent = CONFIG.price;
-document.getElementById("ig-handle").textContent = CONFIG.instagramHandle;
-document.getElementById("ig-handle-pending").textContent = CONFIG.instagramHandle;
+document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
+
+// Render once up front (English) so the direct "#approved" link — which
+// skips language selection entirely — still shows real text, not blanks.
+renderLandingFinePrint();
+renderPendingFinePrint();
+renderApprovedFinePrint();
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;
@@ -167,11 +459,14 @@ function renderQuestion() {
   const q = CONFIG.questions[state.questionIndex];
   const prev = state.answers[state.questionIndex]; // restore on back-navigation
   renderProgress();
-  qCountEl.textContent = `Question ${state.questionIndex + 1} of ${CONFIG.questions.length}`;
-  questionTextEl.textContent = q.text;
+  qCountEl.textContent = t("question.countTemplate")
+    .replace("{current}", state.questionIndex + 1)
+    .replace("{total}", CONFIG.questions.length);
+  questionTextEl.textContent = q.text[state.lang];
 
-  qHintEl.textContent = q.hint || "";
-  qHintEl.hidden = !q.hint;
+  const hintText = q.hint ? q.hint[state.lang] : "";
+  qHintEl.textContent = hintText;
+  qHintEl.hidden = !hintText;
 
   writeInEl.hidden = true;
   writeInError.hidden = true;
@@ -182,7 +477,7 @@ function renderQuestion() {
     multiAnswerEl.hidden = true;
     textAnswerEl.hidden = false;
     textAnswerInput.value = prev ? prev.answer : "";
-    textAnswerInput.placeholder = q.placeholder || "";
+    textAnswerInput.placeholder = (q.placeholder && q.placeholder[state.lang]) || "";
     textAnswerInput.rows = q.type === "text" ? 1 : 4;
     textAnswerInput.classList.toggle("short", q.type === "text");
     textAnswerError.hidden = true;
@@ -195,10 +490,11 @@ function renderQuestion() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option-btn";
-      if (prev && Array.isArray(prev.answer) && prev.answer.includes(opt)) {
+      btn.dataset.optEn = opt.en;
+      if (prev && Array.isArray(prev.answerEn) && prev.answerEn.includes(opt.en)) {
         btn.classList.add("selected");
       }
-      btn.textContent = opt;
+      btn.textContent = opt[state.lang];
       btn.addEventListener("click", () => {
         btn.classList.toggle("selected");
         multiAnswerError.hidden = true;
@@ -216,11 +512,12 @@ function renderQuestion() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option-btn";
-      const isWriteInOption = q.writeIn && opt === q.writeIn;
-      if (prev && (prev.answer === opt || (isWriteInOption && prev.writeInText !== undefined))) {
+      btn.dataset.optEn = opt.en;
+      const isWriteInOption = q.writeIn && opt.en === q.writeIn;
+      if (prev && (prev.answerEn === opt.en || (isWriteInOption && prev.writeInText !== undefined))) {
         btn.classList.add("selected");
       }
-      btn.textContent = opt;
+      btn.textContent = opt[state.lang];
       btn.addEventListener("click", () => {
         if (isWriteInOption) {
           btn.classList.add("selected");
@@ -248,7 +545,7 @@ function openWriteIn(initialText) {
   const q = CONFIG.questions[state.questionIndex];
   writeInEl.hidden = false;
   writeInInput.value = initialText || "";
-  writeInInput.placeholder = q.writeInPlaceholder || "Tell us more...";
+  writeInInput.placeholder = (q.writeInPlaceholder && q.writeInPlaceholder[state.lang]) || t("question.writeInDefaultPlaceholder");
   writeInError.hidden = true;
   writeInInput.focus();
 }
@@ -257,16 +554,18 @@ function submitWriteIn() {
   const q = CONFIG.questions[state.questionIndex];
   const text = writeInInput.value.trim();
   if (!text) {
-    writeInError.textContent = "Please tell us a bit more.";
+    writeInError.textContent = t("question.writeInError");
     writeInError.hidden = false;
     writeInInput.focus();
     return;
   }
   writeInError.hidden = true;
 
+  const writeInOption = q.options.find((o) => o.en === q.writeIn);
+
   state.answers[state.questionIndex] = {
-    question: q.text,
-    answer: `${q.writeIn}: ${text}`,
+    question: q.text[state.lang],
+    answer: `${writeInOption[state.lang]}: ${text}`,
     writeInText: text,
   };
 
@@ -303,16 +602,18 @@ function advanceQuestion() {
   }
 }
 
-function selectOption(answer) {
+function selectOption(opt) {
   // brief selected-state flash so the tap feels acknowledged
   Array.from(optionsEl.children).forEach((btn) => {
-    btn.classList.toggle("selected", btn.textContent === answer);
+    btn.classList.toggle("selected", btn.dataset.optEn === opt.en);
     btn.disabled = true;
   });
 
+  const q = CONFIG.questions[state.questionIndex];
   state.answers[state.questionIndex] = {
-    question: CONFIG.questions[state.questionIndex].text,
-    answer,
+    question: q.text[state.lang],
+    answer: opt[state.lang],
+    answerEn: opt.en,
   };
 
   setTimeout(advanceQuestion, 320);
@@ -321,15 +622,16 @@ function selectOption(answer) {
 function submitTextAnswer() {
   const answer = textAnswerInput.value.trim();
   if (!answer) {
-    textAnswerError.textContent = "Please answer to continue.";
+    textAnswerError.textContent = t("question.textError");
     textAnswerError.hidden = false;
     textAnswerInput.focus();
     return;
   }
   textAnswerError.hidden = true;
 
+  const q = CONFIG.questions[state.questionIndex];
   state.answers[state.questionIndex] = {
-    question: CONFIG.questions[state.questionIndex].text,
+    question: q.text[state.lang],
     answer,
   };
 
@@ -337,20 +639,20 @@ function submitTextAnswer() {
 }
 
 function submitMultiAnswer() {
-  const selected = Array.from(optionsEl.children)
-    .filter((btn) => btn.classList.contains("selected"))
-    .map((btn) => btn.textContent);
+  const selectedEls = Array.from(optionsEl.children).filter((btn) => btn.classList.contains("selected"));
 
-  if (selected.length === 0) {
-    multiAnswerError.textContent = "Please choose at least one option.";
+  if (selectedEls.length === 0) {
+    multiAnswerError.textContent = t("question.multiError");
     multiAnswerError.hidden = false;
     return;
   }
   multiAnswerError.hidden = true;
 
+  const q = CONFIG.questions[state.questionIndex];
   state.answers[state.questionIndex] = {
-    question: CONFIG.questions[state.questionIndex].text,
-    answer: selected,
+    question: q.text[state.lang],
+    answer: selectedEls.map((btn) => btn.textContent),
+    answerEn: selectedEls.map((btn) => btn.dataset.optEn),
   };
 
   advanceQuestion();
@@ -397,7 +699,7 @@ contactForm.addEventListener("submit", (e) => {
   const instagram = (data.get("instagram") || "").toString().trim();
 
   if (!whatsapp) {
-    contactError.textContent = "Please fill in your WhatsApp number.";
+    contactError.textContent = t("contact.error");
     contactError.hidden = false;
     return;
   }
@@ -412,19 +714,15 @@ contactForm.addEventListener("submit", (e) => {
 // "Reviewing" sequence — builds the curated-application feel, then submits
 // ---------------------------------------------------------------------------
 const reviewingText = document.getElementById("reviewing-text");
-const REVIEW_MESSAGES = [
-  "Reviewing your application…",
-  "Checking group fit…",
-  "Submitting your application…",
-];
 
 function runReviewSequence() {
+  const messages = t("reviewing.messages");
   let step = 0;
-  reviewingText.textContent = REVIEW_MESSAGES[0];
+  reviewingText.textContent = messages[0];
   const interval = setInterval(() => {
     step += 1;
-    if (step < REVIEW_MESSAGES.length) {
-      reviewingText.textContent = REVIEW_MESSAGES[step];
+    if (step < messages.length) {
+      reviewingText.textContent = messages[step];
     }
   }, 850);
 
@@ -433,7 +731,7 @@ function runReviewSequence() {
   setTimeout(() => {
     clearInterval(interval);
     showScreen("pending");
-  }, REVIEW_MESSAGES.length * 850 + 250);
+  }, messages.length * 850 + 250);
 }
 
 // ---------------------------------------------------------------------------
@@ -442,6 +740,7 @@ function runReviewSequence() {
 function submitApplication() {
   const payload = {
     submittedAt: new Date().toISOString(),
+    language: state.lang,
     ...state.contact,
     answers: state.answers,
   };
@@ -478,10 +777,8 @@ function submitApplication() {
 // ---------------------------------------------------------------------------
 // Payment — Pix key + WhatsApp payment proof
 // ---------------------------------------------------------------------------
-document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
-
 const whatsappBtn = document.getElementById("whatsapp-btn");
-whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
+renderWhatsappBtn();
 
 const copyPixBtn = document.getElementById("copy-pix-btn");
 copyPixBtn.addEventListener("click", async () => {
@@ -491,10 +788,10 @@ copyPixBtn.addEventListener("click", async () => {
     // Clipboard API can be unavailable (e.g. insecure context) — fall back silently,
     // the key is still selectable/copyable by hand from the page.
   }
-  copyPixBtn.textContent = "Copied";
+  copyPixBtn.textContent = t("approved.copied");
   copyPixBtn.classList.add("copied");
   setTimeout(() => {
-    copyPixBtn.textContent = "Copy";
+    copyPixBtn.textContent = t("approved.copy");
     copyPixBtn.classList.remove("copied");
   }, 1600);
 });
@@ -503,7 +800,9 @@ copyPixBtn.addEventListener("click", async () => {
 // Direct link to the payment screen for approved applicants — send someone
 // "yoursite.com/#approved" (e.g. on WhatsApp, using the number they gave you)
 // once you've reviewed their application, and it opens straight to the
-// Pix/WhatsApp screen, skipping the whole questionnaire.
+// Pix/WhatsApp screen, skipping language selection and the whole
+// questionnaire. Shows in English (the default fallback), since no language
+// was ever chosen on this path.
 // ---------------------------------------------------------------------------
 if (window.location.hash === "#approved") {
   showScreen("approved");
