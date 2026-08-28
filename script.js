@@ -42,6 +42,10 @@ const CONFIG = {
       text: "What brings you to Rio?",
       type: "choice",
       key: "reason",
+      // Selecting this exact option opens a text box asking them to specify —
+      // see `writeIn`/`openWriteIn()` below.
+      writeIn: "✨ Something else",
+      writeInPlaceholder: "Tell us what brought you here",
       options: [
         "🏖️ I'm from Rio (Carioca)",
         "💼 I moved here for work",
@@ -133,6 +137,10 @@ const textAnswerEl = document.getElementById("text-answer");
 const textAnswerInput = document.getElementById("text-answer-input");
 const textAnswerError = document.getElementById("text-answer-error");
 const textAnswerContinue = document.getElementById("text-answer-continue");
+const writeInEl = document.getElementById("write-in-answer");
+const writeInInput = document.getElementById("write-in-input");
+const writeInError = document.getElementById("write-in-error");
+const writeInContinue = document.getElementById("write-in-continue");
 
 function renderProgress() {
   progressEl.innerHTML = "";
@@ -152,6 +160,9 @@ function renderQuestion() {
 
   qHintEl.textContent = q.hint || "";
   qHintEl.hidden = !q.hint;
+
+  writeInEl.hidden = true;
+  writeInError.hidden = true;
 
   if (q.type === "text" || q.type === "textarea") {
     optionsEl.hidden = true;
@@ -193,15 +204,71 @@ function renderQuestion() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option-btn";
-      if (prev && prev.answer === opt) {
+      const isWriteInOption = q.writeIn && opt === q.writeIn;
+      if (prev && (prev.answer === opt || (isWriteInOption && prev.writeInText !== undefined))) {
         btn.classList.add("selected");
       }
       btn.textContent = opt;
-      btn.addEventListener("click", () => selectOption(opt));
+      btn.addEventListener("click", () => {
+        if (isWriteInOption) {
+          btn.classList.add("selected");
+          // Don't clobber in-progress typing if it's already open.
+          if (writeInEl.hidden) {
+            openWriteIn(prev && prev.writeInText !== undefined ? prev.writeInText : "");
+          } else {
+            writeInInput.focus();
+          }
+        } else {
+          writeInEl.hidden = true;
+          selectOption(opt);
+        }
+      });
       optionsEl.appendChild(btn);
     });
+
+    if (q.writeIn && prev && prev.writeInText !== undefined) {
+      openWriteIn(prev.writeInText);
+    }
   }
 }
+
+function openWriteIn(initialText) {
+  const q = CONFIG.questions[state.questionIndex];
+  writeInEl.hidden = false;
+  writeInInput.value = initialText || "";
+  writeInInput.placeholder = q.writeInPlaceholder || "Tell us more...";
+  writeInError.hidden = true;
+  writeInInput.focus();
+}
+
+function submitWriteIn() {
+  const q = CONFIG.questions[state.questionIndex];
+  const text = writeInInput.value.trim();
+  if (!text) {
+    writeInError.textContent = "Please tell us a bit more.";
+    writeInError.hidden = false;
+    writeInInput.focus();
+    return;
+  }
+  writeInError.hidden = true;
+
+  state.answers[state.questionIndex] = {
+    question: q.text,
+    answer: `${q.writeIn}: ${text}`,
+    writeInText: text,
+  };
+
+  advanceQuestion();
+}
+
+writeInContinue.addEventListener("click", submitWriteIn);
+
+writeInInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    submitWriteIn();
+  }
+});
 
 function goToPreviousQuestion() {
   if (state.questionIndex > 0) {
