@@ -123,11 +123,19 @@ body {
   width: auto;
 }
 
-.topbar-graphic {
-  display: block;
-  height: 46px;
-  width: auto;
-  margin: 0 auto 6px;
+/* Community graphic — fixed centered on every page (index.html and
+   menu.html both), behind the content, for continuity site-wide. */
+.center-graphic {
+  position: fixed;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58%;
+  max-width: 260px;
+  height: auto;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 main {
@@ -158,19 +166,6 @@ main {
   align-self: stretch;
   justify-content: space-evenly;
   padding: 8px 0;
-}
-
-.landing-accent {
-  position: absolute;
-  z-index: 0;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 52%;
-  max-width: 220px;
-  height: auto;
-  opacity: 0.9;
-  pointer-events: none;
 }
 
 .landing-hero,
