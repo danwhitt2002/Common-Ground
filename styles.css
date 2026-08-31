@@ -123,6 +123,13 @@ body {
   width: auto;
 }
 
+.topbar-graphic {
+  display: block;
+  height: 46px;
+  width: auto;
+  margin: 0 auto 6px;
+}
+
 main {
   position: relative;
   z-index: 1;
@@ -156,13 +163,13 @@ main {
 .landing-accent {
   position: absolute;
   z-index: 0;
-  top: 63%;
+  top: 54%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 78%;
-  max-width: 320px;
+  width: 52%;
+  max-width: 220px;
   height: auto;
-  opacity: 0.85;
+  opacity: 0.9;
   pointer-events: none;
 }
 
