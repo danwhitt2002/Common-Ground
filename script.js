@@ -84,7 +84,7 @@ const CONFIG = {
       },
       options: [
         { en: "🏖️ I'm from Rio (Carioca)", pt: "🏖️ Sou do Rio (Carioca)", es: "🏖️ Soy de Río (Carioca)" },
-        { en: "💼 I moved here for work", pt: "💼 Me mudei para cá a trabalho", es: "💼 Me mudé aquí por trabajo" },
+        { en: "💼 I moved here for work/digital nomad", pt: "💼 Me mudei para cá a trabalho/nômade digital", es: "💼 Me mudé aquí por trabajo/nómada digital" },
         { en: "❤️ I moved here for a partner", pt: "❤️ Me mudei para cá por causa de um(a) parceiro(a)", es: "❤️ Me mudé aquí por una pareja" },
         { en: "🎒 I'm travelling / backpacking", pt: "🎒 Estou viajando / mochilão", es: "🎒 Estoy viajando / de mochilero" },
         { en: "🎓 I'm studying here", pt: "🎓 Estou estudando aqui", es: "🎓 Estoy estudiando aquí" },
