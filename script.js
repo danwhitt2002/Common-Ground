@@ -193,7 +193,7 @@ const TRANSLATIONS = {
       ],
     },
     approved: {
-      eyebrow: "Application Approved",
+      eyebrow: "You're In!",
       heading: "Welcome to Common Ground.",
       lede: "You're in. Lock in your spot with your Grounds Pass — access to every weekly event, with coffee & matcha‑based mocktails included.",
       priceLabel: "Grounds Pass",
@@ -244,7 +244,7 @@ const TRANSLATIONS = {
       ],
     },
     approved: {
-      eyebrow: "Inscrição Aprovada",
+      eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) à Common Ground.",
       lede: "Você entrou. Garanta sua vaga com o seu Grounds Pass — acesso a todos os encontros semanais, com mocktails de café e matchá incluídos.",
       priceLabel: "Grounds Pass",
@@ -295,7 +295,7 @@ const TRANSLATIONS = {
       ],
     },
     approved: {
-      eyebrow: "Solicitud Aprobada",
+      eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a a Common Ground.",
       lede: "Ya estás dentro. Asegura tu lugar con tu Grounds Pass — acceso a todos los encuentros semanales, con mocktails de café y matcha incluidos.",
       priceLabel: "Grounds Pass",
