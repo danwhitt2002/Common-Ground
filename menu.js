@@ -20,8 +20,8 @@
 //
 // Each image is saved at 2x with its letters' x-height normalized to the
 // same pixel count as every other image in its tier (items vs. category
-// titles) — that's what makes "Moonshine Matcha" and "Sweettalk by Unique"
-// read as the same size despite one having deep descenders and the other
+// titles) — that's what makes "Moonshine Matcha" and "Sweettalk" read as
+// the same size despite one having deep descenders and the other
 // not. renderHandwriting() below displays each at half its natural size
 // (crisp at 2x, and every image's letters now line up at that scale) —
 // don't apply a fixed CSS height to these images, it would undo that.
@@ -54,9 +54,9 @@ const MENU_CONFIG = {
           description: { en: "Our default cold brew, in collaboration with UNIQUE Coffee.", pt: "Nosso cold brew padrão, em colaboração com a UNIQUE Coffee.", es: "Nuestro cold brew predeterminado, en colaboración con UNIQUE Coffee." },
         },
         {
-          name: "Sweettalk by Unique",
-          image: "assets/menu/sweettalk-by-unique.png",
-          description: { en: "A sweet, flirtatious oat milk-based beverage.", pt: "Uma bebida doce e sedutora à base de leite de aveia.", es: "Una bebida dulce y coqueta a base de leche de avena." },
+          name: "Sweettalk",
+          image: "assets/menu/sweettalk.png",
+          description: { en: "A sweet, flirtatious PB + date-based beverage.", pt: "Uma bebida doce e sedutora à base de pasta de amendoim e tâmara.", es: "Una bebida dulce y coqueta a base de mantequilla de maní y dátil." },
         },
         {
           name: "Shaken Guyanese Dirty Chai",
@@ -72,7 +72,7 @@ const MENU_CONFIG = {
         {
           name: "Posto 9",
           image: "assets/menu/posto-9.png",
-          description: { en: "Bright and bold, just like Posto 9.", pt: "Vibrante e ousado, como o Posto 9.", es: "Vibrante y audaz, como el Posto 9." },
+          description: { en: "Bright and bold, like Posto 9.", pt: "Vibrante e ousado, como o Posto 9.", es: "Vibrante y audaz, como el Posto 9." },
         },
         {
           name: "Carioca Kick",
