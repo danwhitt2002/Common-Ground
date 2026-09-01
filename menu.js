@@ -35,7 +35,7 @@ const MENU_CONFIG = {
         {
           name: "The Greenhaus",
           image: "assets/menu/the-greenhaus.png",
-          description: { en: "Earthy, fresh, green.", pt: "Terroso, fresco, verde.", es: "Terroso, fresco, verde." },
+          description: { en: "Green juice meets matcha latte.", pt: "Suco verde encontra matcha latte.", es: "Jugo verde se encuentra con matcha latte." },
         },
         {
           name: "Moonshine Matcha",
