@@ -173,7 +173,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
       apply: "Apply for Your Grounds Pass",
-      finePrint: "Takes about a minute. {price} per event if approved.",
+      finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
     },
     question: {
@@ -240,7 +240,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
       apply: "Inscreva-se para o seu Grounds Pass",
-      finePrint: "Leva cerca de um minuto. {price} por evento se aprovado(a).",
+      finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
     },
     question: {
@@ -307,7 +307,7 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
       apply: "Solicita tu Grounds Pass",
-      finePrint: "Toma cerca de un minuto. {price} por evento si eres aprobado/a.",
+      finePrint: "Toma cerca de un minuto. {price}/evento.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
     },
     question: {
