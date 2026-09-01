@@ -167,7 +167,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      lede: "Find your Common Ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
+      lede: "Find your Common Ground — apply now.",
       perks: {
         events: "Weekly events with an international crowd",
         mocktails: "Coffee and matcha-based mocktails included every time",
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      lede: "Encontre seu Common Ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
+      lede: "Encontre seu Common Ground — inscreva-se agora.",
       perks: {
         events: "Encontros semanais com um público internacional",
         mocktails: "Mocktails de café e matchá incluídos sempre",
@@ -311,7 +311,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      lede: "Encuentra tu Common Ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
+      lede: "Encuentra tu Common Ground — solicita ahora.",
       perks: {
         events: "Encuentros semanales con un público internacional",
         mocktails: "Mocktails de café y matcha incluidos siempre",
