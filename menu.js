@@ -40,7 +40,7 @@ const MENU_CONFIG = {
         {
           name: "Moonshine Matcha",
           image: "assets/menu/moonshine-matcha.png",
-          description: { en: "Smoky, wild, nocturnal.", pt: "Defumado, selvagem, noturno.", es: "Ahumado, salvaje, nocturno." },
+          description: { en: "A homemade matcha blend.", pt: "Um blend caseiro de matchá.", es: "Una mezcla casera de matcha." },
         },
       ],
     },
