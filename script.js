@@ -168,6 +168,11 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
+      perks: {
+        events: "Weekly events with an international crowd",
+        mocktails: "Coffee and matcha-based mocktails included every time",
+        groupchat: "Access to the Common Ground WhatsApp community group chat",
+      },
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
@@ -222,7 +227,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "Included with your Grounds Pass: access to our insiders WhatsApp group chat. We'll add you in once you're a pass-holder.",
+      groupNote: "Included with your Grounds Pass: access to the Common Ground WhatsApp community group chat. We'll add you in once you're a pass-holder.",
       menuLink: "See the drinks menu →",
       finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
@@ -235,6 +240,11 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
+      perks: {
+        events: "Encontros semanais com um público internacional",
+        mocktails: "Mocktails de café e matchá incluídos sempre",
+        groupchat: "Acesso ao grupo da comunidade Common Ground no WhatsApp",
+      },
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
@@ -289,7 +299,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Incluído no seu Grounds Pass: acesso ao nosso grupo insiders no WhatsApp. Vamos te adicionar assim que você for pass-holder.",
+      groupNote: "Incluído no seu Grounds Pass: acesso ao grupo da comunidade Common Ground no WhatsApp. Vamos te adicionar assim que você for pass-holder.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
@@ -302,6 +312,11 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
+      perks: {
+        events: "Encuentros semanales con un público internacional",
+        mocktails: "Mocktails de café y matcha incluidos siempre",
+        groupchat: "Acceso al grupo de la comunidad Common Ground en WhatsApp",
+      },
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price}/evento.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
@@ -356,7 +371,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Incluido en tu Grounds Pass: acceso a nuestro grupo insiders de WhatsApp. Te añadiremos en cuanto seas pass-holder.",
+      groupNote: "Incluido en tu Grounds Pass: acceso al grupo de la comunidad Common Ground en WhatsApp. Te añadiremos en cuanto seas pass-holder.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
