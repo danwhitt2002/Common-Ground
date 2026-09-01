@@ -206,6 +206,10 @@ main {
 h1.display { font-size: clamp(38px, 10vw, 52px); }
 h2.display { font-size: clamp(26px, 7vw, 32px); }
 
+/* Landing hero: bring the headline size down a step closer to the eyebrow
+   and lede around it, instead of the much larger default h1 scale. */
+.landing-hero h1.display { font-size: clamp(34px, 9vw, 44px); }
+
 .lede {
   font-size: 16px;
   line-height: 1.55;
@@ -219,6 +223,10 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   font-size: 13px;
   color: var(--ink-dim);
 }
+
+/* Match the landing screen's fine print to its neighboring menu link (14px)
+   instead of sitting a size smaller for no real reason. */
+#landing-fine-print { font-size: 14px; }
 
 .btn-primary {
   appearance: none;
