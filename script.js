@@ -15,6 +15,11 @@ const CONFIG = {
   // Shown at the bottom of the "approved" screen. Update to your real handle.
   instagramHandle: "@dansdigitaldiaries",
 
+  // Invite link to your WhatsApp group chat (WhatsApp → group → Group Info →
+  // Invite to Group via Link). Shown as a link on the payment screen once
+  // someone's in. Leave blank to hide that link.
+  whatsappGroupLink: "",
+
   // Where application answers get saved. Point this at a Formspree endpoint
   // (https://formspree.io — free tier, no backend needed) or any endpoint that
   // accepts a JSON POST. Leave blank to disable remote saving (answers still
@@ -162,7 +167,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your common ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
       apply: "Apply for Your Grounds Pass",
-      finePrint: "Takes about a minute. {price} if approved.",
+      finePrint: "Takes about a minute. {price} per event if approved.",
       menuLink: "See what's included — the drinks menu →",
     },
     question: {
@@ -195,14 +200,16 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "You're In!",
       heading: "Welcome to Common Ground.",
-      lede: "You're in. Lock in your spot with your Grounds Pass — access to every weekly event, with coffee & matcha‑based mocktails included.",
+      lede: "You're in. Your Grounds Pass covers this event — coffee & matcha‑based mocktails included.",
       priceLabel: "Grounds Pass",
-      priceSub: "Weekly events · coffee & matcha mocktails included",
+      priceSub: "Per event · coffee & matcha mocktails included",
+      priceUnit: "/event",
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
       pixKeyLabel: "Pix key (CPF)",
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
+      whatsappGroupLink: "Join the WhatsApp group chat →",
       menuLink: "See the drinks menu →",
       finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
@@ -213,7 +220,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu common ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
       apply: "Inscreva-se para o seu Grounds Pass",
-      finePrint: "Leva cerca de um minuto. {price} se aprovado(a).",
+      finePrint: "Leva cerca de um minuto. {price} por evento se aprovado(a).",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
     },
     question: {
@@ -246,14 +253,16 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) à Common Ground.",
-      lede: "Você entrou. Garanta sua vaga com o seu Grounds Pass — acesso a todos os encontros semanais, com mocktails de café e matchá incluídos.",
+      lede: "Você entrou. Seu Grounds Pass cobre este evento — mocktails de café e matchá incluídos.",
       priceLabel: "Grounds Pass",
-      priceSub: "Encontros semanais · mocktails de café e matchá incluídos",
+      priceSub: "Por evento · mocktails de café e matchá incluídos",
+      priceUnit: "/evento",
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
       pixKeyLabel: "Chave Pix (CPF)",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
+      whatsappGroupLink: "Entre no grupo do WhatsApp →",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
@@ -264,7 +273,7 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu common ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
       apply: "Solicita tu Grounds Pass",
-      finePrint: "Toma cerca de un minuto. {price} si eres aprobado/a.",
+      finePrint: "Toma cerca de un minuto. {price} por evento si eres aprobado/a.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
     },
     question: {
@@ -297,14 +306,16 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a a Common Ground.",
-      lede: "Ya estás dentro. Asegura tu lugar con tu Grounds Pass — acceso a todos los encuentros semanales, con mocktails de café y matcha incluidos.",
+      lede: "Ya estás dentro. Tu Grounds Pass cubre este evento — mocktails de café y matcha incluidos.",
       priceLabel: "Grounds Pass",
-      priceSub: "Encuentros semanales · mocktails de café y matcha incluidos",
+      priceSub: "Por evento · mocktails de café y matcha incluidos",
+      priceUnit: "/evento",
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
       pixKeyLabel: "Clave Pix (CPF)",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
+      whatsappGroupLink: "Únete al grupo de WhatsApp →",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
@@ -415,6 +426,13 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 // ---------------------------------------------------------------------------
 document.getElementById("approved-price").textContent = CONFIG.price;
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
+
+const whatsappGroupLinkEl = document.getElementById("whatsapp-group-link");
+if (CONFIG.whatsappGroupLink) {
+  whatsappGroupLinkEl.href = CONFIG.whatsappGroupLink;
+} else {
+  whatsappGroupLinkEl.hidden = true;
+}
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;

@@ -95,15 +95,15 @@
 
     <!-- APPROVED (the real ending — reached right after applying, straight to payment; also reachable directly via a link — see README) -->
     <section class="screen" data-screen="approved">
-      <p class="eyebrow" data-i18n="approved.eyebrow">Application Approved</p>
+      <p class="eyebrow" data-i18n="approved.eyebrow">You're In!</p>
       <h1 class="display" data-i18n="approved.heading">Welcome to Common Ground.</h1>
-      <p class="lede" data-i18n="approved.lede">You're in. Lock in your spot with your Grounds Pass — access to every weekly event, with coffee &amp; matcha‑based mocktails included.</p>
+      <p class="lede" data-i18n="approved.lede">You're in. Your Grounds Pass covers this event — coffee &amp; matcha‑based mocktails included.</p>
       <div class="price-card">
         <div class="price-card-row">
           <span class="price-label" data-i18n="approved.priceLabel">Grounds Pass</span>
-          <span class="price-amount" id="approved-price"></span>
+          <span><span class="price-amount" id="approved-price"></span><span class="price-unit" data-i18n="approved.priceUnit">/event</span></span>
         </div>
-        <span class="price-sub" data-i18n="approved.priceSub">Weekly events · coffee &amp; matcha mocktails included</span>
+        <span class="price-sub" data-i18n="approved.priceSub">Per event · coffee &amp; matcha mocktails included</span>
       </div>
 
       <div class="pix-card">
@@ -119,6 +119,7 @@
       </div>
 
       <a class="btn-primary" id="whatsapp-btn" href="#" target="_blank" rel="noopener" data-i18n="approved.whatsappBtn">Send Payment Proof on WhatsApp</a>
+      <a class="link-secondary" id="whatsapp-group-link" href="#" target="_blank" rel="noopener" data-i18n="approved.whatsappGroupLink">Join the WhatsApp group chat →</a>
       <a class="link-secondary" href="menu.html" data-menu-link data-i18n="approved.menuLink">See the drinks menu →</a>
       <p class="fine-print" id="approved-fine-print"></p>
     </section>

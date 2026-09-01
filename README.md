@@ -3,7 +3,7 @@ Find your common ground. A social club.
 
 ## Grounds Pass application page
 
-A social club in Rio de Janeiro. The Grounds Pass (R$80) gets members into weekly events with coffee-based and matcha-based mocktails included.
+A social club in Rio de Janeiro. The Grounds Pass (R$80 per event) gets members into that week's event, with coffee-based and matcha-based mocktails included.
 
 Two static pages, no build step, no backend required:
 
@@ -25,12 +25,15 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 
 If you ever change the Pix key or the R$80 price, you'll need a new QR — regenerate `assets/pix-qr.png` (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild it) so it stays in sync with `CONFIG.pixKey`.
 
+The payment screen also shows a **"Join the WhatsApp group chat →"** link once `CONFIG.whatsappGroupLink` is set to your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) — it's blank and hidden by default until you add one.
+
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** — currently `R$80`, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
+2. **`price`** — currently `R$80` per event, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
 3. **`instagramHandle`** — shown on the payment screen.
-4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
+4. **`whatsappGroupLink`** — your WhatsApp group invite link, shown on the payment screen. Leave blank to hide that link.
+5. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
 ### Languages — English, Português, Español
 
