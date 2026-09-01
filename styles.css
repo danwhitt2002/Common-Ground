@@ -208,16 +208,16 @@ main {
   gap: 8px;
   font-family: 'Waiting for the Sunrise', cursive;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 19px;
   line-height: 1.35;
   color: var(--ink-dim);
 }
 
 .perks-list li::before {
-  content: "✓";
+  content: "–";
   flex: none;
   color: var(--accent);
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1;
 }
 
