@@ -61,7 +61,7 @@ const MENU_CONFIG = {
         {
           name: "Shaken Guyanese Dirty Chai",
           image: "assets/menu/shaken-guyanese-dirty-chai.png",
-          description: { en: "Inspired by my time in Guyana.", pt: "Inspirado no meu tempo na Guiana.", es: "Inspirado en mi tiempo en Guyana." },
+          description: { en: "Chai cold brew inspired by my time in Guyana.", pt: "Chai cold brew inspirado no meu tempo na Guiana.", es: "Chai cold brew inspirado en mi tiempo en Guyana." },
         },
       ],
     },
