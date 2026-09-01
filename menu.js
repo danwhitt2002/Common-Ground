@@ -56,7 +56,7 @@ const MENU_CONFIG = {
         {
           name: "Sweettalk by Unique",
           image: "assets/menu/sweettalk-by-unique.png",
-          description: { en: "Silky, warm, flirty.", pt: "Sedoso, quente, sedutor.", es: "Sedoso, cálido, coqueto." },
+          description: { en: "A sweet, flirtatious oat milk-based beverage.", pt: "Uma bebida doce e sedutora à base de leite de aveia.", es: "Una bebida dulce y coqueta a base de leche de avena." },
         },
         {
           name: "Shaken Guyanese Dirty Chai",
