@@ -25,7 +25,9 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 
 If you ever change the Pix key or either price, you'll need new QRs — regenerate `assets/pix-qr.png` (single) and `assets/pix-qr-4pack.png` (4-pack) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
-The payment screen also shows a **"Join the WhatsApp group chat →"** link once `CONFIG.whatsappGroupLink` is set to your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) — it's blank and hidden by default until you add one.
+### WhatsApp group chat access comes with the pass
+
+Access to the Common Ground WhatsApp group chat is included with any Grounds Pass (single or 4-pack) — it's not sold separately. The payment screen tells them this ("Once you're a pass-holder, we'll add you to the Common Ground WhatsApp group chat") but doesn't hand out the invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) to welcome them in as a pass-holder.
 
 ### Two plans: Single Pass or a 4-Pack of Passes
 
@@ -36,10 +38,9 @@ There's no backend or accounts here, so **redemption for the 4-pack is on you to
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** — currently `R$80` per event, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
+2. **`price`** / **`fourPackPrice`** — currently `R$80` per event and `R$250` for the 4-pack, shown on the landing and payment screens (should match the amounts encoded in the two Pix QRs).
 3. **`instagramHandle`** — shown on the payment screen.
-4. **`whatsappGroupLink`** — your WhatsApp group invite link, shown on the payment screen. Leave blank to hide that link.
-5. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
+4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
 ### Languages — English, Português, Español
 

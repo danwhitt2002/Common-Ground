@@ -22,11 +22,6 @@ const CONFIG = {
   // Shown at the bottom of the "approved" screen. Update to your real handle.
   instagramHandle: "@dansdigitaldiaries",
 
-  // Invite link to your WhatsApp group chat (WhatsApp → group → Group Info →
-  // Invite to Group via Link). Shown as a link on the payment screen once
-  // someone's in. Leave blank to hide that link.
-  whatsappGroupLink: "",
-
   // Where application answers get saved. Point this at a Formspree endpoint
   // (https://formspree.io — free tier, no backend needed) or any endpoint that
   // accepts a JSON POST. Leave blank to disable remote saving (answers still
@@ -227,7 +222,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      whatsappGroupLink: "Join the WhatsApp group chat →",
+      groupNote: "Once you're a pass-holder, we'll add you to the Common Ground WhatsApp group chat.",
       menuLink: "See the drinks menu →",
       finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
@@ -294,7 +289,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      whatsappGroupLink: "Entre no grupo do WhatsApp →",
+      groupNote: "Assim que você for pass-holder, vamos te adicionar ao grupo do WhatsApp da Common Ground.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
@@ -361,7 +356,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      whatsappGroupLink: "Únete al grupo de WhatsApp →",
+      groupNote: "En cuanto seas pass-holder, te añadiremos al grupo de WhatsApp de Common Ground.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
@@ -513,13 +508,6 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
 document.getElementById("plan-price-fourpack").textContent = CONFIG.fourPackPrice;
-
-const whatsappGroupLinkEl = document.getElementById("whatsapp-group-link");
-if (CONFIG.whatsappGroupLink) {
-  whatsappGroupLinkEl.href = CONFIG.whatsappGroupLink;
-} else {
-  whatsappGroupLinkEl.hidden = true;
-}
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;
