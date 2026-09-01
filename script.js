@@ -199,9 +199,9 @@ const TRANSLATIONS = {
     },
     reviewing: {
       messages: [
-        "Reviewing your application…",
-        "Checking group fit…",
-        "Submitting your application…",
+        "Saving your answers…",
+        "Setting up your Grounds Pass…",
+        "Almost there…",
       ],
     },
     approved: {
@@ -266,9 +266,9 @@ const TRANSLATIONS = {
     },
     reviewing: {
       messages: [
-        "Analisando sua inscrição…",
-        "Verificando se combina com o grupo…",
-        "Enviando sua inscrição…",
+        "Salvando suas respostas…",
+        "Preparando seu Grounds Pass…",
+        "Quase lá…",
       ],
     },
     approved: {
@@ -333,9 +333,9 @@ const TRANSLATIONS = {
     },
     reviewing: {
       messages: [
-        "Revisando tu solicitud…",
-        "Verificando que encajes con el grupo…",
-        "Enviando tu solicitud…",
+        "Guardando tus respuestas…",
+        "Preparando tu Grounds Pass…",
+        "Casi listo…",
       ],
     },
     approved: {
@@ -813,7 +813,8 @@ contactForm.addEventListener("submit", (e) => {
 });
 
 // ---------------------------------------------------------------------------
-// "Reviewing" sequence — builds the curated-application feel, then submits
+// Brief transition sequence — describes the actual submit happening
+// underneath, rather than implying a human review that isn't taking place
 // ---------------------------------------------------------------------------
 const reviewingText = document.getElementById("reviewing-text");
 
