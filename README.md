@@ -20,7 +20,7 @@ You can also send that same payment screen directly to anyone at any time: **`yo
 
 That payment screen shows a **Pix QR code + copyable Pix key** to pay directly in any Brazilian bank app, then a **"Send Payment Proof on WhatsApp"** button so you can manually confirm and let them into the group. It's already set up:
 
-- **Pix key**: `danwhitt2002@gmail.com` (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
+- **Pix key**: `04409638777` (CPF) (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
 If you ever change the Pix key or the R$80 price, you'll need a new QR — regenerate `assets/pix-qr.png` (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild it) so it stays in sync with `CONFIG.pixKey`.

@@ -6,7 +6,7 @@ const CONFIG = {
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png).
   // If you ever change the key or amount, regenerate that QR image to match.
-  pixKey: "danwhitt2002@gmail.com",
+  pixKey: "04409638777",
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -199,7 +199,7 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       priceSub: "Weekly events · coffee & matcha mocktails included",
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
-      pixKeyLabel: "Pix key (email)",
+      pixKeyLabel: "Pix key (CPF)",
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
@@ -250,7 +250,7 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       priceSub: "Encontros semanais · mocktails de café e matchá incluídos",
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
-      pixKeyLabel: "Chave Pix (e-mail)",
+      pixKeyLabel: "Chave Pix (CPF)",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
@@ -301,7 +301,7 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       priceSub: "Encuentros semanales · mocktails de café y matcha incluidos",
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
-      pixKeyLabel: "Clave Pix (correo)",
+      pixKeyLabel: "Clave Pix (CPF)",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
