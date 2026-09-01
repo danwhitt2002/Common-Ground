@@ -218,7 +218,7 @@ const TRANSLATIONS = {
         fourpack: {
           label: "4-Pack of Passes",
           unit: "/4-pack",
-          sub: "4 passes, 4 events of your choice · coffee and matcha-based mocktails included every time",
+          sub: "4 passes, 4 events of your choice\nCoffee and matcha-based mocktails included every time",
           badge: "Save R$70",
         },
       },
@@ -285,7 +285,7 @@ const TRANSLATIONS = {
         fourpack: {
           label: "Pacote de 4 Passes",
           unit: "/pacote de 4",
-          sub: "4 passes, 4 eventos à sua escolha · mocktails de café e matchá incluídos sempre",
+          sub: "4 passes, 4 eventos à sua escolha\nMocktails de café e matchá incluídos sempre",
           badge: "Economize R$70",
         },
       },
@@ -352,7 +352,7 @@ const TRANSLATIONS = {
         fourpack: {
           label: "Paquete de 4 Pases",
           unit: "/paquete de 4",
-          sub: "4 pases, 4 eventos de tu elección · mocktails de café y matcha incluidos siempre",
+          sub: "4 pases, 4 eventos de tu elección\nMocktails de café y matcha incluidos siempre",
           badge: "Ahorra R$70",
         },
       },
