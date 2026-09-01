@@ -61,7 +61,7 @@ const MENU_CONFIG = {
         {
           name: "Shaken Guyanese Dirty Chai",
           image: "assets/menu/shaken-guyanese-dirty-chai.png",
-          description: { en: "Spiced, punchy, rich.", pt: "Especiado, marcante, encorpado.", es: "Especiado, intenso, con cuerpo." },
+          description: { en: "Inspired by my time in Guyana.", pt: "Inspirado no meu tempo na Guiana.", es: "Inspirado en mi tiempo en Guyana." },
         },
       ],
     },
@@ -72,12 +72,12 @@ const MENU_CONFIG = {
         {
           name: "Posto 9",
           image: "assets/menu/posto-9.png",
-          description: { en: "Fiery, bright, sweet.", pt: "Ardente, vibrante, doce.", es: "Ardiente, vibrante, dulce." },
+          description: { en: "Bright and bold, just like Posto 9.", pt: "Vibrante e ousado, como o Posto 9.", es: "Vibrante y audaz, como el Posto 9." },
         },
         {
           name: "Carioca Kick",
           image: "assets/menu/carioca-kick.png",
-          description: { en: "Zesty, sharp, lively.", pt: "Cítrico, marcante, animado.", es: "Cítrico, intenso, animado." },
+          description: { en: "A fiery wellness shot.", pt: "Um shot de bem-estar ardente.", es: "Un shot de bienestar ardiente." },
         },
       ],
     },
