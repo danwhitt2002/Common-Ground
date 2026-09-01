@@ -213,7 +213,7 @@ const TRANSLATIONS = {
         single: {
           label: "Single Pass",
           unit: "/event",
-          sub: "Per event · coffee & matcha mocktails included",
+          sub: "Coffee and matcha-based mocktails included every time",
         },
         fourpack: {
           label: "4-Pack of Passes",
@@ -280,7 +280,7 @@ const TRANSLATIONS = {
         single: {
           label: "Passe Único",
           unit: "/evento",
-          sub: "Por evento · mocktails de café e matchá incluídos",
+          sub: "Mocktails de café e matchá incluídos sempre",
         },
         fourpack: {
           label: "Pacote de 4 Passes",
@@ -347,7 +347,7 @@ const TRANSLATIONS = {
         single: {
           label: "Pase Único",
           unit: "/evento",
-          sub: "Por evento · mocktails de café y matcha incluidos",
+          sub: "Mocktails de café y matcha incluidos siempre",
         },
         fourpack: {
           label: "Paquete de 4 Pases",
