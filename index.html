@@ -35,7 +35,7 @@
       <div class="landing-hero">
         <p class="eyebrow" data-i18n="landing.eyebrow">Rio de Janeiro · Applications Open Now</p>
         <h1 class="display">The Grounds&nbsp;Pass</h1>
-        <p class="lede" data-i18n="landing.lede">Find your common ground — weekly meetups, international circle, functional mocktails included every time. Membership is by application only.</p>
+        <p class="lede" data-i18n="landing.lede">Find your Common Ground — weekly meetups, international circle, functional mocktails included every time. Apply now.</p>
       </div>
       <div class="landing-cta">
         <button class="btn-primary" id="start-btn" type="button" data-i18n="landing.apply">Apply for Your Grounds Pass</button>
@@ -97,13 +97,26 @@
     <section class="screen" data-screen="approved">
       <p class="eyebrow" data-i18n="approved.eyebrow">You're In!</p>
       <h1 class="display" data-i18n="approved.heading">Welcome to Common Ground.</h1>
-      <p class="lede" data-i18n="approved.lede">You're in. Your Grounds Pass covers this event — coffee &amp; matcha‑based mocktails included.</p>
+      <p class="lede" data-i18n="approved.lede">You're in. Choose your plan below — coffee &amp; matcha‑based mocktails included every time.</p>
+
+      <div class="plan-toggle" role="group" aria-label="Choose a plan">
+        <button type="button" class="plan-btn is-active" id="plan-btn-single" data-plan="single">
+          <span class="plan-btn-label" data-i18n="approved.plans.single.label">Single Event</span>
+          <span class="plan-btn-price" id="plan-price-single"></span>
+        </button>
+        <button type="button" class="plan-btn" id="plan-btn-monthly" data-plan="monthly">
+          <span class="plan-btn-label" data-i18n="approved.plans.monthly.label">Monthly · 4 Events</span>
+          <span class="plan-btn-price" id="plan-price-monthly"></span>
+        </button>
+      </div>
+
       <div class="price-card">
         <div class="price-card-row">
           <span class="price-label" data-i18n="approved.priceLabel">Grounds Pass</span>
-          <span><span class="price-amount" id="approved-price"></span><span class="price-unit" data-i18n="approved.priceUnit">/event</span></span>
+          <span><span class="price-amount" id="approved-price"></span><span class="price-unit" id="approved-price-unit"></span></span>
         </div>
-        <span class="price-sub" data-i18n="approved.priceSub">Per event · coffee &amp; matcha mocktails included</span>
+        <span class="price-sub" id="approved-price-sub"></span>
+        <span class="plan-badge" id="plan-badge" hidden></span>
       </div>
 
       <div class="pix-card">

@@ -4,8 +4,14 @@
 const CONFIG = {
   price: "R$80",
 
-  // Your Pix key (shown as text, and encoded into assets/pix-qr.png).
-  // If you ever change the key or amount, regenerate that QR image to match.
+  // The 4-event monthly bundle. If you ever change either price, you'll
+  // need new QR codes — regenerate assets/pix-qr.png (single) and
+  // assets/pix-qr-monthly.png (monthly) to match.
+  monthlyPrice: "R$250",
+
+  // Your Pix key (shown as text, and encoded into assets/pix-qr.png and
+  // assets/pix-qr-monthly.png). If you ever change the key, regenerate
+  // both QR images to match.
   pixKey: "04409638777",
 
   // WhatsApp number applicants send payment proof to, digits only with
@@ -165,7 +171,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      lede: "Find your common ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
+      lede: "Find your Common Ground — weekly meetups, international circle, functional mocktails included every time. Apply now.",
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price} per event if approved.",
       menuLink: "See what's included — the drinks menu →",
@@ -200,10 +206,21 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "You're In!",
       heading: "Welcome to Common Ground.",
-      lede: "You're in. Your Grounds Pass covers this event — coffee & matcha‑based mocktails included.",
+      lede: "You're in. Choose your plan below — coffee & matcha‑based mocktails included every time.",
       priceLabel: "Grounds Pass",
-      priceSub: "Per event · coffee & matcha mocktails included",
-      priceUnit: "/event",
+      plans: {
+        single: {
+          label: "Single Event",
+          unit: "/event",
+          sub: "Per event · coffee & matcha mocktails included",
+        },
+        monthly: {
+          label: "Monthly · 4 Events",
+          unit: "/month",
+          sub: "4 events this month · coffee & matcha mocktails included",
+          badge: "Save R$70",
+        },
+      },
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
       pixKeyLabel: "Pix key (CPF)",
       copy: "Copy",
@@ -213,12 +230,15 @@ const TRANSLATIONS = {
       menuLink: "See the drinks menu →",
       finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
-    whatsappMessage: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
+    whatsappMessage: {
+      single: "Hi! Here's my payment proof for my Common Ground Grounds Pass (single event):",
+      monthly: "Hi! Here's my payment proof for my Common Ground Monthly Pass (4 events):",
+    },
   },
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      lede: "Encontre seu common ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
+      lede: "Encontre seu Common Ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Inscreva-se agora.",
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price} por evento se aprovado(a).",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
@@ -253,10 +273,21 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) à Common Ground.",
-      lede: "Você entrou. Seu Grounds Pass cobre este evento — mocktails de café e matchá incluídos.",
+      lede: "Você entrou. Escolha seu plano abaixo — mocktails de café e matchá incluídos sempre.",
       priceLabel: "Grounds Pass",
-      priceSub: "Por evento · mocktails de café e matchá incluídos",
-      priceUnit: "/evento",
+      plans: {
+        single: {
+          label: "Evento Único",
+          unit: "/evento",
+          sub: "Por evento · mocktails de café e matchá incluídos",
+        },
+        monthly: {
+          label: "Mensal · 4 Eventos",
+          unit: "/mês",
+          sub: "4 eventos por mês · mocktails de café e matchá incluídos",
+          badge: "Economize R$70",
+        },
+      },
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
       pixKeyLabel: "Chave Pix (CPF)",
       copy: "Copiar",
@@ -266,12 +297,15 @@ const TRANSLATIONS = {
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
-    whatsappMessage: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground:",
+    whatsappMessage: {
+      single: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground (evento único):",
+      monthly: "Oi! Aqui está o comprovante de pagamento do meu Passe Mensal da Common Ground (4 eventos):",
+    },
   },
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      lede: "Encuentra tu common ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
+      lede: "Encuentra tu Common Ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Solicita ahora.",
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price} por evento si eres aprobado/a.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
@@ -306,10 +340,21 @@ const TRANSLATIONS = {
     approved: {
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a a Common Ground.",
-      lede: "Ya estás dentro. Tu Grounds Pass cubre este evento — mocktails de café y matcha incluidos.",
+      lede: "Ya estás dentro. Elige tu plan abajo — mocktails de café y matcha incluidos siempre.",
       priceLabel: "Grounds Pass",
-      priceSub: "Por evento · mocktails de café y matcha incluidos",
-      priceUnit: "/evento",
+      plans: {
+        single: {
+          label: "Evento Único",
+          unit: "/evento",
+          sub: "Por evento · mocktails de café y matcha incluidos",
+        },
+        monthly: {
+          label: "Mensual · 4 Eventos",
+          unit: "/mes",
+          sub: "4 eventos al mes · mocktails de café y matcha incluidos",
+          badge: "Ahorra R$70",
+        },
+      },
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
       pixKeyLabel: "Clave Pix (CPF)",
       copy: "Copiar",
@@ -319,7 +364,10 @@ const TRANSLATIONS = {
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
-    whatsappMessage: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground:",
+    whatsappMessage: {
+      single: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground (evento único):",
+      monthly: "¡Hola! Aquí está mi comprobante de pago de mi Pase Mensual de Common Ground (4 eventos):",
+    },
   },
 };
 
@@ -334,6 +382,7 @@ function t(key) {
 const state = {
   screen: "landing", // landing | question | contact | reviewing | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
+  plan: "single", // "single" | "monthly" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
@@ -378,8 +427,44 @@ function renderApprovedFinePrint() {
 }
 
 function renderWhatsappBtn() {
-  whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(t("whatsappMessage"))}`;
+  whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(t("whatsappMessage")[state.plan])}`;
 }
+
+// ---------------------------------------------------------------------------
+// Plan toggle — Single Event vs Monthly (4 events), on the approved/payment
+// screen. Swaps the displayed price, its QR code (each amount needs its own
+// Pix QR), and the WhatsApp payment-proof message so it's clear which plan
+// was paid for.
+// ---------------------------------------------------------------------------
+const planPrices = { single: CONFIG.price, monthly: CONFIG.monthlyPrice };
+const planQrImages = { single: "assets/pix-qr.png", monthly: "assets/pix-qr-monthly.png" };
+
+function renderPlanCard() {
+  document.getElementById("plan-btn-single").classList.toggle("is-active", state.plan === "single");
+  document.getElementById("plan-btn-monthly").classList.toggle("is-active", state.plan === "monthly");
+
+  document.getElementById("approved-price").textContent = planPrices[state.plan];
+  document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
+  document.getElementById("approved-price-sub").textContent = t(`approved.plans.${state.plan}.sub`);
+
+  const badge = document.getElementById("plan-badge");
+  if (state.plan === "monthly") {
+    badge.textContent = t("approved.plans.monthly.badge");
+    badge.hidden = false;
+  } else {
+    badge.hidden = true;
+  }
+
+  document.getElementById("pix-qr").src = planQrImages[state.plan];
+  renderWhatsappBtn();
+}
+
+document.querySelectorAll(".plan-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    state.plan = btn.dataset.plan;
+    renderPlanCard();
+  });
+});
 
 // menu.html is a separate page with no shared JS state, so the chosen
 // language is carried across via a "?lang=" URL param on the way there —
@@ -408,7 +493,7 @@ function applyLang(lang) {
 
   renderLandingFinePrint();
   renderApprovedFinePrint();
-  renderWhatsappBtn();
+  renderPlanCard();
   renderMenuLinks();
 }
 
@@ -424,8 +509,9 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 // ---------------------------------------------------------------------------
 // Landing
 // ---------------------------------------------------------------------------
-document.getElementById("approved-price").textContent = CONFIG.price;
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
+document.getElementById("plan-price-single").textContent = CONFIG.price;
+document.getElementById("plan-price-monthly").textContent = CONFIG.monthlyPrice;
 
 const whatsappGroupLinkEl = document.getElementById("whatsapp-group-link");
 if (CONFIG.whatsappGroupLink) {
