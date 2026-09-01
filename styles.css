@@ -192,8 +192,9 @@ main {
 }
 
 .perks-list li {
-  position: relative;
-  padding-left: 22px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   font-size: 14px;
   line-height: 1.4;
   color: var(--ink-dim);
@@ -201,11 +202,12 @@ main {
 
 .perks-list li::before {
   content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
+  flex: none;
   color: var(--accent);
+  font-family: 'Caveat', cursive;
   font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
 }
 
 @keyframes rise {
