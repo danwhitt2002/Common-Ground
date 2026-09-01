@@ -3,39 +3,41 @@ Find your common ground. A social club.
 
 ## Grounds Pass application page
 
-A social club in Rio de Janeiro. The Grounds Pass (R$120) gets members into weekly events with coffee-based and matcha-based mocktails included.
+A social club in Rio de Janeiro. The Grounds Pass (R$80) gets members into weekly events with coffee-based and matcha-based mocktails included.
 
 Two static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → a "Thank You, under review" screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the approved/payment screen already uses. Applications aren't auto-approved — see **Payment** below for how someone actually gets to pay.
-- **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and approved screens), showing what's included with the pass.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → straight into the payment screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the payment screen already uses.
+- **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and payment screens), showing what's included with the pass.
 
-### Applications aren't auto-approved — how payment actually happens
+### How payment actually happens
 
-Since applicants answer real, open-ended questions, there's no way to auto-decide who gets in — a person has to read the answers. So the public flow ends at a "Thank You, your application is under review" screen (`data-screen="pending"`), not at payment.
+There's no manual approval gate — an in-between step between applying and paying loses people, so the flow goes straight from the questionnaire to the payment screen (`data-screen="approved"`). The short "reviewing your application…" beat plays for a couple of seconds while the answers are actually submitted, then it lands on payment automatically.
 
-Once you've reviewed someone's application (check your Formspree inbox) and decided to let them in, send them **`yoursite.com/#approved`** — on WhatsApp (using the number they gave you), Instagram DM, wherever — and that link drops them straight onto the payment screen (`data-screen="approved"`), skipping the whole questionnaire. One tap from your message to the Pix QR code. No backend, no accounts, no per-person unique links — just the one shared hash link you send manually to whoever you've accepted.
+The application itself is still saved in full (to your Formspree inbox, plus a local-only backup in the browser), so you can read every answer and follow up on WhatsApp afterwards if someone isn't a fit — nothing here auto-adds anyone to the group itself, it just gets them to the Pix QR without waiting on you first.
+
+You can also send that same payment screen directly to anyone at any time: **`yoursite.com/#approved`** — on WhatsApp, Instagram DM, wherever — drops them straight onto it, skipping the whole questionnaire. Handy for a friend you're waving in without the form, or for resending the payment step to someone who dropped off. No backend, no accounts, no per-person unique links — just the one shared hash link.
 
 That payment screen shows a **Pix QR code + copyable Pix key** to pay directly in any Brazilian bank app, then a **"Send Payment Proof on WhatsApp"** button so you can manually confirm and let them into the group. It's already set up:
 
 - **Pix key**: `danwhitt2002@gmail.com` (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
-If you ever change the Pix key or the R$120 price, you'll need a new QR — regenerate `assets/pix-qr.png` (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild it) so it stays in sync with `CONFIG.pixKey`.
+If you ever change the Pix key or the R$80 price, you'll need a new QR — regenerate `assets/pix-qr.png` (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild it) so it stays in sync with `CONFIG.pixKey`.
 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** — currently `R$120`, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
-3. **`instagramHandle`** — shown on the pending and approved screens.
+2. **`price`** — currently `R$80`, shown on the landing and approved screens (should match the amount encoded in the Pix QR).
+3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
 ### Languages — English, Português, Español
 
-Three small flag buttons (🇬🇧/🇧🇷/🇪🇸) sit in the top-right corner of the landing screen — tapping one translates the entire application flow in place (every question, button, error message, and the contact/pending/approved screens) without navigating anywhere. Two places hold the translated text, both in `script.js`:
+Three small flag buttons (🇬🇧/🇧🇷/🇪🇸) sit in the top-right corner of the landing screen — tapping one translates the entire application flow in place (every question, button, error message, and the contact/payment screens) without navigating anywhere. Two places hold the translated text, both in `script.js`:
 
 - **`CONFIG.questions`** — each question's `text`/`hint`/`placeholder`/`writeInPlaceholder`, and every entry in an `options` array, is an `{ en, pt, es }` object instead of a plain string. Add a fourth language by adding its key to each of these objects (and to `TRANSLATIONS` below) — nothing else needs to change structurally.
-- **`TRANSLATIONS`** — every other on-screen string (landing copy, buttons, error messages, the pending/approved screens, the WhatsApp pre-filled message), one block per language, looked up by dot-path (e.g. `t("landing.apply")`). A handful of strings are templated with `{price}`/`{handle}`/`{current}`/`{total}` placeholders, filled in with a plain `.replace()` where they're used.
+- **`TRANSLATIONS`** — every other on-screen string (landing copy, buttons, error messages, the payment screen, the WhatsApp pre-filled message), one block per language, looked up by dot-path (e.g. `t("landing.apply")`). A handful of strings are templated with `{price}`/`{handle}`/`{current}`/`{total}` placeholders, filled in with a plain `.replace()` where they're used.
 
 Multiple-choice answers are saved in whichever language the applicant used (so their own words come through), plus an `answerEn` field with the canonical English option text, so you can review applications consistently regardless of which language someone applied in. The saved application also includes a top-level `language` field. The direct `#approved` payment link (see below) always shows in English, since that path never touches the landing screen's flag switcher.
 

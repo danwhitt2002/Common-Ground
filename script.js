@@ -2,7 +2,7 @@
 // CONFIG — everything you need to customize lives here.
 // ---------------------------------------------------------------------------
 const CONFIG = {
-  price: "R$120",
+  price: "R$80",
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png).
   // If you ever change the key or amount, regenerate that QR image to match.
@@ -160,7 +160,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      lede: "Find your common ground — weekly meetups, international circle, functional mocktails included every time. Membership is by application only.",
+      lede: "Find your common ground — weekly meetups, international circle, functional mocktails included every time. New members start with a quick application.",
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price} if approved.",
       menuLink: "See what's included — the drinks menu →",
@@ -192,13 +192,6 @@ const TRANSLATIONS = {
         "Submitting your application…",
       ],
     },
-    pending: {
-      eyebrow: "Application Received",
-      heading: "Thank You",
-      lede: "Your application is being reviewed. If you're a good fit, we'll message you on WhatsApp soon with your invitation and payment details.",
-      menuLink: "See what's included — the drinks menu →",
-      finePrint: "Questions in the meantime? DM us on Instagram {handle}.",
-    },
     approved: {
       eyebrow: "Application Approved",
       heading: "Welcome to Common Ground.",
@@ -218,7 +211,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      lede: "Encontre seu common ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. A associação é somente por inscrição.",
+      lede: "Encontre seu common ground — encontros semanais, um círculo internacional, mocktails funcionais incluídos sempre. Novos membros começam com uma inscrição rápida.",
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price} se aprovado(a).",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
@@ -250,13 +243,6 @@ const TRANSLATIONS = {
         "Enviando sua inscrição…",
       ],
     },
-    pending: {
-      eyebrow: "Inscrição Recebida",
-      heading: "Obrigado(a)!",
-      lede: "Sua inscrição está sendo analisada. Se for um bom encaixe, mandaremos uma mensagem no WhatsApp em breve com seu convite e os detalhes do pagamento.",
-      menuLink: "Veja o que está incluído — o cardápio de bebidas →",
-      finePrint: "Dúvidas enquanto isso? Chame no Instagram {handle}.",
-    },
     approved: {
       eyebrow: "Inscrição Aprovada",
       heading: "Bem-vindo(a) à Common Ground.",
@@ -276,7 +262,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      lede: "Encuentra tu common ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. La membresía es solo por solicitud.",
+      lede: "Encuentra tu common ground — encuentros semanales, un círculo internacional, mocktails funcionales incluidos siempre. Los nuevos miembros comienzan con una solicitud rápida.",
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price} si eres aprobado/a.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
@@ -307,13 +293,6 @@ const TRANSLATIONS = {
         "Verificando que encajes con el grupo…",
         "Enviando tu solicitud…",
       ],
-    },
-    pending: {
-      eyebrow: "Solicitud Recibida",
-      heading: "¡Gracias!",
-      lede: "Tu solicitud está siendo revisada. Si encajas bien, te escribiremos pronto por WhatsApp con tu invitación y los detalles de pago.",
-      menuLink: "Mira qué está incluido — el menú de bebidas →",
-      finePrint: "¿Dudas mientras tanto? Escríbenos por Instagram {handle}.",
     },
     approved: {
       eyebrow: "Solicitud Aprobada",
@@ -383,10 +362,6 @@ function renderLandingFinePrint() {
   document.getElementById("landing-fine-print").textContent = t("landing.finePrint").replace("{price}", CONFIG.price);
 }
 
-function renderPendingFinePrint() {
-  document.getElementById("pending-fine-print").textContent = t("pending.finePrint").replace("{handle}", CONFIG.instagramHandle);
-}
-
 function renderApprovedFinePrint() {
   document.getElementById("approved-fine-print").textContent = t("approved.finePrint").replace("{handle}", CONFIG.instagramHandle);
 }
@@ -421,7 +396,6 @@ function applyLang(lang) {
   });
 
   renderLandingFinePrint();
-  renderPendingFinePrint();
   renderApprovedFinePrint();
   renderWhatsappBtn();
   renderMenuLinks();
@@ -753,7 +727,7 @@ function runReviewSequence() {
 
   setTimeout(() => {
     clearInterval(interval);
-    showScreen("pending");
+    showScreen("approved");
   }, messages.length * 850 + 250);
 }
 
