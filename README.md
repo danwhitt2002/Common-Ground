@@ -23,15 +23,15 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 - **Pix key**: `04409638777` (CPF) (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
-If you ever change the Pix key or either price, you'll need new QRs — regenerate `assets/pix-qr.png` (single) and `assets/pix-qr-monthly.png` (monthly) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
+If you ever change the Pix key or either price, you'll need new QRs — regenerate `assets/pix-qr.png` (single) and `assets/pix-qr-4pack.png` (4-pack) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
 The payment screen also shows a **"Join the WhatsApp group chat →"** link once `CONFIG.whatsappGroupLink` is set to your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) — it's blank and hidden by default until you add one.
 
-### Two plans: Single Event or Monthly (4 events)
+### Two plans: Single Pass or a 4-Pack of Passes
 
-The payment screen lets someone pick **Single Event** (`CONFIG.price`, R$80) or **Monthly · 4 Events** (`CONFIG.monthlyPrice`, R$250 — a discount, like getting a 4th event free) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for.
+The payment screen lets someone pick a **Single Pass** (`CONFIG.price`, R$80) or a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 — a discount, like getting a 4th pass free) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. The 4-pack is deliberately not called "monthly" — events aren't strictly weekly, so it's framed as 4 passes good for any 4 events they choose to attend, whenever those land.
 
-There's no backend or accounts here, so **redemption for the monthly pass is on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of their 4 events someone's used.
+There's no backend or accounts here, so **redemption for the 4-pack is on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of their 4 passes someone's used.
 
 ### Before you go live, edit `script.js` → `CONFIG`:
 

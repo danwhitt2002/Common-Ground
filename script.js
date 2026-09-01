@@ -4,14 +4,15 @@
 const CONFIG = {
   price: "R$80",
 
-  // The 4-event monthly bundle. If you ever change either price, you'll
-  // need new QR codes — regenerate assets/pix-qr.png (single) and
-  // assets/pix-qr-monthly.png (monthly) to match.
-  monthlyPrice: "R$250",
+  // The 4-pack of passes — R$250 for 4, good for any 4 events they want
+  // (not tied to a calendar month, since events aren't strictly weekly).
+  // If you ever change either price, you'll need new QR codes — regenerate
+  // assets/pix-qr.png (single) and assets/pix-qr-4pack.png (4-pack) to match.
+  fourPackPrice: "R$250",
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png and
-  // assets/pix-qr-monthly.png). If you ever change the key, regenerate
-  // both QR images to match.
+  // assets/pix-qr-4pack.png). If you ever change the key, regenerate both
+  // QR images to match.
   pixKey: "04409638777",
 
   // WhatsApp number applicants send payment proof to, digits only with
@@ -205,19 +206,19 @@ const TRANSLATIONS = {
     },
     approved: {
       eyebrow: "You're In!",
-      heading: "Welcome to Common Ground.",
+      heading: "Welcome to the Common Ground Social Club.",
       lede: "You're in. Choose your plan below — coffee & matcha‑based mocktails included every time.",
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Single Event",
+          label: "Single Pass",
           unit: "/event",
           sub: "Per event · coffee & matcha mocktails included",
         },
-        monthly: {
-          label: "Monthly · 4 Events",
-          unit: "/month",
-          sub: "4 events this month · coffee & matcha mocktails included",
+        fourpack: {
+          label: "4-Pack of Passes",
+          unit: "/4-pack",
+          sub: "4 passes, use them for any 4 events you like · coffee & matcha mocktails included",
           badge: "Save R$70",
         },
       },
@@ -232,7 +233,7 @@ const TRANSLATIONS = {
     },
     whatsappMessage: {
       single: "Hi! Here's my payment proof for my Common Ground Grounds Pass (single event):",
-      monthly: "Hi! Here's my payment proof for my Common Ground Monthly Pass (4 events):",
+      fourpack: "Hi! Here's my payment proof for my Common Ground 4-Pack of Passes:",
     },
   },
   pt: {
@@ -272,19 +273,19 @@ const TRANSLATIONS = {
     },
     approved: {
       eyebrow: "Você Está Dentro!",
-      heading: "Bem-vindo(a) à Common Ground.",
+      heading: "Bem-vindo(a) ao Common Ground Social Club.",
       lede: "Você entrou. Escolha seu plano abaixo — mocktails de café e matchá incluídos sempre.",
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Evento Único",
+          label: "Passe Único",
           unit: "/evento",
           sub: "Por evento · mocktails de café e matchá incluídos",
         },
-        monthly: {
-          label: "Mensal · 4 Eventos",
-          unit: "/mês",
-          sub: "4 eventos por mês · mocktails de café e matchá incluídos",
+        fourpack: {
+          label: "Pacote de 4 Passes",
+          unit: "/pacote de 4",
+          sub: "4 passes, use em quaisquer 4 eventos que quiser · mocktails de café e matchá incluídos",
           badge: "Economize R$70",
         },
       },
@@ -299,7 +300,7 @@ const TRANSLATIONS = {
     },
     whatsappMessage: {
       single: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground (evento único):",
-      monthly: "Oi! Aqui está o comprovante de pagamento do meu Passe Mensal da Common Ground (4 eventos):",
+      fourpack: "Oi! Aqui está o comprovante de pagamento do meu Pacote de 4 Passes da Common Ground:",
     },
   },
   es: {
@@ -339,19 +340,19 @@ const TRANSLATIONS = {
     },
     approved: {
       eyebrow: "¡Ya Estás Dentro!",
-      heading: "Bienvenido/a a Common Ground.",
+      heading: "Bienvenido/a al Common Ground Social Club.",
       lede: "Ya estás dentro. Elige tu plan abajo — mocktails de café y matcha incluidos siempre.",
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Evento Único",
+          label: "Pase Único",
           unit: "/evento",
           sub: "Por evento · mocktails de café y matcha incluidos",
         },
-        monthly: {
-          label: "Mensual · 4 Eventos",
-          unit: "/mes",
-          sub: "4 eventos al mes · mocktails de café y matcha incluidos",
+        fourpack: {
+          label: "Paquete de 4 Pases",
+          unit: "/paquete de 4",
+          sub: "4 pases, úsalos en cualquiera de los 4 eventos que quieras · mocktails de café y matcha incluidos",
           badge: "Ahorra R$70",
         },
       },
@@ -366,7 +367,7 @@ const TRANSLATIONS = {
     },
     whatsappMessage: {
       single: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground (evento único):",
-      monthly: "¡Hola! Aquí está mi comprobante de pago de mi Pase Mensual de Common Ground (4 eventos):",
+      fourpack: "¡Hola! Aquí está mi comprobante de pago de mi Paquete de 4 Pases de Common Ground:",
     },
   },
 };
@@ -382,7 +383,7 @@ function t(key) {
 const state = {
   screen: "landing", // landing | question | contact | reviewing | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
-  plan: "single", // "single" | "monthly" — chosen on the approved/payment screen
+  plan: "single", // "single" | "fourpack" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
@@ -431,25 +432,25 @@ function renderWhatsappBtn() {
 }
 
 // ---------------------------------------------------------------------------
-// Plan toggle — Single Event vs Monthly (4 events), on the approved/payment
-// screen. Swaps the displayed price, its QR code (each amount needs its own
-// Pix QR), and the WhatsApp payment-proof message so it's clear which plan
-// was paid for.
+// Plan toggle — Single Pass vs a 4-Pack of Passes (good for any 4 events,
+// not tied to a calendar month), on the approved/payment screen. Swaps the
+// displayed price, its QR code (each amount needs its own Pix QR), and the
+// WhatsApp payment-proof message so it's clear which plan was paid for.
 // ---------------------------------------------------------------------------
-const planPrices = { single: CONFIG.price, monthly: CONFIG.monthlyPrice };
-const planQrImages = { single: "assets/pix-qr.png", monthly: "assets/pix-qr-monthly.png" };
+const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice };
+const planQrImages = { single: "assets/pix-qr.png", fourpack: "assets/pix-qr-4pack.png" };
 
 function renderPlanCard() {
   document.getElementById("plan-btn-single").classList.toggle("is-active", state.plan === "single");
-  document.getElementById("plan-btn-monthly").classList.toggle("is-active", state.plan === "monthly");
+  document.getElementById("plan-btn-fourpack").classList.toggle("is-active", state.plan === "fourpack");
 
   document.getElementById("approved-price").textContent = planPrices[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
   document.getElementById("approved-price-sub").textContent = t(`approved.plans.${state.plan}.sub`);
 
   const badge = document.getElementById("plan-badge");
-  if (state.plan === "monthly") {
-    badge.textContent = t("approved.plans.monthly.badge");
+  if (state.plan === "fourpack") {
+    badge.textContent = t("approved.plans.fourpack.badge");
     badge.hidden = false;
   } else {
     badge.hidden = true;
@@ -511,7 +512,7 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 // ---------------------------------------------------------------------------
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
-document.getElementById("plan-price-monthly").textContent = CONFIG.monthlyPrice;
+document.getElementById("plan-price-fourpack").textContent = CONFIG.fourPackPrice;
 
 const whatsappGroupLinkEl = document.getElementById("whatsapp-group-link");
 if (CONFIG.whatsappGroupLink) {
