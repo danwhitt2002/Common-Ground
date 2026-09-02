@@ -1,7 +1,9 @@
 // ---------------------------------------------------------------------------
 // MENU CONFIG — edit this to update what's on the menu. Each category needs
-// a `name` and a list of `items` ({ name, description, tag }). `description`
-// and `tag` are optional (e.g. a "New" or "Seasonal" pill) and only render
+// a `name` and a list of `items` ({ name, description, tag, playlistUrl }).
+// `description`, `tag` (e.g. a "New" or "Seasonal" pill), and `playlistUrl`
+// (a Spotify/Apple Music/etc. link to that drink's curated playlist — shown
+// as a "🎵 Listen on Spotify →"-style link) are all optional and only render
 // when present. `addOns` and `footnote` are optional too.
 //
 // Drink and category `name`s stay in English always (they're the pixel-exact
@@ -97,6 +99,7 @@ const MENU_TRANSLATIONS = {
     lede: "Included with every Grounds Pass",
     applyLink: "Ready to apply? Get your Grounds Pass →",
     playlistNote: "🎵 Each mocktail comes with a corresponding, curated playlist to help you get in the mood before each event",
+    playlistLink: "🎵 Listen on Spotify →",
   },
   pt: {
     back: "← Voltar",
@@ -104,6 +107,7 @@ const MENU_TRANSLATIONS = {
     lede: "Incluído em todo Grounds Pass",
     applyLink: "Pronto(a) para se inscrever? Garanta seu Grounds Pass →",
     playlistNote: "🎵 Cada mocktail vem com uma playlist correspondente, com curadoria, para te colocar no clima antes de cada evento",
+    playlistLink: "🎵 Ouça no Spotify →",
   },
   es: {
     back: "← Atrás",
@@ -111,6 +115,7 @@ const MENU_TRANSLATIONS = {
     lede: "Incluido en cada Grounds Pass",
     applyLink: "¿Listo/a para solicitar? Consigue tu Grounds Pass →",
     playlistNote: "🎵 Cada mocktail viene con una playlist correspondiente, con curaduría, para ponerte en el ambiente antes de cada evento",
+    playlistLink: "🎵 Escucha en Spotify →",
   },
 };
 
@@ -235,6 +240,16 @@ function renderMenuPage() {
         desc.className = "menu-item-desc";
         desc.textContent = localize(item.description);
         li.appendChild(desc);
+      }
+
+      if (item.playlistUrl) {
+        const link = document.createElement("a");
+        link.className = "menu-item-playlist-link";
+        link.href = item.playlistUrl;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = mt("playlistLink");
+        li.appendChild(link);
       }
 
       list.appendChild(li);
