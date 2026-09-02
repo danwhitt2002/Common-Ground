@@ -199,6 +199,12 @@ main {
   width: 100%;
 }
 
+/* .lang-switch is absolutely positioned (floats top-right, out of flow), so
+   nothing here guarantees clearance on its own — on shorter viewports the
+   space-evenly distribution above can push .landing-hero's top (and the
+   eyebrow inside it) up underneath the flags. Reserve space explicitly. */
+.landing-hero { padding-top: 44px; }
+
 .landing-hero .lede { margin-bottom: 0; }
 
 .perks-list {
