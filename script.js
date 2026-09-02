@@ -184,6 +184,11 @@ const TRANSLATIONS = {
         mocktails: "Coffee and matcha-based mocktails included every time",
         groupchat: "Access to the Common Ground WhatsApp community group chat",
       },
+      stats: {
+        capacity: "Max people per event",
+        founding: "Founding Member spots",
+        price: "Starting price per event",
+      },
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
@@ -263,6 +268,11 @@ const TRANSLATIONS = {
         mocktails: "Mocktails de café e matchá incluídos sempre",
         groupchat: "Acesso ao grupo da comunidade Common Ground no WhatsApp",
       },
+      stats: {
+        capacity: "Máximo de pessoas por evento",
+        founding: "Vagas de Membro Fundador",
+        price: "Preço inicial por evento",
+      },
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
@@ -341,6 +351,11 @@ const TRANSLATIONS = {
         events: "Encuentros semanales con un público internacional",
         mocktails: "Mocktails de café y matcha incluidos siempre",
         groupchat: "Acceso al grupo de la comunidad Common Ground en WhatsApp",
+      },
+      stats: {
+        capacity: "Máximo de personas por evento",
+        founding: "Cupos de Miembro Fundador",
+        price: "Precio inicial por evento",
       },
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price}/evento.",
@@ -518,6 +533,39 @@ document.querySelectorAll(".plan-btn").forEach((btn) => {
     renderPlanCard();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Landing page stat row — each number counts up from 0 once it scrolls into
+// view, as a small visual hook. Fires once per element (unobserved after).
+// ---------------------------------------------------------------------------
+function animateCountUp(el, target, prefix, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = prefix + Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+if ("IntersectionObserver" in window) {
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      animateCountUp(el, Number(el.dataset.target), el.dataset.prefix || "", 1200);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll(".stat-number").forEach((el) => statObserver.observe(el));
+} else {
+  // No IntersectionObserver support — just show the final numbers.
+  document.querySelectorAll(".stat-number").forEach((el) => {
+    el.textContent = (el.dataset.prefix || "") + el.dataset.target;
+  });
+}
 
 // menu.html is a separate page with no shared JS state, so the chosen
 // language is carried across via a "?lang=" URL param on the way there —
