@@ -535,27 +535,51 @@ document.querySelectorAll(".plan-btn").forEach((btn) => {
 });
 
 // ---------------------------------------------------------------------------
-// Landing page stat row — each number counts up from 0 once it scrolls into
-// view, as a small visual hook. Fires once per element (unobserved after).
+// Landing page stat row — each number fluctuates between its start value and
+// target on a loop once it scrolls into view (up, hold, back down, repeat),
+// as an ongoing visual hook rather than a one-shot count-up.
 // ---------------------------------------------------------------------------
-function animateCountUp(el, target, prefix, duration) {
-  const start = performance.now();
+function animateNumber(el, from, to, prefix, suffix, duration, onDone) {
+  const startTime = performance.now();
   function tick(now) {
-    const progress = Math.min((now - start) / duration, 1);
+    const progress = Math.min((now - startTime) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = prefix + Math.round(eased * target);
-    if (progress < 1) requestAnimationFrame(tick);
+    const value = Math.round(from + eased * (to - from));
+    el.textContent = prefix + value + suffix;
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else if (onDone) {
+      onDone();
+    }
   }
   requestAnimationFrame(tick);
+}
+
+function loopStat(el) {
+  const target = Number(el.dataset.target);
+  const from = el.dataset.start ? Number(el.dataset.start) : 0;
+  const prefix = el.dataset.prefix || "";
+  const suffix = el.dataset.suffix || "";
+  const holdMs = 3600;
+
+  function cycle() {
+    animateNumber(el, from, target, prefix, suffix, 3000, () => {
+      setTimeout(() => {
+        animateNumber(el, target, from, prefix, suffix, 2000, () => {
+          setTimeout(cycle, 400);
+        });
+      }, holdMs);
+    });
+  }
+  cycle();
 }
 
 if ("IntersectionObserver" in window) {
   const statObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      animateCountUp(el, Number(el.dataset.target), el.dataset.prefix || "", 1200);
-      statObserver.unobserve(el);
+      loopStat(entry.target);
+      statObserver.unobserve(entry.target);
     });
   }, { threshold: 0.4 });
 
@@ -563,7 +587,7 @@ if ("IntersectionObserver" in window) {
 } else {
   // No IntersectionObserver support — just show the final numbers.
   document.querySelectorAll(".stat-number").forEach((el) => {
-    el.textContent = (el.dataset.prefix || "") + el.dataset.target;
+    el.textContent = (el.dataset.prefix || "") + el.dataset.target + (el.dataset.suffix || "");
   });
 }
 
