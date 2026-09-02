@@ -44,6 +44,7 @@ const MENU_CONFIG = {
           name: "Moonshine Matcha",
           image: "assets/menu/moonshine-matcha.png",
           description: { en: "A homemade matcha blend.", pt: "Um blend caseiro de matchá.", es: "Una mezcla casera de matcha." },
+          playlistUrl: "https://open.spotify.com/playlist/56uXLRioo2mrv6L8EVSVZf",
         },
       ],
     },
