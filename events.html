@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upcoming Events — Common Ground</title>
+<meta name="description" content="See the upcoming Common Ground event dates before you apply for your Grounds Pass.">
+
+<meta property="og:title" content="Upcoming Events — Common Ground">
+<meta property="og:description" content="Weekly events, every Sunday. See the dates before you apply.">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="bg-texture" aria-hidden="true"></div>
+
+  <img class="center-graphic" src="assets/community-graphic.png" alt="" aria-hidden="true">
+
+  <header class="topbar">
+    <a href="index.html" id="events-logo-link" aria-label="Common Ground — home">
+      <img class="wordmark-img" src="assets/logo-common-ground.png" alt="Common Ground">
+    </a>
+  </header>
+
+  <main class="menu-main">
+    <div class="menu-page">
+      <a class="back-link" href="index.html" id="events-back-link" data-i18n="back">&larr; Back</a>
+
+      <h1 class="eyebrow" data-i18n="eyebrow">Upcoming Events</h1>
+      <ul class="perks-list menu-perks-list">
+        <li data-i18n="lede">Every Sunday · exact location shared with pass-holders in the WhatsApp group</li>
+      </ul>
+
+      <div id="events-list"></div>
+
+      <div class="menu-footer">
+        <a class="link-secondary" href="index.html" id="events-apply-link" data-i18n="applyLink">Ready to apply? Get your Grounds Pass →</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="events.js"></script>
+</body>
+</html>

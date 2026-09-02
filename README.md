@@ -5,10 +5,11 @@ Find your common ground. A social club.
 
 A social club in Rio de Janeiro. The Grounds Pass (R$80 per event) gets members into that week's event, with coffee-based and matcha-based mocktails included.
 
-Two static pages, no build step, no backend required:
+Three static pages, no build step, no backend required:
 
 - **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → straight into the payment screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the payment screen already uses.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and payment screens), showing what's included with the pass.
+- **`events.html` / `events.js`** — the upcoming-events page (linked from the landing screen), showing real dates before someone applies, so they know what they're actually paying for.
 
 ### How payment actually happens
 
@@ -64,6 +65,19 @@ Each item also accepts an optional **`playlistUrl`** — a link to that drink's 
 Every category and item currently renders as an `image` — cropped directly out of the real menu photo (`assets/menu/*.png`, background keyed transparent) instead of typed text, so the handwriting is pixel-exact rather than a font approximation. This only works for lines that exist in that source photo. A category or item added later without a matching photo (drop the `image` field) falls back to typed text in `Caveat`, the closest font match — still on-brand, just not pixel-exact.
 
 Drink and category **names always stay in English** (they're that pixel-exact handwriting, or the plain-text fallback) — but `description`, `tag`, `note`, and `footnote` are translated, along with the rest of the page (eyebrow, lede, back link, footer). Each of those fields can be a plain string (shown as-is in every language — fine for a quick addition) or an `{ en, pt, es }` object for a real per-language version, same pattern as `CONFIG.questions` in `script.js`. The chosen language reaches this page via a `?lang=` URL param on the link from `index.html` (there's no other shared state between the two pages) — and the two links back to the application page carry it forward the same way, so going back and forth stays in sync.
+
+### Upcoming events — edit `events.js` → `EVENTS_CONFIG`
+
+Holds the list of upcoming event dates shown on `events.html`, so applicants can see an event is actually coming up before they pay — rather than paying blind. There's no backend here either, so **this list is maintained by hand**: add a new entry as you schedule an event, and delete one you've cancelled or that's already passed.
+
+Each entry is `{ date: "YYYY-MM-DD", location, tag?, image? }`:
+
+- **`date`** — formatted automatically into each language's locale (e.g. "Sunday, 6 September" / "domingo, 6 de setembro" / "domingo, 6 de septiembre").
+- **`location`** — currently just `"Copacabana"` on every date. This is **deliberately vague** — a neighborhood, not an address — the exact spot is only shared with pass-holders in the WhatsApp group once they've paid, not posted publicly here. Keep it that way.
+- **`tag`** (optional) — a short badge shown above the date, e.g. `"+1 PARTY"` for a launch or special date. Omit it for a normal event.
+- **`image`** (optional) — a photo for that specific event, shown above the date. Omit it for no photo (the default for every date right now).
+
+Translated strings (`back`, `eyebrow`, `lede`, `applyLink`) live in `EVENTS_TRANSLATIONS` in the same file, same `{ en, pt, es }` pattern as everywhere else. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
 
 ### Brand identity
 

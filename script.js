@@ -192,6 +192,7 @@ const TRANSLATIONS = {
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
+      eventsLink: "See upcoming event dates →",
     },
     question: {
       back: "← Back",
@@ -276,6 +277,7 @@ const TRANSLATIONS = {
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
+      eventsLink: "Veja as próximas datas de eventos →",
     },
     question: {
       back: "← Voltar",
@@ -360,6 +362,7 @@ const TRANSLATIONS = {
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price}/evento.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
+      eventsLink: "Mira las próximas fechas de eventos →",
     },
     question: {
       back: "← Atrás",
@@ -457,12 +460,16 @@ function showScreen(name) {
   screens[name].classList.add("is-active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // No-op on the real site (there's no "menu" screen here — that link is a
-  // real page navigation to menu.html). Only fires in the trial bundle,
-  // where menu.js is merged into this same page as a "menu" screen, so a
-  // language switched after that screen was first built still comes through.
+  // No-op on the real site (there's no "menu"/"events" screen here — those
+  // links are real page navigations to menu.html/events.html). Only fires
+  // in the trial bundle, where menu.js/events.js are merged into this same
+  // page as screens, so a language switched after a screen was first built
+  // still comes through.
   if (name === "menu" && typeof renderMenuPage === "function") {
     renderMenuPage();
+  }
+  if (name === "events" && typeof renderEventsPage === "function") {
+    renderEventsPage();
   }
 }
 
@@ -591,12 +598,15 @@ if ("IntersectionObserver" in window) {
   });
 }
 
-// menu.html is a separate page with no shared JS state, so the chosen
-// language is carried across via a "?lang=" URL param on the way there —
-// and read back below on the way back, so the round trip stays in sync.
+// menu.html/events.html are separate pages with no shared JS state, so the
+// chosen language is carried across via a "?lang=" URL param on the way
+// there — and read back on the way back, so the round trip stays in sync.
 function renderMenuLinks() {
   document.querySelectorAll("[data-menu-link]").forEach((a) => {
     a.href = `menu.html?lang=${state.lang}`;
+  });
+  document.querySelectorAll("[data-events-link]").forEach((a) => {
+    a.href = `events.html?lang=${state.lang}`;
   });
 }
 
