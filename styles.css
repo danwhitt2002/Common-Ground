@@ -909,11 +909,11 @@ button.back-link {
   color: var(--ink-dim);
 }
 
-.menu-item-playlist {
-  margin: 6px 0 0;
-  font-size: 11.5px;
+.playlist-note {
+  margin: -8px 0 24px;
+  font-size: 13px;
   font-style: italic;
-  letter-spacing: 0.02em;
+  line-height: 1.4;
   color: var(--accent-dim);
 }
 

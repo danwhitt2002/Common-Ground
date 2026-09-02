@@ -96,21 +96,21 @@ const MENU_TRANSLATIONS = {
     eyebrow: "Functional Mocktails",
     lede: "Included with every Grounds Pass.",
     applyLink: "Ready to apply? Get your Grounds Pass →",
-    playlistNote: "Curated playlist to match its vibe",
+    playlistNote: "🎵 Each mocktail comes with a corresponding, curated playlist to help you get in the mood before each event.",
   },
   pt: {
     back: "← Voltar",
     eyebrow: "Mocktails Funcionais",
     lede: "Incluído em todo Grounds Pass.",
     applyLink: "Pronto(a) para se inscrever? Garanta seu Grounds Pass →",
-    playlistNote: "Playlist com curadoria para combinar com a vibe",
+    playlistNote: "🎵 Cada mocktail vem com uma playlist correspondente, com curadoria, para te colocar no clima antes de cada evento.",
   },
   es: {
     back: "← Atrás",
     eyebrow: "Mocktails Funcionales",
     lede: "Incluido en cada Grounds Pass.",
     applyLink: "¿Listo/a para solicitar? Consigue tu Grounds Pass →",
-    playlistNote: "Playlist con curaduría que combina con su vibra",
+    playlistNote: "🎵 Cada mocktail viene con una playlist correspondiente, con curaduría, para ponerte en el ambiente antes de cada evento.",
   },
 };
 
@@ -232,11 +232,6 @@ function renderMenuPage() {
         desc.textContent = localize(item.description);
         li.appendChild(desc);
       }
-
-      const playlist = document.createElement("p");
-      playlist.className = "menu-item-playlist";
-      playlist.textContent = `🎵 ${mt("playlistNote")}`;
-      li.appendChild(playlist);
 
       list.appendChild(li);
     });
