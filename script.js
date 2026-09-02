@@ -186,8 +186,8 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Max people per event",
-        founding: "Founding Member spots",
-        price: "Starting price per event",
+        founding: "Founding Member passes available",
+        price: "Price per event",
       },
       apply: "Apply for Your Grounds Pass",
       finePrint: "Takes about a minute. {price}/event.",
@@ -270,8 +270,8 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
-        founding: "Vagas de Membro Fundador",
-        price: "Preço inicial por evento",
+        founding: "Passes de Membro Fundador disponíveis",
+        price: "Preço por evento",
       },
       apply: "Inscreva-se para o seu Grounds Pass",
       finePrint: "Leva cerca de um minuto. {price}/evento.",
@@ -354,8 +354,8 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Máximo de personas por evento",
-        founding: "Cupos de Miembro Fundador",
-        price: "Precio inicial por evento",
+        founding: "Pases de Miembro Fundador disponibles",
+        price: "Precio por evento",
       },
       apply: "Solicita tu Grounds Pass",
       finePrint: "Toma cerca de un minuto. {price}/evento.",
