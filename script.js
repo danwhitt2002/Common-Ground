@@ -180,7 +180,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — apply now.",
       perks: {
-        events: "Weekly events with an international crowd",
+        events: "Weekly events announced through the WhatsApp community group chat",
         mocktails: "Coffee and matcha-based mocktails included every time",
         groupchat: "Access to the Common Ground WhatsApp community group chat",
       },
@@ -264,7 +264,7 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — inscreva-se agora.",
       perks: {
-        events: "Encontros semanais com um público internacional",
+        events: "Encontros semanais anunciados no grupo da comunidade no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
         groupchat: "Acesso ao grupo da comunidade Common Ground no WhatsApp",
       },
@@ -348,7 +348,7 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — solicita ahora.",
       perks: {
-        events: "Encuentros semanales con un público internacional",
+        events: "Encuentros semanales anunciados en el grupo de la comunidad de WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
         groupchat: "Acceso al grupo de la comunidad Common Ground en WhatsApp",
       },
