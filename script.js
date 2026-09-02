@@ -645,6 +645,14 @@ document.getElementById("start-btn").addEventListener("click", () => {
   showScreen("question");
 });
 
+// Wordmark in the header links back to the landing screen — a full page
+// navigation would work too, but this avoids the reload/flash since we're
+// already on this same page.
+document.getElementById("logo-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  showScreen("landing");
+});
+
 // ---------------------------------------------------------------------------
 // Questions
 // ---------------------------------------------------------------------------

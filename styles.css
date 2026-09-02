@@ -118,7 +118,7 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .bg-texture {
@@ -144,12 +144,18 @@ body {
   width: auto;
 }
 
+#logo-link,
+#menu-logo-link {
+  display: inline-block;
+  line-height: 0;
+}
+
 /* Community graphic — fixed centered on every page (index.html and
    menu.html both), behind the content, for continuity site-wide. */
 .center-graphic {
   position: fixed;
   z-index: 0;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 58%;
@@ -197,6 +203,7 @@ main {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 24px;
 }
 
 /* .lang-switch is absolutely positioned (floats top-right, out of flow), so
@@ -243,7 +250,8 @@ main {
   display: flex;
   width: 100%;
   max-width: 340px;
-  padding-top: 8px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 

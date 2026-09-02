@@ -182,8 +182,12 @@ function renderMenuPage() {
   });
 
   // Carry the language forward on both links back to the application page.
-  ["menu-back-link", "menu-apply-link"].forEach((id) => {
-    document.getElementById(id).href = `index.html?lang=${lang}`;
+  // menu-logo-link only exists on the real, standalone menu.html — the
+  // trial bundle's merged single-page app reuses the shared header's
+  // logo-link (a showScreen("landing") call) for every screen instead.
+  ["menu-back-link", "menu-apply-link", "menu-logo-link"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.href = `index.html?lang=${lang}`;
   });
 
   categoriesEl.innerHTML = "";
