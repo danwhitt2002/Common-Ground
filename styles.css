@@ -64,10 +64,20 @@
 
 /* Thinner, wider casual handwriting — closer to the pen strokes on the real
    drinks-menu photo (assets/menu/matcha-based.png etc.) than Caveat, which
-   reads as heavier/tighter. Used for the landing page's perks checklist. */
+   reads as heavier/tighter. */
 @font-face {
   font-family: 'Waiting for the Sunrise';
   src: url('assets/fonts/waiting-for-the-sunrise-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bolder, rounder, more exaggerated handwriting — trying this on the
+   landing page's perks checklist instead of Waiting for the Sunrise. */
+@font-face {
+  font-family: 'Architects Daughter';
+  src: url('assets/fonts/architects-daughter-400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -206,10 +216,10 @@ main {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  font-family: 'Waiting for the Sunrise', cursive;
+  font-family: 'Architects Daughter', cursive;
   font-weight: 400;
-  font-size: 19px;
-  line-height: 1.35;
+  font-size: 17px;
+  line-height: 1.4;
   color: var(--ink-dim);
 }
 
