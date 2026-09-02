@@ -38,6 +38,7 @@ const MENU_CONFIG = {
           name: "The Greenhaus",
           image: "assets/menu/the-greenhaus.png",
           description: { en: "Green juice meets matcha latte.", pt: "Suco verde encontra matcha latte.", es: "Jugo verde se encuentra con matcha latte." },
+          playlistUrl: "https://open.spotify.com/playlist/2MHLwmxptY0EmSyu8EKhw3",
         },
         {
           name: "Moonshine Matcha",
