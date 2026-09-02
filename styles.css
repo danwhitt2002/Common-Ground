@@ -817,8 +817,9 @@ button.back-link {
   margin-bottom: 20px;
 }
 
-.menu-page .lede {
-  text-align: left;
+.menu-perks-list {
+  max-width: none;
+  margin-top: 12px;
   margin-bottom: 28px;
 }
 
@@ -907,14 +908,6 @@ button.back-link {
   letter-spacing: 0.02em;
   line-height: 1.4;
   color: var(--ink-dim);
-}
-
-.playlist-note {
-  margin: -8px 0 24px;
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--accent-dim);
 }
 
 .menu-addon {
