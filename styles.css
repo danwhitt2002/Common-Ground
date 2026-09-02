@@ -872,6 +872,14 @@ button.back-link {
   color: var(--ink-dim);
 }
 
+.menu-item-playlist {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--accent-dim);
+}
+
 .menu-addon {
   display: flex;
   align-items: center;
