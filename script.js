@@ -6,13 +6,24 @@ const CONFIG = {
 
   // The 4-pack of passes — R$250 for 4, good for any 4 events they want
   // (not tied to a calendar month, since events aren't strictly weekly).
-  // If you ever change either price, you'll need new QR codes — regenerate
-  // assets/pix-qr.png (single) and assets/pix-qr-4pack.png (4-pack) to match.
   fourPackPrice: "R$250",
 
-  // Your Pix key (shown as text, and encoded into assets/pix-qr.png and
-  // assets/pix-qr-4pack.png). If you ever change the key, regenerate both
-  // QR images to match.
+  // Founding Member — a one-time, lifetime pass. Deliberately limited
+  // (see foundingMemberSpotsTotal/Remaining below) to keep it exclusive.
+  foundingMemberPrice: "R$699",
+
+  // How many Founding Member spots exist in total, and how many are still
+  // available — shown on the payment screen ("X of Y spots left"). There's
+  // no backend here, so update foundingMemberSpotsRemaining by hand each
+  // time one sells. The actual member number (e.g. "You're Founding Member
+  // 4/20!") is something you tell them yourself when you confirm their
+  // payment on WhatsApp — the site can't assign that live.
+  foundingMemberSpotsTotal: 20,
+  foundingMemberSpotsRemaining: 20,
+
+  // Your Pix key (shown as text, and encoded into assets/pix-qr.png,
+  // assets/pix-qr-4pack.png, and assets/pix-qr-founding.png). If you ever
+  // change the key or any price, regenerate the matching QR image(s).
   pixKey: "04409638777",
 
   // WhatsApp number applicants send payment proof to, digits only with
@@ -221,6 +232,12 @@ const TRANSLATIONS = {
           sub: "4 passes, 4 events of your choice\nCoffee and matcha-based mocktails included every time",
           badge: "Save R$70",
         },
+        founding: {
+          label: "Founding Member",
+          unit: "one-time",
+          sub: "One-time payment · lifetime access to every event",
+          badge: "{remaining} of {total} spots left",
+        },
       },
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
       pixKeyLabel: "Pix key (CPF)",
@@ -234,6 +251,7 @@ const TRANSLATIONS = {
     whatsappMessage: {
       single: "Hi! Here's my payment proof for my Common Ground Grounds Pass (single event):",
       fourpack: "Hi! Here's my payment proof for my Common Ground 4-Pack of Passes:",
+      founding: "Hi! Here's my payment proof for my Common Ground Founding Member Pass (lifetime):",
     },
   },
   pt: {
@@ -293,6 +311,12 @@ const TRANSLATIONS = {
           sub: "4 passes, 4 eventos à sua escolha\nMocktails de café e matchá incluídos sempre",
           badge: "Economize R$70",
         },
+        founding: {
+          label: "Membro Fundador",
+          unit: "pagamento único",
+          sub: "Pagamento único · acesso vitalício a todos os eventos",
+          badge: "{remaining} de {total} vagas restantes",
+        },
       },
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
       pixKeyLabel: "Chave Pix (CPF)",
@@ -306,6 +330,7 @@ const TRANSLATIONS = {
     whatsappMessage: {
       single: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground (evento único):",
       fourpack: "Oi! Aqui está o comprovante de pagamento do meu Pacote de 4 Passes da Common Ground:",
+      founding: "Oi! Aqui está o comprovante de pagamento do meu Passe de Membro Fundador da Common Ground (vitalício):",
     },
   },
   es: {
@@ -365,6 +390,12 @@ const TRANSLATIONS = {
           sub: "4 pases, 4 eventos de tu elección\nMocktails de café y matcha incluidos siempre",
           badge: "Ahorra R$70",
         },
+        founding: {
+          label: "Miembro Fundador",
+          unit: "pago único",
+          sub: "Pago único · acceso de por vida a todos los eventos",
+          badge: "{remaining} de {total} cupos restantes",
+        },
       },
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
       pixKeyLabel: "Clave Pix (CPF)",
@@ -378,6 +409,7 @@ const TRANSLATIONS = {
     whatsappMessage: {
       single: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground (evento único):",
       fourpack: "¡Hola! Aquí está mi comprobante de pago de mi Paquete de 4 Pases de Common Ground:",
+      founding: "¡Hola! Aquí está mi comprobante de pago de mi Pase de Miembro Fundador de Common Ground (de por vida):",
     },
   },
 };
@@ -442,25 +474,35 @@ function renderWhatsappBtn() {
 }
 
 // ---------------------------------------------------------------------------
-// Plan toggle — Single Pass vs a 4-Pack of Passes (good for any 4 events,
-// not tied to a calendar month), on the approved/payment screen. Swaps the
-// displayed price, its QR code (each amount needs its own Pix QR), and the
-// WhatsApp payment-proof message so it's clear which plan was paid for.
+// Plan toggle — Single Pass, a 4-Pack of Passes (good for any 4 events, not
+// tied to a calendar month), or a Founding Member lifetime pass (limited to
+// CONFIG.foundingMemberSpotsTotal — see that comment for how spots are
+// tracked), on the approved/payment screen. Swaps the displayed price, its
+// QR code (each amount needs its own Pix QR), and the WhatsApp payment-proof
+// message so it's clear which plan was paid for.
 // ---------------------------------------------------------------------------
-const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice };
-const planQrImages = { single: "assets/pix-qr.png", fourpack: "assets/pix-qr-4pack.png" };
+const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice, founding: CONFIG.foundingMemberPrice };
+const planQrImages = {
+  single: "assets/pix-qr.png",
+  fourpack: "assets/pix-qr-4pack.png",
+  founding: "assets/pix-qr-founding.png",
+};
 
 function renderPlanCard() {
   document.getElementById("plan-btn-single").classList.toggle("is-active", state.plan === "single");
   document.getElementById("plan-btn-fourpack").classList.toggle("is-active", state.plan === "fourpack");
+  document.getElementById("plan-btn-founding").classList.toggle("is-active", state.plan === "founding");
 
   document.getElementById("approved-price").textContent = planPrices[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
   document.getElementById("approved-price-sub").textContent = t(`approved.plans.${state.plan}.sub`);
 
   const badge = document.getElementById("plan-badge");
-  if (state.plan === "fourpack") {
-    badge.textContent = t("approved.plans.fourpack.badge");
+  const badgeText = t(`approved.plans.${state.plan}.badge`);
+  if (badgeText) {
+    badge.textContent = badgeText
+      .replace("{remaining}", CONFIG.foundingMemberSpotsRemaining)
+      .replace("{total}", CONFIG.foundingMemberSpotsTotal);
     badge.hidden = false;
   } else {
     badge.hidden = true;
@@ -523,6 +565,7 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
 document.getElementById("plan-price-fourpack").textContent = CONFIG.fourPackPrice;
+document.getElementById("plan-price-founding").textContent = CONFIG.foundingMemberPrice;
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;

@@ -23,22 +23,26 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 - **Pix key**: `04409638777` (CPF) (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
-If you ever change the Pix key or either price, you'll need new QRs — regenerate `assets/pix-qr.png` (single) and `assets/pix-qr-4pack.png` (4-pack) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
+If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (single), `assets/pix-qr-4pack.png` (4-pack), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
 ### WhatsApp group chat access comes with the pass
 
 Access to the Common Ground WhatsApp group chat is included with any Grounds Pass (single or 4-pack) — it's not sold separately. The payment screen tells them this ("Once you're a pass-holder, we'll add you to the Common Ground WhatsApp group chat") but doesn't hand out the invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) to welcome them in as a pass-holder.
 
-### Two plans: Single Pass or a 4-Pack of Passes
+### Three plans: Single Pass, a 4-Pack, or Founding Member
 
-The payment screen lets someone pick a **Single Pass** (`CONFIG.price`, R$80) or a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 — a discount, like getting a 4th pass free) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. The 4-pack is deliberately not called "monthly" — events aren't strictly weekly, so it's framed as 4 passes good for any 4 events they choose to attend, whenever those land.
+The payment screen lets someone pick a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. The 4-pack is deliberately not called "monthly" — events aren't strictly weekly, so it's framed as 4 passes good for any 4 events they choose to attend, whenever those land.
 
-There's no backend or accounts here, so **redemption for the 4-pack is on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of their 4 passes someone's used.
+There's no backend or accounts here, so **redemption for the 4-pack, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of a 4-pack's passes someone's used, or to hand out live-assigned Founding Member numbers.
+
+#### Founding Member — a deliberately limited lifetime pass
+
+Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive rather than an open-ended giveaway. The payment screen shows a badge like "20 of 20 spots left," pulled from `CONFIG.foundingMemberSpotsRemaining` — **decrement that number yourself** each time one sells (edit `script.js`), since there's no backend to track it live. The actual member number (e.g. "You're Founding Member 4/20!") is something you tell them yourself when you confirm their payment on WhatsApp — the site has no way to assign that safely in real time (two people loading the page at once would have no shared counter to draw from).
 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`fourPackPrice`** — currently `R$80` per event and `R$250` for the 4-pack, shown on the landing and payment screens (should match the amounts encoded in the two Pix QRs).
+2. **`price`** / **`fourPackPrice`** / **`foundingMemberPrice`** — currently `R$80` per event, `R$250` for the 4-pack, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
