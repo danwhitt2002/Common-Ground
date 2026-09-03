@@ -169,6 +169,18 @@
         <a class="btn-primary" id="external-pay-btn" href="#" target="_blank" rel="noopener"></a>
       </div>
 
+      <div class="pix-card" id="wise-card" hidden>
+        <img class="pix-qr-img" id="wise-qr" src="assets/wise-qr.png" alt="Wise QR code to pay for your Grounds Pass">
+        <p class="pix-scan-hint" data-i18n="approved.wiseScanHint">Scan with the Wise app, or use the tag below</p>
+        <div class="pix-key-row">
+          <span class="pix-key-label" data-i18n="approved.wiseTagLabel">Wise tag</span>
+          <div class="pix-key-value-row">
+            <code class="pix-key-value" id="wise-tag-value"></code>
+            <button type="button" class="copy-btn" id="copy-wise-btn" data-i18n="approved.copy">Copy</button>
+          </div>
+        </div>
+      </div>
+
       <a class="btn-primary" id="whatsapp-btn" href="#" target="_blank" rel="noopener" data-i18n="approved.whatsappBtn">Send Payment Proof on WhatsApp</a>
       <p class="fine-print" id="group-note" data-i18n="approved.groupNote">Included with your Grounds Pass: access to the Common Ground WhatsApp community group chat. We'll add you in once you're a pass-holder.</p>
       <a class="link-secondary" href="menu.html" data-menu-link data-i18n="approved.menuLink">See the drinks menu →</a>

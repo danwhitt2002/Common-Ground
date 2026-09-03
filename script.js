@@ -37,15 +37,17 @@ const CONFIG = {
   // link built automatically, no per-amount QR needed.
   paypalLink: "https://www.paypal.me/commongroundbr",
 
-  // wiseLink is a personal Wise "pay me" link. Wise's documented format for
-  // pre-filling an amount (?amount=X&currency=YYY) is confirmed for
-  // wise.com/pay/business/ links; it's applied here too since appending an
-  // unrecognized query param is harmless (Wise just ignores it and opens
-  // the plain pay page) — the amount is also always shown as text next to
-  // the button either way, so nothing is lost if the pre-fill doesn't take.
+  // wiseLink is a personal Wise "pay me" link. The ?amount=X&currency=YYY
+  // pre-fill (Wise's documented format for its *business* pay links) is
+  // confirmed working here too — the Wise app itself showed the right
+  // amount pre-filled when this exact link+params combo was tested.
   wiseLink: "https://wise.com/pay/me/danielthomasw81",
 
-  // GBP amount for each plan, shown on the PayPal/Wise buttons and built
+  // Shown as copyable fallback text under the Wise QR, same role as
+  // CONFIG.pixKey under the Pix QR — for anyone who can't scan.
+  wiseTag: "@danielthomasw81",
+
+  // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
   gbpAmount: { single: 12, fourpack: 35, founding: 100 },
@@ -272,6 +274,8 @@ const TRANSLATIONS = {
       paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
       pixKeyLabel: "Pix key (CPF)",
+      wiseScanHint: "Scan with the Wise app, or use the tag below",
+      wiseTagLabel: "Wise tag",
       externalPayHint: "Tap below to pay, then send your receipt on WhatsApp to lock in your spot.",
       externalPayBtn: "Pay with {method} →",
       paidViaSuffix: " (paid via {method})",
@@ -361,6 +365,8 @@ const TRANSLATIONS = {
       paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
       pixKeyLabel: "Chave Pix (CPF)",
+      wiseScanHint: "Escaneie com o app da Wise, ou use a tag abaixo",
+      wiseTagLabel: "Tag da Wise",
       externalPayHint: "Toque abaixo para pagar, depois envie seu comprovante no WhatsApp para garantir sua vaga.",
       externalPayBtn: "Pagar com {method} →",
       paidViaSuffix: " (pago via {method})",
@@ -450,6 +456,8 @@ const TRANSLATIONS = {
       paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
       pixKeyLabel: "Clave Pix (CPF)",
+      wiseScanHint: "Escanea con la app de Wise, o usa la etiqueta abajo",
+      wiseTagLabel: "Etiqueta de Wise",
       externalPayHint: "Toca abajo para pagar, luego envía tu comprobante por WhatsApp para asegurar tu lugar.",
       externalPayBtn: "Pagar con {method} →",
       paidViaSuffix: " (pagado vía {method})",
@@ -544,10 +552,10 @@ function renderWhatsappBtn() {
 // message so it's clear which plan was paid for.
 //
 // Payment-method toggle — Pix, PayPal, or Wise, alongside the plan toggle.
-// Pix shows the existing QR + copyable key; PayPal/Wise show a single
-// tappable button linking straight to that plan's exact GBP amount (see
-// CONFIG.gbpAmount/paypalLink/wiseLink) instead, since those are just links
-// meant to be tapped on the same phone, not scanned from another device.
+// Pix and Wise each show a QR (scan to pay, exact amount baked in) plus a
+// copyable fallback value; PayPal shows a single tappable button instead,
+// since paypal.me links are meant to be tapped on the same phone rather
+// than scanned (no fixed-amount QR was set up for it).
 // ---------------------------------------------------------------------------
 const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice, founding: CONFIG.foundingMemberPrice };
 const planPricesGBP = {
@@ -559,6 +567,11 @@ const planQrImages = {
   single: "assets/pix-qr.png",
   fourpack: "assets/pix-qr-4pack.png",
   founding: "assets/pix-qr-founding.png",
+};
+const wiseQrImages = {
+  single: "assets/wise-qr.png",
+  fourpack: "assets/wise-qr-4pack.png",
+  founding: "assets/wise-qr-founding.png",
 };
 
 // How much the 4-pack saves vs. 4 single passes, per currency — shown in
@@ -573,7 +586,6 @@ const fourpackSavings = {
 function externalPayUrl(method, plan) {
   const amount = CONFIG.gbpAmount[plan];
   if (method === "paypal") return `${CONFIG.paypalLink}/${amount}GBP`;
-  if (method === "wise") return `${CONFIG.wiseLink}?amount=${amount}&currency=GBP`;
   return "#";
 }
 
@@ -603,11 +615,13 @@ function renderPlanCard() {
     badge.hidden = true;
   }
 
-  document.getElementById("pix-card").hidden = !isPix;
-  document.getElementById("external-pay-card").hidden = isPix;
+  document.getElementById("pix-card").hidden = state.paymentMethod !== "pix";
+  document.getElementById("external-pay-card").hidden = state.paymentMethod !== "paypal";
+  document.getElementById("wise-card").hidden = state.paymentMethod !== "wise";
   document.getElementById("pix-qr").src = planQrImages[state.plan];
+  document.getElementById("wise-qr").src = wiseQrImages[state.plan];
 
-  if (!isPix) {
+  if (state.paymentMethod === "paypal") {
     const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
     const externalBtn = document.getElementById("external-pay-btn");
     externalBtn.href = externalPayUrl(state.paymentMethod, state.plan);
@@ -735,6 +749,7 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 // Landing
 // ---------------------------------------------------------------------------
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
+document.getElementById("wise-tag-value").textContent = CONFIG.wiseTag;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
 document.getElementById("plan-price-fourpack").textContent = CONFIG.fourPackPrice;
 document.getElementById("plan-price-founding").textContent = CONFIG.foundingMemberPrice;
@@ -1104,24 +1119,29 @@ function submitApplication() {
 }
 
 // ---------------------------------------------------------------------------
-// Payment — Pix key + WhatsApp payment proof
+// Payment — Pix key / Wise tag copy buttons + WhatsApp payment proof
 // (whatsappBtn itself is declared earlier, alongside applyLang())
 // ---------------------------------------------------------------------------
-const copyPixBtn = document.getElementById("copy-pix-btn");
-copyPixBtn.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(CONFIG.pixKey);
-  } catch (err) {
-    // Clipboard API can be unavailable (e.g. insecure context) — fall back silently,
-    // the key is still selectable/copyable by hand from the page.
-  }
-  copyPixBtn.textContent = t("approved.copied");
-  copyPixBtn.classList.add("copied");
-  setTimeout(() => {
-    copyPixBtn.textContent = t("approved.copy");
-    copyPixBtn.classList.remove("copied");
-  }, 1600);
-});
+function wireCopyButton(buttonId, value) {
+  const btn = document.getElementById(buttonId);
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch (err) {
+      // Clipboard API can be unavailable (e.g. insecure context) — fall back silently,
+      // the value is still selectable/copyable by hand from the page.
+    }
+    btn.textContent = t("approved.copied");
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = t("approved.copy");
+      btn.classList.remove("copied");
+    }, 1600);
+  });
+}
+
+wireCopyButton("copy-pix-btn", CONFIG.pixKey);
+wireCopyButton("copy-wise-btn", CONFIG.wiseTag);
 
 // ---------------------------------------------------------------------------
 // Direct link to the payment screen for approved applicants — send someone

@@ -28,12 +28,17 @@ If you ever change the Pix key or any price, you'll need new QRs — regenerate 
 
 ### A second and third way to pay: PayPal and Wise
 
-Pix only works for people with a Brazilian bank account, which shuts out international applicants — so the payment screen also has a **Pix / PayPal / Wise** toggle (`script.js` → the `.payment-btn` handlers) sitting next to the plan toggle. Switching it swaps the price shown, and swaps the Pix QR card for a single **"Pay with PayPal →" / "Pay with Wise →"** button, without navigating anywhere or losing the chosen plan.
+Pix only works for people with a Brazilian bank account, which shuts out international applicants — so the payment screen also has a **Pix / PayPal / Wise** toggle (`script.js` → the `.payment-btn` handlers) sitting next to the plan toggle. Switching it swaps the price shown and the payment card below, without navigating anywhere or losing the chosen plan.
 
-- **PayPal**: `CONFIG.paypalLink` — a [PayPal.me](https://paypal.me) link (`paypal.me/commongroundbr`). PayPal.me supports the amount directly in the URL (`/12GBP`), so each plan's exact link is built automatically — no QR needed, since these are links meant to be tapped on the same phone, not scanned from a second device. (An earlier PayPal "Request Money" link was deliberately *not* used here — those expire and aren't meant for repeat payers; PayPal.me links don't expire and work for anyone.)
-- **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`). The amount is appended as `?amount=X&currency=GBP` (Wise's documented format for its *business* pay links — applied here too since an unrecognized query param is harmless if personal links ignore it, and the amount is always shown as visible text either way, so nothing breaks if the pre-fill doesn't take).
+- **Pix and Wise** both show a **QR code + copyable fallback value** (Pix key / Wise tag), same layout — scan to pay the exact amount for whichever plan is selected, or copy the value and enter it by hand.
+- **PayPal** shows a single tappable **"Pay with PayPal →"** button instead of a QR, since it's a link meant to be tapped on the same phone rather than scanned from a second device.
 
-Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £12 single / £35 4-pack / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice; the 4-pack's "Save £X" badge is computed from it automatically.
+Details:
+
+- **PayPal**: `CONFIG.paypalLink` — a [PayPal.me](https://paypal.me) link (`paypal.me/commongroundbr`). PayPal.me supports the amount directly in the URL (`/12GBP`), so each plan's exact link is built automatically. (An earlier PayPal "Request Money" link was deliberately *not* used here — those expire and aren't meant for repeat payers; PayPal.me links don't expire and work for anyone.)
+- **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`), with the amount appended as `?amount=X&currency=GBP` — confirmed working directly in the Wise app (it shows the right amount pre-filled on the "Scan to pay" screen). `CONFIG.wiseTag` (`@danielthomasw81`) is the copyable fallback shown under the QR. Each plan gets its own QR image (`assets/wise-qr.png`, `-4pack`, `-founding`) encoding that plan's exact link — regenerate them with any QR generator (or ask me) if you ever change the tag or `CONFIG.gbpAmount`.
+
+Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £12 single / £35 4-pack / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice (and regenerate the Wise QRs to match); the 4-pack's "Save £X" badge is computed from it automatically.
 
 The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
 
