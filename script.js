@@ -26,6 +26,30 @@ const CONFIG = {
   // change the key or any price, regenerate the matching QR image(s).
   pixKey: "04409638777",
 
+  // PayPal and Wise — a second/third way to pay for applicants without Pix
+  // (mainly international visitors). Both are priced in GBP rather than
+  // Reais, since that's the currency your PayPal/Wise accounts actually
+  // settle in — pricing directly in GBP avoids paying for two currency
+  // conversions (payer's currency -> BRL -> GBP) instead of one.
+  //
+  // paypalLink is a PayPal.me link — PayPal.me supports the amount right
+  // in the URL (paypalLink + "/12GBP"), so each plan gets its own exact
+  // link built automatically, no per-amount QR needed.
+  paypalLink: "https://www.paypal.me/commongroundbr",
+
+  // wiseLink is a personal Wise "pay me" link. Wise's documented format for
+  // pre-filling an amount (?amount=X&currency=YYY) is confirmed for
+  // wise.com/pay/business/ links; it's applied here too since appending an
+  // unrecognized query param is harmless (Wise just ignores it and opens
+  // the plain pay page) — the amount is also always shown as text next to
+  // the button either way, so nothing is lost if the pre-fill doesn't take.
+  wiseLink: "https://wise.com/pay/me/danielthomasw81",
+
+  // GBP amount for each plan, shown on the PayPal/Wise buttons and built
+  // into their links. Independent from the Reais prices above — update
+  // both if you ever reprice.
+  gbpAmount: { single: 12, fourpack: 35, founding: 100 },
+
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
   whatsappNumber: "447830067043",
@@ -236,7 +260,7 @@ const TRANSLATIONS = {
           label: "4-Pack of Passes",
           unit: "/4-pack",
           sub: "4 passes, 4 events of your choice\nCoffee and matcha-based mocktails included every time",
-          badge: "Save R$70",
+          badge: "Save {amount}",
         },
         founding: {
           label: "Founding Member",
@@ -245,14 +269,18 @@ const TRANSLATIONS = {
           badge: "{remaining} of {total} spots left",
         },
       },
+      paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Scan with your bank app, or copy the Pix key below",
       pixKeyLabel: "Pix key (CPF)",
+      externalPayHint: "Tap below to pay, then send your receipt on WhatsApp to lock in your spot.",
+      externalPayBtn: "Pay with {method} →",
+      paidViaSuffix: " (paid via {method})",
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
       groupNote: "Included with your Grounds Pass: access to the Common Ground WhatsApp community group chat. We'll add you in once you're a pass-holder.",
       menuLink: "See the drinks menu →",
-      finePrint: "Pay via Pix, then send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
+      finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
     whatsappMessage: {
       single: "Hi! Here's my payment proof for my Common Ground Grounds Pass (single event):",
@@ -321,7 +349,7 @@ const TRANSLATIONS = {
           label: "Pacote de 4 Passes",
           unit: "/pacote de 4",
           sub: "4 passes, 4 eventos à sua escolha\nMocktails de café e matchá incluídos sempre",
-          badge: "Economize R$70",
+          badge: "Economize {amount}",
         },
         founding: {
           label: "Membro Fundador",
@@ -330,14 +358,18 @@ const TRANSLATIONS = {
           badge: "{remaining} de {total} vagas restantes",
         },
       },
+      paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Escaneie com o app do seu banco, ou copie a chave Pix abaixo",
       pixKeyLabel: "Chave Pix (CPF)",
+      externalPayHint: "Toque abaixo para pagar, depois envie seu comprovante no WhatsApp para garantir sua vaga.",
+      externalPayBtn: "Pagar com {method} →",
+      paidViaSuffix: " (pago via {method})",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
       groupNote: "Incluído no seu Grounds Pass: acesso ao grupo da comunidade Common Ground no WhatsApp. Vamos te adicionar assim que você for pass-holder.",
       menuLink: "Veja o cardápio de bebidas →",
-      finePrint: "Pague via Pix e depois envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
+      finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
     whatsappMessage: {
       single: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground (evento único):",
@@ -406,7 +438,7 @@ const TRANSLATIONS = {
           label: "Paquete de 4 Pases",
           unit: "/paquete de 4",
           sub: "4 pases, 4 eventos de tu elección\nMocktails de café y matcha incluidos siempre",
-          badge: "Ahorra R$70",
+          badge: "Ahorra {amount}",
         },
         founding: {
           label: "Miembro Fundador",
@@ -415,14 +447,18 @@ const TRANSLATIONS = {
           badge: "{remaining} de {total} cupos restantes",
         },
       },
+      paymentMethods: { pix: "Pix", paypal: "PayPal", wise: "Wise" },
       pixScanHint: "Escanea con la app de tu banco, o copia la clave Pix abajo",
       pixKeyLabel: "Clave Pix (CPF)",
+      externalPayHint: "Toca abajo para pagar, luego envía tu comprobante por WhatsApp para asegurar tu lugar.",
+      externalPayBtn: "Pagar con {method} →",
+      paidViaSuffix: " (pagado vía {method})",
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
       groupNote: "Incluido en tu Grounds Pass: acceso al grupo de la comunidad Common Ground en WhatsApp. Te añadiremos en cuanto seas pass-holder.",
       menuLink: "Mira el menú de bebidas →",
-      finePrint: "Paga por Pix y luego envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
+      finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
     whatsappMessage: {
       single: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground (evento único):",
@@ -444,6 +480,7 @@ const state = {
   screen: "landing", // landing | question | contact | reviewing | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
   plan: "single", // "single" | "fourpack" — chosen on the approved/payment screen
+  paymentMethod: "pix", // "pix" | "paypal" | "wise" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
@@ -492,7 +529,10 @@ function renderApprovedFinePrint() {
 }
 
 function renderWhatsappBtn() {
-  whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(t("whatsappMessage")[state.plan])}`;
+  const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
+  const paidVia = t("approved.paidViaSuffix").replace("{method}", methodLabel);
+  const message = t("whatsappMessage")[state.plan] + paidVia;
+  whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -502,20 +542,52 @@ function renderWhatsappBtn() {
 // tracked), on the approved/payment screen. Swaps the displayed price, its
 // QR code (each amount needs its own Pix QR), and the WhatsApp payment-proof
 // message so it's clear which plan was paid for.
+//
+// Payment-method toggle — Pix, PayPal, or Wise, alongside the plan toggle.
+// Pix shows the existing QR + copyable key; PayPal/Wise show a single
+// tappable button linking straight to that plan's exact GBP amount (see
+// CONFIG.gbpAmount/paypalLink/wiseLink) instead, since those are just links
+// meant to be tapped on the same phone, not scanned from another device.
 // ---------------------------------------------------------------------------
 const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice, founding: CONFIG.foundingMemberPrice };
+const planPricesGBP = {
+  single: `£${CONFIG.gbpAmount.single}`,
+  fourpack: `£${CONFIG.gbpAmount.fourpack}`,
+  founding: `£${CONFIG.gbpAmount.founding}`,
+};
 const planQrImages = {
   single: "assets/pix-qr.png",
   fourpack: "assets/pix-qr-4pack.png",
   founding: "assets/pix-qr-founding.png",
 };
 
+// How much the 4-pack saves vs. 4 single passes, per currency — shown in
+// the fourpack plan's badge (via the "{amount}" placeholder in its
+// approved.plans.fourpack.badge translation).
+const fourpackSavings = {
+  pix: "R$70",
+  paypal: `£${4 * CONFIG.gbpAmount.single - CONFIG.gbpAmount.fourpack}`,
+  wise: `£${4 * CONFIG.gbpAmount.single - CONFIG.gbpAmount.fourpack}`,
+};
+
+function externalPayUrl(method, plan) {
+  const amount = CONFIG.gbpAmount[plan];
+  if (method === "paypal") return `${CONFIG.paypalLink}/${amount}GBP`;
+  if (method === "wise") return `${CONFIG.wiseLink}?amount=${amount}&currency=GBP`;
+  return "#";
+}
+
 function renderPlanCard() {
   document.getElementById("plan-btn-single").classList.toggle("is-active", state.plan === "single");
   document.getElementById("plan-btn-fourpack").classList.toggle("is-active", state.plan === "fourpack");
   document.getElementById("plan-btn-founding").classList.toggle("is-active", state.plan === "founding");
 
-  document.getElementById("approved-price").textContent = planPrices[state.plan];
+  document.getElementById("payment-btn-pix").classList.toggle("is-active", state.paymentMethod === "pix");
+  document.getElementById("payment-btn-paypal").classList.toggle("is-active", state.paymentMethod === "paypal");
+  document.getElementById("payment-btn-wise").classList.toggle("is-active", state.paymentMethod === "wise");
+
+  const isPix = state.paymentMethod === "pix";
+  document.getElementById("approved-price").textContent = isPix ? planPrices[state.plan] : planPricesGBP[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
   document.getElementById("approved-price-sub").textContent = t(`approved.plans.${state.plan}.sub`);
 
@@ -523,6 +595,7 @@ function renderPlanCard() {
   const badgeText = t(`approved.plans.${state.plan}.badge`);
   if (badgeText) {
     badge.textContent = badgeText
+      .replace("{amount}", fourpackSavings[state.paymentMethod])
       .replace("{remaining}", CONFIG.foundingMemberSpotsRemaining)
       .replace("{total}", CONFIG.foundingMemberSpotsTotal);
     badge.hidden = false;
@@ -530,13 +603,30 @@ function renderPlanCard() {
     badge.hidden = true;
   }
 
+  document.getElementById("pix-card").hidden = !isPix;
+  document.getElementById("external-pay-card").hidden = isPix;
   document.getElementById("pix-qr").src = planQrImages[state.plan];
+
+  if (!isPix) {
+    const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
+    const externalBtn = document.getElementById("external-pay-btn");
+    externalBtn.href = externalPayUrl(state.paymentMethod, state.plan);
+    externalBtn.textContent = t("approved.externalPayBtn").replace("{method}", methodLabel);
+  }
+
   renderWhatsappBtn();
 }
 
 document.querySelectorAll(".plan-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     state.plan = btn.dataset.plan;
+    renderPlanCard();
+  });
+});
+
+document.querySelectorAll(".payment-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    state.paymentMethod = btn.dataset.method;
     renderPlanCard();
   });
 });

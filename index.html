@@ -137,6 +137,12 @@
         </button>
       </div>
 
+      <div class="payment-toggle" role="group" aria-label="Choose how to pay">
+        <button type="button" class="payment-btn is-active" id="payment-btn-pix" data-method="pix" data-i18n="approved.paymentMethods.pix">Pix</button>
+        <button type="button" class="payment-btn" id="payment-btn-paypal" data-method="paypal" data-i18n="approved.paymentMethods.paypal">PayPal</button>
+        <button type="button" class="payment-btn" id="payment-btn-wise" data-method="wise" data-i18n="approved.paymentMethods.wise">Wise</button>
+      </div>
+
       <div class="price-card">
         <div class="price-card-row">
           <span class="price-label" data-i18n="approved.priceLabel">Grounds Pass</span>
@@ -146,7 +152,7 @@
         <span class="plan-badge" id="plan-badge" hidden></span>
       </div>
 
-      <div class="pix-card">
+      <div class="pix-card" id="pix-card">
         <img class="pix-qr-img" id="pix-qr" src="assets/pix-qr.png" alt="Pix QR code to pay for your Grounds Pass">
         <p class="pix-scan-hint" data-i18n="approved.pixScanHint">Scan with your bank app, or copy the Pix key below</p>
         <div class="pix-key-row">
@@ -156,6 +162,11 @@
             <button type="button" class="copy-btn" id="copy-pix-btn" data-i18n="approved.copy">Copy</button>
           </div>
         </div>
+      </div>
+
+      <div class="pix-card" id="external-pay-card" hidden>
+        <p class="pix-scan-hint" id="external-pay-hint" data-i18n="approved.externalPayHint">Tap below to pay, then send your receipt on WhatsApp to lock in your spot.</p>
+        <a class="btn-primary" id="external-pay-btn" href="#" target="_blank" rel="noopener"></a>
       </div>
 
       <a class="btn-primary" id="whatsapp-btn" href="#" target="_blank" rel="noopener" data-i18n="approved.whatsappBtn">Send Payment Proof on WhatsApp</a>

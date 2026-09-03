@@ -26,6 +26,17 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 
 If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (single), `assets/pix-qr-4pack.png` (4-pack), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
+### A second and third way to pay: PayPal and Wise
+
+Pix only works for people with a Brazilian bank account, which shuts out international applicants — so the payment screen also has a **Pix / PayPal / Wise** toggle (`script.js` → the `.payment-btn` handlers) sitting next to the plan toggle. Switching it swaps the price shown, and swaps the Pix QR card for a single **"Pay with PayPal →" / "Pay with Wise →"** button, without navigating anywhere or losing the chosen plan.
+
+- **PayPal**: `CONFIG.paypalLink` — a [PayPal.me](https://paypal.me) link (`paypal.me/commongroundbr`). PayPal.me supports the amount directly in the URL (`/12GBP`), so each plan's exact link is built automatically — no QR needed, since these are links meant to be tapped on the same phone, not scanned from a second device. (An earlier PayPal "Request Money" link was deliberately *not* used here — those expire and aren't meant for repeat payers; PayPal.me links don't expire and work for anyone.)
+- **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`). The amount is appended as `?amount=X&currency=GBP` (Wise's documented format for its *business* pay links — applied here too since an unrecognized query param is harmless if personal links ignore it, and the amount is always shown as visible text either way, so nothing breaks if the pre-fill doesn't take).
+
+Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £12 single / £35 4-pack / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice; the 4-pack's "Save £X" badge is computed from it automatically.
+
+The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
+
 ### WhatsApp group chat access comes with the pass
 
 Access to the Common Ground WhatsApp group chat is included with any Grounds Pass (single or 4-pack) — it's not sold separately. The payment screen tells them this ("Once you're a pass-holder, we'll add you to the Common Ground WhatsApp group chat") but doesn't hand out the invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) to welcome them in as a pass-holder.
