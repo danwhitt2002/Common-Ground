@@ -19,7 +19,7 @@ const CONFIG = {
   // 4/20!") is something you tell them yourself when you confirm their
   // payment on WhatsApp — the site can't assign that live.
   foundingMemberSpotsTotal: 20,
-  foundingMemberSpotsRemaining: 20,
+  foundingMemberSpotsRemaining: 19,
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png,
   // assets/pix-qr-4pack.png, and assets/pix-qr-founding.png). If you ever
