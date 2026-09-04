@@ -250,14 +250,13 @@ const TRANSLATIONS = {
     selectEvent: {
       back: "← Back",
       eyebrow: "Almost There",
-      heading: "Select Your Event(s)",
-      lede: "Pick one date, or select up to 4 and bundle them into a discounted 4-Pack.",
-      note: "Select up to 4 events and bundle them into a 4-Pack — save {amount}.",
+      heading: "Select Your Event",
+      lede: "Pick the date you're coming to.",
       continueOne: "Continue →",
-      continueMulti: "Continue with {count} Events (4-Pack) →",
+      fourpackLink: "Or get a 4-Pack — pick your events as they're announced →",
       foundingLink: "Or become a Founding Member — lifetime access, no dates needed →",
-      selectedDatesLabel: "Your date(s): {dates}",
-      whatsappDatesSuffix: "Dates: {dates}.",
+      selectedDatesLabel: "Your date: {dates}",
+      whatsappDatesSuffix: "Date: {dates}.",
       locale: "en-GB",
     },
     approved: {
@@ -354,14 +353,13 @@ const TRANSLATIONS = {
     selectEvent: {
       back: "← Voltar",
       eyebrow: "Quase Lá",
-      heading: "Escolha Seu(s) Evento(s)",
-      lede: "Escolha uma data, ou selecione até 4 e monte um Pacote de 4 com desconto.",
-      note: "Selecione até 4 eventos e monte um Pacote de 4 — economize {amount}.",
+      heading: "Escolha Seu Evento",
+      lede: "Escolha a data em que você vai participar.",
       continueOne: "Continuar →",
-      continueMulti: "Continuar com {count} Eventos (Pacote de 4) →",
+      fourpackLink: "Ou garanta um Pacote de 4 — escolha seus eventos conforme forem anunciados →",
       foundingLink: "Ou torne-se Membro Fundador — acesso vitalício, sem datas necessárias →",
-      selectedDatesLabel: "Sua(s) data(s): {dates}",
-      whatsappDatesSuffix: "Datas: {dates}.",
+      selectedDatesLabel: "Sua data: {dates}",
+      whatsappDatesSuffix: "Data: {dates}.",
       locale: "pt-BR",
     },
     approved: {
@@ -458,14 +456,13 @@ const TRANSLATIONS = {
     selectEvent: {
       back: "← Atrás",
       eyebrow: "Casi Listo",
-      heading: "Elige Tu(s) Evento(s)",
-      lede: "Elige una fecha, o selecciona hasta 4 y arma un Paquete de 4 con descuento.",
-      note: "Selecciona hasta 4 eventos y arma un Paquete de 4 — ahorra {amount}.",
+      heading: "Elige Tu Evento",
+      lede: "Elige la fecha a la que vas a asistir.",
       continueOne: "Continuar →",
-      continueMulti: "Continuar con {count} Eventos (Paquete de 4) →",
+      fourpackLink: "O consigue un Paquete de 4 — elige tus eventos conforme se anuncien →",
       foundingLink: "O conviértete en Miembro Fundador — acceso de por vida, sin fechas necesarias →",
-      selectedDatesLabel: "Tu(s) fecha(s): {dates}",
-      whatsappDatesSuffix: "Fechas: {dates}.",
+      selectedDatesLabel: "Tu fecha: {dates}",
+      whatsappDatesSuffix: "Fecha: {dates}.",
       locale: "es-ES",
     },
     approved: {
@@ -594,7 +591,7 @@ function renderWhatsappBtn() {
   const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
   const paidVia = t("approved.paidViaSuffix").replace("{method}", methodLabel);
   let message = t("whatsappMessage")[state.plan] + paidVia;
-  const datesLabel = (state.plan === "single" || state.plan === "fourpack") ? formatSelectedDatesForSub() : null;
+  const datesLabel = state.plan === "single" ? formatSelectedDatesForSub() : null;
   if (datesLabel) {
     message += " " + t("selectEvent.whatsappDatesSuffix").replace("{dates}", datesLabel);
   }
@@ -602,12 +599,15 @@ function renderWhatsappBtn() {
 }
 
 // ---------------------------------------------------------------------------
-// Select-event(s) — the step between "reviewing" and payment. Applicants
-// pick which real date(s) they're paying for (from EVENTS_CONFIG, shared
-// with events.html via events-data.js) instead of buying a Grounds Pass
-// blind. Picking 1 date maps to the Single Pass plan; 2-4 dates bundle into
-// the 4-Pack's flat discounted price. Founding Member skips this screen
-// entirely via its own link, since it's a lifetime pass not tied to dates.
+// Select-event — the step between "reviewing" and payment. Applicants pick
+// the one real date they're paying for (from EVENTS_CONFIG, shared with
+// events.html via events-data.js) instead of buying a Grounds Pass blind,
+// always mapping to the Single Pass plan. The 4-Pack and Founding Member
+// both skip this screen via their own links instead — a 4-Pack isn't tied
+// to specific dates up front (there usually aren't 4 announced far enough
+// ahead to pre-pick), it's redeemed against future events as they're
+// announced, tracked manually like before; Founding Member is a lifetime
+// pass with no dates at all.
 // ---------------------------------------------------------------------------
 function renderSelectEventScreen() {
   const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { weekday: "long", day: "numeric", month: "long" });
@@ -618,12 +618,11 @@ function renderSelectEventScreen() {
   ul.className = "events-cards";
 
   EVENTS_CONFIG.events.forEach((event) => {
-    const isSelected = state.selectedEvents.includes(event.date);
-    const atCap = state.selectedEvents.length >= 4 && !isSelected;
+    const isSelected = state.selectedEvents[0] === event.date;
 
     const li = document.createElement("li");
-    li.className = "event-card event-card-select" + (isSelected ? " is-selected" : "") + (atCap ? " is-disabled" : "");
-    li.setAttribute("role", "checkbox");
+    li.className = "event-card event-card-select" + (isSelected ? " is-selected" : "");
+    li.setAttribute("role", "radio");
     li.setAttribute("aria-checked", String(isSelected));
     li.tabIndex = 0;
 
@@ -651,21 +650,15 @@ function renderSelectEventScreen() {
     locationEl.textContent = `📍 ${event.location}`;
     li.appendChild(locationEl);
 
-    const toggle = () => {
-      if (li.classList.contains("is-disabled")) return;
-      const idx = state.selectedEvents.indexOf(event.date);
-      if (idx === -1) {
-        state.selectedEvents.push(event.date);
-      } else {
-        state.selectedEvents.splice(idx, 1);
-      }
+    const select = () => {
+      state.selectedEvents = [event.date];
       renderSelectEventScreen();
     };
-    li.addEventListener("click", toggle);
+    li.addEventListener("click", select);
     li.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        toggle();
+        select();
       }
     });
 
@@ -674,17 +667,20 @@ function renderSelectEventScreen() {
 
   listEl.appendChild(ul);
 
-  const count = state.selectedEvents.length;
-  const continueBtn = document.getElementById("select-event-continue");
-  continueBtn.disabled = count === 0;
-  continueBtn.textContent = count <= 1 ? t("selectEvent.continueOne") : t("selectEvent.continueMulti").replace("{count}", count);
-
-  document.getElementById("select-event-note").textContent = t("selectEvent.note").replace("{amount}", fourpackSavings.pix);
+  document.getElementById("select-event-continue").disabled = state.selectedEvents.length === 0;
 }
 
 document.getElementById("select-event-continue").addEventListener("click", () => {
   if (state.selectedEvents.length === 0) return;
-  state.plan = state.selectedEvents.length === 1 ? "single" : "fourpack";
+  state.plan = "single";
+  showScreen("approved");
+  renderPlanCard();
+});
+
+document.getElementById("select-event-fourpack-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  state.plan = "fourpack";
+  state.selectedEvents = [];
   showScreen("approved");
   renderPlanCard();
 });
@@ -761,12 +757,12 @@ function renderPlanCard() {
   document.getElementById("approved-price").textContent = isPix ? planPrices[state.plan] : planPricesGBP[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
 
-  // Show the actual date(s) picked on the select-event screen in place of the
-  // generic plan description, when they match the currently active plan —
-  // switching to a plan tab that doesn't match the selection (e.g. tapping
-  // Founding Member, or Single after picking several dates) falls back to
-  // the generic copy rather than showing a stale/mismatched date list.
-  const datesLabel = (state.plan === "single" || state.plan === "fourpack") ? formatSelectedDatesForSub() : null;
+  // Show the actual date picked on the select-event screen in place of the
+  // generic plan description, for Single Pass only — the 4-Pack and
+  // Founding Member links both skip that screen, so they never carry a
+  // date, and switching plan tabs manually after picking one (e.g. to
+  // Founding Member) correctly falls back to the generic copy.
+  const datesLabel = state.plan === "single" ? formatSelectedDatesForSub() : null;
   document.getElementById("approved-price-sub").textContent = datesLabel
     ? t("selectEvent.selectedDatesLabel").replace("{dates}", datesLabel)
     : t(`approved.plans.${state.plan}.sub`);

@@ -12,13 +12,13 @@ Three static pages, no build step, no backend required:
 - **`events.html` / `events.js`** — the upcoming-events page (linked from the landing screen), showing real dates before someone applies, so they know what they're actually paying for.
 - **`events-data.js`** — just the `EVENTS_CONFIG` date list (see below), shared between `events.js` and `script.js` — loaded via its own `<script>` tag before either.
 
-### Selecting which event(s) you're paying for
+### Selecting which event you're paying for
 
-Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking **1 date** maps to the Single Pass plan; picking **2–4** bundles them into the 4-Pack's flat discounted price (a 5th tap is disabled once 4 are selected). The picked date(s) then show on the payment screen in place of the generic plan description, and get included in the pre-filled WhatsApp payment-proof message, so you can see exactly what someone paid for when they message you.
+Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking a date always maps to the **Single Pass** plan; the picked date then shows on the payment screen in place of the generic plan description, and gets included in the pre-filled WhatsApp payment-proof message, so you can see exactly which date someone paid for when they message you.
 
-Founding Member doesn't need a date — it's a lifetime pass — so there's a **"Or become a Founding Member"** link on the select-event screen that skips straight to the payment screen with that plan pre-selected.
+The **4-Pack** and **Founding Member** both skip this screen instead, via their own links below the date cards — neither is tied to a specific announced date up front: a 4-Pack is bought now and redeemed against future events as they get announced (there usually aren't 4 dates announced far enough ahead to pre-pick them all at signup — see "Three plans" below for how redemption is tracked), and Founding Member is a lifetime pass with no dates at all.
 
-The direct payment-screen shortcut (`yoursite.com/#approved`, see below) still works exactly as before and skips this step too — it falls back to the generic plan copy since no dates were picked.
+The direct payment-screen shortcut (`yoursite.com/#approved`, see below) still works exactly as before and skips this step too — it falls back to the generic plan copy since no date was picked.
 
 ### How payment actually happens
 
@@ -57,9 +57,9 @@ Access to the Common Ground WhatsApp group chat is included with any Grounds Pas
 
 ### Three plans: Single Pass, a 4-Pack, or Founding Member
 
-The payment screen lets someone pay for a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 flat — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way (through the select-event step above), the plan is chosen *for* them by how many dates they picked (1 = Single, 2–4 = 4-Pack at the same flat price regardless of exact count) — the plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below, with no dates picked yet.
+The payment screen lets someone pay for a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 flat — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Pass comes from picking a date on the select-event step above; 4-Pack and Founding Member both come from their own skip links there instead. The plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below.
 
-There's no backend or accounts here, so **spot-tracking for Founding Member is on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to hand out live-assigned Founding Member numbers.
+There's no backend or accounts here, so **redemption for the 4-Pack, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of a 4-Pack's passes someone's used, or to hand out live-assigned Founding Member numbers.
 
 #### Founding Member — a deliberately limited lifetime pass
 

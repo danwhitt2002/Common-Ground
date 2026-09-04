@@ -1089,17 +1089,17 @@ button.back-link {
 
 .event-card-select:not(.is-selected) .event-card-check { color: transparent; }
 
-#select-event-note {
-  margin-bottom: 18px;
-}
-
 #select-event-continue[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-#select-event-founding-link {
+#select-event-fourpack-link {
   margin-top: 16px;
+}
+
+#select-event-founding-link {
+  margin-top: 10px;
 }
 
 .menu-addon {

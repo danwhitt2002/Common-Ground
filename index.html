@@ -116,15 +116,18 @@
       <h2 class="display" id="reviewing-text">Saving your answers&hellip;</h2>
     </section>
 
-    <!-- SELECT EVENT — which date(s) they're actually paying for, before payment -->
+    <!-- SELECT EVENT — which single date they're actually paying for, before payment.
+         4-Pack/Founding skip this (see the two links below) since neither is tied to a
+         specific announced date — a 4-Pack is redeemed against future events as they're
+         announced, and Founding Member is a lifetime pass. -->
     <section class="screen" data-screen="select-event">
       <button class="back-link" id="select-event-back-btn" type="button" data-i18n="selectEvent.back">← Back</button>
       <p class="eyebrow" data-i18n="selectEvent.eyebrow">Almost There</p>
-      <h2 class="display" data-i18n="selectEvent.heading">Select Your Event(s)</h2>
-      <p class="lede" data-i18n="selectEvent.lede">Pick one date, or select up to 4 and bundle them into a discounted 4-Pack.</p>
+      <h2 class="display" data-i18n="selectEvent.heading">Select Your Event</h2>
+      <p class="lede" data-i18n="selectEvent.lede">Pick the date you're coming to.</p>
       <div id="select-event-list"></div>
-      <p class="fine-print" id="select-event-note" data-i18n="selectEvent.note">Select up to 4 events and bundle them into a 4-Pack — save R$70.</p>
       <button class="btn-primary" id="select-event-continue" type="button" disabled data-i18n="selectEvent.continueOne">Continue →</button>
+      <a class="link-secondary" href="#" id="select-event-fourpack-link" data-i18n="selectEvent.fourpackLink">Or get a 4-Pack — pick your events as they're announced →</a>
       <a class="link-secondary" href="#" id="select-event-founding-link" data-i18n="selectEvent.foundingLink">Or become a Founding Member — lifetime access, no dates needed →</a>
     </section>
 
