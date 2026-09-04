@@ -260,6 +260,7 @@ const TRANSLATIONS = {
       locale: "en-GB",
     },
     approved: {
+      backToSelectEvent: "← Select Your Event",
       eyebrow: "You're In!",
       heading: "Welcome to the Common Ground Social Club.",
       lede: "You're in. Choose your plan below — coffee & matcha‑based mocktails included every time.",
@@ -363,6 +364,7 @@ const TRANSLATIONS = {
       locale: "pt-BR",
     },
     approved: {
+      backToSelectEvent: "← Escolha Seu Evento",
       eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) ao Common Ground Social Club.",
       lede: "Você entrou. Escolha seu plano abaixo — mocktails de café e matchá incluídos sempre.",
@@ -466,6 +468,7 @@ const TRANSLATIONS = {
       locale: "es-ES",
     },
     approved: {
+      backToSelectEvent: "← Elige Tu Evento",
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a al Common Ground Social Club.",
       lede: "Ya estás dentro. Elige tu plan abajo — mocktails de café y matcha incluidos siempre.",
@@ -696,6 +699,14 @@ document.getElementById("select-event-founding-link").addEventListener("click", 
 document.getElementById("select-event-back-btn").addEventListener("click", () => {
   prefillContact();
   showScreen("contact");
+});
+
+// Lets someone recheck/change their picked date from the payment screen
+// without starting the whole application over — jumps straight back to
+// select-event (preserving whatever's already in state.selectedEvents).
+document.getElementById("approved-back-btn").addEventListener("click", () => {
+  renderSelectEventScreen();
+  showScreen("select-event");
 });
 
 // ---------------------------------------------------------------------------

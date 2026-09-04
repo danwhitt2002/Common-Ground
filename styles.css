@@ -863,7 +863,8 @@ button.back-link {
 
 .screen[data-screen="question"] .back-link,
 .screen[data-screen="contact"] .back-link,
-.screen[data-screen="select-event"] .back-link {
+.screen[data-screen="select-event"] .back-link,
+.screen[data-screen="approved"] .back-link {
   align-self: flex-start;
   margin-bottom: 20px;
 }
