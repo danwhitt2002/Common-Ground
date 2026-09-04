@@ -208,7 +208,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Weekly events announced through the WhatsApp community group chat",
         mocktails: "Coffee and matcha-based mocktails included every time",
-        groupchat: "Access to the Common Ground WhatsApp community group chat",
+        groupchat: "Access to the Common Ground WhatsApp community group chat, plus free meetups (run club & more) throughout the week",
       },
       stats: {
         capacity: "Max people per event",
@@ -299,7 +299,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encontros semanais anunciados no grupo da comunidade no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
-        groupchat: "Acesso ao grupo da comunidade Common Ground no WhatsApp",
+        groupchat: "Acesso ao grupo da comunidade Common Ground no WhatsApp, além de encontros gratuitos (corrida em grupo e mais) durante a semana",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -390,7 +390,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encuentros semanales anunciados en el grupo de la comunidad de WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
-        groupchat: "Acceso al grupo de la comunidad Common Ground en WhatsApp",
+        groupchat: "Acceso al grupo de la comunidad Common Ground en WhatsApp, además de encuentros gratuitos (running en grupo y más) durante la semana",
       },
       stats: {
         capacity: "Máximo de personas por evento",
