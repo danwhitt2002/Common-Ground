@@ -206,9 +206,9 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — apply now.",
       perks: {
-        events: "Weekly events announced through the WhatsApp community group chat",
+        events: "Weekly events for Grounds Pass holders, announced through WhatsApp",
         mocktails: "Coffee and matcha-based mocktails included every time",
-        groupchat: "Community WhatsApp access, plus complimentary meetups all week",
+        groupchat: "Community WhatsApp access, plus complimentary meetups — your weekly ritual",
       },
       stats: {
         capacity: "Max people per event",
@@ -297,9 +297,9 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — inscreva-se agora.",
       perks: {
-        events: "Encontros semanais anunciados no grupo da comunidade no WhatsApp",
+        events: "Encontros semanais para pass-holders, anunciados no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
-        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia durante a semana",
+        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia — seu ritual semanal",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -388,9 +388,9 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — solicita ahora.",
       perks: {
-        events: "Encuentros semanales anunciados en el grupo de la comunidad de WhatsApp",
+        events: "Encuentros semanales para pass-holders, anunciados por WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
-        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía durante la semana",
+        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía — tu ritual semanal",
       },
       stats: {
         capacity: "Máximo de personas por evento",
