@@ -1,26 +1,6 @@
-// ---------------------------------------------------------------------------
-// EVENTS CONFIG — the upcoming event dates, shown on events.html before
-// someone applies, so they know an event is actually coming up rather than
-// paying blind. There's no backend here, so this list is maintained by
-// hand — add/remove dates as you schedule (or cancel) events. Location is
-// deliberately vague (a neighborhood, not an address) — the exact spot is
-// shared with pass-holders in the WhatsApp group, not posted publicly.
-//
-// Each event is { date: "YYYY-MM-DD", location, tag?, image? }. `tag` is an
-// optional short badge (e.g. "+1 PARTY" for a launch/special date) and
-// `image` an optional photo for that specific event — both omitted by
-// default, only render when present.
-// ---------------------------------------------------------------------------
-const EVENTS_CONFIG = {
-  events: [
-    { date: "2026-09-06", location: "Copacabana", tag: "+1 PARTY" },
-    { date: "2026-09-13", location: "Copacabana" },
-    { date: "2026-09-20", location: "Copacabana" },
-    { date: "2026-09-27", location: "Copacabana" },
-    { date: "2026-10-04", location: "Copacabana" },
-    { date: "2026-10-11", location: "Copacabana" },
-  ],
-};
+// EVENTS_CONFIG (the upcoming event dates) now lives in events-data.js,
+// loaded via its own <script> tag before this file — shared with script.js,
+// which uses the same list for the "select your event(s)" application step.
 
 const EVENTS_TRANSLATIONS = {
   en: {

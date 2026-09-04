@@ -247,6 +247,19 @@ const TRANSLATIONS = {
         "Almost there…",
       ],
     },
+    selectEvent: {
+      back: "← Back",
+      eyebrow: "Almost There",
+      heading: "Select Your Event(s)",
+      lede: "Pick one date, or select up to 4 and bundle them into a discounted 4-Pack.",
+      note: "Select up to 4 events and bundle them into a 4-Pack — save {amount}.",
+      continueOne: "Continue →",
+      continueMulti: "Continue with {count} Events (4-Pack) →",
+      foundingLink: "Or become a Founding Member — lifetime access, no dates needed →",
+      selectedDatesLabel: "Your date(s): {dates}",
+      whatsappDatesSuffix: "Dates: {dates}.",
+      locale: "en-GB",
+    },
     approved: {
       eyebrow: "You're In!",
       heading: "Welcome to the Common Ground Social Club.",
@@ -337,6 +350,19 @@ const TRANSLATIONS = {
         "Preparando seu Grounds Pass…",
         "Quase lá…",
       ],
+    },
+    selectEvent: {
+      back: "← Voltar",
+      eyebrow: "Quase Lá",
+      heading: "Escolha Seu(s) Evento(s)",
+      lede: "Escolha uma data, ou selecione até 4 e monte um Pacote de 4 com desconto.",
+      note: "Selecione até 4 eventos e monte um Pacote de 4 — economize {amount}.",
+      continueOne: "Continuar →",
+      continueMulti: "Continuar com {count} Eventos (Pacote de 4) →",
+      foundingLink: "Ou torne-se Membro Fundador — acesso vitalício, sem datas necessárias →",
+      selectedDatesLabel: "Sua(s) data(s): {dates}",
+      whatsappDatesSuffix: "Datas: {dates}.",
+      locale: "pt-BR",
     },
     approved: {
       eyebrow: "Você Está Dentro!",
@@ -429,6 +455,19 @@ const TRANSLATIONS = {
         "Casi listo…",
       ],
     },
+    selectEvent: {
+      back: "← Atrás",
+      eyebrow: "Casi Listo",
+      heading: "Elige Tu(s) Evento(s)",
+      lede: "Elige una fecha, o selecciona hasta 4 y arma un Paquete de 4 con descuento.",
+      note: "Selecciona hasta 4 eventos y arma un Paquete de 4 — ahorra {amount}.",
+      continueOne: "Continuar →",
+      continueMulti: "Continuar con {count} Eventos (Paquete de 4) →",
+      foundingLink: "O conviértete en Miembro Fundador — acceso de por vida, sin fechas necesarias →",
+      selectedDatesLabel: "Tu(s) fecha(s): {dates}",
+      whatsappDatesSuffix: "Fechas: {dates}.",
+      locale: "es-ES",
+    },
     approved: {
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a al Common Ground Social Club.",
@@ -485,13 +524,14 @@ function t(key) {
 // State machine
 // ---------------------------------------------------------------------------
 const state = {
-  screen: "landing", // landing | question | contact | reviewing | approved
+  screen: "landing", // landing | question | contact | reviewing | select-event | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
-  plan: "single", // "single" | "fourpack" — chosen on the approved/payment screen
+  plan: "single", // "single" | "fourpack" | "founding" — set by the select-event step (or chosen directly on the payment screen via the #approved shortcut link)
   paymentMethod: "pix", // "pix" | "paypal" | "wise" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
+  selectedEvents: [], // "YYYY-MM-DD" dates picked on the select-event screen, 1-4 of them
 };
 
 const screens = {};
@@ -536,12 +576,131 @@ function renderApprovedFinePrint() {
   document.getElementById("approved-fine-print").textContent = t("approved.finePrint").replace("{handle}", CONFIG.instagramHandle);
 }
 
+// Formats the dates picked on the select-event screen (e.g. "6 Sep, 13 Sep")
+// in the current language's locale — null if nothing was picked there (the
+// #approved direct-link shortcut skips that screen entirely).
+function formatSelectedDatesForSub() {
+  if (state.selectedEvents.length === 0) return null;
+  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { day: "numeric", month: "short" });
+  return state.selectedEvents
+    .map((dateStr) => {
+      const [y, m, d] = dateStr.split("-").map(Number);
+      return formatter.format(new Date(Date.UTC(y, m - 1, d)));
+    })
+    .join(", ");
+}
+
 function renderWhatsappBtn() {
   const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
   const paidVia = t("approved.paidViaSuffix").replace("{method}", methodLabel);
-  const message = t("whatsappMessage")[state.plan] + paidVia;
+  let message = t("whatsappMessage")[state.plan] + paidVia;
+  const datesLabel = (state.plan === "single" || state.plan === "fourpack") ? formatSelectedDatesForSub() : null;
+  if (datesLabel) {
+    message += " " + t("selectEvent.whatsappDatesSuffix").replace("{dates}", datesLabel);
+  }
   whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
+
+// ---------------------------------------------------------------------------
+// Select-event(s) — the step between "reviewing" and payment. Applicants
+// pick which real date(s) they're paying for (from EVENTS_CONFIG, shared
+// with events.html via events-data.js) instead of buying a Grounds Pass
+// blind. Picking 1 date maps to the Single Pass plan; 2-4 dates bundle into
+// the 4-Pack's flat discounted price. Founding Member skips this screen
+// entirely via its own link, since it's a lifetime pass not tied to dates.
+// ---------------------------------------------------------------------------
+function renderSelectEventScreen() {
+  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { weekday: "long", day: "numeric", month: "long" });
+  const listEl = document.getElementById("select-event-list");
+  listEl.innerHTML = "";
+
+  const ul = document.createElement("ul");
+  ul.className = "events-cards";
+
+  EVENTS_CONFIG.events.forEach((event) => {
+    const isSelected = state.selectedEvents.includes(event.date);
+    const atCap = state.selectedEvents.length >= 4 && !isSelected;
+
+    const li = document.createElement("li");
+    li.className = "event-card event-card-select" + (isSelected ? " is-selected" : "") + (atCap ? " is-disabled" : "");
+    li.setAttribute("role", "checkbox");
+    li.setAttribute("aria-checked", String(isSelected));
+    li.tabIndex = 0;
+
+    const check = document.createElement("span");
+    check.className = "event-card-check";
+    check.setAttribute("aria-hidden", "true");
+    check.textContent = "✓";
+    li.appendChild(check);
+
+    if (event.tag) {
+      const tag = document.createElement("span");
+      tag.className = "event-tag";
+      tag.textContent = event.tag;
+      li.appendChild(tag);
+    }
+
+    const dateEl = document.createElement("p");
+    dateEl.className = "event-card-date";
+    const [y, m, d] = event.date.split("-").map(Number);
+    dateEl.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
+    li.appendChild(dateEl);
+
+    const locationEl = document.createElement("p");
+    locationEl.className = "event-card-location";
+    locationEl.textContent = `📍 ${event.location}`;
+    li.appendChild(locationEl);
+
+    const toggle = () => {
+      if (li.classList.contains("is-disabled")) return;
+      const idx = state.selectedEvents.indexOf(event.date);
+      if (idx === -1) {
+        state.selectedEvents.push(event.date);
+      } else {
+        state.selectedEvents.splice(idx, 1);
+      }
+      renderSelectEventScreen();
+    };
+    li.addEventListener("click", toggle);
+    li.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+
+    ul.appendChild(li);
+  });
+
+  listEl.appendChild(ul);
+
+  const count = state.selectedEvents.length;
+  const continueBtn = document.getElementById("select-event-continue");
+  continueBtn.disabled = count === 0;
+  continueBtn.textContent = count <= 1 ? t("selectEvent.continueOne") : t("selectEvent.continueMulti").replace("{count}", count);
+
+  document.getElementById("select-event-note").textContent = t("selectEvent.note").replace("{amount}", fourpackSavings.pix);
+}
+
+document.getElementById("select-event-continue").addEventListener("click", () => {
+  if (state.selectedEvents.length === 0) return;
+  state.plan = state.selectedEvents.length === 1 ? "single" : "fourpack";
+  showScreen("approved");
+  renderPlanCard();
+});
+
+document.getElementById("select-event-founding-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  state.plan = "founding";
+  state.selectedEvents = [];
+  showScreen("approved");
+  renderPlanCard();
+});
+
+document.getElementById("select-event-back-btn").addEventListener("click", () => {
+  prefillContact();
+  showScreen("contact");
+});
 
 // ---------------------------------------------------------------------------
 // Plan toggle — Single Pass, a 4-Pack of Passes (good for any 4 events, not
@@ -601,7 +760,16 @@ function renderPlanCard() {
   const isPix = state.paymentMethod === "pix";
   document.getElementById("approved-price").textContent = isPix ? planPrices[state.plan] : planPricesGBP[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
-  document.getElementById("approved-price-sub").textContent = t(`approved.plans.${state.plan}.sub`);
+
+  // Show the actual date(s) picked on the select-event screen in place of the
+  // generic plan description, when they match the currently active plan —
+  // switching to a plan tab that doesn't match the selection (e.g. tapping
+  // Founding Member, or Single after picking several dates) falls back to
+  // the generic copy rather than showing a stale/mismatched date list.
+  const datesLabel = (state.plan === "single" || state.plan === "fourpack") ? formatSelectedDatesForSub() : null;
+  document.getElementById("approved-price-sub").textContent = datesLabel
+    ? t("selectEvent.selectedDatesLabel").replace("{dates}", datesLabel)
+    : t(`approved.plans.${state.plan}.sub`);
 
   const badge = document.getElementById("plan-badge");
   const badgeText = t(`approved.plans.${state.plan}.badge`);
@@ -1074,7 +1242,8 @@ function runReviewSequence() {
 
   setTimeout(() => {
     clearInterval(interval);
-    showScreen("approved");
+    renderSelectEventScreen();
+    showScreen("select-event");
   }, messages.length * 850 + 250);
 }
 

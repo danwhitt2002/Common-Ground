@@ -7,13 +7,22 @@ A social club in Rio de Janeiro. The Grounds Pass (R$80 per event) gets members 
 
 Three static pages, no build step, no backend required:
 
-- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → straight into the payment screen. Every question screen and the WhatsApp/IG screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the payment screen already uses.
+- **`index.html` / `styles.css` / `script.js`** — the application landing page for the Instagram bio link. Flow: hero (with a small 🇬🇧/🇧🇷/🇪🇸 language switch in the top-right corner) → application questions (name, then multiple-choice/multi-select) → WhatsApp number/IG → a short "reviewing your application" beat → **select which event(s) you're actually paying for** → the payment screen. Every question screen, the WhatsApp/IG screen, and the select-event screen has a **← Back** button, so applicants can revisit and change any earlier answer before submitting — their answers (and whatever they've typed into the WhatsApp/IG fields) are restored, not cleared, when they go back. Contact is collected as a WhatsApp number rather than an email — it's the more casual, on-brand way to reach someone, and it's what the payment screen already uses.
 - **`menu.html` / `menu.js`** — the drinks menu page (linked from the landing and payment screens), showing what's included with the pass.
 - **`events.html` / `events.js`** — the upcoming-events page (linked from the landing screen), showing real dates before someone applies, so they know what they're actually paying for.
+- **`events-data.js`** — just the `EVENTS_CONFIG` date list (see below), shared between `events.js` and `script.js` — loaded via its own `<script>` tag before either.
+
+### Selecting which event(s) you're paying for
+
+Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking **1 date** maps to the Single Pass plan; picking **2–4** bundles them into the 4-Pack's flat discounted price (a 5th tap is disabled once 4 are selected). The picked date(s) then show on the payment screen in place of the generic plan description, and get included in the pre-filled WhatsApp payment-proof message, so you can see exactly what someone paid for when they message you.
+
+Founding Member doesn't need a date — it's a lifetime pass — so there's a **"Or become a Founding Member"** link on the select-event screen that skips straight to the payment screen with that plan pre-selected.
+
+The direct payment-screen shortcut (`yoursite.com/#approved`, see below) still works exactly as before and skips this step too — it falls back to the generic plan copy since no dates were picked.
 
 ### How payment actually happens
 
-There's no manual approval gate — an in-between step between applying and paying loses people, so the flow goes straight from the questionnaire to the payment screen (`data-screen="approved"`). The short "reviewing your application…" beat plays for a couple of seconds while the answers are actually submitted, then it lands on payment automatically.
+There's no manual approval gate — an in-between step between applying and paying loses people, so the flow goes straight from the questionnaire to the payment screen (`data-screen="approved"`), by way of the select-event step above. The short "reviewing your application…" beat plays for a couple of seconds while the answers are actually submitted, then it moves on automatically.
 
 The application itself is still saved in full (to your Formspree inbox, plus a local-only backup in the browser), so you can read every answer and follow up on WhatsApp afterwards if someone isn't a fit — nothing here auto-adds anyone to the group itself, it just gets them to the Pix QR without waiting on you first.
 
@@ -48,9 +57,9 @@ Access to the Common Ground WhatsApp group chat is included with any Grounds Pas
 
 ### Three plans: Single Pass, a 4-Pack, or Founding Member
 
-The payment screen lets someone pick a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. The 4-pack is deliberately not called "monthly" — events aren't strictly weekly, so it's framed as 4 passes good for any 4 events they choose to attend, whenever those land.
+The payment screen lets someone pay for a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 flat — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way (through the select-event step above), the plan is chosen *for* them by how many dates they picked (1 = Single, 2–4 = 4-Pack at the same flat price regardless of exact count) — the plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below, with no dates picked yet.
 
-There's no backend or accounts here, so **redemption for the 4-pack, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of a 4-pack's passes someone's used, or to hand out live-assigned Founding Member numbers.
+There's no backend or accounts here, so **spot-tracking for Founding Member is on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to hand out live-assigned Founding Member numbers.
 
 #### Founding Member — a deliberately limited lifetime pass
 
@@ -82,9 +91,9 @@ Every category and item currently renders as an `image` — cropped directly out
 
 Drink and category **names always stay in English** (they're that pixel-exact handwriting, or the plain-text fallback) — but `description`, `tag`, `note`, and `footnote` are translated, along with the rest of the page (eyebrow, lede, back link, footer). Each of those fields can be a plain string (shown as-is in every language — fine for a quick addition) or an `{ en, pt, es }` object for a real per-language version, same pattern as `CONFIG.questions` in `script.js`. The chosen language reaches this page via a `?lang=` URL param on the link from `index.html` (there's no other shared state between the two pages) — and the two links back to the application page carry it forward the same way, so going back and forth stays in sync.
 
-### Upcoming events — edit `events.js` → `EVENTS_CONFIG`
+### Upcoming events — edit `events-data.js` → `EVENTS_CONFIG`
 
-Holds the list of upcoming event dates shown on `events.html`, so applicants can see an event is actually coming up before they pay — rather than paying blind. There's no backend here either, so **this list is maintained by hand**: add a new entry as you schedule an event, and delete one you've cancelled or that's already passed.
+Holds the list of upcoming event dates shown on `events.html` and on the application flow's select-event step, so applicants can see (and pick) a real event before they pay — rather than paying blind. There's no backend here either, so **this list is maintained by hand**: add a new entry as you schedule an event, and delete one you've cancelled or that's already passed — both pages pick up the change automatically.
 
 Each entry is `{ date: "YYYY-MM-DD", location, tag?, image? }`:
 

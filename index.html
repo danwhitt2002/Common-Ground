@@ -116,6 +116,18 @@
       <h2 class="display" id="reviewing-text">Saving your answers&hellip;</h2>
     </section>
 
+    <!-- SELECT EVENT — which date(s) they're actually paying for, before payment -->
+    <section class="screen" data-screen="select-event">
+      <button class="back-link" id="select-event-back-btn" type="button" data-i18n="selectEvent.back">← Back</button>
+      <p class="eyebrow" data-i18n="selectEvent.eyebrow">Almost There</p>
+      <h2 class="display" data-i18n="selectEvent.heading">Select Your Event(s)</h2>
+      <p class="lede" data-i18n="selectEvent.lede">Pick one date, or select up to 4 and bundle them into a discounted 4-Pack.</p>
+      <div id="select-event-list"></div>
+      <p class="fine-print" id="select-event-note" data-i18n="selectEvent.note">Select up to 4 events and bundle them into a 4-Pack — save R$70.</p>
+      <button class="btn-primary" id="select-event-continue" type="button" disabled data-i18n="selectEvent.continueOne">Continue →</button>
+      <a class="link-secondary" href="#" id="select-event-founding-link" data-i18n="selectEvent.foundingLink">Or become a Founding Member — lifetime access, no dates needed →</a>
+    </section>
+
     <!-- APPROVED (the real ending — reached right after applying, straight to payment; also reachable directly via a link — see README) -->
     <section class="screen" data-screen="approved">
       <p class="eyebrow" data-i18n="approved.eyebrow">You're In!</p>
@@ -190,6 +202,7 @@
   </main>
 </div>
 
+<script src="events-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

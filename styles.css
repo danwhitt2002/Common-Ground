@@ -862,7 +862,8 @@ button.back-link {
 }
 
 .screen[data-screen="question"] .back-link,
-.screen[data-screen="contact"] .back-link {
+.screen[data-screen="contact"] .back-link,
+.screen[data-screen="select-event"] .back-link {
   align-self: flex-start;
   margin-bottom: 20px;
 }
@@ -1035,6 +1036,70 @@ button.back-link {
   margin: 0;
   font-size: 10px;
   color: var(--ink-dim);
+}
+
+/* Select-your-event(s) step — same card look as events.html, but tappable */
+.screen[data-screen="select-event"] .lede { margin-bottom: 20px; }
+
+#select-event-list {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.event-card-select {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  width: 100%;
+  position: relative;
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+}
+
+.event-card-select:hover { border-color: var(--accent-dim); }
+
+.event-card-select.is-selected {
+  border-color: var(--accent);
+  background: #1c3fa0;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.event-card-select.is-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.event-card-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.event-card-select:not(.is-selected) .event-card-check { color: transparent; }
+
+#select-event-note {
+  margin-bottom: 18px;
+}
+
+#select-event-continue[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#select-event-founding-link {
+  margin-top: 16px;
 }
 
 .menu-addon {
