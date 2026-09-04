@@ -208,7 +208,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Weekly events announced through the WhatsApp community group chat",
         mocktails: "Coffee and matcha-based mocktails included every time",
-        groupchat: "Community WhatsApp access, plus complimentary meetups (run club & more) all week",
+        groupchat: "Community WhatsApp access, plus complimentary meetups all week",
       },
       stats: {
         capacity: "Max people per event",
@@ -299,7 +299,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encontros semanais anunciados no grupo da comunidade no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
-        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia (corrida em grupo e mais) durante a semana",
+        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia durante a semana",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -390,7 +390,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encuentros semanales anunciados en el grupo de la comunidad de WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
-        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía (running en grupo y más) durante la semana",
+        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía durante la semana",
       },
       stats: {
         capacity: "Máximo de personas por evento",
