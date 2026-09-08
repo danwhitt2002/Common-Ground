@@ -14,9 +14,9 @@ Three static pages, no build step, no backend required:
 
 ### Selecting which event you're paying for
 
-Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking a date always maps to the **Single Pass** plan; the picked date then shows on the payment screen in place of the generic plan description, and gets included in the pre-filled WhatsApp payment-proof message, so you can see exactly which date someone paid for when they message you.
+Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking a date always maps to the **Single Event** plan; the picked date then shows on the payment screen in place of the generic plan description, and gets included in the pre-filled WhatsApp payment-proof message, so you can see exactly which date someone paid for when they message you.
 
-The **4-Pack** and **Founding Member** both skip this screen instead, via their own links below the date cards — neither is tied to a specific announced date up front: a 4-Pack is bought now and redeemed against future events as they get announced (there usually aren't 4 dates announced far enough ahead to pre-pick them all at signup — see "Three plans" below for how redemption is tracked), and Founding Member is a lifetime pass with no dates at all.
+**Monthly Membership** and **Founding Member** both skip this screen instead, via their own links below the date cards — neither is tied to a specific announced date up front: Monthly Membership is bought now and covers every event announced during that paid month (see "Three plans" below for how it's tracked), and Founding Member is a lifetime pass with no dates at all.
 
 The direct payment-screen shortcut (`yoursite.com/#approved`, see below) still works exactly as before and skips this step too — it falls back to the generic plan copy since no date was picked.
 
@@ -33,7 +33,7 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 - **Pix key**: `04409638777` (CPF) (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
-If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (single), `assets/pix-qr-4pack.png` (4-pack), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
+If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (single), `assets/pix-qr-monthly.png` (monthly membership), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
 ### A second and third way to pay: PayPal and Wise
 
@@ -45,21 +45,26 @@ Pix only works for people with a Brazilian bank account, which shuts out interna
 Details:
 
 - **PayPal**: `CONFIG.paypalLink` — a [PayPal.me](https://paypal.me) link (`paypal.me/commongroundbr`). PayPal.me supports the amount directly in the URL (`/12GBP`), so each plan's exact link is built automatically. (An earlier PayPal "Request Money" link was deliberately *not* used here — those expire and aren't meant for repeat payers; PayPal.me links don't expire and work for anyone.)
-- **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`), with the amount appended as `?amount=X&currency=GBP` — confirmed working directly in the Wise app (it shows the right amount pre-filled on the "Scan to pay" screen). `CONFIG.wiseTag` (`@danielthomasw81`) is the copyable fallback shown under the QR. Each plan gets its own QR image (`assets/wise-qr.png`, `-4pack`, `-founding`) encoding that plan's exact link — regenerate them with any QR generator (or ask me) if you ever change the tag or `CONFIG.gbpAmount`.
+- **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`), with the amount appended as `?amount=X&currency=GBP` — confirmed working directly in the Wise app (it shows the right amount pre-filled on the "Scan to pay" screen). `CONFIG.wiseTag` (`@danielthomasw81`) is the copyable fallback shown under the QR. Each plan gets its own QR image (`assets/wise-qr.png`, `-monthly`, `-founding`) encoding that plan's exact link — regenerate them with any QR generator (or ask me) if you ever change the tag or `CONFIG.gbpAmount`.
 
-Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £12 single / £35 4-pack / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice (and regenerate the Wise QRs to match); the 4-pack's "Save £X" badge is computed from it automatically.
+Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £12 single / £26 monthly / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice (and regenerate the Wise QRs to match).
 
 The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
 
-### WhatsApp group chat access comes with the pass
+### Two WhatsApp groups: standard and premium
 
-Access to the Common Ground WhatsApp group chat is included with any Grounds Pass (single or 4-pack) — it's not sold separately. The payment screen tells them this ("Once you're a pass-holder, we'll add you to the Common Ground WhatsApp group chat") but doesn't hand out the invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with your group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) to welcome them in as a pass-holder.
+There are two separate Common Ground WhatsApp groups, not one — which group someone gets added to depends on which plan they paid for:
 
-### Three plans: Single Pass, a 4-Pack, or Founding Member
+- **Standard group** — general community chat. **Single Event** buyers get this one; it's not tied to any specific event, just the general community.
+- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Monthly Membership** and **Founding Member** both get this one.
 
-The payment screen lets someone pay for a **Single Pass** (`CONFIG.price`, R$80), a **4-Pack of Passes** (`CONFIG.fourPackPrice`, R$250 flat — a discount, like getting a 4th pass free), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Pass comes from picking a date on the select-event step above; 4-Pack and Founding Member both come from their own skip links there instead. The plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below.
+The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote`, but — same as before — it doesn't hand out either invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with the correct group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) based on which plan they paid for.
 
-There's no backend or accounts here, so **redemption for the 4-Pack, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp group), since the site itself has no way to know how many of a 4-Pack's passes someone's used, or to hand out live-assigned Founding Member numbers.
+### Three plans: Single Event, Monthly Membership, or Founding Member
+
+The payment screen lets someone pay for a **Single Event** (`CONFIG.price`, R$80 — this event only, plus the standard WhatsApp group), a **Monthly Membership** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus the premium WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus the premium WhatsApp group) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event comes from picking a date on the select-event step above; Monthly Membership and Founding Member both come from their own skip links there instead. The plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below.
+
+There's no backend or accounts here, so **Monthly Membership renewal, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp groups), since the site itself has no way to know when someone's paid month is up, or to hand out live-assigned Founding Member numbers. There's no recurring billing here either — a Monthly Membership is a one-off Pix/PayPal/Wise payment for one month's access, same as Founding Member is a one-off payment for lifetime access; you note when someone's month is up and follow up for the next payment when it comes due.
 
 #### Founding Member — a deliberately limited lifetime pass
 
@@ -68,7 +73,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`fourPackPrice`** / **`foundingMemberPrice`** — currently `R$80` per event, `R$250` for the 4-pack, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$80` per event, `R$180` for Monthly Membership, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 

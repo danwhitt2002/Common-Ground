@@ -2,11 +2,17 @@
 // CONFIG — everything you need to customize lives here.
 // ---------------------------------------------------------------------------
 const CONFIG = {
+  // Single Event — one specific date, picked on the select-event screen.
   price: "R$80",
 
-  // The 4-pack of passes — R$250 for 4, good for any 4 events they want
-  // (not tied to a calendar month, since events aren't strictly weekly).
-  fourPackPrice: "R$250",
+  // Monthly Membership — access to every event for a month, plus the
+  // premium WhatsApp group (day-to-day meetups: run club, beach days,
+  // co-working, etc. — see TRANSLATIONS.<lang>.approved.plans.monthly.sub).
+  // Not tied to a specific date, so it skips the select-event screen via
+  // its own link. There's no recurring billing here (no backend for
+  // that) — like Founding Member spots, renewals are tracked by hand:
+  // note when someone's month is up and follow up for the next payment.
+  monthlyMembershipPrice: "R$180",
 
   // Founding Member — a one-time, lifetime pass. Deliberately limited
   // (see foundingMemberSpotsTotal/Remaining below) to keep it exclusive.
@@ -22,7 +28,7 @@ const CONFIG = {
   foundingMemberSpotsRemaining: 19,
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png,
-  // assets/pix-qr-4pack.png, and assets/pix-qr-founding.png). If you ever
+  // assets/pix-qr-monthly.png, and assets/pix-qr-founding.png). If you ever
   // change the key or any price, regenerate the matching QR image(s).
   pixKey: "04409638777",
 
@@ -50,7 +56,7 @@ const CONFIG = {
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
-  gbpAmount: { single: 12, fourpack: 35, founding: 100 },
+  gbpAmount: { single: 12, monthly: 26, founding: 100 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -208,7 +214,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Weekly events for Grounds Pass holders, announced through WhatsApp",
         mocktails: "Coffee and matcha-based mocktails included every time",
-        groupchat: "Community WhatsApp access, plus complimentary meetups — your weekly ritual",
+        groupchat: "Community WhatsApp access, plus complimentary meetups for members — your weekly ritual",
       },
       stats: {
         capacity: "Max people per event",
@@ -253,7 +259,7 @@ const TRANSLATIONS = {
       heading: "Select Your Event",
       lede: "Pick the date you're coming to.",
       continueOne: "Continue →",
-      fourpackLink: "Or get a 4-Pack — pick your events as they're announced →",
+      monthlyLink: "Or get Monthly Membership — premium access, no dates needed →",
       foundingLink: "Or become a Founding Member — lifetime access, no dates needed →",
       selectedDatesLabel: "Your date: {dates}",
       whatsappDatesSuffix: "Date: {dates}.",
@@ -267,20 +273,19 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Single Pass",
+          label: "Single Event",
           unit: "/event",
-          sub: "Coffee and matcha-based mocktails included every time",
+          sub: "This event only, plus the general WhatsApp group chat",
         },
-        fourpack: {
-          label: "4-Pack of Passes",
-          unit: "/4-pack",
-          sub: "4 passes, 4 events of your choice\nCoffee and matcha-based mocktails included every time",
-          badge: "Save {amount}",
+        monthly: {
+          label: "Monthly Membership",
+          unit: "/month",
+          sub: "Every event this month, plus the premium WhatsApp group — weekly events, run club, beach days, co-working & more",
         },
         founding: {
           label: "Founding Member",
           unit: "one-time",
-          sub: "One-time payment · lifetime access to every event",
+          sub: "One-time payment · lifetime access to every event, plus the premium WhatsApp group",
           badge: "{remaining} of {total} spots left",
         },
       },
@@ -295,13 +300,13 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "Included with your Grounds Pass: access to the Common Ground WhatsApp community group chat. We'll add you in once you're a pass-holder.",
+      groupNote: "We'll add you to the right WhatsApp group once you're a pass-holder — the premium group (weekly events + day-to-day meetups) for Monthly and Founding Members, the general group for Single Event passes.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "Hi! Here's my payment proof for my Common Ground Grounds Pass (single event):",
-      fourpack: "Hi! Here's my payment proof for my Common Ground 4-Pack of Passes:",
+      single: "Hi! Here's my payment proof for my Common Ground Single Event pass:",
+      monthly: "Hi! Here's my payment proof for my Common Ground Monthly Membership:",
       founding: "Hi! Here's my payment proof for my Common Ground Founding Member Pass (lifetime):",
     },
   },
@@ -312,7 +317,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encontros semanais para pass-holders, anunciados no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
-        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia — seu ritual semanal",
+        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia para membros — seu ritual semanal",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -357,7 +362,7 @@ const TRANSLATIONS = {
       heading: "Escolha Seu Evento",
       lede: "Escolha a data em que você vai participar.",
       continueOne: "Continuar →",
-      fourpackLink: "Ou garanta um Pacote de 4 — escolha seus eventos conforme forem anunciados →",
+      monthlyLink: "Ou garanta a Membresia Mensal — acesso premium, sem datas necessárias →",
       foundingLink: "Ou torne-se Membro Fundador — acesso vitalício, sem datas necessárias →",
       selectedDatesLabel: "Sua data: {dates}",
       whatsappDatesSuffix: "Data: {dates}.",
@@ -371,20 +376,19 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Passe Único",
+          label: "Evento Único",
           unit: "/evento",
-          sub: "Mocktails de café e matchá incluídos sempre",
+          sub: "Somente este evento, além do grupo geral no WhatsApp",
         },
-        fourpack: {
-          label: "Pacote de 4 Passes",
-          unit: "/pacote de 4",
-          sub: "4 passes, 4 eventos à sua escolha\nMocktails de café e matchá incluídos sempre",
-          badge: "Economize {amount}",
+        monthly: {
+          label: "Membro Mensal",
+          unit: "/mês",
+          sub: "Todos os eventos do mês, além do grupo premium no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e mais",
         },
         founding: {
           label: "Membro Fundador",
           unit: "pagamento único",
-          sub: "Pagamento único · acesso vitalício a todos os eventos",
+          sub: "Pagamento único · acesso vitalício a todos os eventos, além do grupo premium no WhatsApp",
           badge: "{remaining} de {total} vagas restantes",
         },
       },
@@ -399,13 +403,13 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Incluído no seu Grounds Pass: acesso ao grupo da comunidade Common Ground no WhatsApp. Vamos te adicionar assim que você for pass-holder.",
+      groupNote: "Vamos te adicionar no grupo certo do WhatsApp assim que você for pass-holder — o grupo premium (encontros semanais + encontros durante a semana) para Membros Mensais e Fundadores, o grupo geral para passes de Evento Único.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground (evento único):",
-      fourpack: "Oi! Aqui está o comprovante de pagamento do meu Pacote de 4 Passes da Common Ground:",
+      single: "Oi! Aqui está o comprovante de pagamento do meu passe de Evento Único da Common Ground:",
+      monthly: "Oi! Aqui está o comprovante de pagamento da minha Membresia Mensal da Common Ground:",
       founding: "Oi! Aqui está o comprovante de pagamento do meu Passe de Membro Fundador da Common Ground (vitalício):",
     },
   },
@@ -416,7 +420,7 @@ const TRANSLATIONS = {
       perks: {
         events: "Encuentros semanales para pass-holders, anunciados por WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
-        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía — tu ritual semanal",
+        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía para miembros — tu ritual semanal",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -461,7 +465,7 @@ const TRANSLATIONS = {
       heading: "Elige Tu Evento",
       lede: "Elige la fecha a la que vas a asistir.",
       continueOne: "Continuar →",
-      fourpackLink: "O consigue un Paquete de 4 — elige tus eventos conforme se anuncien →",
+      monthlyLink: "O consigue la Membresía Mensual — acceso premium, sin fechas necesarias →",
       foundingLink: "O conviértete en Miembro Fundador — acceso de por vida, sin fechas necesarias →",
       selectedDatesLabel: "Tu fecha: {dates}",
       whatsappDatesSuffix: "Fecha: {dates}.",
@@ -475,20 +479,19 @@ const TRANSLATIONS = {
       priceLabel: "Grounds Pass",
       plans: {
         single: {
-          label: "Pase Único",
+          label: "Evento Único",
           unit: "/evento",
-          sub: "Mocktails de café y matcha incluidos siempre",
+          sub: "Solo este evento, además del grupo general de WhatsApp",
         },
-        fourpack: {
-          label: "Paquete de 4 Pases",
-          unit: "/paquete de 4",
-          sub: "4 pases, 4 eventos de tu elección\nMocktails de café y matcha incluidos siempre",
-          badge: "Ahorra {amount}",
+        monthly: {
+          label: "Membresía Mensual",
+          unit: "/mes",
+          sub: "Todos los eventos de este mes, además del grupo premium de WhatsApp — eventos semanales, running club, playa, coworking y más",
         },
         founding: {
           label: "Miembro Fundador",
           unit: "pago único",
-          sub: "Pago único · acceso de por vida a todos los eventos",
+          sub: "Pago único · acceso de por vida a todos los eventos, además del grupo premium de WhatsApp",
           badge: "{remaining} de {total} cupos restantes",
         },
       },
@@ -503,13 +506,13 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Incluido en tu Grounds Pass: acceso al grupo de la comunidad Common Ground en WhatsApp. Te añadiremos en cuanto seas pass-holder.",
+      groupNote: "Te añadiremos al grupo de WhatsApp correcto en cuanto seas pass-holder — el grupo premium (eventos semanales + encuentros durante la semana) para Miembros Mensuales y Fundadores, el grupo general para pases de Evento Único.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground (evento único):",
-      fourpack: "¡Hola! Aquí está mi comprobante de pago de mi Paquete de 4 Pases de Common Ground:",
+      single: "¡Hola! Aquí está mi comprobante de pago de mi pase de Evento Único de Common Ground:",
+      monthly: "¡Hola! Aquí está mi comprobante de pago de mi Membresía Mensual de Common Ground:",
       founding: "¡Hola! Aquí está mi comprobante de pago de mi Pase de Miembro Fundador de Common Ground (de por vida):",
     },
   },
@@ -526,12 +529,12 @@ function t(key) {
 const state = {
   screen: "landing", // landing | question | contact | reviewing | select-event | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
-  plan: "single", // "single" | "fourpack" | "founding" — set by the select-event step (or chosen directly on the payment screen via the #approved shortcut link)
+  plan: "single", // "single" | "monthly" | "founding" — set by the select-event step (or chosen directly on the payment screen via the #approved shortcut link)
   paymentMethod: "pix", // "pix" | "paypal" | "wise" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
-  selectedEvents: [], // "YYYY-MM-DD" dates picked on the select-event screen, 1-4 of them
+  selectedEvents: [], // holds a single "YYYY-MM-DD" date picked on the select-event screen (Single Event plan only)
 };
 
 const screens = {};
@@ -605,12 +608,11 @@ function renderWhatsappBtn() {
 // Select-event — the step between "reviewing" and payment. Applicants pick
 // the one real date they're paying for (from EVENTS_CONFIG, shared with
 // events.html via events-data.js) instead of buying a Grounds Pass blind,
-// always mapping to the Single Pass plan. The 4-Pack and Founding Member
-// both skip this screen via their own links instead — a 4-Pack isn't tied
-// to specific dates up front (there usually aren't 4 announced far enough
-// ahead to pre-pick), it's redeemed against future events as they're
-// announced, tracked manually like before; Founding Member is a lifetime
-// pass with no dates at all.
+// always mapping to the Single Event plan. Monthly Membership and Founding
+// Member both skip this screen via their own links instead — neither is
+// tied to a specific date: Monthly Membership covers every event announced
+// during the paid month, tracked manually like Founding Member spots;
+// Founding Member is a lifetime pass with no dates at all.
 // ---------------------------------------------------------------------------
 function renderSelectEventScreen() {
   const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { weekday: "long", day: "numeric", month: "long" });
@@ -680,9 +682,9 @@ document.getElementById("select-event-continue").addEventListener("click", () =>
   renderPlanCard();
 });
 
-document.getElementById("select-event-fourpack-link").addEventListener("click", (e) => {
+document.getElementById("select-event-monthly-link").addEventListener("click", (e) => {
   e.preventDefault();
-  state.plan = "fourpack";
+  state.plan = "monthly";
   state.selectedEvents = [];
   showScreen("approved");
   renderPlanCard();
@@ -710,8 +712,9 @@ document.getElementById("approved-back-btn").addEventListener("click", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Plan toggle — Single Pass, a 4-Pack of Passes (good for any 4 events, not
-// tied to a calendar month), or a Founding Member lifetime pass (limited to
+// Plan toggle — Single Event (one date, picked on the select-event screen),
+// Monthly Membership (a manually-tracked month of access, no recurring
+// billing), or a Founding Member lifetime pass (limited to
 // CONFIG.foundingMemberSpotsTotal — see that comment for how spots are
 // tracked), on the approved/payment screen. Swaps the displayed price, its
 // QR code (each amount needs its own Pix QR), and the WhatsApp payment-proof
@@ -723,30 +726,21 @@ document.getElementById("approved-back-btn").addEventListener("click", () => {
 // since paypal.me links are meant to be tapped on the same phone rather
 // than scanned (no fixed-amount QR was set up for it).
 // ---------------------------------------------------------------------------
-const planPrices = { single: CONFIG.price, fourpack: CONFIG.fourPackPrice, founding: CONFIG.foundingMemberPrice };
+const planPrices = { single: CONFIG.price, monthly: CONFIG.monthlyMembershipPrice, founding: CONFIG.foundingMemberPrice };
 const planPricesGBP = {
   single: `£${CONFIG.gbpAmount.single}`,
-  fourpack: `£${CONFIG.gbpAmount.fourpack}`,
+  monthly: `£${CONFIG.gbpAmount.monthly}`,
   founding: `£${CONFIG.gbpAmount.founding}`,
 };
 const planQrImages = {
   single: "assets/pix-qr.png",
-  fourpack: "assets/pix-qr-4pack.png",
+  monthly: "assets/pix-qr-monthly.png",
   founding: "assets/pix-qr-founding.png",
 };
 const wiseQrImages = {
   single: "assets/wise-qr.png",
-  fourpack: "assets/wise-qr-4pack.png",
+  monthly: "assets/wise-qr-monthly.png",
   founding: "assets/wise-qr-founding.png",
-};
-
-// How much the 4-pack saves vs. 4 single passes, per currency — shown in
-// the fourpack plan's badge (via the "{amount}" placeholder in its
-// approved.plans.fourpack.badge translation).
-const fourpackSavings = {
-  pix: "R$70",
-  paypal: `£${4 * CONFIG.gbpAmount.single - CONFIG.gbpAmount.fourpack}`,
-  wise: `£${4 * CONFIG.gbpAmount.single - CONFIG.gbpAmount.fourpack}`,
 };
 
 function externalPayUrl(method, plan) {
@@ -757,7 +751,7 @@ function externalPayUrl(method, plan) {
 
 function renderPlanCard() {
   document.getElementById("plan-btn-single").classList.toggle("is-active", state.plan === "single");
-  document.getElementById("plan-btn-fourpack").classList.toggle("is-active", state.plan === "fourpack");
+  document.getElementById("plan-btn-monthly").classList.toggle("is-active", state.plan === "monthly");
   document.getElementById("plan-btn-founding").classList.toggle("is-active", state.plan === "founding");
 
   document.getElementById("payment-btn-pix").classList.toggle("is-active", state.paymentMethod === "pix");
@@ -769,10 +763,10 @@ function renderPlanCard() {
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
 
   // Show the actual date picked on the select-event screen in place of the
-  // generic plan description, for Single Pass only — the 4-Pack and
-  // Founding Member links both skip that screen, so they never carry a
-  // date, and switching plan tabs manually after picking one (e.g. to
-  // Founding Member) correctly falls back to the generic copy.
+  // generic plan description, for Single Event only — the Monthly
+  // Membership and Founding Member links both skip that screen, so they
+  // never carry a date, and switching plan tabs manually after picking one
+  // (e.g. to Founding Member) correctly falls back to the generic copy.
   const datesLabel = state.plan === "single" ? formatSelectedDatesForSub() : null;
   document.getElementById("approved-price-sub").textContent = datesLabel
     ? t("selectEvent.selectedDatesLabel").replace("{dates}", datesLabel)
@@ -782,7 +776,6 @@ function renderPlanCard() {
   const badgeText = t(`approved.plans.${state.plan}.badge`);
   if (badgeText) {
     badge.textContent = badgeText
-      .replace("{amount}", fourpackSavings[state.paymentMethod])
       .replace("{remaining}", CONFIG.foundingMemberSpotsRemaining)
       .replace("{total}", CONFIG.foundingMemberSpotsTotal);
     badge.hidden = false;
@@ -926,7 +919,7 @@ applyLang(["en", "pt", "es"].includes(urlLang) ? urlLang : "en");
 document.getElementById("pix-key-value").textContent = CONFIG.pixKey;
 document.getElementById("wise-tag-value").textContent = CONFIG.wiseTag;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
-document.getElementById("plan-price-fourpack").textContent = CONFIG.fourPackPrice;
+document.getElementById("plan-price-monthly").textContent = CONFIG.monthlyMembershipPrice;
 document.getElementById("plan-price-founding").textContent = CONFIG.foundingMemberPrice;
 
 document.getElementById("start-btn").addEventListener("click", () => {
