@@ -215,6 +215,7 @@ const TRANSLATIONS = {
         events: "Weekly events for Grounds Pass holders, announced through WhatsApp",
         mocktails: "Coffee and matcha-based mocktails included every time",
         groupchat: "Community WhatsApp access, plus complimentary meetups for members — your weekly ritual",
+        brands: "Discounts with a curated lineup of brands, hand-picked to match our aesthetic",
       },
       stats: {
         capacity: "Max people per event",
@@ -318,6 +319,7 @@ const TRANSLATIONS = {
         events: "Encontros semanais para pass-holders, anunciados no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
         groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia para membros — seu ritual semanal",
+        brands: "Descontos com marcas cuidadosamente escolhidas para combinar com a nossa estética",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -421,6 +423,7 @@ const TRANSLATIONS = {
         events: "Encuentros semanales para pass-holders, anunciados por WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
         groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía para miembros — tu ritual semanal",
+        brands: "Descuentos con marcas cuidadosamente elegidas para combinar con nuestra estética",
       },
       stats: {
         capacity: "Máximo de personas por evento",

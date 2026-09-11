@@ -60,6 +60,16 @@ There are two separate Common Ground WhatsApp groups, not one — which group so
 
 The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote`, but — same as before — it doesn't hand out either invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with the correct group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) based on which plan they paid for.
 
+### Partner brand discounts
+
+The landing page's fourth perk bullet (`landing.perks.brands` — "Discounts with a curated lineup of brands, hand-picked to match our aesthetic") teases discount codes from outside brands, without naming them or publishing the actual codes — same reasoning as the event address: keep it vague publicly, hand over specifics only to people who've actually paid, via the premium WhatsApp group.
+
+Current partner deals (not stored anywhere else — keep this list updated as you add or drop partners):
+
+- **NAVEIA** (oat milk, Rio de Janeiro) — 20% off at checkout on their site with code `COMMONGROUND20`.
+
+Since there's no backend, there's no way to gate this automatically — post the code(s) in the premium WhatsApp group description or pinned message so Monthly Membership and Founding Member holders can find it themselves, rather than sending it out one-by-one.
+
 ### Three plans: Single Event, Monthly Membership, or Founding Member
 
 The payment screen lets someone pay for a **Single Event** (`CONFIG.price`, R$80 — this event only, plus the standard WhatsApp group), a **Monthly Membership** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus the premium WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus the premium WhatsApp group) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event comes from picking a date on the select-event step above; Monthly Membership and Founding Member both come from their own skip links there instead. The plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below.
