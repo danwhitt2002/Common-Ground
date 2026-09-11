@@ -83,7 +83,7 @@ const CONFIG = {
   // The STANDARD/general WhatsApp community group's invite link — this one
   // is public, shown directly on the landing page as a tappable link
   // (landing.communityLink), open to anyone, no payment needed. Distinct
-  // from Inner Circle, the PREMIUM group (weekly events + day-to-day meetups), which
+  // from Inner Circle, the PREMIUM group (fortnightly events + day-to-day meetups), which
   // stays invite-only — you still hand that invite out manually to Grounds
   // Pass/Founding Member holders after confirming payment, same as before.
   standardGroupLink: "https://chat.whatsapp.com/F0Cfm69AAL6JVQpoud0Ok0?s=cl&p=i&mlu=4&ilr=4",
@@ -314,7 +314,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/month",
-          sub: "Every event this month, plus Inner Circle, our invite-only WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
+          sub: "Every event this month, plus Inner Circle, our invite-only WhatsApp group — fortnightly events, run club, beach days, co-working, and discounts with our curated brand partners",
         },
         founding: {
           label: "Founding Member",
@@ -334,7 +334,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to Inner Circle, our invite-only WhatsApp group, for weekly events and day-to-day meetups.",
+      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to Inner Circle, our invite-only WhatsApp group, for fortnightly events and day-to-day meetups.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
       referralBadge: "20% off — referred by {name}",
@@ -427,7 +427,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mês",
-          sub: "Todos os eventos do mês, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
+          sub: "Todos os eventos do mês, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp — encontros quinzenais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
         },
         founding: {
           label: "Membro Fundador",
@@ -447,7 +447,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no Inner Circle, nosso grupo exclusivo por convite, com encontros semanais e durante a semana.",
+      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no Inner Circle, nosso grupo exclusivo por convite, com encontros quinzenais e durante a semana.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
       referralBadge: "20% de desconto — indicado(a) por {name}",
@@ -540,7 +540,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mes",
-          sub: "Todos los eventos de este mes, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
+          sub: "Todos los eventos de este mes, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp — eventos quincenales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
         },
         founding: {
           label: "Miembro Fundador",
@@ -560,7 +560,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al Inner Circle, nuestro grupo exclusivo por invitación, con eventos semanales y encuentros durante la semana.",
+      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al Inner Circle, nuestro grupo exclusivo por invitación, con eventos quincenales y encuentros durante la semana.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
       referralBadge: "20% de descuento — referido/a por {name}",

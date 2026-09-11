@@ -6,6 +6,7 @@ const EVENTS_TRANSLATIONS = {
   en: {
     back: "← Back",
     eyebrow: "Upcoming Events",
+    cadence: "Fortnightly Events",
     lede: "Carioca time, every time",
     pastEventsHeading: "Past Events",
     applyLink: "Ready to apply? Join Common Ground →",
@@ -14,6 +15,7 @@ const EVENTS_TRANSLATIONS = {
   pt: {
     back: "← Voltar",
     eyebrow: "Próximos Eventos",
+    cadence: "Eventos Quinzenais",
     lede: "Hora carioca, sempre",
     pastEventsHeading: "Eventos Passados",
     applyLink: "Pronto(a) para se inscrever? Junte-se à Common Ground →",
@@ -22,6 +24,7 @@ const EVENTS_TRANSLATIONS = {
   es: {
     back: "← Atrás",
     eyebrow: "Próximos Eventos",
+    cadence: "Eventos Quincenales",
     lede: "Hora carioca, siempre",
     pastEventsHeading: "Eventos Pasados",
     applyLink: "¿Listo/a para solicitar? Únete a Common Ground →",

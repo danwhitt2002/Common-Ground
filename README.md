@@ -56,7 +56,7 @@ The pre-filled WhatsApp message also names which method was used ("paid via PayP
 There are two separate Common Ground WhatsApp groups, not one:
 
 - **Standard group** — general community chat, open to anyone. Its invite link is **public**, shown right on the landing page (`CONFIG.standardGroupLink` in `script.js`) as a tappable "Common Ground Community Groupchat →" link (`landing.communityLede`/`landing.communityLink`) — no application or payment needed, anyone visiting the site can join directly.
-- **Inner Circle** (Common Ground: Inner Circle) — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Invite-only**: **Grounds Pass** and **Founding Member** holders get this one.
+- **Inner Circle** (Common Ground: Inner Circle) — everything the standard group has, plus access to fortnightly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Invite-only**: **Grounds Pass** and **Founding Member** holders get this one.
 
 The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote` (it points Single Event Pass holders back to the public link on the homepage, and promises Grounds Pass/Founding Member holders Inner Circle once they've paid). Since there's no backend here to confirm payment actually happened, the *Inner Circle* invite still isn't handed out automatically — that part is still on you: once you get their payment proof on WhatsApp, reply with Inner Circle's invite link (WhatsApp → the group → Group Info → Invite to Group via Link).
 
