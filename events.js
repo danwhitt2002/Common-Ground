@@ -7,6 +7,7 @@ const EVENTS_TRANSLATIONS = {
     back: "← Back",
     eyebrow: "Upcoming Events",
     lede: "Every Sunday · exact location shared with pass-holders in the WhatsApp group",
+    pastEventsHeading: "Past Events",
     applyLink: "Ready to apply? Join Common Ground →",
     tagline: "Carioca time, every time",
     locale: "en-GB",
@@ -15,6 +16,7 @@ const EVENTS_TRANSLATIONS = {
     back: "← Voltar",
     eyebrow: "Próximos Eventos",
     lede: "Todo domingo · o local exato é compartilhado com os pass-holders no grupo do WhatsApp",
+    pastEventsHeading: "Eventos Passados",
     applyLink: "Pronto(a) para se inscrever? Junte-se à Common Ground →",
     tagline: "Hora carioca, sempre",
     locale: "pt-BR",
@@ -23,6 +25,7 @@ const EVENTS_TRANSLATIONS = {
     back: "← Atrás",
     eyebrow: "Próximos Eventos",
     lede: "Cada domingo · la ubicación exacta se comparte con los pass-holders en el grupo de WhatsApp",
+    pastEventsHeading: "Eventos Pasados",
     applyLink: "¿Listo/a para solicitar? Únete a Common Ground →",
     tagline: "Hora carioca, siempre",
     locale: "es-ES",
@@ -30,6 +33,8 @@ const EVENTS_TRANSLATIONS = {
 };
 
 const eventsListEl = document.getElementById("events-list");
+const pastEventsListEl = document.getElementById("past-events-list");
+const pastEventsHeadingEl = document.getElementById("past-events-heading");
 
 // Resolves the language to render in: the "?lang=" URL param (the real
 // hand-off from index.html, a separate page/document); falling back to a
@@ -72,11 +77,10 @@ function renderEventsPage() {
 
   const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 
-  eventsListEl.innerHTML = "";
-  const list = document.createElement("ul");
-  list.className = "events-cards";
-
-  EVENTS_CONFIG.events.forEach((event) => {
+  // Shared by both the upcoming and past-events lists below. Past events
+  // skip the "Carioca time, every time" tagline — it's forward-looking
+  // marketing copy that doesn't fit a historical recap card.
+  function buildEventCard(event, { showTagline }) {
     const li = document.createElement("li");
     li.className = "event-card";
 
@@ -95,6 +99,13 @@ function renderEventsPage() {
       li.appendChild(img);
     }
 
+    if (event.title) {
+      const titleEl = document.createElement("p");
+      titleEl.className = "event-card-title";
+      titleEl.textContent = event.title;
+      li.appendChild(titleEl);
+    }
+
     const dateEl = document.createElement("p");
     dateEl.className = "event-card-date";
     // Date-only parse (no time) is treated as UTC midnight by JS — read the
@@ -103,20 +114,37 @@ function renderEventsPage() {
     dateEl.textContent = dateFormatter.format(new Date(Date.UTC(y, m - 1, d)));
     li.appendChild(dateEl);
 
-    const taglineEl = document.createElement("p");
-    taglineEl.className = "event-card-tagline";
-    taglineEl.textContent = t.tagline;
-    li.appendChild(taglineEl);
+    if (showTagline) {
+      const taglineEl = document.createElement("p");
+      taglineEl.className = "event-card-tagline";
+      taglineEl.textContent = t.tagline;
+      li.appendChild(taglineEl);
+    }
 
-    const locationEl = document.createElement("p");
-    locationEl.className = "event-card-location";
-    locationEl.textContent = `📍 ${event.location}`;
-    li.appendChild(locationEl);
+    return li;
+  }
 
-    list.appendChild(li);
+  eventsListEl.innerHTML = "";
+  const list = document.createElement("ul");
+  list.className = "events-cards";
+  EVENTS_CONFIG.events.forEach((event) => {
+    list.appendChild(buildEventCard(event, { showTagline: true }));
   });
-
   eventsListEl.appendChild(list);
+
+  if (pastEventsListEl) {
+    pastEventsListEl.innerHTML = "";
+    const pastEvents = EVENTS_CONFIG.pastEvents || [];
+    pastEventsHeadingEl.hidden = pastEvents.length === 0;
+    if (pastEvents.length > 0) {
+      const pastList = document.createElement("ul");
+      pastList.className = "events-cards";
+      pastEvents.forEach((event) => {
+        pastList.appendChild(buildEventCard(event, { showTagline: false }));
+      });
+      pastEventsListEl.appendChild(pastList);
+    }
+  }
 }
 
 renderEventsPage();

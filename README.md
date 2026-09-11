@@ -3,7 +3,7 @@ Find your common ground. A social club.
 
 ## Common Ground application page
 
-A social club in Rio de Janeiro. Applicants choose between a **Single Event Pass** (R$100 — a one-off, "try us out" ticket into a single event) and a **Grounds Pass** (R$180/month — the main product: every event that month, plus the premium WhatsApp group's day-to-day meetups and curated brand discounts). Coffee-based and matcha-based mocktails are included on every plan, every time.
+A social club in Rio de Janeiro. Applicants choose between a **Single Event Pass** (R$100 — a one-off, "try us out" ticket into a single event) and a **Grounds Pass** (R$180/month — the main product: every event that month, plus Inner Circle, the invite-only WhatsApp group's day-to-day meetups and curated brand discounts). Coffee-based and matcha-based mocktails are included on every plan, every time.
 
 Three static pages, no build step, no backend required:
 
@@ -51,26 +51,26 @@ Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently �
 
 The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
 
-### Two WhatsApp groups: standard (public) and premium (invite-only)
+### Two WhatsApp groups: standard (public) and Inner Circle (invite-only)
 
 There are two separate Common Ground WhatsApp groups, not one:
 
 - **Standard group** — general community chat, open to anyone. Its invite link is **public**, shown right on the landing page (`CONFIG.standardGroupLink` in `script.js`) as a tappable "Common Ground Community Groupchat →" link (`landing.communityLede`/`landing.communityLink`) — no application or payment needed, anyone visiting the site can join directly.
-- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Invite-only**: **Grounds Pass** and **Founding Member** holders get this one.
+- **Inner Circle** (Common Ground: Inner Circle) — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Invite-only**: **Grounds Pass** and **Founding Member** holders get this one.
 
-The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote` (it points Single Event Pass holders back to the public link on the homepage, and promises Grounds Pass/Founding Member holders the invite-only premium group once they've paid). Since there's no backend here to confirm payment actually happened, the *premium* group's invite still isn't handed out automatically — that part is still on you: once you get their payment proof on WhatsApp, reply with the premium group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link).
+The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote` (it points Single Event Pass holders back to the public link on the homepage, and promises Grounds Pass/Founding Member holders Inner Circle once they've paid). Since there's no backend here to confirm payment actually happened, the *Inner Circle* invite still isn't handed out automatically — that part is still on you: once you get their payment proof on WhatsApp, reply with Inner Circle's invite link (WhatsApp → the group → Group Info → Invite to Group via Link).
 
 If you ever change/regenerate the standard group, update `CONFIG.standardGroupLink` to match.
 
 ### Partner brand discounts
 
-The landing page's fourth perk bullet (`landing.perks.brands` — "Discounts with a curated lineup of brands, hand-picked to match our aesthetic") teases discount codes from outside brands, without naming them or publishing the actual codes — same reasoning as the event address: keep it vague publicly, hand over specifics only to people who've actually paid, via the premium WhatsApp group.
+The landing page's fourth perk bullet (`landing.perks.brands` — "Curated discounts across a handpicked lineup of brands that share our aesthetic") teases discount codes from outside brands, without naming them or publishing the actual codes — same reasoning as the event address: keep it vague publicly, hand over specifics only to people who've actually paid, via Inner Circle.
 
 Current partner deals (not stored anywhere else — keep this list updated as you add or drop partners):
 
 - **NAVEIA** (oat milk, Rio de Janeiro) — 20% off at checkout on their site with code `COMMONGROUND20`.
 
-Since there's no backend, there's no way to gate this automatically — post the code(s) in the premium WhatsApp group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
+Since there's no backend, there's no way to gate this automatically — post the code(s) in Inner Circle's group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
 
 ### Refer a friend — 20% off a Single Event Pass, automatic but honor-based
 
@@ -88,7 +88,7 @@ If you ever reprice, update `CONFIG.referralPrice` and `CONFIG.gbpAmount.referra
 
 **Grounds Pass is the main product** — the payment screen leads with it: it's first in the plan toggle, carries a "Recommended" badge (`approved.recommendedLabel`, a small pill on the plan button — see `.plan-btn-badge` in `styles.css`), and is what's pre-selected by default (`state.plan` defaults to `"monthly"` in `script.js`) for anyone landing directly on the payment screen via the `#approved` shortcut. **Single Event Pass is framed as the trial option** — its own sub-copy says "Try us out" (`approved.plans.single.sub`) — for people who want to test the club before committing to a month.
 
-The payment screen lets someone pay for a **Grounds Pass** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus the premium WhatsApp group), a **Single Event Pass** (`CONFIG.price`, R$100 — this event only, plus the standard WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus the premium WhatsApp group) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event Pass comes from picking a date on the select-event step above; Grounds Pass and Founding Member both come from their own skip links there instead — picking a date always overrides the default back to Single Event Pass, since that's an explicit, deliberate choice.
+The payment screen lets someone pay for a **Grounds Pass** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus Inner Circle), a **Single Event Pass** (`CONFIG.price`, R$100 — this event only, plus the standard WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus Inner Circle) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event Pass comes from picking a date on the select-event step above; Grounds Pass and Founding Member both come from their own skip links there instead — picking a date always overrides the default back to Single Event Pass, since that's an explicit, deliberate choice.
 
 There's no backend or accounts here, so **Grounds Pass renewal, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp groups), since the site itself has no way to know when someone's paid month is up, or to hand out live-assigned Founding Member numbers. There's no recurring billing here either — a Grounds Pass is a one-off Pix/PayPal/Wise payment for one month's access, same as Founding Member is a one-off payment for lifetime access; you note when someone's month is up and follow up for the next payment when it comes due.
 
@@ -124,18 +124,19 @@ Every category and item currently renders as an `image` — cropped directly out
 
 Drink and category **names always stay in English** (they're that pixel-exact handwriting, or the plain-text fallback) — but `description`, `tag`, `note`, and `footnote` are translated, along with the rest of the page (eyebrow, lede, back link, footer). Each of those fields can be a plain string (shown as-is in every language — fine for a quick addition) or an `{ en, pt, es }` object for a real per-language version, same pattern as `CONFIG.questions` in `script.js`. The chosen language reaches this page via a `?lang=` URL param on the link from `index.html` (there's no other shared state between the two pages) — and the two links back to the application page carry it forward the same way, so going back and forth stays in sync.
 
-### Upcoming events — edit `events-data.js` → `EVENTS_CONFIG`
+### Events — edit `events-data.js` → `EVENTS_CONFIG`
 
-Holds the list of upcoming event dates shown on `events.html` and on the application flow's select-event step, so applicants can see (and pick) a real event before they pay — rather than paying blind. There's no backend here either, so **this list is maintained by hand**: add a new entry as you schedule an event, and delete one you've cancelled or that's already passed — both pages pick up the change automatically.
+Holds two lists: `events` (upcoming — shown on `events.html` and selectable on the application flow's select-event step, so applicants can see and pick a real date before they pay rather than paying blind) and `pastEvents` (already happened — shown on `events.html` as a recap section only, never selectable in the application flow). There's no backend here either, so **both lists are maintained by hand**: move an entry from `events` to `pastEvents` once it's happened, add a new one as you schedule it, delete one you've cancelled — both pages pick up the change automatically.
 
-Each entry is `{ date: "YYYY-MM-DD", location, tag?, image? }`:
+Each entry is `{ date: "YYYY-MM-DD", location, title?, tag?, image? }`:
 
 - **`date`** — formatted automatically into each language's locale (e.g. "Sunday, 6 September" / "domingo, 6 de setembro" / "domingo, 6 de septiembre").
-- **`location`** — currently just `"Copacabana"` on every date. This is **deliberately vague** — a neighborhood, not an address — the exact spot is only shared with pass-holders in the WhatsApp group once they've paid, not posted publicly here. Keep it that way.
+- **`location`** — currently just `"Copacabana"` on every date. Kept as data for your own reference but **not shown on the cards publicly** — the exact spot is only shared with pass-holders in the WhatsApp group once they've paid.
+- **`title`** (optional) — a prominent headline for a special date, e.g. `"LAUNCH PARTY: Bring a +1"` (see `.event-card-title` in `styles.css`). Omit it for a normal, date-only event.
 - **`tag`** (optional) — a short badge shown above the date, e.g. `"+1 PARTY"` for a launch or special date. Omit it for a normal event.
-- **`image`** (optional) — a photo for that specific event, shown above the date. Omit it for no photo (the default for every date right now).
+- **`image`** (optional) — a photo for that specific event, filling the square card (crop it square, add your own branding, drop the file in `assets/`, e.g. `assets/events/launch-party.png`, and reference it here). Omit it for no photo.
 
-Translated strings (`back`, `eyebrow`, `lede`, `applyLink`) live in `EVENTS_TRANSLATIONS` in the same file, same `{ en, pt, es }` pattern as everywhere else. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
+Translated strings (`back`, `eyebrow`, `lede`, `pastEventsHeading`, `applyLink`, `tagline`) live in `EVENTS_TRANSLATIONS` in `events.js`, same `{ en, pt, es }` pattern as everywhere else. The "Past Events" heading and section only render when `pastEvents` has at least one entry. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
 
 ### Brand identity
 

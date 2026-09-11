@@ -19,7 +19,7 @@ const CONFIG = {
   referralPrice: "R$80",
 
   // Grounds Pass — the monthly membership. Access to every event for a
-  // month, plus the invite-only premium WhatsApp group (day-to-day
+  // month, plus Inner Circle, the invite-only premium WhatsApp group (day-to-day
   // meetups: run club, beach days, co-working, etc. — see
   // TRANSLATIONS.<lang>.approved.plans.monthly.sub). Called "monthly"
   // internally throughout the code (state.plan, element ids, CONFIG field
@@ -83,7 +83,7 @@ const CONFIG = {
   // The STANDARD/general WhatsApp community group's invite link — this one
   // is public, shown directly on the landing page as a tappable link
   // (landing.communityLink), open to anyone, no payment needed. Distinct
-  // from the PREMIUM group (weekly events + day-to-day meetups), which
+  // from Inner Circle, the PREMIUM group (weekly events + day-to-day meetups), which
   // stays invite-only — you still hand that invite out manually to Grounds
   // Pass/Founding Member holders after confirming payment, same as before.
   standardGroupLink: "https://chat.whatsapp.com/F0Cfm69AAL6JVQpoud0Ok0?s=cl&p=i&mlu=4&ilr=4",
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
       lede: "Find your Common Ground — apply now.",
       perksHeading: "The Grounds Pass — {monthlyPrice}/month",
       perks: {
-        access: "Unlimited access to every event hosted that month, included in the pass.",
+        access: "Unlimited access to Common Ground events that month.",
         groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
         meetups: "Free meetups throughout the month — beach days, run clubs, coworking, and more.",
         brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
@@ -315,12 +315,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/month",
-          sub: "Every event this month, plus our invite-only premium WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
+          sub: "Every event this month, plus Inner Circle, our invite-only WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
         },
         founding: {
           label: "Founding Member",
           unit: "one-time",
-          sub: "One-time payment · lifetime access to every event, plus our invite-only premium WhatsApp group",
+          sub: "One-time payment · lifetime access to every event, plus Inner Circle, our invite-only WhatsApp group",
           badge: "{remaining} of {total} spots left",
         },
       },
@@ -335,7 +335,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to our invite-only premium group, for weekly events and day-to-day meetups.",
+      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to Inner Circle, our invite-only WhatsApp group, for weekly events and day-to-day meetups.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
       referralBadge: "20% off — referred by {name}",
@@ -350,10 +350,10 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      lede: "Encontre seu Common Ground — inscreva-se agora.",
+      lede: "Find your Common Ground — inscreva-se agora.",
       perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
       perks: {
-        access: "Acesso ilimitado a todos os eventos do mês, incluído no seu passe.",
+        access: "Acesso ilimitado aos eventos da Common Ground naquele mês.",
         groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
         meetups: "Encontros gratuitos ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
         brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
@@ -429,12 +429,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mês",
-          sub: "Todos os eventos do mês, além do nosso grupo premium por convite no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
+          sub: "Todos os eventos do mês, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
         },
         founding: {
           label: "Membro Fundador",
           unit: "pagamento único",
-          sub: "Pagamento único · acesso vitalício a todos os eventos, além do nosso grupo premium por convite no WhatsApp",
+          sub: "Pagamento único · acesso vitalício a todos os eventos, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp",
           badge: "{remaining} de {total} vagas restantes",
         },
       },
@@ -449,7 +449,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no nosso grupo premium por convite, com encontros semanais e durante a semana.",
+      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no Inner Circle, nosso grupo exclusivo por convite, com encontros semanais e durante a semana.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
       referralBadge: "20% de desconto — indicado(a) por {name}",
@@ -464,10 +464,10 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      lede: "Encuentra tu Common Ground — solicita ahora.",
+      lede: "Find your Common Ground — solicita ahora.",
       perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
       perks: {
-        access: "Acceso ilimitado a todos los eventos del mes, incluido en tu pase.",
+        access: "Acceso ilimitado a los eventos de Common Ground ese mes.",
         groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
         meetups: "Encuentros gratuitos durante todo el mes — playa, running club, coworking y más.",
         brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
@@ -543,12 +543,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mes",
-          sub: "Todos los eventos de este mes, además de nuestro grupo premium por invitación de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
+          sub: "Todos los eventos de este mes, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
         },
         founding: {
           label: "Miembro Fundador",
           unit: "pago único",
-          sub: "Pago único · acceso de por vida a todos los eventos, además de nuestro grupo premium por invitación de WhatsApp",
+          sub: "Pago único · acceso de por vida a todos los eventos, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp",
           badge: "{remaining} de {total} cupos restantes",
         },
       },
@@ -563,7 +563,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos a nuestro grupo premium por invitación, con eventos semanales y encuentros durante la semana.",
+      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al Inner Circle, nuestro grupo exclusivo por invitación, con eventos semanales y encuentros durante la semana.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
       referralBadge: "20% de descuento — referido/a por {name}",
@@ -717,6 +717,21 @@ function renderSelectEventScreen() {
       li.appendChild(tag);
     }
 
+    if (event.image) {
+      const img = document.createElement("img");
+      img.className = "event-card-img";
+      img.src = event.image;
+      img.alt = "";
+      li.appendChild(img);
+    }
+
+    if (event.title) {
+      const titleEl = document.createElement("p");
+      titleEl.className = "event-card-title";
+      titleEl.textContent = event.title;
+      li.appendChild(titleEl);
+    }
+
     const dateEl = document.createElement("p");
     dateEl.className = "event-card-date";
     const [y, m, d] = event.date.split("-").map(Number);
@@ -727,11 +742,6 @@ function renderSelectEventScreen() {
     taglineEl.className = "event-card-tagline";
     taglineEl.textContent = t("selectEvent.tagline");
     li.appendChild(taglineEl);
-
-    const locationEl = document.createElement("p");
-    locationEl.className = "event-card-location";
-    locationEl.textContent = `📍 ${event.location}`;
-    li.appendChild(locationEl);
 
     const select = () => {
       state.selectedEvents = [event.date];
