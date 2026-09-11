@@ -801,10 +801,20 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   justify-content: center;
 }
 
-.referral-heading {
+.referral-heading,
+.community-heading {
   font-size: clamp(16px, 4.2vw, 20px);
   color: var(--accent);
   margin: 0 0 8px;
+}
+
+.community-heading {
+  display: block;
+  text-decoration: none;
+}
+
+.community-heading:hover {
+  color: var(--accent-dim);
 }
 
 .referral-price-row {
