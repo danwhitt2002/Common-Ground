@@ -817,6 +817,16 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   color: var(--accent-dim);
 }
 
+/* Small friendly nudge closing out the community-chat card — the same
+   casual handwriting font as the perks-list bullets, to read as a
+   personal aside rather than more informational copy. */
+.community-intro {
+  margin: 8px 0 0;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 15px;
+  color: var(--accent);
+}
+
 .referral-price-row {
   display: flex;
   align-items: baseline;
