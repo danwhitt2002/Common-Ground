@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Common Ground — Apply for Your Grounds Pass</title>
-<meta name="description" content="Apply for your Grounds Pass — the ticket into Common Ground, a curated social club.">
+<title>Common Ground — Apply Now</title>
+<meta name="description" content="Apply to Common Ground — a curated social club in Rio de Janeiro.">
 
-<meta property="og:title" content="Common Ground — Apply for Your Grounds Pass">
+<meta property="og:title" content="Common Ground — Apply Now">
 <meta property="og:description" content="Applications are reviewed, not guaranteed. Apply in under a minute.">
 <meta property="og:type" content="website">
 
@@ -36,7 +36,7 @@
       </div>
       <div class="landing-hero">
         <p class="eyebrow" data-i18n="landing.eyebrow">Rio de Janeiro · Applications Open Now</p>
-        <h1 class="display">The Grounds&nbsp;Pass</h1>
+        <h1 class="display">Common&nbsp;Ground</h1>
         <p class="lede" data-i18n="landing.lede">Find your Common Ground — apply now.</p>
         <ul class="perks-list">
           <li data-i18n="landing.perks.events">Weekly events with an international crowd</li>
@@ -46,7 +46,7 @@
         </ul>
       </div>
       <div class="landing-cta">
-        <button class="btn-primary" id="start-btn" type="button" data-i18n="landing.apply">Apply for Your Grounds Pass</button>
+        <button class="btn-primary" id="start-btn" type="button" data-i18n="landing.apply">Apply Now</button>
         <p class="fine-print" id="landing-fine-print"></p>
         <a class="link-secondary" href="menu.html" data-menu-link data-i18n="landing.menuLink">See what's included — the drinks menu →</a>
         <a class="link-secondary" href="events.html" data-events-link data-i18n="landing.eventsLink">See upcoming event dates →</a>
@@ -118,9 +118,9 @@
     </section>
 
     <!-- SELECT EVENT — which single date they're actually paying for, before payment.
-         Monthly Membership/Founding skip this (see the two links below) since neither is
-         tied to a specific announced date — Monthly Membership covers every event during
-         the paid month, and Founding Member is a lifetime pass. -->
+         Grounds Pass (the monthly membership)/Founding skip this (see the two links below)
+         since neither is tied to a specific announced date — Grounds Pass covers every
+         event during the paid month, and Founding Member is a lifetime pass. -->
     <section class="screen" data-screen="select-event">
       <button class="back-link" id="select-event-back-btn" type="button" data-i18n="selectEvent.back">← Back</button>
       <p class="eyebrow" data-i18n="selectEvent.eyebrow">Almost There</p>
@@ -128,7 +128,7 @@
       <p class="lede" data-i18n="selectEvent.lede">Pick the date you're coming to.</p>
       <div id="select-event-list"></div>
       <button class="btn-primary" id="select-event-continue" type="button" disabled data-i18n="selectEvent.continueOne">Continue →</button>
-      <a class="link-secondary" href="#" id="select-event-monthly-link" data-i18n="selectEvent.monthlyLink">Or get Monthly Membership — premium access, no dates needed →</a>
+      <a class="link-secondary" href="#" id="select-event-monthly-link" data-i18n="selectEvent.monthlyLink">Or get a Grounds Pass — premium access, no dates needed →</a>
       <a class="link-secondary" href="#" id="select-event-founding-link" data-i18n="selectEvent.foundingLink">Or become a Founding Member — lifetime access, no dates needed →</a>
     </section>
 
@@ -140,13 +140,14 @@
       <p class="lede" data-i18n="approved.lede">You're in. Choose your plan below — coffee &amp; matcha‑based mocktails included every time.</p>
 
       <div class="plan-toggle" role="group" aria-label="Choose a plan">
-        <button type="button" class="plan-btn is-active" id="plan-btn-single" data-plan="single">
-          <span class="plan-btn-label" data-i18n="approved.plans.single.label">Single Pass</span>
-          <span class="plan-btn-price" id="plan-price-single"></span>
-        </button>
-        <button type="button" class="plan-btn" id="plan-btn-monthly" data-plan="monthly">
-          <span class="plan-btn-label" data-i18n="approved.plans.monthly.label">Monthly Membership</span>
+        <button type="button" class="plan-btn is-active" id="plan-btn-monthly" data-plan="monthly">
+          <span class="plan-btn-badge" data-i18n="approved.recommendedLabel">Recommended</span>
+          <span class="plan-btn-label" data-i18n="approved.plans.monthly.label">Grounds Pass</span>
           <span class="plan-btn-price" id="plan-price-monthly"></span>
+        </button>
+        <button type="button" class="plan-btn" id="plan-btn-single" data-plan="single">
+          <span class="plan-btn-label" data-i18n="approved.plans.single.label">Single Event Pass</span>
+          <span class="plan-btn-price" id="plan-price-single"></span>
         </button>
         <button type="button" class="plan-btn" id="plan-btn-founding" data-plan="founding">
           <span class="plan-btn-label" data-i18n="approved.plans.founding.label">Founding Member</span>
@@ -162,7 +163,7 @@
 
       <div class="price-card">
         <div class="price-card-row">
-          <span class="price-label" data-i18n="approved.priceLabel">Grounds Pass</span>
+          <span class="price-label" id="approved-price-label"></span>
           <span><span class="price-amount" id="approved-price"></span><span class="price-unit" id="approved-price-unit"></span></span>
         </div>
         <span class="price-sub" id="approved-price-sub"></span>
@@ -178,7 +179,7 @@
           </div>
         </div>
         <p class="pix-scan-hint" data-i18n="approved.pixScanHint">Or scan the QR code below</p>
-        <img class="pix-qr-img" id="pix-qr" src="assets/pix-qr.png" alt="Pix QR code to pay for your Grounds Pass">
+        <img class="pix-qr-img" id="pix-qr" src="assets/pix-qr.png" alt="Pix QR code to pay for your Common Ground pass">
       </div>
 
       <div class="pix-card" id="external-pay-card" hidden>
@@ -195,11 +196,11 @@
           </div>
         </div>
         <p class="pix-scan-hint" data-i18n="approved.wiseScanHint">Or scan the QR code below</p>
-        <img class="pix-qr-img" id="wise-qr" src="assets/wise-qr.png" alt="Wise QR code to pay for your Grounds Pass">
+        <img class="pix-qr-img" id="wise-qr" src="assets/wise-qr.png" alt="Wise QR code to pay for your Common Ground pass">
       </div>
 
       <a class="btn-primary" id="whatsapp-btn" href="#" target="_blank" rel="noopener" data-i18n="approved.whatsappBtn">Send Payment Proof on WhatsApp</a>
-      <p class="fine-print" id="group-note" data-i18n="approved.groupNote">Included with your Grounds Pass: access to the Common Ground WhatsApp community group chat. We'll add you in once you're a pass-holder.</p>
+      <p class="fine-print" id="group-note" data-i18n="approved.groupNote">We'll add you to the right WhatsApp group once you're a pass-holder.</p>
       <a class="link-secondary" href="menu.html" data-menu-link data-i18n="approved.menuLink">See the drinks menu →</a>
       <p class="fine-print" id="approved-fine-print"></p>
     </section>

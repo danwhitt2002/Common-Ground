@@ -7,21 +7,24 @@ const EVENTS_TRANSLATIONS = {
     back: "← Back",
     eyebrow: "Upcoming Events",
     lede: "Every Sunday · exact location shared with pass-holders in the WhatsApp group",
-    applyLink: "Ready to apply? Get your Grounds Pass →",
+    applyLink: "Ready to apply? Join Common Ground →",
+    tagline: "Carioca time, every time",
     locale: "en-GB",
   },
   pt: {
     back: "← Voltar",
     eyebrow: "Próximos Eventos",
     lede: "Todo domingo · o local exato é compartilhado com os pass-holders no grupo do WhatsApp",
-    applyLink: "Pronto(a) para se inscrever? Garanta seu Grounds Pass →",
+    applyLink: "Pronto(a) para se inscrever? Junte-se à Common Ground →",
+    tagline: "Hora carioca, sempre",
     locale: "pt-BR",
   },
   es: {
     back: "← Atrás",
     eyebrow: "Próximos Eventos",
     lede: "Cada domingo · la ubicación exacta se comparte con los pass-holders en el grupo de WhatsApp",
-    applyLink: "¿Listo/a para solicitar? Consigue tu Grounds Pass →",
+    applyLink: "¿Listo/a para solicitar? Únete a Common Ground →",
+    tagline: "Hora carioca, siempre",
     locale: "es-ES",
   },
 };
@@ -67,7 +70,7 @@ function renderEventsPage() {
     if (el) el.href = `index.html?lang=${lang}`;
   });
 
-  const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long" });
+  const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 
   eventsListEl.innerHTML = "";
   const list = document.createElement("ul");
@@ -99,6 +102,11 @@ function renderEventsPage() {
     const [y, m, d] = event.date.split("-").map(Number);
     dateEl.textContent = dateFormatter.format(new Date(Date.UTC(y, m - 1, d)));
     li.appendChild(dateEl);
+
+    const taglineEl = document.createElement("p");
+    taglineEl.className = "event-card-tagline";
+    taglineEl.textContent = t.tagline;
+    li.appendChild(taglineEl);
 
     const locationEl = document.createElement("p");
     locationEl.className = "event-card-location";

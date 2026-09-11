@@ -2,16 +2,21 @@
 // CONFIG — everything you need to customize lives here.
 // ---------------------------------------------------------------------------
 const CONFIG = {
-  // Single Event — one specific date, picked on the select-event screen.
+  // Single Event Pass — one specific date, picked on the select-event screen.
   price: "R$80",
 
-  // Monthly Membership — access to every event for a month, plus the
-  // premium WhatsApp group (day-to-day meetups: run club, beach days,
-  // co-working, etc. — see TRANSLATIONS.<lang>.approved.plans.monthly.sub).
-  // Not tied to a specific date, so it skips the select-event screen via
-  // its own link. There's no recurring billing here (no backend for
-  // that) — like Founding Member spots, renewals are tracked by hand:
-  // note when someone's month is up and follow up for the next payment.
+  // Grounds Pass — the monthly membership. Access to every event for a
+  // month, plus the premium WhatsApp group (day-to-day meetups: run club,
+  // beach days, co-working, etc. — see
+  // TRANSLATIONS.<lang>.approved.plans.monthly.sub). Called "monthly"
+  // internally throughout the code (state.plan, element ids, CONFIG field
+  // names) since that's what it technically is, but every user-facing
+  // string calls it "Grounds Pass" — the flagship, branded tier, distinct
+  // from the plain one-off Single Event Pass. Not tied to a specific date,
+  // so it skips the select-event screen via its own link. There's no
+  // recurring billing here (no backend for that) — like Founding Member
+  // spots, renewals are tracked by hand: note when someone's month is up
+  // and follow up for the next payment.
   monthlyMembershipPrice: "R$180",
 
   // Founding Member — a one-time, lifetime pass. Deliberately limited
@@ -222,7 +227,7 @@ const TRANSLATIONS = {
         founding: "Founding Member passes remaining",
         price: "Price per event",
       },
-      apply: "Apply for Your Grounds Pass",
+      apply: "Apply Now",
       finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
       eventsLink: "See upcoming event dates →",
@@ -250,7 +255,7 @@ const TRANSLATIONS = {
     reviewing: {
       messages: [
         "Saving your answers…",
-        "Setting up your Grounds Pass…",
+        "Setting up your application…",
         "Almost there…",
       ],
     },
@@ -260,10 +265,11 @@ const TRANSLATIONS = {
       heading: "Select Your Event",
       lede: "Pick the date you're coming to.",
       continueOne: "Continue →",
-      monthlyLink: "Or get Monthly Membership — premium access, no dates needed →",
+      monthlyLink: "Or get a Grounds Pass — premium access, no dates needed →",
       foundingLink: "Or become a Founding Member — lifetime access, no dates needed →",
       selectedDatesLabel: "Your date: {dates}",
       whatsappDatesSuffix: "Date: {dates}.",
+      tagline: "Carioca time, every time",
       locale: "en-GB",
     },
     approved: {
@@ -271,17 +277,17 @@ const TRANSLATIONS = {
       eyebrow: "You're In!",
       heading: "Welcome to the Common Ground Social Club.",
       lede: "You're in. Choose your plan below — coffee & matcha‑based mocktails included every time.",
-      priceLabel: "Grounds Pass",
+      recommendedLabel: "Recommended",
       plans: {
         single: {
-          label: "Single Event",
+          label: "Single Event Pass",
           unit: "/event",
-          sub: "This event only, plus the general WhatsApp group chat",
+          sub: "Try us out — this event only, plus the general WhatsApp group chat",
         },
         monthly: {
-          label: "Monthly Membership",
+          label: "Grounds Pass",
           unit: "/month",
-          sub: "Every event this month, plus the premium WhatsApp group — weekly events, run club, beach days, co-working & more",
+          sub: "Every event this month, plus the premium WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
         },
         founding: {
           label: "Founding Member",
@@ -301,13 +307,13 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "We'll add you to the right WhatsApp group once you're a pass-holder — the premium group (weekly events + day-to-day meetups) for Monthly and Founding Members, the general group for Single Event passes.",
+      groupNote: "We'll add you to the right WhatsApp group once you're a pass-holder — the premium group (weekly events + day-to-day meetups) for Grounds Pass and Founding Members, the general group for Single Event Pass holders.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "Hi! Here's my payment proof for my Common Ground Single Event pass:",
-      monthly: "Hi! Here's my payment proof for my Common Ground Monthly Membership:",
+      single: "Hi! Here's my payment proof for my Common Ground Single Event Pass:",
+      monthly: "Hi! Here's my payment proof for my Common Ground Grounds Pass:",
       founding: "Hi! Here's my payment proof for my Common Ground Founding Member Pass (lifetime):",
     },
   },
@@ -326,7 +332,7 @@ const TRANSLATIONS = {
         founding: "Passes de Membro Fundador restantes",
         price: "Preço por evento",
       },
-      apply: "Inscreva-se para o seu Grounds Pass",
+      apply: "Inscreva-se Agora",
       finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
       eventsLink: "Veja as próximas datas de eventos →",
@@ -354,7 +360,7 @@ const TRANSLATIONS = {
     reviewing: {
       messages: [
         "Salvando suas respostas…",
-        "Preparando seu Grounds Pass…",
+        "Preparando sua inscrição…",
         "Quase lá…",
       ],
     },
@@ -364,10 +370,11 @@ const TRANSLATIONS = {
       heading: "Escolha Seu Evento",
       lede: "Escolha a data em que você vai participar.",
       continueOne: "Continuar →",
-      monthlyLink: "Ou garanta a Membresia Mensal — acesso premium, sem datas necessárias →",
+      monthlyLink: "Ou garanta um Grounds Pass — acesso premium, sem datas necessárias →",
       foundingLink: "Ou torne-se Membro Fundador — acesso vitalício, sem datas necessárias →",
       selectedDatesLabel: "Sua data: {dates}",
       whatsappDatesSuffix: "Data: {dates}.",
+      tagline: "Hora carioca, sempre",
       locale: "pt-BR",
     },
     approved: {
@@ -375,17 +382,17 @@ const TRANSLATIONS = {
       eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) ao Common Ground Social Club.",
       lede: "Você entrou. Escolha seu plano abaixo — mocktails de café e matchá incluídos sempre.",
-      priceLabel: "Grounds Pass",
+      recommendedLabel: "Recomendado",
       plans: {
         single: {
-          label: "Evento Único",
+          label: "Passe de Evento Único",
           unit: "/evento",
-          sub: "Somente este evento, além do grupo geral no WhatsApp",
+          sub: "Experimente — somente este evento, além do grupo geral no WhatsApp",
         },
         monthly: {
-          label: "Membro Mensal",
+          label: "Grounds Pass",
           unit: "/mês",
-          sub: "Todos os eventos do mês, além do grupo premium no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e mais",
+          sub: "Todos os eventos do mês, além do grupo premium no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
         },
         founding: {
           label: "Membro Fundador",
@@ -405,13 +412,13 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Vamos te adicionar no grupo certo do WhatsApp assim que você for pass-holder — o grupo premium (encontros semanais + encontros durante a semana) para Membros Mensais e Fundadores, o grupo geral para passes de Evento Único.",
+      groupNote: "Vamos te adicionar no grupo certo do WhatsApp assim que você for pass-holder — o grupo premium (encontros semanais + encontros durante a semana) para quem tem Grounds Pass ou é Membro Fundador, o grupo geral para quem tem Passe de Evento Único.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "Oi! Aqui está o comprovante de pagamento do meu passe de Evento Único da Common Ground:",
-      monthly: "Oi! Aqui está o comprovante de pagamento da minha Membresia Mensal da Common Ground:",
+      single: "Oi! Aqui está o comprovante de pagamento do meu Passe de Evento Único da Common Ground:",
+      monthly: "Oi! Aqui está o comprovante de pagamento do meu Grounds Pass da Common Ground:",
       founding: "Oi! Aqui está o comprovante de pagamento do meu Passe de Membro Fundador da Common Ground (vitalício):",
     },
   },
@@ -430,7 +437,7 @@ const TRANSLATIONS = {
         founding: "Pases de Miembro Fundador restantes",
         price: "Precio por evento",
       },
-      apply: "Solicita tu Grounds Pass",
+      apply: "Solicita Ahora",
       finePrint: "Toma cerca de un minuto. {price}/evento.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
       eventsLink: "Mira las próximas fechas de eventos →",
@@ -458,7 +465,7 @@ const TRANSLATIONS = {
     reviewing: {
       messages: [
         "Guardando tus respuestas…",
-        "Preparando tu Grounds Pass…",
+        "Preparando tu solicitud…",
         "Casi listo…",
       ],
     },
@@ -468,10 +475,11 @@ const TRANSLATIONS = {
       heading: "Elige Tu Evento",
       lede: "Elige la fecha a la que vas a asistir.",
       continueOne: "Continuar →",
-      monthlyLink: "O consigue la Membresía Mensual — acceso premium, sin fechas necesarias →",
+      monthlyLink: "O consigue un Grounds Pass — acceso premium, sin fechas necesarias →",
       foundingLink: "O conviértete en Miembro Fundador — acceso de por vida, sin fechas necesarias →",
       selectedDatesLabel: "Tu fecha: {dates}",
       whatsappDatesSuffix: "Fecha: {dates}.",
+      tagline: "Hora carioca, siempre",
       locale: "es-ES",
     },
     approved: {
@@ -479,17 +487,17 @@ const TRANSLATIONS = {
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a al Common Ground Social Club.",
       lede: "Ya estás dentro. Elige tu plan abajo — mocktails de café y matcha incluidos siempre.",
-      priceLabel: "Grounds Pass",
+      recommendedLabel: "Recomendado",
       plans: {
         single: {
-          label: "Evento Único",
+          label: "Pase de Evento Único",
           unit: "/evento",
-          sub: "Solo este evento, además del grupo general de WhatsApp",
+          sub: "Pruébanos — solo este evento, además del grupo general de WhatsApp",
         },
         monthly: {
-          label: "Membresía Mensual",
+          label: "Grounds Pass",
           unit: "/mes",
-          sub: "Todos los eventos de este mes, además del grupo premium de WhatsApp — eventos semanales, running club, playa, coworking y más",
+          sub: "Todos los eventos de este mes, además del grupo premium de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
         },
         founding: {
           label: "Miembro Fundador",
@@ -509,13 +517,13 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Te añadiremos al grupo de WhatsApp correcto en cuanto seas pass-holder — el grupo premium (eventos semanales + encuentros durante la semana) para Miembros Mensuales y Fundadores, el grupo general para pases de Evento Único.",
+      groupNote: "Te añadiremos al grupo de WhatsApp correcto en cuanto seas pass-holder — el grupo premium (eventos semanales + encuentros durante la semana) para quienes tienen un Grounds Pass o son Miembro Fundador, el grupo general para quienes tienen un Pase de Evento Único.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
     whatsappMessage: {
-      single: "¡Hola! Aquí está mi comprobante de pago de mi pase de Evento Único de Common Ground:",
-      monthly: "¡Hola! Aquí está mi comprobante de pago de mi Membresía Mensual de Common Ground:",
+      single: "¡Hola! Aquí está mi comprobante de pago de mi Pase de Evento Único de Common Ground:",
+      monthly: "¡Hola! Aquí está mi comprobante de pago de mi Grounds Pass de Common Ground:",
       founding: "¡Hola! Aquí está mi comprobante de pago de mi Pase de Miembro Fundador de Common Ground (de por vida):",
     },
   },
@@ -532,7 +540,7 @@ function t(key) {
 const state = {
   screen: "landing", // landing | question | contact | reviewing | select-event | approved
   lang: "en", // "en" | "pt" | "es" — switched via the flag buttons on landing
-  plan: "single", // "single" | "monthly" | "founding" — set by the select-event step (or chosen directly on the payment screen via the #approved shortcut link)
+  plan: "monthly", // "single" | "monthly" | "founding" — defaults to Grounds Pass ("monthly"), the main product, for anyone landing straight on the payment screen via the #approved shortcut; overridden to "single" the moment someone actually picks a date on the select-event step
   paymentMethod: "pix", // "pix" | "paypal" | "wise" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
@@ -587,7 +595,7 @@ function renderApprovedFinePrint() {
 // #approved direct-link shortcut skips that screen entirely).
 function formatSelectedDatesForSub() {
   if (state.selectedEvents.length === 0) return null;
-  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { day: "numeric", month: "short" });
+  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { day: "numeric", month: "short", timeZone: "UTC" });
   return state.selectedEvents
     .map((dateStr) => {
       const [y, m, d] = dateStr.split("-").map(Number);
@@ -610,15 +618,16 @@ function renderWhatsappBtn() {
 // ---------------------------------------------------------------------------
 // Select-event — the step between "reviewing" and payment. Applicants pick
 // the one real date they're paying for (from EVENTS_CONFIG, shared with
-// events.html via events-data.js) instead of buying a Grounds Pass blind,
-// always mapping to the Single Event plan. Monthly Membership and Founding
-// Member both skip this screen via their own links instead — neither is
-// tied to a specific date: Monthly Membership covers every event announced
-// during the paid month, tracked manually like Founding Member spots;
-// Founding Member is a lifetime pass with no dates at all.
+// events.html via events-data.js) instead of buying a pass blind, always
+// mapping to the Single Event Pass. Grounds Pass (the monthly membership,
+// "monthly" internally) and Founding Member both skip this screen via
+// their own links instead — neither is tied to a specific date: Grounds
+// Pass covers every event announced during the paid month, tracked
+// manually like Founding Member spots; Founding Member is a lifetime pass
+// with no dates at all.
 // ---------------------------------------------------------------------------
 function renderSelectEventScreen() {
-  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { weekday: "long", day: "numeric", month: "long" });
+  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
   const listEl = document.getElementById("select-event-list");
   listEl.innerHTML = "";
 
@@ -652,6 +661,11 @@ function renderSelectEventScreen() {
     const [y, m, d] = event.date.split("-").map(Number);
     dateEl.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
     li.appendChild(dateEl);
+
+    const taglineEl = document.createElement("p");
+    taglineEl.className = "event-card-tagline";
+    taglineEl.textContent = t("selectEvent.tagline");
+    li.appendChild(taglineEl);
 
     const locationEl = document.createElement("p");
     locationEl.className = "event-card-location";
@@ -715,13 +729,13 @@ document.getElementById("approved-back-btn").addEventListener("click", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Plan toggle — Single Event (one date, picked on the select-event screen),
-// Monthly Membership (a manually-tracked month of access, no recurring
-// billing), or a Founding Member lifetime pass (limited to
-// CONFIG.foundingMemberSpotsTotal — see that comment for how spots are
-// tracked), on the approved/payment screen. Swaps the displayed price, its
-// QR code (each amount needs its own Pix QR), and the WhatsApp payment-proof
-// message so it's clear which plan was paid for.
+// Plan toggle — Single Event Pass (one date, picked on the select-event
+// screen), Grounds Pass (the monthly membership — a manually-tracked month
+// of access, no recurring billing), or a Founding Member lifetime pass
+// (limited to CONFIG.foundingMemberSpotsTotal — see that comment for how
+// spots are tracked), on the approved/payment screen. Swaps the displayed
+// price, its QR code (each amount needs its own Pix QR), and the WhatsApp
+// payment-proof message so it's clear which plan was paid for.
 //
 // Payment-method toggle — Pix, PayPal, or Wise, alongside the plan toggle.
 // Pix and Wise each show a QR (scan to pay, exact amount baked in) plus a
@@ -762,13 +776,14 @@ function renderPlanCard() {
   document.getElementById("payment-btn-wise").classList.toggle("is-active", state.paymentMethod === "wise");
 
   const isPix = state.paymentMethod === "pix";
+  document.getElementById("approved-price-label").textContent = t(`approved.plans.${state.plan}.label`);
   document.getElementById("approved-price").textContent = isPix ? planPrices[state.plan] : planPricesGBP[state.plan];
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
 
   // Show the actual date picked on the select-event screen in place of the
-  // generic plan description, for Single Event only — the Monthly
-  // Membership and Founding Member links both skip that screen, so they
-  // never carry a date, and switching plan tabs manually after picking one
+  // generic plan description, for Single Event Pass only — the Grounds
+  // Pass and Founding Member links both skip that screen, so they never
+  // carry a date, and switching plan tabs manually after picking one
   // (e.g. to Founding Member) correctly falls back to the generic copy.
   const datesLabel = state.plan === "single" ? formatSelectedDatesForSub() : null;
   document.getElementById("approved-price-sub").textContent = datesLabel

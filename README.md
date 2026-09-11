@@ -1,9 +1,9 @@
 # Common-Ground
 Find your common ground. A social club.
 
-## Grounds Pass application page
+## Common Ground application page
 
-A social club in Rio de Janeiro. The Grounds Pass (R$80 per event) gets members into that week's event, with coffee-based and matcha-based mocktails included.
+A social club in Rio de Janeiro. Applicants choose between a **Single Event Pass** (R$80 — a one-off, "try us out" ticket into a single event) and a **Grounds Pass** (R$180/month — the main product: every event that month, plus the premium WhatsApp group's day-to-day meetups and curated brand discounts). Coffee-based and matcha-based mocktails are included on every plan, every time.
 
 Three static pages, no build step, no backend required:
 
@@ -14,9 +14,9 @@ Three static pages, no build step, no backend required:
 
 ### Selecting which event you're paying for
 
-Applicants used to buy a Grounds Pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking a date always maps to the **Single Event** plan; the picked date then shows on the payment screen in place of the generic plan description, and gets included in the pre-filled WhatsApp payment-proof message, so you can see exactly which date someone paid for when they message you.
+Applicants used to buy a pass without knowing which date they'd actually get — the reviewing screen now leads to a **`data-screen="select-event"`** step first, showing the same upcoming dates as `events.html` (from the shared `EVENTS_CONFIG` in `events-data.js`) as tappable cards. Picking a date always maps to the **Single Event Pass**; the picked date then shows on the payment screen in place of the generic plan description, and gets included in the pre-filled WhatsApp payment-proof message, so you can see exactly which date someone paid for when they message you.
 
-**Monthly Membership** and **Founding Member** both skip this screen instead, via their own links below the date cards — neither is tied to a specific announced date up front: Monthly Membership is bought now and covers every event announced during that paid month (see "Three plans" below for how it's tracked), and Founding Member is a lifetime pass with no dates at all.
+**Grounds Pass** and **Founding Member** both skip this screen instead, via their own links below the date cards — neither is tied to a specific announced date up front: a Grounds Pass is bought now and covers every event announced during that paid month (see "Three plans" below for how it's tracked), and Founding Member is a lifetime pass with no dates at all.
 
 The direct payment-screen shortcut (`yoursite.com/#approved`, see below) still works exactly as before and skips this step too — it falls back to the generic plan copy since no date was picked.
 
@@ -33,7 +33,7 @@ That payment screen shows a **Pix QR code + copyable Pix key** to pay directly i
 - **Pix key**: `04409638777` (CPF) (`script.js` → `CONFIG.pixKey`, and baked into `assets/pix-qr.png`)
 - **WhatsApp**: `+44 7830 067043` (`script.js` → `CONFIG.whatsappNumber`) — tapping the button opens a chat pre-filled with a message so they just attach their payment screenshot.
 
-If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (single), `assets/pix-qr-monthly.png` (monthly membership), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
+If you ever change the Pix key or any price, you'll need new QRs — regenerate `assets/pix-qr.png` (Single Event Pass), `assets/pix-qr-monthly.png` (Grounds Pass), and `assets/pix-qr-founding.png` (Founding Member) (any Pix "BR Code" / EMV QR generator works, or ask me and I'll rebuild them) so they stay in sync with `CONFIG.pixKey`.
 
 ### A second and third way to pay: PayPal and Wise
 
@@ -55,8 +55,8 @@ The pre-filled WhatsApp message also names which method was used ("paid via PayP
 
 There are two separate Common Ground WhatsApp groups, not one — which group someone gets added to depends on which plan they paid for:
 
-- **Standard group** — general community chat. **Single Event** buyers get this one; it's not tied to any specific event, just the general community.
-- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Monthly Membership** and **Founding Member** both get this one.
+- **Standard group** — general community chat. **Single Event Pass** holders get this one; it's not tied to any specific event, just the general community.
+- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Grounds Pass** and **Founding Member** both get this one.
 
 The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote`, but — same as before — it doesn't hand out either invite link itself, since there's no backend here to confirm payment actually happened. So it's on you: once you get their payment proof on WhatsApp, reply with the correct group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link) based on which plan they paid for.
 
@@ -68,13 +68,17 @@ Current partner deals (not stored anywhere else — keep this list updated as yo
 
 - **NAVEIA** (oat milk, Rio de Janeiro) — 20% off at checkout on their site with code `COMMONGROUND20`.
 
-Since there's no backend, there's no way to gate this automatically — post the code(s) in the premium WhatsApp group description or pinned message so Monthly Membership and Founding Member holders can find it themselves, rather than sending it out one-by-one.
+Since there's no backend, there's no way to gate this automatically — post the code(s) in the premium WhatsApp group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
 
-### Three plans: Single Event, Monthly Membership, or Founding Member
+### Three plans: Grounds Pass, Single Event Pass, or Founding Member
 
-The payment screen lets someone pay for a **Single Event** (`CONFIG.price`, R$80 — this event only, plus the standard WhatsApp group), a **Monthly Membership** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus the premium WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus the premium WhatsApp group) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event comes from picking a date on the select-event step above; Monthly Membership and Founding Member both come from their own skip links there instead. The plan toggle only needs manual clicking when someone lands on the payment screen directly via the `#approved` shortcut below.
+**Grounds Pass is the main product** — the payment screen leads with it: it's first in the plan toggle, carries a "Recommended" badge (`approved.recommendedLabel`, a small pill on the plan button — see `.plan-btn-badge` in `styles.css`), and is what's pre-selected by default (`state.plan` defaults to `"monthly"` in `script.js`) for anyone landing directly on the payment screen via the `#approved` shortcut. **Single Event Pass is framed as the trial option** — its own sub-copy says "Try us out" (`approved.plans.single.sub`) — for people who want to test the club before committing to a month.
 
-There's no backend or accounts here, so **Monthly Membership renewal, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp groups), since the site itself has no way to know when someone's paid month is up, or to hand out live-assigned Founding Member numbers. There's no recurring billing here either — a Monthly Membership is a one-off Pix/PayPal/Wise payment for one month's access, same as Founding Member is a one-off payment for lifetime access; you note when someone's month is up and follow up for the next payment when it comes due.
+The payment screen lets someone pay for a **Grounds Pass** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus the premium WhatsApp group), a **Single Event Pass** (`CONFIG.price`, R$80 — this event only, plus the standard WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus the premium WhatsApp group) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event Pass comes from picking a date on the select-event step above; Grounds Pass and Founding Member both come from their own skip links there instead — picking a date always overrides the default back to Single Event Pass, since that's an explicit, deliberate choice.
+
+There's no backend or accounts here, so **Grounds Pass renewal, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp groups), since the site itself has no way to know when someone's paid month is up, or to hand out live-assigned Founding Member numbers. There's no recurring billing here either — a Grounds Pass is a one-off Pix/PayPal/Wise payment for one month's access, same as Founding Member is a one-off payment for lifetime access; you note when someone's month is up and follow up for the next payment when it comes due.
+
+Internally, the code still calls this tier `"monthly"` throughout (`state.plan`, `CONFIG.monthlyMembershipPrice`, element ids like `plan-btn-monthly`) — that's just the technical/implementation name for "the monthly membership tier." Every user-facing string calls it "Grounds Pass."
 
 #### Founding Member — a deliberately limited lifetime pass
 
@@ -83,7 +87,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$80` per event, `R$180` for Monthly Membership, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$80` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
