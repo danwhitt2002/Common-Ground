@@ -247,6 +247,7 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Max people per event",
+        nextEvent: "Next Event",
         founding: "Founding Member passes remaining",
         price: "Price per event",
       },
@@ -362,6 +363,7 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
+        nextEvent: "Próximo Evento",
         founding: "Passes de Membro Fundador restantes",
         price: "Preço por evento",
       },
@@ -477,6 +479,7 @@ const TRANSLATIONS = {
       },
       stats: {
         capacity: "Máximo de personas por evento",
+        nextEvent: "Próximo Evento",
         founding: "Pases de Miembro Fundador restantes",
         price: "Precio por evento",
       },
@@ -639,6 +642,18 @@ function renderLandingFinePrint() {
 
 function renderLandingPerksHeading() {
   document.getElementById("landing-perks-heading").textContent = t("landing.perksHeading").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
+}
+
+// Landing page's stat row shows the next upcoming event's date (day + short
+// month, e.g. "27 Sep") next to the capacity stat — reuses the same locale
+// key as the select-event screen's date formatting for consistency.
+function renderNextEventStat() {
+  const el = document.getElementById("next-event-date");
+  const nextEvent = EVENTS_CONFIG.events[0];
+  if (!el || !nextEvent) return;
+  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { day: "numeric", month: "short", timeZone: "UTC" });
+  const [y, m, d] = nextEvent.date.split("-").map(Number);
+  el.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
 }
 
 function renderReferralSection() {
@@ -1001,6 +1016,7 @@ function applyLang(lang) {
 
   renderLandingFinePrint();
   renderLandingPerksHeading();
+  renderNextEventStat();
   renderReferralSection();
   renderApprovedFinePrint();
   renderPlanCard();

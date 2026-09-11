@@ -272,7 +272,7 @@ main {
 .stats-row {
   display: flex;
   width: 100%;
-  max-width: 340px;
+  max-width: 400px;
   margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid var(--line);
@@ -284,6 +284,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  min-width: 0;
 }
 
 .stat-number {
@@ -294,14 +295,25 @@ main {
   color: var(--accent);
 }
 
+/* Next-event date sits alongside the count-up .stat-number figures but
+   isn't itself a counted number — a smaller size fits "27 Sep" in the
+   same column width as a two-digit count-up. */
+.stat-date {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: var(--accent);
+}
+
 .stat-label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--ink-dim);
   text-align: center;
-  max-width: 90px;
+  max-width: 80px;
   line-height: 1.3;
 }
 
