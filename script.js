@@ -237,12 +237,12 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — apply now.",
-      perksHeading: "Grounds Pass Perks — {monthlyPrice}/month",
+      perksHeading: "The Grounds Pass — {monthlyPrice}/month",
       perks: {
-        events: "Weekly events, announced through WhatsApp",
-        mocktails: "Coffee and matcha-based mocktails included every time",
-        groupchat: "Community WhatsApp access, plus complimentary meetups for members — your weekly ritual",
-        brands: "Discounts with a curated lineup of brands, hand-picked to match our aesthetic",
+        access: "Unlimited access to every event hosted that month, included in the pass.",
+        groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
+        meetups: "Free meetups throughout the month — beach days, run clubs, coworking, and more.",
+        brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
       },
       stats: {
         capacity: "Max people per event",
@@ -351,12 +351,12 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — inscreva-se agora.",
-      perksHeading: "Vantagens do Grounds Pass — {monthlyPrice}/mês",
+      perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
       perks: {
-        events: "Encontros semanais, anunciados no WhatsApp",
-        mocktails: "Mocktails de café e matchá incluídos sempre",
-        groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia para membros — seu ritual semanal",
-        brands: "Descontos com marcas cuidadosamente escolhidas para combinar com a nossa estética",
+        access: "Acesso ilimitado a todos os eventos do mês, incluído no seu passe.",
+        groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
+        meetups: "Encontros gratuitos ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
+        brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -465,12 +465,12 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — solicita ahora.",
-      perksHeading: "Ventajas del Grounds Pass — {monthlyPrice}/mes",
+      perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
       perks: {
-        events: "Encuentros semanales, anunciados por WhatsApp",
-        mocktails: "Mocktails de café y matcha incluidos siempre",
-        groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía para miembros — tu ritual semanal",
-        brands: "Descuentos con marcas cuidadosamente elegidas para combinar con nuestra estética",
+        access: "Acceso ilimitado a todos los eventos del mes, incluido en tu pase.",
+        groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
+        meetups: "Encuentros gratuitos durante todo el mes — playa, running club, coworking y más.",
+        brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
