@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 const CONFIG = {
   // Single Event Pass — one specific date, picked on the select-event screen.
-  price: "R$80",
+  price: "R$100",
 
   // Grounds Pass — the monthly membership. Access to every event for a
   // month, plus the invite-only premium WhatsApp group (day-to-day
@@ -61,7 +61,7 @@ const CONFIG = {
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
-  gbpAmount: { single: 12, monthly: 26, founding: 100 },
+  gbpAmount: { single: 15, monthly: 26, founding: 100 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -224,8 +224,9 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       lede: "Find your Common Ground — apply now.",
+      perksHeading: "Grounds Pass Perks — {monthlyPrice}/month",
       perks: {
-        events: "Weekly events for Grounds Pass holders, announced through WhatsApp",
+        events: "Weekly events, announced through WhatsApp",
         mocktails: "Coffee and matcha-based mocktails included every time",
         groupchat: "Community WhatsApp access, plus complimentary meetups for members — your weekly ritual",
         brands: "Discounts with a curated lineup of brands, hand-picked to match our aesthetic",
@@ -331,8 +332,9 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       lede: "Encontre seu Common Ground — inscreva-se agora.",
+      perksHeading: "Vantagens do Grounds Pass — {monthlyPrice}/mês",
       perks: {
-        events: "Encontros semanais para pass-holders, anunciados no WhatsApp",
+        events: "Encontros semanais, anunciados no WhatsApp",
         mocktails: "Mocktails de café e matchá incluídos sempre",
         groupchat: "Acesso à comunidade no WhatsApp, além de encontros de cortesia para membros — seu ritual semanal",
         brands: "Descontos com marcas cuidadosamente escolhidas para combinar com a nossa estética",
@@ -438,8 +440,9 @@ const TRANSLATIONS = {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       lede: "Encuentra tu Common Ground — solicita ahora.",
+      perksHeading: "Ventajas del Grounds Pass — {monthlyPrice}/mes",
       perks: {
-        events: "Encuentros semanales para pass-holders, anunciados por WhatsApp",
+        events: "Encuentros semanales, anunciados por WhatsApp",
         mocktails: "Mocktails de café y matcha incluidos siempre",
         groupchat: "Acceso a la comunidad de WhatsApp, además de encuentros de cortesía para miembros — tu ritual semanal",
         brands: "Descuentos con marcas cuidadosamente elegidas para combinar con nuestra estética",
@@ -598,6 +601,10 @@ const whatsappBtn = document.getElementById("whatsapp-btn");
 // ---------------------------------------------------------------------------
 function renderLandingFinePrint() {
   document.getElementById("landing-fine-print").textContent = t("landing.finePrint").replace("{price}", CONFIG.price);
+}
+
+function renderLandingPerksHeading() {
+  document.getElementById("landing-perks-heading").textContent = t("landing.perksHeading").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
 }
 
 function renderApprovedFinePrint() {
@@ -931,6 +938,7 @@ function applyLang(lang) {
   });
 
   renderLandingFinePrint();
+  renderLandingPerksHeading();
   renderApprovedFinePrint();
   renderPlanCard();
   renderMenuLinks();

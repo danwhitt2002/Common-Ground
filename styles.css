@@ -225,6 +225,18 @@ main {
   max-width: 38ch;
 }
 
+/* Introduces the Grounds-Pass-specific perks list below it — the mocktails
+   perk above it is universal (every plan), so it sits outside/before this
+   heading rather than under it. */
+.perks-heading {
+  margin: 20px 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  max-width: 38ch;
+}
+
 .perks-list li {
   display: flex;
   align-items: baseline;
