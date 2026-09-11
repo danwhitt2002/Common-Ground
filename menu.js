@@ -98,7 +98,7 @@ const MENU_TRANSLATIONS = {
   en: {
     back: "← Back",
     eyebrow: "Functional Mocktails",
-    lede: "Included with every Common Ground pass",
+    lede: "A full menu of coffee and matcha-based functional mocktails included at every event",
     applyLink: "Ready to apply? Join Common Ground →",
     playlistNote: "🎵 Each mocktail comes with a corresponding, curated playlist to help you get in the mood before each event",
     playlistLink: "🎵 Listen on Spotify →",
@@ -106,7 +106,7 @@ const MENU_TRANSLATIONS = {
   pt: {
     back: "← Voltar",
     eyebrow: "Mocktails Funcionais",
-    lede: "Incluído em todo passe da Common Ground",
+    lede: "Um cardápio completo de mocktails funcionais à base de café e matchá, incluído em todo evento",
     applyLink: "Pronto(a) para se inscrever? Junte-se à Common Ground →",
     playlistNote: "🎵 Cada mocktail vem com uma playlist correspondente, com curadoria, para te colocar no clima antes de cada evento",
     playlistLink: "🎵 Ouça no Spotify →",
@@ -114,7 +114,7 @@ const MENU_TRANSLATIONS = {
   es: {
     back: "← Atrás",
     eyebrow: "Mocktails Funcionales",
-    lede: "Incluido en cada pase de Common Ground",
+    lede: "Un menú completo de mocktails funcionales a base de café y matcha, incluido en cada evento",
     applyLink: "¿Listo/a para solicitar? Únete a Common Ground →",
     playlistNote: "🎵 Cada mocktail viene con una playlist correspondiente, con curaduría, para ponerte en el ambiente antes de cada evento",
     playlistLink: "🎵 Escucha en Spotify →",
