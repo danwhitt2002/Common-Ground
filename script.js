@@ -67,6 +67,17 @@ const CONFIG = {
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
   whatsappNumber: "447830067043",
 
+  // The STANDARD/general WhatsApp community group's invite link — this one
+  // is public, shown directly on the landing page (QR + tappable link,
+  // assets/whatsapp-community-qr.png), open to anyone, no payment needed.
+  // Distinct from the PREMIUM group (weekly events + day-to-day meetups),
+  // which stays payment-gated — you still hand that invite out manually to
+  // Grounds Pass/Founding Member holders after confirming payment, same as
+  // before. If you ever change/regenerate this group, update the link here
+  // and regenerate assets/whatsapp-community-qr.png to match (any QR
+  // generator works, or ask me).
+  standardGroupLink: "https://chat.whatsapp.com/F0Cfm69AAL6JVQpoud0Ok0?s=cl&p=i&mlu=4&ilr=4",
+
   // Shown at the bottom of the "approved" screen. Update to your real handle.
   instagramHandle: "@dansdigitaldiaries",
 
@@ -231,6 +242,8 @@ const TRANSLATIONS = {
       finePrint: "Takes about a minute. {price}/event.",
       menuLink: "See what's included — the drinks menu →",
       eventsLink: "See upcoming event dates →",
+      communityLede: "Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.",
+      communityLink: "Join on WhatsApp →",
     },
     question: {
       back: "← Back",
@@ -307,7 +320,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "We'll add you to the right WhatsApp group once you're a pass-holder — the premium group (weekly events + day-to-day meetups) for Grounds Pass and Founding Members, the general group for Single Event Pass holders.",
+      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to the premium group, for weekly events and day-to-day meetups.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
@@ -336,6 +349,8 @@ const TRANSLATIONS = {
       finePrint: "Leva cerca de um minuto. {price}/evento.",
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
       eventsLink: "Veja as próximas datas de eventos →",
+      communityLede: "Ainda não está pronto(a) para se inscrever? Entre no nosso grupo geral do WhatsApp — aberto a todos, com novidades e avisos de eventos.",
+      communityLink: "Entrar no WhatsApp →",
     },
     question: {
       back: "← Voltar",
@@ -412,7 +427,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Vamos te adicionar no grupo certo do WhatsApp assim que você for pass-holder — o grupo premium (encontros semanais + encontros durante a semana) para quem tem Grounds Pass ou é Membro Fundador, o grupo geral para quem tem Passe de Evento Único.",
+      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no grupo premium, com encontros semanais e durante a semana.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
@@ -441,6 +456,8 @@ const TRANSLATIONS = {
       finePrint: "Toma cerca de un minuto. {price}/evento.",
       menuLink: "Mira qué está incluido — el menú de bebidas →",
       eventsLink: "Mira las próximas fechas de eventos →",
+      communityLede: "¿Aún no estás listo/a para solicitar? Únete a nuestra comunidad general de WhatsApp — abierta a todos, con novedades y anuncios de eventos.",
+      communityLink: "Unirme por WhatsApp →",
     },
     question: {
       back: "← Atrás",
@@ -517,7 +534,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Te añadiremos al grupo de WhatsApp correcto en cuanto seas pass-holder — el grupo premium (eventos semanales + encuentros durante la semana) para quienes tienen un Grounds Pass o son Miembro Fundador, el grupo general para quienes tienen un Pase de Evento Único.",
+      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al grupo premium, con eventos semanales y encuentros durante la semana.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },
@@ -939,6 +956,7 @@ document.getElementById("wise-tag-value").textContent = CONFIG.wiseTag;
 document.getElementById("plan-price-single").textContent = CONFIG.price;
 document.getElementById("plan-price-monthly").textContent = CONFIG.monthlyMembershipPrice;
 document.getElementById("plan-price-founding").textContent = CONFIG.foundingMemberPrice;
+document.getElementById("community-link").href = CONFIG.standardGroupLink;
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;

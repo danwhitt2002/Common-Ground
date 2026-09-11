@@ -746,6 +746,12 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   align-items: center;
 }
 
+/* Landing screen's public community-chat card — reuses .pix-card's look */
+.community-card {
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
 .pix-card[hidden] { display: none; }
 
 .pix-qr-img {
