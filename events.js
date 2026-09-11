@@ -33,6 +33,40 @@ const eventsListEl = document.getElementById("events-list");
 const pastEventsListEl = document.getElementById("past-events-list");
 const pastEventsHeadingEl = document.getElementById("past-events-heading");
 
+// ---------------------------------------------------------------------------
+// Lightbox — tapping an event's poster image expands it to fill the screen,
+// so the full detail (any text near the edges especially) is easy to read
+// instead of squeezed into the small square card. Set up once here (not
+// inside renderEventsPage, which can run more than once) since these
+// elements and their close behavior never change between re-renders.
+// ---------------------------------------------------------------------------
+const eventsLightbox = document.getElementById("events-lightbox");
+const eventsLightboxImg = document.getElementById("events-lightbox-img");
+
+function openEventsLightbox(src, alt) {
+  eventsLightboxImg.src = src;
+  eventsLightboxImg.alt = alt;
+  eventsLightbox.hidden = false;
+}
+
+function closeEventsLightbox() {
+  eventsLightbox.hidden = true;
+  eventsLightboxImg.src = "";
+}
+
+if (eventsLightbox) {
+  document.getElementById("events-lightbox-close").addEventListener("click", closeEventsLightbox);
+  // Click anywhere on the dark backdrop closes it; clicking the image itself
+  // (inside the backdrop) shouldn't, so only close when the click target is
+  // the backdrop element itself, not a child like the image or close button.
+  eventsLightbox.addEventListener("click", (e) => {
+    if (e.target === eventsLightbox) closeEventsLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !eventsLightbox.hidden) closeEventsLightbox();
+  });
+}
+
 // Resolves the language to render in: the "?lang=" URL param (the real
 // hand-off from index.html, a separate page/document); falling back to a
 // shared `state.lang` if one exists in this scope (only true when events.js
@@ -90,7 +124,18 @@ function renderEventsPage() {
       const img = document.createElement("img");
       img.className = "event-card-img";
       img.src = event.image;
-      img.alt = "";
+      img.alt = event.title || "";
+      img.tabIndex = 0;
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", "View full-size image");
+      const expand = () => openEventsLightbox(event.image, event.title || "");
+      img.addEventListener("click", expand);
+      img.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          expand();
+        }
+      });
       li.appendChild(img);
     }
 

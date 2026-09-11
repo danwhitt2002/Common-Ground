@@ -42,6 +42,15 @@
       <div class="menu-footer">
         <a class="link-secondary" href="index.html" id="events-apply-link" data-i18n="applyLink">Ready to apply? Join Common Ground →</a>
       </div>
+
+      <!-- position:fixed, so nesting here (inside .menu-page, captured by
+           build.py's trial-bundle extraction regex) vs directly in .app
+           makes no visual difference — keeps the trial bundle in sync
+           without needing a separate extraction step for it. -->
+      <div class="image-lightbox" id="events-lightbox" hidden>
+        <button class="image-lightbox-close" id="events-lightbox-close" type="button" aria-label="Close">✕</button>
+        <img id="events-lightbox-img" src="" alt="">
+      </div>
     </div>
   </main>
 </div>
