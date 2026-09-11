@@ -6,8 +6,8 @@ const CONFIG = {
   price: "R$80",
 
   // Grounds Pass — the monthly membership. Access to every event for a
-  // month, plus the premium WhatsApp group (day-to-day meetups: run club,
-  // beach days, co-working, etc. — see
+  // month, plus the invite-only premium WhatsApp group (day-to-day
+  // meetups: run club, beach days, co-working, etc. — see
   // TRANSLATIONS.<lang>.approved.plans.monthly.sub). Called "monthly"
   // internally throughout the code (state.plan, element ids, CONFIG field
   // names) since that's what it technically is, but every user-facing
@@ -68,14 +68,11 @@ const CONFIG = {
   whatsappNumber: "447830067043",
 
   // The STANDARD/general WhatsApp community group's invite link — this one
-  // is public, shown directly on the landing page (QR + tappable link,
-  // assets/whatsapp-community-qr.png), open to anyone, no payment needed.
-  // Distinct from the PREMIUM group (weekly events + day-to-day meetups),
-  // which stays payment-gated — you still hand that invite out manually to
-  // Grounds Pass/Founding Member holders after confirming payment, same as
-  // before. If you ever change/regenerate this group, update the link here
-  // and regenerate assets/whatsapp-community-qr.png to match (any QR
-  // generator works, or ask me).
+  // is public, shown directly on the landing page as a tappable link
+  // (landing.communityLink), open to anyone, no payment needed. Distinct
+  // from the PREMIUM group (weekly events + day-to-day meetups), which
+  // stays invite-only — you still hand that invite out manually to Grounds
+  // Pass/Founding Member holders after confirming payment, same as before.
   standardGroupLink: "https://chat.whatsapp.com/F0Cfm69AAL6JVQpoud0Ok0?s=cl&p=i&mlu=4&ilr=4",
 
   // Shown at the bottom of the "approved" screen. Update to your real handle.
@@ -243,7 +240,7 @@ const TRANSLATIONS = {
       menuLink: "See what's included — the drinks menu →",
       eventsLink: "See upcoming event dates →",
       communityLede: "Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.",
-      communityLink: "Join on WhatsApp →",
+      communityLink: "Common Ground Community Groupchat →",
     },
     question: {
       back: "← Back",
@@ -300,12 +297,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/month",
-          sub: "Every event this month, plus the premium WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
+          sub: "Every event this month, plus our invite-only premium WhatsApp group — weekly events, run club, beach days, co-working, and discounts with our curated brand partners",
         },
         founding: {
           label: "Founding Member",
           unit: "one-time",
-          sub: "One-time payment · lifetime access to every event, plus the premium WhatsApp group",
+          sub: "One-time payment · lifetime access to every event, plus our invite-only premium WhatsApp group",
           badge: "{remaining} of {total} spots left",
         },
       },
@@ -320,7 +317,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to the premium group, for weekly events and day-to-day meetups.",
+      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to our invite-only premium group, for weekly events and day-to-day meetups.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
     },
@@ -350,7 +347,7 @@ const TRANSLATIONS = {
       menuLink: "Veja o que está incluído — o cardápio de bebidas →",
       eventsLink: "Veja as próximas datas de eventos →",
       communityLede: "Ainda não está pronto(a) para se inscrever? Entre no nosso grupo geral do WhatsApp — aberto a todos, com novidades e avisos de eventos.",
-      communityLink: "Entrar no WhatsApp →",
+      communityLink: "Grupo da Comunidade Common Ground →",
     },
     question: {
       back: "← Voltar",
@@ -407,12 +404,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mês",
-          sub: "Todos os eventos do mês, além do grupo premium no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
+          sub: "Todos os eventos do mês, além do nosso grupo premium por convite no WhatsApp — encontros semanais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
         },
         founding: {
           label: "Membro Fundador",
           unit: "pagamento único",
-          sub: "Pagamento único · acesso vitalício a todos os eventos, além do grupo premium no WhatsApp",
+          sub: "Pagamento único · acesso vitalício a todos os eventos, além do nosso grupo premium por convite no WhatsApp",
           badge: "{remaining} de {total} vagas restantes",
         },
       },
@@ -427,7 +424,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no grupo premium, com encontros semanais e durante a semana.",
+      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no nosso grupo premium por convite, com encontros semanais e durante a semana.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
     },
@@ -457,7 +454,7 @@ const TRANSLATIONS = {
       menuLink: "Mira qué está incluido — el menú de bebidas →",
       eventsLink: "Mira las próximas fechas de eventos →",
       communityLede: "¿Aún no estás listo/a para solicitar? Únete a nuestra comunidad general de WhatsApp — abierta a todos, con novedades y anuncios de eventos.",
-      communityLink: "Unirme por WhatsApp →",
+      communityLink: "Grupo Comunitario de Common Ground →",
     },
     question: {
       back: "← Atrás",
@@ -514,12 +511,12 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mes",
-          sub: "Todos los eventos de este mes, además del grupo premium de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
+          sub: "Todos los eventos de este mes, además de nuestro grupo premium por invitación de WhatsApp — eventos semanales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
         },
         founding: {
           label: "Miembro Fundador",
           unit: "pago único",
-          sub: "Pago único · acceso de por vida a todos los eventos, además del grupo premium de WhatsApp",
+          sub: "Pago único · acceso de por vida a todos los eventos, además de nuestro grupo premium por invitación de WhatsApp",
           badge: "{remaining} de {total} cupos restantes",
         },
       },
@@ -534,7 +531,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al grupo premium, con eventos semanales y encuentros durante la semana.",
+      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos a nuestro grupo premium por invitación, con eventos semanales y encuentros durante la semana.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
     },

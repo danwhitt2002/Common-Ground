@@ -51,16 +51,16 @@ Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently �
 
 The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
 
-### Two WhatsApp groups: standard (public) and premium (payment-gated)
+### Two WhatsApp groups: standard (public) and premium (invite-only)
 
 There are two separate Common Ground WhatsApp groups, not one:
 
-- **Standard group** — general community chat, open to anyone. Its invite link is **public**, shown right on the landing page (`CONFIG.standardGroupLink` in `script.js`) as a scannable QR (`assets/whatsapp-community-qr.png`) plus a tappable "Join on WhatsApp →" link (`landing.communityLede`/`landing.communityLink`) — no application or payment needed, anyone visiting the site can join directly.
-- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). Stays payment-gated: **Grounds Pass** and **Founding Member** holders get this one.
+- **Standard group** — general community chat, open to anyone. Its invite link is **public**, shown right on the landing page (`CONFIG.standardGroupLink` in `script.js`) as a tappable "Common Ground Community Groupchat →" link (`landing.communityLede`/`landing.communityLink`) — no application or payment needed, anyone visiting the site can join directly.
+- **Premium group** — everything the standard group has, plus access to weekly events *and* day-to-day meetups announced during the week (five a.m. runs, beach days, co-working sessions, that kind of thing). **Invite-only**: **Grounds Pass** and **Founding Member** holders get this one.
 
-The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote` (it points Single Event Pass holders back to the public QR on the homepage, and promises Grounds Pass/Founding Member holders the premium group once they've paid). Since there's no backend here to confirm payment actually happened, the *premium* group's invite still isn't handed out automatically — that part is still on you: once you get their payment proof on WhatsApp, reply with the premium group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link).
+The payment screen tells applicants this via `TRANSLATIONS.<lang>.approved.groupNote` (it points Single Event Pass holders back to the public link on the homepage, and promises Grounds Pass/Founding Member holders the invite-only premium group once they've paid). Since there's no backend here to confirm payment actually happened, the *premium* group's invite still isn't handed out automatically — that part is still on you: once you get their payment proof on WhatsApp, reply with the premium group's invite link (WhatsApp → the group → Group Info → Invite to Group via Link).
 
-If you ever change/regenerate the standard group, update `CONFIG.standardGroupLink` and regenerate `assets/whatsapp-community-qr.png` to match (any QR generator works, or ask me).
+If you ever change/regenerate the standard group, update `CONFIG.standardGroupLink` to match.
 
 ### Partner brand discounts
 
