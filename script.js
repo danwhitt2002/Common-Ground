@@ -297,7 +297,6 @@ const TRANSLATIONS = {
       foundingLink: "Or become a Founding Member — lifetime access, no dates needed →",
       selectedDatesLabel: "Your date: {dates}",
       whatsappDatesSuffix: "Date: {dates}.",
-      tagline: "Carioca time, every time",
       locale: "en-GB",
     },
     approved: {
@@ -411,7 +410,6 @@ const TRANSLATIONS = {
       foundingLink: "Ou torne-se Membro Fundador — acesso vitalício, sem datas necessárias →",
       selectedDatesLabel: "Sua data: {dates}",
       whatsappDatesSuffix: "Data: {dates}.",
-      tagline: "Hora carioca, sempre",
       locale: "pt-BR",
     },
     approved: {
@@ -525,7 +523,6 @@ const TRANSLATIONS = {
       foundingLink: "O conviértete en Miembro Fundador — acceso de por vida, sin fechas necesarias →",
       selectedDatesLabel: "Tu fecha: {dates}",
       whatsappDatesSuffix: "Fecha: {dates}.",
-      tagline: "Hora carioca, siempre",
       locale: "es-ES",
     },
     approved: {
@@ -737,11 +734,6 @@ function renderSelectEventScreen() {
     const [y, m, d] = event.date.split("-").map(Number);
     dateEl.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
     li.appendChild(dateEl);
-
-    const taglineEl = document.createElement("p");
-    taglineEl.className = "event-card-tagline";
-    taglineEl.textContent = t("selectEvent.tagline");
-    li.appendChild(taglineEl);
 
     const select = () => {
       state.selectedEvents = [event.date];

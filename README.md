@@ -136,7 +136,7 @@ Each entry is `{ date: "YYYY-MM-DD", location, title?, tag?, image? }`:
 - **`tag`** (optional) — a short badge shown above the date, e.g. `"+1 PARTY"` for a launch or special date. Omit it for a normal event.
 - **`image`** (optional) — a photo for that specific event, filling the square card (crop it square, add your own branding, drop the file in `assets/`, e.g. `assets/events/launch-party.png`, and reference it here). Omit it for no photo.
 
-Translated strings (`back`, `eyebrow`, `lede`, `pastEventsHeading`, `applyLink`, `tagline`) live in `EVENTS_TRANSLATIONS` in `events.js`, same `{ en, pt, es }` pattern as everywhere else. The "Past Events" heading and section only render when `pastEvents` has at least one entry. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
+Translated strings (`back`, `eyebrow`, `lede`, `pastEventsHeading`, `applyLink`) live in `EVENTS_TRANSLATIONS` in `events.js`, same `{ en, pt, es }` pattern as everywhere else. `lede` ("Carioca time, every time") is the page's one tagline, shown once at the top — it used to repeat on every individual event card, but that read as redundant once it was already established up top. The "Past Events" heading and section only render when `pastEvents` has at least one entry. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
 
 ### Brand identity
 

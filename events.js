@@ -6,28 +6,25 @@ const EVENTS_TRANSLATIONS = {
   en: {
     back: "← Back",
     eyebrow: "Upcoming Events",
-    lede: "Every Sunday · exact location shared with pass-holders in the WhatsApp group",
+    lede: "Carioca time, every time",
     pastEventsHeading: "Past Events",
     applyLink: "Ready to apply? Join Common Ground →",
-    tagline: "Carioca time, every time",
     locale: "en-GB",
   },
   pt: {
     back: "← Voltar",
     eyebrow: "Próximos Eventos",
-    lede: "Todo domingo · o local exato é compartilhado com os pass-holders no grupo do WhatsApp",
+    lede: "Hora carioca, sempre",
     pastEventsHeading: "Eventos Passados",
     applyLink: "Pronto(a) para se inscrever? Junte-se à Common Ground →",
-    tagline: "Hora carioca, sempre",
     locale: "pt-BR",
   },
   es: {
     back: "← Atrás",
     eyebrow: "Próximos Eventos",
-    lede: "Cada domingo · la ubicación exacta se comparte con los pass-holders en el grupo de WhatsApp",
+    lede: "Hora carioca, siempre",
     pastEventsHeading: "Eventos Pasados",
     applyLink: "¿Listo/a para solicitar? Únete a Common Ground →",
-    tagline: "Hora carioca, siempre",
     locale: "es-ES",
   },
 };
@@ -77,10 +74,8 @@ function renderEventsPage() {
 
   const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 
-  // Shared by both the upcoming and past-events lists below. Past events
-  // skip the "Carioca time, every time" tagline — it's forward-looking
-  // marketing copy that doesn't fit a historical recap card.
-  function buildEventCard(event, { showTagline }) {
+  // Shared by both the upcoming and past-events lists below.
+  function buildEventCard(event) {
     const li = document.createElement("li");
     li.className = "event-card";
 
@@ -114,13 +109,6 @@ function renderEventsPage() {
     dateEl.textContent = dateFormatter.format(new Date(Date.UTC(y, m - 1, d)));
     li.appendChild(dateEl);
 
-    if (showTagline) {
-      const taglineEl = document.createElement("p");
-      taglineEl.className = "event-card-tagline";
-      taglineEl.textContent = t.tagline;
-      li.appendChild(taglineEl);
-    }
-
     return li;
   }
 
@@ -128,7 +116,7 @@ function renderEventsPage() {
   const list = document.createElement("ul");
   list.className = "events-cards";
   EVENTS_CONFIG.events.forEach((event) => {
-    list.appendChild(buildEventCard(event, { showTagline: true }));
+    list.appendChild(buildEventCard(event));
   });
   eventsListEl.appendChild(list);
 
@@ -140,7 +128,7 @@ function renderEventsPage() {
       const pastList = document.createElement("ul");
       pastList.className = "events-cards";
       pastEvents.forEach((event) => {
-        pastList.appendChild(buildEventCard(event, { showTagline: false }));
+        pastList.appendChild(buildEventCard(event));
       });
       pastEventsListEl.appendChild(pastList);
     }

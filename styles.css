@@ -1091,13 +1091,6 @@ button.back-link {
   color: var(--ink);
 }
 
-.event-card-tagline {
-  margin: 0;
-  font-size: 10px;
-  font-style: italic;
-  color: var(--accent-dim);
-}
-
 .event-card-title {
   margin: 0;
   font-family: 'Instrument Serif', Georgia, serif;

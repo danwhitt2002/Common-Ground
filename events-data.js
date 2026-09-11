@@ -19,15 +19,15 @@
 //   "LAUNCH PARTY: Bring a +1". Omit for a normal, date-only event.
 // - `tag` (optional) — a short badge shown above the date, e.g. "+1 PARTY".
 // - `image` (optional) — a photo for that specific event, filling the
-//   square card (e.g. "assets/events/launch-party.png") — crop it square,
-//   add your own branding, drop the file in assets/, and reference it here.
-//   Omit for no photo.
+//   square card (e.g. "assets/events/launch-party.jpg" — already used
+//   below) — crop it square, add your own branding, drop the file in
+//   assets/events/, and reference it here. Omit for no photo.
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
     { date: "2026-09-27", location: "Copacabana" },
   ],
   pastEvents: [
-    { date: "2026-09-06", location: "Copacabana", title: "LAUNCH PARTY: Bring a +1" },
+    { date: "2026-09-06", location: "Copacabana", title: "LAUNCH PARTY: Bring a +1", image: "assets/events/launch-party.jpg" },
   ],
 };
