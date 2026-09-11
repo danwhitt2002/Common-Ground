@@ -769,21 +769,40 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   align-items: center;
 }
 
+/* Landing screen's Refer-a-Friend and community-chat cards, side by side
+   on the same row (they used to stack, adding a lot of extra scroll to an
+   already-long page) — each shrinks to half width with a gap between,
+   and stretches to match whichever card is taller. */
+.cta-cards-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 24px;
+}
+
+.cta-cards-row .pix-card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 16px 12px;
+}
+
 /* Landing screen's public community-chat card — reuses .pix-card's look */
 .community-card {
-  margin-top: 24px;
-  margin-bottom: 0;
+  justify-content: center;
 }
 
 /* Landing screen's "Refer a Friend" card — reuses .pix-card's look, with
    its own serif, gold-accent headline instead of a plain lede line. */
 .referral-card {
-  margin-top: 24px;
-  margin-bottom: 0;
+  justify-content: center;
 }
 
 .referral-heading {
-  font-size: clamp(18px, 5vw, 22px);
+  font-size: clamp(16px, 4.2vw, 20px);
   color: var(--accent);
   margin: 0 0 8px;
 }
