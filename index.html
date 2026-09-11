@@ -67,6 +67,11 @@
         </div>
       </div>
 
+      <div class="pix-card referral-card">
+        <h3 class="display referral-heading" data-i18n="landing.referralHeading">Refer a Friend, You Both Save</h3>
+        <p class="pix-scan-hint" id="landing-referral-body"></p>
+      </div>
+
       <div class="pix-card community-card">
         <p class="pix-scan-hint" data-i18n="landing.communityLede">Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.</p>
         <a class="link-secondary" id="community-link" href="#" target="_blank" rel="noopener" data-i18n="landing.communityLink">Common Ground Community Groupchat →</a>
@@ -110,6 +115,10 @@
         <label class="field">
           <span><span data-i18n="contact.instagramLabel">Instagram handle</span> <em data-i18n="contact.optional">(optional)</em></span>
           <input name="instagram" type="text" data-i18n-placeholder="contact.instagramPlaceholder" placeholder="@yourname">
+        </label>
+        <label class="field">
+          <span><span data-i18n="contact.referredByLabel">Referred by</span> <em data-i18n="contact.optional">(optional)</em></span>
+          <input name="referredBy" type="text" data-i18n-placeholder="contact.referredByPlaceholder" placeholder="Friend's name">
         </label>
         <button class="btn-primary" type="submit" data-i18n="contact.submit">Submit Application</button>
         <p class="error" id="contact-error" role="alert" hidden></p>

@@ -72,6 +72,18 @@ Current partner deals (not stored anywhere else — keep this list updated as yo
 
 Since there's no backend, there's no way to gate this automatically — post the code(s) in the premium WhatsApp group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
 
+### Refer a friend — 20% off a Single Event Pass, automatic but honor-based
+
+The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 20% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$100 → R$80). The application's contact screen has a matching optional **"Referred by"** text field.
+
+The moment someone fills that field in, the payment screen **automatically** swaps to the discounted price and a separate discounted QR (`assets/pix-qr-referral.png` / `assets/wise-qr-referral.png`) — no need to message you first and wait for confirmation, they can pay straight away. This only applies to the Single Event Pass; picking Grounds Pass or Founding Member instead ignores the referral field entirely (`isReferralDiscountActive()` in `script.js` checks `state.plan === "single"`).
+
+**This is honor-based, deliberately** — there's no backend or accounts here, so nothing verifies the named referrer is real; anyone could type any name into that field and get the discount immediately. That trade-off was made on purpose to keep the payment flow frictionless (pay immediately, not "message first, wait for us to confirm, then pay"). The mitigation: every submitted application still records whatever was typed in "Referred by" (it flows straight into your Formspree inbox like every other field), so you can spot-check afterwards — a name that's clearly made up, or the same name showing up suspiciously often, is visible to you after the fact even though it wasn't blocked up front.
+
+The **referrer's own 20% off is not automated at all** — they aren't filling out a new application, so there's no field for them to trigger anything. You'll need to remember to honor that side by hand (a note, a tally, whatever you already use to track Founding Member spots) the next time they book a Single Event Pass.
+
+If you ever reprice, update `CONFIG.referralPrice` and `CONFIG.gbpAmount.referral` and regenerate both referral QR codes to match.
+
 ### Three plans: Grounds Pass, Single Event Pass, or Founding Member
 
 **Grounds Pass is the main product** — the payment screen leads with it: it's first in the plan toggle, carries a "Recommended" badge (`approved.recommendedLabel`, a small pill on the plan button — see `.plan-btn-badge` in `styles.css`), and is what's pre-selected by default (`state.plan` defaults to `"monthly"` in `script.js`) for anyone landing directly on the payment screen via the `#approved` shortcut. **Single Event Pass is framed as the trial option** — its own sub-copy says "Try us out" (`approved.plans.single.sub`) — for people who want to test the club before committing to a month.
@@ -89,7 +101,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$100` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs).
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$100` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$80`) is the discounted Single Event Pass price for the "Refer a Friend" perk — see that section above.
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 

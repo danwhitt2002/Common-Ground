@@ -764,6 +764,19 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   margin-bottom: 0;
 }
 
+/* Landing screen's "Refer a Friend" card — reuses .pix-card's look, with
+   its own serif, gold-accent headline instead of a plain lede line. */
+.referral-card {
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.referral-heading {
+  font-size: clamp(18px, 5vw, 22px);
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
 .pix-card[hidden] { display: none; }
 
 .pix-qr-img {
