@@ -807,6 +807,29 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   margin: 0 0 8px;
 }
 
+.referral-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.referral-price-old {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 15px;
+  color: var(--ink-dim);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-dim);
+}
+
+.referral-price-new {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
 .pix-card[hidden] { display: none; }
 
 .pix-qr-img {

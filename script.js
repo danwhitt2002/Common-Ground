@@ -255,8 +255,8 @@ const TRANSLATIONS = {
       eventsLink: "See upcoming event dates →",
       communityLede: "Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.",
       communityLink: "Common Ground Community Groupchat →",
-      referralHeading: "Refer a Friend, You Both Save",
-      referralBody: "Already applied? Refer a friend and you'll both get 20% off a Single Event Pass — {price} → {referralPrice}. Just have them mention your name when they apply.",
+      referralHeading: "Refer a Friend",
+      referralBody: "Refer a friend and both get 20% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
     },
     question: {
       back: "← Back",
@@ -368,8 +368,8 @@ const TRANSLATIONS = {
       eventsLink: "Veja as próximas datas de eventos →",
       communityLede: "Ainda não está pronto(a) para se inscrever? Entre no nosso grupo geral do WhatsApp — aberto a todos, com novidades e avisos de eventos.",
       communityLink: "Grupo da Comunidade Common Ground →",
-      referralHeading: "Indique um Amigo, Os Dois Economizam",
-      referralBody: "Já se inscreveu? Indique um(a) amigo(a) e vocês dois ganham 20% de desconto num Passe de Evento Único — {price} → {referralPrice}. É só ele(a) mencionar seu nome ao se inscrever.",
+      referralHeading: "Indique um Amigo",
+      referralBody: "Indique um(a) amigo(a) e os dois ganham 20% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
     },
     question: {
       back: "← Voltar",
@@ -481,8 +481,8 @@ const TRANSLATIONS = {
       eventsLink: "Mira las próximas fechas de eventos →",
       communityLede: "¿Aún no estás listo/a para solicitar? Únete a nuestra comunidad general de WhatsApp — abierta a todos, con novedades y anuncios de eventos.",
       communityLink: "Grupo Comunitario de Common Ground →",
-      referralHeading: "Refiere a un Amigo, Ambos Ahorran",
-      referralBody: "¿Ya solicitaste? Refiere a un amigo y ambos obtendrán 20% de descuento en un Pase de Evento Único — {price} → {referralPrice}. Solo pídele que mencione tu nombre al solicitar.",
+      referralHeading: "Refiere a un Amigo",
+      referralBody: "Refiere a un amigo y ambos obtienen 20% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
     },
     question: {
       back: "← Atrás",
@@ -636,9 +636,9 @@ function renderLandingPerksHeading() {
 }
 
 function renderReferralSection() {
-  document.getElementById("landing-referral-body").textContent = t("landing.referralBody")
-    .replace("{price}", CONFIG.price)
-    .replace("{referralPrice}", CONFIG.referralPrice);
+  document.getElementById("landing-referral-body").textContent = t("landing.referralBody");
+  document.getElementById("referral-price-old").textContent = CONFIG.price;
+  document.getElementById("referral-price-new").textContent = CONFIG.referralPrice;
 }
 
 function renderApprovedFinePrint() {
