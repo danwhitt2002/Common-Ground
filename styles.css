@@ -1078,8 +1078,7 @@ button.back-link {
   width: 100%;
   flex: 1;
   min-height: 0;
-  object-fit: contain;
-  background: #dddcd7;
+  object-fit: cover;
   border-radius: calc(var(--radius) - 6px);
   cursor: pointer;
 }
