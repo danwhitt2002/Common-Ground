@@ -236,7 +236,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      bio: "A social club in Rio de Janeiro made for connection through community. Whether you're a local Carioca, a digital nomad, or just travelling through — everyone is welcome!",
+      bio: "A social club in Rio de Janeiro made for connection through community. Locals, nomads, and travellers alike — everyone is welcome!",
       lede: "Find your Common Ground — apply now.",
       perksHeading: "The Grounds Pass — {monthlyPrice}/month",
       perks: {
@@ -352,7 +352,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Seja você um(a) carioca, um(a) nômade digital, ou só de passagem — todos são bem-vindos!",
+      bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Cariocas, nômades e viajantes — todos são bem-vindos!",
       lede: "Find your Common Ground — inscreva-se agora.",
       perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
       perks: {
@@ -468,7 +468,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Ya seas un(a) carioca local, un(a) nómada digital, o solo estés de paso — ¡todos son bienvenidos!",
+      bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Cariocas, nómadas y viajeros — ¡todos son bienvenidos!",
       lede: "Find your Common Ground — solicita ahora.",
       perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
       perks: {
