@@ -56,6 +56,7 @@ const MENU_CONFIG = {
           name: "CG x Unique Cold Brew",
           image: "assets/menu/cg-x-unique-cold-brew.png",
           description: { en: "Our default cold brew, in collaboration with UNIQUE Coffee.", pt: "Nosso cold brew padrão, em colaboração com a UNIQUE Coffee.", es: "Nuestro cold brew predeterminado, en colaboración con UNIQUE Coffee." },
+          playlistUrl: "https://open.spotify.com/playlist/42Qls2YYYI234peODaS1mL",
         },
         {
           name: "Sweettalk",
