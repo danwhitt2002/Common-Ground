@@ -256,7 +256,7 @@ const TRANSLATIONS = {
         price: "Price per event",
       },
       apply: "Apply Now",
-      finePrint: "Takes about a minute. {price}/event.",
+      finePrint: "Takes about a minute.",
       menuLink: "See what's included at our events — the drinks menu →",
       eventsLink: "See upcoming event dates →",
       communityLede: "Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.",
@@ -376,7 +376,7 @@ const TRANSLATIONS = {
         price: "Preço por evento",
       },
       apply: "Inscreva-se Agora",
-      finePrint: "Leva cerca de um minuto. {price}/evento.",
+      finePrint: "Leva cerca de um minuto.",
       menuLink: "Veja o que está incluído nos nossos eventos — o cardápio de bebidas →",
       eventsLink: "Veja as próximas datas de eventos →",
       communityLede: "Ainda não está pronto(a) para se inscrever? Entre no nosso grupo geral do WhatsApp — aberto a todos, com novidades e avisos de eventos.",
@@ -496,7 +496,7 @@ const TRANSLATIONS = {
         price: "Precio por evento",
       },
       apply: "Solicita Ahora",
-      finePrint: "Toma cerca de un minuto. {price}/evento.",
+      finePrint: "Toma cerca de un minuto.",
       menuLink: "Mira qué está incluido en nuestros eventos — el menú de bebidas →",
       eventsLink: "Mira las próximas fechas de eventos →",
       communityLede: "¿Aún no estás listo/a para solicitar? Únete a nuestra comunidad general de WhatsApp — abierta a todos, con novedades y anuncios de eventos.",
@@ -648,10 +648,6 @@ const whatsappBtn = document.getElementById("whatsapp-btn");
 // landing screen. Picking one translates every static string on the page
 // (via [data-i18n]/[data-i18n-placeholder]) without changing screens.
 // ---------------------------------------------------------------------------
-function renderLandingFinePrint() {
-  document.getElementById("landing-fine-print").textContent = t("landing.finePrint").replace("{price}", CONFIG.price);
-}
-
 function renderLandingPerksHeading() {
   document.getElementById("landing-perks-heading").textContent = t("landing.perksHeading").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
 }
@@ -1030,7 +1026,6 @@ function applyLang(lang) {
     btn.classList.toggle("active", btn.dataset.lang === lang);
   });
 
-  renderLandingFinePrint();
   renderLandingPerksHeading();
   renderLandingSingleHeading();
   renderNextEventStat();
