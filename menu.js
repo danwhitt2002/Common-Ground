@@ -77,6 +77,7 @@ const MENU_CONFIG = {
           name: "Posto 9",
           image: "assets/menu/posto-9.png",
           description: { en: "Bright and bold, like Posto 9.", pt: "Vibrante e ousado, como o Posto 9.", es: "Vibrante y audaz, como el Posto 9." },
+          playlistUrl: "https://open.spotify.com/playlist/57IDRLTrdtqQvwZcIGgbNT",
         },
         {
           name: "Carioca Kick",
