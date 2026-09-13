@@ -84,6 +84,7 @@ const MENU_CONFIG = {
           name: "Carioca Kick",
           image: "assets/menu/carioca-kick.png",
           description: { en: "A fiery wellness shot.", pt: "Um shot de bem-estar ardente.", es: "Un shot de bienestar ardiente." },
+          playlistUrl: "https://open.spotify.com/playlist/19AlB7FHKwlC6dhbW672b5",
         },
       ],
     },
