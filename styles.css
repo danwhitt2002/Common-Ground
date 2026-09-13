@@ -267,6 +267,37 @@ main {
   line-height: 1;
 }
 
+/* Single-Event Pass vs. Grounds Pass, side by side, so the sheer difference
+   in what's included is obvious at a glance. */
+.plans-compare {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.plan-compare-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* The Single-Event side reads as the plainer option next to the accent-gold
+   Grounds Pass heading — same box treatment, muted color. */
+.plan-compare-heading-muted {
+  color: var(--ink-dim);
+}
+
+.perks-list.compact {
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.perks-list.compact li {
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+
 /* Landing page stat row — numbers count up from 0 on scroll-into-view
    (see the IntersectionObserver in script.js) as a small visual hook. */
 .stats-row {

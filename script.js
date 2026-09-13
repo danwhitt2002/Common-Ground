@@ -236,7 +236,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      bio: "A social club in Rio de Janeiro made for connection through community. Locals, nomads, and travellers alike — everyone is welcome!",
+      bio: "A fortnightly social club in Rio de Janeiro made for connection through community. Locals, nomads, and travellers alike — everyone is welcome!",
       lede: "Find your Common Ground — apply now.",
       perksHeading: "The Grounds Pass — {monthlyPrice}/month",
       perks: {
@@ -244,6 +244,10 @@ const TRANSLATIONS = {
         groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
         meetups: "Free meetups throughout the month — beach days, run clubs, coworking, and more.",
         brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
+      },
+      singleHeading: "Single-Event Pass — {price}/event",
+      singlePerks: {
+        access: "Access to our fortnightly social club.",
       },
       stats: {
         capacity: "Max people per event",
@@ -352,7 +356,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Cariocas, nômades e viajantes — todos são bem-vindos!",
+      bio: "Um clube social quinzenal no Rio de Janeiro feito para conexão através da comunidade. Cariocas, nômades e viajantes — todos são bem-vindos!",
       lede: "Find your Common Ground — inscreva-se agora.",
       perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
       perks: {
@@ -360,6 +364,10 @@ const TRANSLATIONS = {
         groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
         meetups: "Encontros gratuitos ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
         brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
+      },
+      singleHeading: "Passe de Evento Único — {price}/evento",
+      singlePerks: {
+        access: "Acesso ao nosso clube social quinzenal.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -468,7 +476,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Cariocas, nómadas y viajeros — ¡todos son bienvenidos!",
+      bio: "Un club social quincenal en Río de Janeiro creado para la conexión a través de la comunidad. Cariocas, nómadas y viajeros — ¡todos son bienvenidos!",
       lede: "Find your Common Ground — solicita ahora.",
       perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
       perks: {
@@ -476,6 +484,10 @@ const TRANSLATIONS = {
         groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
         meetups: "Encuentros gratuitos durante todo el mes — playa, running club, coworking y más.",
         brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
+      },
+      singleHeading: "Pase de Evento Único — {price}/evento",
+      singlePerks: {
+        access: "Acceso a nuestro club social quincenal.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -642,6 +654,10 @@ function renderLandingFinePrint() {
 
 function renderLandingPerksHeading() {
   document.getElementById("landing-perks-heading").textContent = t("landing.perksHeading").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
+}
+
+function renderLandingSingleHeading() {
+  document.getElementById("landing-single-heading").textContent = t("landing.singleHeading").replace("{price}", CONFIG.price);
 }
 
 // Landing page's stat row shows the next upcoming event's date (day + short
@@ -1016,6 +1032,7 @@ function applyLang(lang) {
 
   renderLandingFinePrint();
   renderLandingPerksHeading();
+  renderLandingSingleHeading();
   renderNextEventStat();
   renderReferralSection();
   renderApprovedFinePrint();
