@@ -341,7 +341,7 @@ const TRANSLATIONS = {
       copy: "Copy",
       copied: "Copied",
       whatsappBtn: "Send Payment Proof on WhatsApp",
-      groupNote: "You can join our general WhatsApp community anytime — see the QR on the homepage. Once you're a Grounds Pass or Founding Member holder, we'll also add you to Inner Circle, our invite-only WhatsApp group, for fortnightly events and day-to-day meetups.",
+      groupNote: "You can join our general WhatsApp community anytime. Once you're a Grounds Pass or Founding Member holder, we'll also add you to Inner Circle, our invite-only WhatsApp group, for fortnightly events and day-to-day meetups.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
       referralBadge: "20% off — referred by {name}",
@@ -461,7 +461,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprovante no WhatsApp",
-      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento — veja o QR na página inicial. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no Inner Circle, nosso grupo exclusivo por convite, com encontros quinzenais e durante a semana.",
+      groupNote: "Você pode entrar no nosso grupo geral do WhatsApp a qualquer momento. Assim que você tiver um Grounds Pass ou for Membro Fundador, também vamos te adicionar no Inner Circle, nosso grupo exclusivo por convite, com encontros quinzenais e durante a semana.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
       referralBadge: "20% de desconto — indicado(a) por {name}",
@@ -581,7 +581,7 @@ const TRANSLATIONS = {
       copy: "Copiar",
       copied: "Copiado",
       whatsappBtn: "Enviar Comprobante por WhatsApp",
-      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento — mira el QR en la página de inicio. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al Inner Circle, nuestro grupo exclusivo por invitación, con eventos quincenales y encuentros durante la semana.",
+      groupNote: "Puedes unirte a nuestra comunidad general de WhatsApp en cualquier momento. En cuanto tengas un Grounds Pass o seas Miembro Fundador, también te añadiremos al Inner Circle, nuestro grupo exclusivo por invitación, con eventos quincenales y encuentros durante la semana.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
       referralBadge: "20% de descuento — referido/a por {name}",
@@ -1053,6 +1053,7 @@ document.getElementById("plan-price-single").textContent = CONFIG.price;
 document.getElementById("plan-price-monthly").textContent = CONFIG.monthlyMembershipPrice;
 document.getElementById("plan-price-founding").textContent = CONFIG.foundingMemberPrice;
 document.getElementById("community-link").href = CONFIG.standardGroupLink;
+document.getElementById("approved-community-link").href = CONFIG.standardGroupLink;
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.questionIndex = 0;
