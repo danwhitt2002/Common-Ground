@@ -25,7 +25,7 @@
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
-    { date: "2026-09-27", location: "Copacabana" },
+    { date: "2026-10-04", location: "Copacabana" },
   ],
   pastEvents: [
     { date: "2026-09-06", location: "Copacabana", title: "LAUNCH PARTY: Bring a +1", image: "assets/events/launch-party.jpg" },
