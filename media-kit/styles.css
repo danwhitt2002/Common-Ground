@@ -288,6 +288,13 @@ section {
   color: var(--cream);
 }
 
+.niche-specialty {
+  border-color: var(--accent) !important;
+  background: var(--accent-dim);
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
 /* Portfolio */
 .portfolio-grid {
   display: grid;
