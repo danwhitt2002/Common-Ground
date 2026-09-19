@@ -272,6 +272,15 @@ section {
   color: var(--cream-dim);
 }
 
+.about-note {
+  max-width: 520px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--cream-dim);
+}
+
 .niche-tags {
   display: flex;
   gap: 10px;
