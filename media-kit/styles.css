@@ -433,6 +433,14 @@ section {
   text-align: center;
 }
 
+.packages-note {
+  max-width: 620px;
+  margin: 36px auto 0;
+  text-align: center;
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+}
+
 /* Contact */
 .contact {
   text-align: center;
