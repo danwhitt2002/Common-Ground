@@ -207,7 +207,7 @@ nav.wrap {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 40px 0;
 }
 
@@ -503,12 +503,6 @@ footer {
 
 /* Responsive */
 @media (max-width: 860px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .stat:nth-child(2) {
-    border-right: none;
-  }
   .portfolio-grid,
   .testimonial-grid,
   .package-grid {
@@ -540,7 +534,7 @@ footer {
     display: none;
   }
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
   .portfolio-grid,
   .testimonial-grid,
