@@ -72,15 +72,15 @@ Current partner deals (not stored anywhere else — keep this list updated as yo
 
 Since there's no backend, there's no way to gate this automatically — post the code(s) in Inner Circle's group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
 
-### Refer a friend — 20% off a Single Event Pass, automatic but honor-based
+### Refer a friend — 25% off a Single Event Pass, automatic but honor-based
 
-The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 20% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$40 → R$32). The application's contact screen has a matching optional **"Referred by"** text field.
+The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 25% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$40 → R$30 — the same discounted price as the COMMONGROUND30 checkout code). The application's contact screen has a matching optional **"Referred by"** text field.
 
 The moment someone fills that field in, the payment screen **automatically** swaps to the discounted price and a separate discounted QR (`assets/pix-qr-referral.png` / `assets/wise-qr-referral.png`) — no need to message you first and wait for confirmation, they can pay straight away. This only applies to the Single Event Pass; picking Grounds Pass or Founding Member instead ignores the referral field entirely (`isReferralDiscountActive()` in `script.js` checks `state.plan === "single"`).
 
 **This is honor-based, deliberately** — there's no backend or accounts here, so nothing verifies the named referrer is real; anyone could type any name into that field and get the discount immediately. That trade-off was made on purpose to keep the payment flow frictionless (pay immediately, not "message first, wait for us to confirm, then pay"). The mitigation: every submitted application still records whatever was typed in "Referred by" (it flows straight into your Formspree inbox like every other field), so you can spot-check afterwards — a name that's clearly made up, or the same name showing up suspiciously often, is visible to you after the fact even though it wasn't blocked up front.
 
-The **referrer's own 20% off is not automated at all** — they aren't filling out a new application, so there's no field for them to trigger anything. You'll need to remember to honor that side by hand (a note, a tally, whatever you already use to track Founding Member spots) the next time they book a Single Event Pass.
+The **referrer's own 25% off is not automated at all** — they aren't filling out a new application, so there's no field for them to trigger anything. You'll need to remember to honor that side by hand (a note, a tally, whatever you already use to track Founding Member spots) the next time they book a Single Event Pass.
 
 If you ever reprice, update `CONFIG.referralPrice` and `CONFIG.gbpAmount.referral` and regenerate both referral QR codes to match.
 
@@ -117,7 +117,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$40` per event (Single Event Pass), `R$100` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$32`) is the discounted Single Event Pass price for the "Refer a Friend" perk, and **`discountCodes`** holds the checkout discount codes — see both sections above.
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$40` per event (Single Event Pass), `R$100` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$30`) is the discounted Single Event Pass price for the "Refer a Friend" perk, and **`discountCodes`** holds the checkout discount codes — see both sections above.
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
@@ -144,13 +144,14 @@ Drink and category **names always stay in English** (they're that pixel-exact ha
 
 Holds two lists: `events` (upcoming — shown on `events.html` and selectable on the application flow's select-event step, so applicants can see and pick a real date before they pay rather than paying blind) and `pastEvents` (already happened — shown on `events.html` as a recap section only, never selectable in the application flow). There's no backend here either, so **both lists are maintained by hand**: move an entry from `events` to `pastEvents` once it's happened, add a new one as you schedule it, delete one you've cancelled — both pages pick up the change automatically.
 
-Each entry is `{ date: "YYYY-MM-DD", location, title?, tag?, image? }`:
+Each entry is `{ date: "YYYY-MM-DD", location, title?, tag?, image?, imagePosition? }`:
 
 - **`date`** — formatted automatically into each language's locale (e.g. "Sunday, 6 September" / "domingo, 6 de setembro" / "domingo, 6 de septiembre").
-- **`location`** — currently just `"Copacabana"` on every date. Kept as data for your own reference but **not shown on the cards publicly** — the exact spot is only shared with pass-holders in the WhatsApp group once they've paid.
+- **`location`** — kept as data for your own reference but **not shown on the cards publicly** — the exact spot is only shared with pass-holders in the WhatsApp group once they've paid.
 - **`title`** (optional) — a prominent headline for a special date, e.g. `"LAUNCH PARTY: Bring a +1"` (see `.event-card-title` in `styles.css`). Omit it for a normal, date-only event.
 - **`tag`** (optional) — a short badge shown above the date, e.g. `"+1 PARTY"` for a launch or special date. Omit it for a normal event.
-- **`image`** (optional) — a photo for that specific event, filling the square card (crop it square, add your own branding, drop the file in `assets/`, e.g. `assets/events/launch-party.png`, and reference it here). Omit it for no photo.
+- **`image`** (optional) — a photo for that specific event, filling the square card (drop the file in `assets/events/` and reference it here — e.g. `assets/events/launch-party.jpg`). The card itself is small (events sit 3-up in a grid), so the thumbnail crop is just a colorful accent — tapping it always reveals the full image uncropped in a lightbox, so there's no need to pre-crop your file to square; any aspect ratio works. Omit it for no photo.
+- **`imagePosition`** (optional) — CSS `object-position` for the square thumbnail crop (e.g. `"top"`, `"25% 20%"`) — useful for a tall or wide `image` where the default center crop lands on a blank or busy area rather than something recognizable. Defaults to `"center"` if omitted.
 
 Translated strings (`back`, `eyebrow`, `lede`, `pastEventsHeading`, `applyLink`) live in `EVENTS_TRANSLATIONS` in `events.js`, same `{ en, pt, es }` pattern as everywhere else. `lede` ("Carioca time, every time") is the page's one tagline, shown once at the top — it used to repeat on every individual event card, but that read as redundant once it was already established up top. The "Past Events" heading and section only render when `pastEvents` has at least one entry. The chosen language reaches this page the same way `menu.html` does — a `?lang=` URL param on the link from `index.html`.
 

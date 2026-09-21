@@ -128,6 +128,7 @@ function renderEventsPage() {
       img.className = "event-card-img";
       img.src = event.image;
       img.alt = event.title || "";
+      if (event.imagePosition) img.style.objectPosition = event.imagePosition;
       img.tabIndex = 0;
       img.setAttribute("role", "button");
       img.setAttribute("aria-label", "View full-size image");

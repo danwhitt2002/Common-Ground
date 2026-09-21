@@ -8,7 +8,7 @@ const CONFIG = {
   // price changes, since those QR images each encode a fixed amount.
   price: "R$40",
 
-  // Referral discount — 20% off a Single Event Pass the moment someone
+  // Referral discount — 25% off a Single Event Pass the moment someone
   // enters a friend's name in the "Referred by" field on the contact
   // screen. This swaps the price/QR on the payment screen automatically,
   // no message-first step — but since there's no backend or accounts
@@ -16,15 +16,17 @@ const CONFIG = {
   // verifies the named referrer is real. Every submitted application
   // still records the name (see submitApplication()), so you can
   // spot-check afterwards if a name looks made up or gets reused
-  // suspiciously. The referrer's own 20% off isn't automated at all —
+  // suspiciously. The referrer's own 25% off isn't automated at all —
   // they aren't filling out a new application — so that side is always on
   // you to remember and honor by hand next time they book.
   //
-  // Recalculated to R$32 (still 20% off) when `price` above dropped to
-  // R$40 — the old R$80 would have been more than the new full price.
-  // Regenerate assets/pix-qr-referral.png + assets/wise-qr-referral.png
-  // to match whenever this changes.
-  referralPrice: "R$32",
+  // Set to R$30 — same discounted price as the COMMONGROUND30 checkout
+  // code — when `price` above dropped to R$40. Regenerate
+  // assets/pix-qr-referral.png + assets/wise-qr-referral.png to match
+  // whenever this changes (currently just copies of
+  // pix-qr-discount.png/wise-qr-discount.png, since both happen to be
+  // the same R$30 amount).
+  referralPrice: "R$30",
 
   // Discount codes for the Single Event Pass — entered at checkout on the
   // payment screen. Add, retire, or reprice a code just by editing this
@@ -297,7 +299,7 @@ const TRANSLATIONS = {
       communityIntro: "Introduce yourself!",
       communityLink: "Common Ground Community Groupchat →",
       referralHeading: "Refer a Friend",
-      referralBody: "Refer a friend and both get 20% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
+      referralBody: "Refer a friend and both get 25% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
     },
     question: {
       back: "← Back",
@@ -378,7 +380,7 @@ const TRANSLATIONS = {
       groupNote: "Grounds Pass holders get added to Common Ground: Inner Circle, our invite-only members WhatsApp. Members get first access to our events and announcements.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
-      referralBadge: "20% off — referred by {name}",
+      referralBadge: "25% off — referred by {name}",
       whatsappReferralSuffix: "Referred by: {name}.",
       discountPlaceholder: "Discount code",
       discountApply: "Apply",
@@ -423,7 +425,7 @@ const TRANSLATIONS = {
       communityIntro: "Se apresente!",
       communityLink: "Grupo da Comunidade Common Ground →",
       referralHeading: "Indique um Amigo",
-      referralBody: "Indique um(a) amigo(a) e os dois ganham 20% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
+      referralBody: "Indique um(a) amigo(a) e os dois ganham 25% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
     },
     question: {
       back: "← Voltar",
@@ -504,7 +506,7 @@ const TRANSLATIONS = {
       groupNote: "Titulares do Grounds Pass são adicionados ao Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros. Membros têm acesso prioritário aos nossos eventos e avisos.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
-      referralBadge: "20% de desconto — indicado(a) por {name}",
+      referralBadge: "25% de desconto — indicado(a) por {name}",
       whatsappReferralSuffix: "Indicado(a) por: {name}.",
       discountPlaceholder: "Código de desconto",
       discountApply: "Aplicar",
@@ -549,7 +551,7 @@ const TRANSLATIONS = {
       communityIntro: "¡Preséntate!",
       communityLink: "Grupo Comunitario de Common Ground →",
       referralHeading: "Refiere a un Amigo",
-      referralBody: "Refiere a un amigo y ambos obtienen 20% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
+      referralBody: "Refiere a un amigo y ambos obtienen 25% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
     },
     question: {
       back: "← Atrás",
@@ -630,7 +632,7 @@ const TRANSLATIONS = {
       groupNote: "Los titulares del Grounds Pass son añadidos a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros. Los miembros tienen acceso prioritario a nuestros eventos y anuncios.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
-      referralBadge: "20% de descuento — referido/a por {name}",
+      referralBadge: "25% de descuento — referido/a por {name}",
       whatsappReferralSuffix: "Referido/a por: {name}.",
       discountPlaceholder: "Código de descuento",
       discountApply: "Aplicar",
@@ -808,6 +810,7 @@ function renderSelectEventScreen() {
       img.className = "event-card-img";
       img.src = event.image;
       img.alt = "";
+      if (event.imagePosition) img.style.objectPosition = event.imagePosition;
       li.appendChild(img);
     }
 
