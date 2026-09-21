@@ -3,20 +3,45 @@
 // ---------------------------------------------------------------------------
 const CONFIG = {
   // Single Event Pass — one specific date, picked on the select-event screen.
-  price: "R$100",
+  // Dropped from R$100 to R$40 for the Oct 4 beach event — update this (and
+  // regenerate assets/pix-qr.png + assets/wise-qr.png) whenever the event
+  // price changes, since those QR images each encode a fixed amount.
+  price: "R$40",
 
-  // Referral discount — 20% off a Single Event Pass (R$100 -> R$80) the
-  // moment someone enters a friend's name in the "Referred by" field on
-  // the contact screen. This swaps the price/QR on the payment screen
-  // automatically, no message-first step — but since there's no backend
-  // or accounts here, it's honor-based like everything else on this site:
-  // nothing verifies the named referrer is real. Every submitted
-  // application still records the name (see submitApplication()), so you
-  // can spot-check afterwards if a name looks made up or gets reused
+  // Referral discount — 20% off a Single Event Pass the moment someone
+  // enters a friend's name in the "Referred by" field on the contact
+  // screen. This swaps the price/QR on the payment screen automatically,
+  // no message-first step — but since there's no backend or accounts
+  // here, it's honor-based like everything else on this site: nothing
+  // verifies the named referrer is real. Every submitted application
+  // still records the name (see submitApplication()), so you can
+  // spot-check afterwards if a name looks made up or gets reused
   // suspiciously. The referrer's own 20% off isn't automated at all —
   // they aren't filling out a new application — so that side is always on
   // you to remember and honor by hand next time they book.
-  referralPrice: "R$80",
+  //
+  // Recalculated to R$32 (still 20% off) when `price` above dropped to
+  // R$40 — the old R$80 would have been more than the new full price.
+  // Regenerate assets/pix-qr-referral.png + assets/wise-qr-referral.png
+  // to match whenever this changes.
+  referralPrice: "R$32",
+
+  // Discount codes for the Single Event Pass — entered at checkout on the
+  // payment screen. Add, retire, or reprice a code just by editing this
+  // object; nothing else needs to change. Codes are matched
+  // case-insensitively. Like the referral discount above, this is
+  // honor-based (no backend to enforce single-use per person) — but
+  // since there's no live usage counter either, the applied code is
+  // appended to the WhatsApp payment-proof message (see
+  // whatsappDiscountSuffix below), so you can search your WhatsApp chat
+  // for the code text to count how many times it's actually been
+  // redeemed. Each code needs its own Pix/Wise QR pair encoding that
+  // exact amount (see assets/pix-qr-discount.png / wise-qr-discount.png)
+  // — regenerate those if you change a price here.
+  discountCodes: {
+    // Posted to the Common Ground Insiders WhatsApp group — R$40 -> R$30.
+    COMMONGROUND30: { price: "R$30", gbp: 5 },
+  },
 
   // Grounds Pass — the monthly membership. Access to every event for a
   // month, plus Inner Circle, the invite-only premium WhatsApp group (day-to-day
@@ -73,8 +98,10 @@ const CONFIG = {
 
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
-  // both if you ever reprice.
-  gbpAmount: { single: 15, monthly: 26, founding: 100, referral: 12 },
+  // both if you ever reprice. single/referral recalculated at the same
+  // ~0.15 GBP-per-Real rate as before when `price`/`referralPrice`
+  // dropped — double-check against your real conversion rate.
+  gbpAmount: { single: 6, monthly: 26, founding: 100, referral: 5 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -346,6 +373,12 @@ const TRANSLATIONS = {
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
       referralBadge: "20% off — referred by {name}",
       whatsappReferralSuffix: "Referred by: {name}.",
+      discountPlaceholder: "Discount code",
+      discountApply: "Apply",
+      discountApplied: "Code applied — {price}/event",
+      discountInvalid: "That code isn't valid.",
+      discountBadge: "Code applied: {code}",
+      whatsappDiscountSuffix: "Discount code used: {code}.",
     },
     whatsappMessage: {
       single: "Hi! Here's my payment proof for my Common Ground Single Event Pass:",
@@ -466,6 +499,12 @@ const TRANSLATIONS = {
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
       referralBadge: "20% de desconto — indicado(a) por {name}",
       whatsappReferralSuffix: "Indicado(a) por: {name}.",
+      discountPlaceholder: "Código de desconto",
+      discountApply: "Aplicar",
+      discountApplied: "Código aplicado — {price}/evento",
+      discountInvalid: "Esse código não é válido.",
+      discountBadge: "Código aplicado: {code}",
+      whatsappDiscountSuffix: "Código de desconto usado: {code}.",
     },
     whatsappMessage: {
       single: "Oi! Aqui está o comprovante de pagamento do meu Passe de Evento Único da Common Ground:",
@@ -586,6 +625,12 @@ const TRANSLATIONS = {
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
       referralBadge: "20% de descuento — referido/a por {name}",
       whatsappReferralSuffix: "Referido/a por: {name}.",
+      discountPlaceholder: "Código de descuento",
+      discountApply: "Aplicar",
+      discountApplied: "Código aplicado — {price}/evento",
+      discountInvalid: "Ese código no es válido.",
+      discountBadge: "Código aplicado: {code}",
+      whatsappDiscountSuffix: "Código de descuento usado: {code}.",
     },
     whatsappMessage: {
       single: "¡Hola! Aquí está mi comprobante de pago de mi Pase de Evento Único de Common Ground:",
@@ -612,6 +657,7 @@ const state = {
   answers: [], // { question, answer, answerEn?, writeInText? }
   contact: {},
   selectedEvents: [], // holds a single "YYYY-MM-DD" date picked on the select-event screen (Single Event plan only)
+  appliedDiscountCode: null, // the matched key from CONFIG.discountCodes (e.g. "COMMONGROUND30") once successfully applied on the payment screen, else null
 };
 
 const screens = {};
@@ -700,7 +746,10 @@ function renderWhatsappBtn() {
   if (datesLabel) {
     message += " " + t("selectEvent.whatsappDatesSuffix").replace("{dates}", datesLabel);
   }
-  if (isReferralDiscountActive()) {
+  const discount = getActiveSingleDiscount();
+  if (discount && discount.type === "code") {
+    message += " " + t("approved.whatsappDiscountSuffix").replace("{code}", discount.code);
+  } else if (discount && discount.type === "referral") {
     message += " " + t("approved.whatsappReferralSuffix").replace("{name}", state.contact.referredBy);
   }
   whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -856,17 +905,33 @@ const wiseQrImages = {
   founding: "assets/wise-qr-founding.png",
 };
 
-// Referral-discount QR codes — swapped in for Single Event Pass only, when
-// state.contact.referredBy is set. See CONFIG.referralPrice for context.
+// Referral-discount and discount-code QR codes — swapped in for Single
+// Event Pass only. See CONFIG.referralPrice / CONFIG.discountCodes.
 const referralPixQr = "assets/pix-qr-referral.png";
 const referralWiseQr = "assets/wise-qr-referral.png";
+const discountPixQr = "assets/pix-qr-discount.png";
+const discountWiseQr = "assets/wise-qr-discount.png";
 
-function isReferralDiscountActive() {
-  return state.plan === "single" && !!state.contact.referredBy;
+// Single Event Pass can have at most one discount active at a time: a
+// checkout discount code (state.appliedDiscountCode) takes priority over
+// the "Referred by" discount if somehow both are present, since applying
+// a code at checkout is the more deliberate, specific action. Returns
+// null when neither applies, or on any other plan.
+function getActiveSingleDiscount() {
+  if (state.plan !== "single") return null;
+  if (state.appliedDiscountCode) {
+    const code = CONFIG.discountCodes[state.appliedDiscountCode];
+    if (code) return { type: "code", code: state.appliedDiscountCode, price: code.price, gbp: code.gbp };
+  }
+  if (state.contact.referredBy) {
+    return { type: "referral", price: CONFIG.referralPrice, gbp: CONFIG.gbpAmount.referral };
+  }
+  return null;
 }
 
 function externalPayUrl(method, plan) {
-  const amount = isReferralDiscountActive() ? CONFIG.gbpAmount.referral : CONFIG.gbpAmount[plan];
+  const discount = getActiveSingleDiscount();
+  const amount = discount ? discount.gbp : CONFIG.gbpAmount[plan];
   if (method === "paypal") return `${CONFIG.paypalLink}/${amount}GBP`;
   return "#";
 }
@@ -881,10 +946,10 @@ function renderPlanCard() {
   document.getElementById("payment-btn-wise").classList.toggle("is-active", state.paymentMethod === "wise");
 
   const isPix = state.paymentMethod === "pix";
-  const referralActive = isReferralDiscountActive();
+  const discount = getActiveSingleDiscount();
   document.getElementById("approved-price-label").textContent = t(`approved.plans.${state.plan}.label`);
-  document.getElementById("approved-price").textContent = referralActive
-    ? (isPix ? CONFIG.referralPrice : `£${CONFIG.gbpAmount.referral}`)
+  document.getElementById("approved-price").textContent = discount
+    ? (isPix ? discount.price : `£${discount.gbp}`)
     : (isPix ? planPrices[state.plan] : planPricesGBP[state.plan]);
   document.getElementById("approved-price-unit").textContent = t(`approved.plans.${state.plan}.unit`);
 
@@ -899,9 +964,14 @@ function renderPlanCard() {
     : t(`approved.plans.${state.plan}.sub`);
 
   const badge = document.getElementById("plan-badge");
-  const badgeText = referralActive
-    ? t("approved.referralBadge").replace("{name}", state.contact.referredBy)
-    : t(`approved.plans.${state.plan}.badge`);
+  let badgeText;
+  if (discount && discount.type === "code") {
+    badgeText = t("approved.discountBadge").replace("{code}", discount.code);
+  } else if (discount && discount.type === "referral") {
+    badgeText = t("approved.referralBadge").replace("{name}", state.contact.referredBy);
+  } else {
+    badgeText = t(`approved.plans.${state.plan}.badge`);
+  }
   if (badgeText) {
     badge.textContent = badgeText
       .replace("{remaining}", CONFIG.foundingMemberSpotsRemaining)
@@ -914,8 +984,9 @@ function renderPlanCard() {
   document.getElementById("pix-card").hidden = state.paymentMethod !== "pix";
   document.getElementById("external-pay-card").hidden = state.paymentMethod !== "paypal";
   document.getElementById("wise-card").hidden = state.paymentMethod !== "wise";
-  document.getElementById("pix-qr").src = referralActive ? referralPixQr : planQrImages[state.plan];
-  document.getElementById("wise-qr").src = referralActive ? referralWiseQr : wiseQrImages[state.plan];
+  const qrKind = discount ? discount.type : null;
+  document.getElementById("pix-qr").src = qrKind === "code" ? discountPixQr : qrKind === "referral" ? referralPixQr : planQrImages[state.plan];
+  document.getElementById("wise-qr").src = qrKind === "code" ? discountWiseQr : qrKind === "referral" ? referralWiseQr : wiseQrImages[state.plan];
 
   if (state.paymentMethod === "paypal") {
     const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
@@ -923,6 +994,10 @@ function renderPlanCard() {
     externalBtn.href = externalPayUrl(state.paymentMethod, state.plan);
     externalBtn.textContent = t("approved.externalPayBtn").replace("{method}", methodLabel);
   }
+
+  // Discount code entry only makes sense for the Single Event Pass — the
+  // Grounds Pass and Founding Member prices aren't discountable.
+  document.getElementById("discount-code-row").hidden = state.plan !== "single";
 
   renderWhatsappBtn();
 }
@@ -939,6 +1014,37 @@ document.querySelectorAll(".payment-btn").forEach((btn) => {
     state.paymentMethod = btn.dataset.method;
     renderPlanCard();
   });
+});
+
+// Discount code entry (Single Event Pass only — see CONFIG.discountCodes).
+// Matched case-insensitively so applicants don't need to worry about how
+// it was typed/pasted from WhatsApp.
+const discountCodeInput = document.getElementById("discount-code-input");
+const discountCodeMessage = document.getElementById("discount-code-message");
+
+function applyDiscountCode() {
+  const entered = discountCodeInput.value.trim().toUpperCase();
+  if (!entered) return;
+  const match = CONFIG.discountCodes[entered];
+  discountCodeMessage.hidden = false;
+  if (match) {
+    state.appliedDiscountCode = entered;
+    discountCodeMessage.textContent = t("approved.discountApplied").replace("{price}", match.price);
+    discountCodeMessage.classList.remove("is-error");
+  } else {
+    state.appliedDiscountCode = null;
+    discountCodeMessage.textContent = t("approved.discountInvalid");
+    discountCodeMessage.classList.add("is-error");
+  }
+  renderPlanCard();
+}
+
+document.getElementById("discount-code-apply").addEventListener("click", applyDiscountCode);
+discountCodeInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    applyDiscountCode();
+  }
 });
 
 // ---------------------------------------------------------------------------

@@ -47,7 +47,7 @@ Details:
 - **PayPal**: `CONFIG.paypalLink` — a [PayPal.me](https://paypal.me) link (`paypal.me/commongroundbr`). PayPal.me supports the amount directly in the URL (`/12GBP`), so each plan's exact link is built automatically. (An earlier PayPal "Request Money" link was deliberately *not* used here — those expire and aren't meant for repeat payers; PayPal.me links don't expire and work for anyone.)
 - **Wise**: `CONFIG.wiseLink` — a personal Wise pay-me link (`wise.com/pay/me/danielthomasw81`), with the amount appended as `?amount=X&currency=GBP` — confirmed working directly in the Wise app (it shows the right amount pre-filled on the "Scan to pay" screen). `CONFIG.wiseTag` (`@danielthomasw81`) is the copyable fallback shown under the QR. Each plan gets its own QR image (`assets/wise-qr.png`, `-monthly`, `-founding`) encoding that plan's exact link — regenerate them with any QR generator (or ask me) if you ever change the tag or `CONFIG.gbpAmount`.
 
-Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £15 single / £26 monthly / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice (and regenerate the Wise QRs to match).
+Both are priced in **GBP** rather than Reais (`CONFIG.gbpAmount` — currently £6 single / £26 monthly / £100 Founding Member) since that's the currency the PayPal/Wise accounts actually settle in — pricing directly in GBP avoids paying for two currency conversions (payer's currency → BRL → GBP) instead of one. Update `CONFIG.gbpAmount` if you ever reprice (and regenerate the Wise QRs to match).
 
 The pre-filled WhatsApp message also names which method was used ("paid via PayPal") so you can tell at a glance which inbox to check for the payment when confirming someone on WhatsApp.
 
@@ -74,7 +74,7 @@ Since there's no backend, there's no way to gate this automatically — post the
 
 ### Refer a friend — 20% off a Single Event Pass, automatic but honor-based
 
-The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 20% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$100 → R$80). The application's contact screen has a matching optional **"Referred by"** text field.
+The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 20% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$40 → R$32). The application's contact screen has a matching optional **"Referred by"** text field.
 
 The moment someone fills that field in, the payment screen **automatically** swaps to the discounted price and a separate discounted QR (`assets/pix-qr-referral.png` / `assets/wise-qr-referral.png`) — no need to message you first and wait for confirmation, they can pay straight away. This only applies to the Single Event Pass; picking Grounds Pass or Founding Member instead ignores the referral field entirely (`isReferralDiscountActive()` in `script.js` checks `state.plan === "single"`).
 
@@ -84,11 +84,27 @@ The **referrer's own 20% off is not automated at all** — they aren't filling o
 
 If you ever reprice, update `CONFIG.referralPrice` and `CONFIG.gbpAmount.referral` and regenerate both referral QR codes to match.
 
+### Discount codes — checkout-entered, easy to add/swap/retire
+
+The payment screen has a discount code field (shown only for Single Event Pass, right in the price card). Codes live in `CONFIG.discountCodes` — an object keyed by the code text (matched case-insensitively), each with its own `price` and `gbp` amount:
+
+```js
+discountCodes: {
+  COMMONGROUND30: { price: "R$30", gbp: 5 },
+},
+```
+
+To add a new code, add a new key. To retire one, delete its key. To reprice one, just edit its `price`/`gbp`. Nothing else in the code needs to change.
+
+Applying a valid code swaps the price and QR (`assets/pix-qr-discount.png` / `assets/wise-qr-discount.png`) immediately, same as the referral discount above — **if you add more than one code with different prices, you'll need separate QR images per price** (the current setup assumes a single active discount price at a time; rename/duplicate the QR files and adjust `discountPixQr`/`discountWiseQr` in `script.js` if you ever run two differently-priced codes simultaneously). If someone has both a referral name and a valid code entered, the code takes priority.
+
+**Tracking redemptions**: there's no backend here, so there's no live usage counter. Instead, whichever code was applied gets appended to the pre-filled WhatsApp payment-proof message (`approved.whatsappDiscountSuffix`) — search your WhatsApp chat for the code text (e.g. "COMMONGROUND30") to count how many times it's actually been redeemed.
+
 ### Three plans: Grounds Pass, Single Event Pass, or Founding Member
 
 **Grounds Pass is the main product** — the payment screen leads with it: it's first in the plan toggle, carries a "Recommended" badge (`approved.recommendedLabel`, a small pill on the plan button — see `.plan-btn-badge` in `styles.css`), and is what's pre-selected by default (`state.plan` defaults to `"monthly"` in `script.js`) for anyone landing directly on the payment screen via the `#approved` shortcut. **Single Event Pass is framed as the trial option** — its own sub-copy says "Try us out" (`approved.plans.single.sub`) — for people who want to test the club before committing to a month.
 
-The payment screen lets someone pay for a **Grounds Pass** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus Inner Circle), a **Single Event Pass** (`CONFIG.price`, R$100 — this event only, plus the standard WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus Inner Circle) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event Pass comes from picking a date on the select-event step above; Grounds Pass and Founding Member both come from their own skip links there instead — picking a date always overrides the default back to Single Event Pass, since that's an explicit, deliberate choice.
+The payment screen lets someone pay for a **Grounds Pass** (`CONFIG.monthlyMembershipPrice`, R$180 — every event that month, plus Inner Circle), a **Single Event Pass** (`CONFIG.price`, R$40 — this event only, plus the standard WhatsApp group), or **Founding Member** (`CONFIG.foundingMemberPrice`, R$699 — a one-time payment for lifetime access, plus Inner Circle) — each with its own QR code and Pix amount, and its own pre-filled WhatsApp message so you can tell which one someone paid for. Reached the normal way, Single Event Pass comes from picking a date on the select-event step above; Grounds Pass and Founding Member both come from their own skip links there instead — picking a date always overrides the default back to Single Event Pass, since that's an explicit, deliberate choice.
 
 There's no backend or accounts here, so **Grounds Pass renewal, and spot-tracking for Founding Member, are on you to track manually** — e.g. a running tally against their name (a note, a spreadsheet, whatever you're already using to manage the WhatsApp groups), since the site itself has no way to know when someone's paid month is up, or to hand out live-assigned Founding Member numbers. There's no recurring billing here either — a Grounds Pass is a one-off Pix/PayPal/Wise payment for one month's access, same as Founding Member is a one-off payment for lifetime access; you note when someone's month is up and follow up for the next payment when it comes due.
 
@@ -101,7 +117,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$100` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$80`) is the discounted Single Event Pass price for the "Refer a Friend" perk — see that section above.
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$40` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$32`) is the discounted Single Event Pass price for the "Refer a Friend" perk, and **`discountCodes`** holds the checkout discount codes — see both sections above.
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 
