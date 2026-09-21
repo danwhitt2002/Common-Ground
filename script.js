@@ -59,7 +59,10 @@ const CONFIG = {
   // recurring billing here (no backend for that) — like Founding Member
   // spots, renewals are tracked by hand: note when someone's month is up
   // and follow up for the next payment.
-  monthlyMembershipPrice: "R$180",
+  // Dropped from R$180 to R$100 — regenerate assets/pix-qr-monthly.png +
+  // assets/wise-qr-monthly.png (and update CONFIG.gbpAmount.monthly) if
+  // this ever changes again, same as the other plans.
+  monthlyMembershipPrice: "R$100",
 
   // Founding Member — a one-time, lifetime pass. Deliberately limited
   // (see foundingMemberSpotsTotal/Remaining below) to keep it exclusive.
@@ -102,10 +105,10 @@ const CONFIG = {
 
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
-  // both if you ever reprice. single/referral recalculated at the same
-  // ~0.15 GBP-per-Real rate as before when `price`/`referralPrice`
-  // dropped — double-check against your real conversion rate.
-  gbpAmount: { single: 6, monthly: 26, founding: 100, referral: 5 },
+  // both if you ever reprice. single/monthly/referral recalculated at
+  // the same ~0.15 GBP-per-Real rate when their Reais prices dropped —
+  // double-check against your real conversion rate.
+  gbpAmount: { single: 6, monthly: 15, founding: 100, referral: 5 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
