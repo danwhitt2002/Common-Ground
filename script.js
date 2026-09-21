@@ -30,16 +30,20 @@ const CONFIG = {
   // payment screen. Add, retire, or reprice a code just by editing this
   // object; nothing else needs to change. Codes are matched
   // case-insensitively. Like the referral discount above, this is
-  // honor-based (no backend to enforce single-use per person) — but
-  // since there's no live usage counter either, the applied code is
-  // appended to the WhatsApp payment-proof message (see
-  // whatsappDiscountSuffix below), so you can search your WhatsApp chat
-  // for the code text to count how many times it's actually been
-  // redeemed. Each code needs its own Pix/Wise QR pair encoding that
-  // exact amount (see assets/pix-qr-discount.png / wise-qr-discount.png)
-  // — regenerate those if you change a price here.
+  // honor-based (no backend to enforce single-use per person, and no way
+  // to auto-cap redemptions) — the applied code is appended to the
+  // WhatsApp payment-proof message (see whatsappDiscountSuffix below),
+  // so you can search your WhatsApp chat for the code text to count how
+  // many times it's actually been redeemed. Each code needs its own
+  // Pix/Wise QR pair encoding that exact amount (see
+  // assets/pix-qr-discount.png / wise-qr-discount.png) — regenerate
+  // those if you change a price here.
   discountCodes: {
-    // Posted to the Common Ground Insiders WhatsApp group — R$40 -> R$30.
+    // Posted to the Common Ground Insiders WhatsApp group — R$40 -> R$30,
+    // advertised there as limited to the first 10 people to use it. The
+    // site can't enforce that cap itself (no backend/counter) — once
+    // you've counted 10 uses via WhatsApp, delete this entry (or comment
+    // it out) to retire the code.
     COMMONGROUND30: { price: "R$30", gbp: 5 },
   },
 
