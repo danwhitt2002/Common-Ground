@@ -207,7 +207,7 @@ nav.wrap {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding: 40px 0;
 }
 
