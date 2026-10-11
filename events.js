@@ -108,10 +108,13 @@ function renderEventsPage() {
 
   const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 
-  // Shared by both the upcoming and past-events lists below.
-  function buildEventCard(event) {
+  // Shared by both the upcoming and past-events lists below. Upcoming
+  // events render "featured" — full width, auto height, no cropping — so
+  // the whole poster is visible without needing to tap into the lightbox;
+  // past events stay in the compact square recap grid.
+  function buildEventCard(event, { featured = false } = {}) {
     const li = document.createElement("li");
-    li.className = "event-card";
+    li.className = featured ? "event-card featured" : "event-card";
 
     if (event.tag) {
       const tag = document.createElement("span");
@@ -125,7 +128,7 @@ function renderEventsPage() {
       img.className = "event-card-img";
       img.src = event.image;
       img.alt = event.title || "";
-      if (event.imagePosition) img.style.objectPosition = event.imagePosition;
+      if (!featured && event.imagePosition) img.style.objectPosition = event.imagePosition;
       img.tabIndex = 0;
       img.setAttribute("role", "button");
       img.setAttribute("aria-label", "View full-size image");
@@ -160,9 +163,9 @@ function renderEventsPage() {
 
   eventsListEl.innerHTML = "";
   const list = document.createElement("ul");
-  list.className = "events-cards";
+  list.className = "events-cards featured";
   EVENTS_CONFIG.events.forEach((event) => {
-    list.appendChild(buildEventCard(event));
+    list.appendChild(buildEventCard(event, { featured: true }));
   });
   eventsListEl.appendChild(list);
 
@@ -172,9 +175,9 @@ function renderEventsPage() {
     pastEventsHeadingEl.hidden = pastEvents.length === 0;
     if (pastEvents.length > 0) {
       const pastList = document.createElement("ul");
-      pastList.className = "events-cards";
+      pastList.className = "events-cards featured";
       pastEvents.forEach((event) => {
-        pastList.appendChild(buildEventCard(event));
+        pastList.appendChild(buildEventCard(event, { featured: true }));
       });
       pastEventsListEl.appendChild(pastList);
     }

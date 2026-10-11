@@ -283,7 +283,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Single-Event Pass — {price}/event",
       singlePerks: {
-        access: "Access to our social club.",
+        access: "Access to 1 Common Ground event.",
       },
       stats: {
         capacity: "Max people per event",
@@ -409,7 +409,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Passe de Evento Único — {price}/evento",
       singlePerks: {
-        access: "Acesso ao nosso clube social.",
+        access: "Acesso a 1 evento da Common Ground.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -535,7 +535,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Pase de Evento Único — {price}/evento",
       singlePerks: {
-        access: "Acceso a nuestro club social.",
+        access: "Acceso a 1 evento de Common Ground.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -714,13 +714,25 @@ function renderLandingSingleHeading() {
 // Landing page's stat row shows the next upcoming event's date (day + short
 // month, e.g. "27 Sep") next to the capacity stat — reuses the same locale
 // key as the select-event screen's date formatting for consistency.
+// Deliberately not using Intl's locale-verbose month format for this one
+// badge — pt-BR's "1 de nov." doesn't fit this stat's column at the larger
+// font size matching the other count-up numbers (wraps/overflows). A
+// short, consistent "day + 3-letter month" format instead, across all
+// three languages — verbose Intl formatting is still used everywhere else
+// (e.g. the full event date shown on events.html/select-event).
+const compactMonths = {
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  pt: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
+  es: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+};
+
 function renderNextEventStat() {
   const el = document.getElementById("next-event-date");
   const nextEvent = EVENTS_CONFIG.events[0];
   if (!el || !nextEvent) return;
-  const formatter = new Intl.DateTimeFormat(t("selectEvent.locale"), { day: "numeric", month: "short", timeZone: "UTC" });
   const [y, m, d] = nextEvent.date.split("-").map(Number);
-  el.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
+  const months = compactMonths[state.lang] || compactMonths.en;
+  el.textContent = `${d} ${months[m - 1]}`;
 }
 
 function renderReferralSection() {

@@ -324,17 +324,29 @@ main {
   font-weight: 400;
   letter-spacing: -0.5px;
   color: var(--accent);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Next-event date sits alongside the count-up .stat-number figures but
-   isn't itself a counted number — a smaller size fits "27 Sep" in the
-   same column width as a two-digit count-up. */
+   isn't itself a counted number. Shares .stat-number's fixed height and
+   font-size (centering the text inside it) so the stat-label row below
+   lines up across all four columns — align-items:center on .stat alone
+   isn't enough, since that only centers each column horizontally, not
+   the number/date text vertically against its neighbors. */
 .stat-date {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 22px;
+  font-size: 34px;
   font-weight: 400;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.5px;
   color: var(--accent);
+  white-space: nowrap;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-label {
@@ -1229,6 +1241,26 @@ button.back-link {
   background: var(--card);
   text-align: center;
   overflow: hidden;
+}
+
+/* Both upcoming and past events render as a single full-width card per
+   event, sized to fit the whole poster with no cropping — there's usually
+   only a couple of these at a time, so there's no need to squeeze them
+   into a tight multi-column grid the way a long list would. */
+.events-cards.featured {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.event-card.featured {
+  aspect-ratio: auto;
+  padding: 14px 10px;
+}
+
+.event-card.featured .event-card-img {
+  flex: none;
+  height: auto;
+  object-fit: contain;
 }
 
 .event-tag {

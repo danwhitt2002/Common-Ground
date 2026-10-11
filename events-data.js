@@ -21,25 +21,25 @@
 //   "\n" for an explicit two-line title (e.g. a co-host credit on its own
 //   line above the event name) — it wraps normally otherwise.
 // - `tag` (optional) — a short badge shown above the date, e.g. "+1 PARTY".
-// - `image` (optional) — a photo for that specific event, filling the
-//   square card (e.g. "assets/events/launch-party.jpg" — already used
-//   below). The card itself is small (event cards sit 3-up in a grid), so
-//   the thumbnail crop is really just a colorful accent — the full image
-//   (whatever its shape) is always revealed uncropped when someone taps
-//   it open. No need to pre-crop your file to square; drop in the photo
-//   at whatever aspect ratio it actually is. Omit `image` entirely for no
-//   photo.
-// - `imagePosition` (optional) — CSS object-position for the square
-//   thumbnail crop (e.g. "top", "center", "25% 20%") — useful for a
-//   tall/wide `image` where the default center crop lands on a blank or
-//   busy area. Defaults to "center" if omitted.
+// - `image` (optional) — a photo for that specific event (drop the file in
+//   assets/events/ and reference it here, e.g.
+//   "assets/events/launch-party.jpg"). Shown full width with no cropping
+//   on events.html (both the upcoming and past-events sections), sized to
+//   fit the whole poster — no need to pre-crop your file, any aspect
+//   ratio works. Omit `image` entirely for no photo.
+// - `imagePosition` (optional) — only matters on the application flow's
+//   select-event step (script.js), which still shows a small square,
+//   cropped thumbnail for picking a date — CSS object-position for that
+//   crop (e.g. "top", "center", "25% 20%"), useful when the default
+//   center crop lands on a blank or busy area. No effect on events.html,
+//   where nothing is ever cropped. Defaults to "center" if omitted.
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
-    { date: "2026-11-01", location: "Quiosque Dumaré/Casa Fuego, Copacabana", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH" },
+    { date: "2026-11-01", location: "Quiosque Dumaré/Casa Fuego, Copacabana", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH", image: "assets/events/wellness-morning.jpg" },
   ],
   pastEvents: [
-    { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg", imagePosition: "top" },
+    { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg" },
     { date: "2026-09-06", location: "Copacabana", title: "LAUNCH PARTY: Bring a +1", image: "assets/events/launch-party.jpg" },
   ],
 };
