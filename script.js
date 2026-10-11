@@ -3,12 +3,13 @@
 // ---------------------------------------------------------------------------
 const CONFIG = {
   // Single Event Pass — one specific date, picked on the select-event screen.
-  // Dropped from R$100 to R$40 for the Oct 4 beach event — update this (and
-  // regenerate assets/pix-qr.png + assets/wise-qr.png) whenever the event
-  // price changes, since those QR images each encode a fixed amount.
-  price: "R$40",
+  // Back to R$100 (was briefly dropped to R$40 for the Oct 4 beach event).
+  // Update this (and regenerate assets/pix-qr.png + assets/wise-qr.png)
+  // whenever the event price changes, since those QR images each encode a
+  // fixed amount.
+  price: "R$100",
 
-  // Referral discount — 25% off a Single Event Pass the moment someone
+  // Referral discount — 20% off a Single Event Pass the moment someone
   // enters a friend's name in the "Referred by" field on the contact
   // screen. This swaps the price/QR on the payment screen automatically,
   // no message-first step — but since there's no backend or accounts
@@ -16,38 +17,28 @@ const CONFIG = {
   // verifies the named referrer is real. Every submitted application
   // still records the name (see submitApplication()), so you can
   // spot-check afterwards if a name looks made up or gets reused
-  // suspiciously. The referrer's own 25% off isn't automated at all —
+  // suspiciously. The referrer's own 20% off isn't automated at all —
   // they aren't filling out a new application — so that side is always on
   // you to remember and honor by hand next time they book.
   //
-  // Set to R$30 — same discounted price as the COMMONGROUND30 checkout
-  // code — when `price` above dropped to R$40. Regenerate
+  // Back to R$80 (20% off the R$100 price above). Regenerate
   // assets/pix-qr-referral.png + assets/wise-qr-referral.png to match
-  // whenever this changes (currently just copies of
-  // pix-qr-discount.png/wise-qr-discount.png, since both happen to be
-  // the same R$30 amount).
-  referralPrice: "R$30",
+  // whenever this changes.
+  referralPrice: "R$80",
 
   // Discount codes for the Single Event Pass — entered at checkout on the
-  // payment screen. Add, retire, or reprice a code just by editing this
-  // object; nothing else needs to change. Codes are matched
-  // case-insensitively. Like the referral discount above, this is
-  // honor-based (no backend to enforce single-use per person, and no way
-  // to auto-cap redemptions) — the applied code is appended to the
-  // WhatsApp payment-proof message (see whatsappDiscountSuffix below),
-  // so you can search your WhatsApp chat for the code text to count how
-  // many times it's actually been redeemed. Each code needs its own
-  // Pix/Wise QR pair encoding that exact amount (see
-  // assets/pix-qr-discount.png / wise-qr-discount.png) — regenerate
-  // those if you change a price here.
-  discountCodes: {
-    // Posted to the Common Ground Insiders WhatsApp group — R$40 -> R$30,
-    // advertised there as limited to the first 10 people to use it. The
-    // site can't enforce that cap itself (no backend/counter) — once
-    // you've counted 10 uses via WhatsApp, delete this entry (or comment
-    // it out) to retire the code.
-    COMMONGROUND30: { price: "R$30", gbp: 5 },
-  },
+  // payment screen. Add a code to switch the field on and make it live;
+  // leave this empty (as now — COMMONGROUND30 retired, no longer live) and
+  // the field stays hidden. Codes are matched case-insensitively. Like the
+  // referral discount above, this is honor-based (no backend to enforce
+  // single-use per person, and no way to auto-cap redemptions) — the
+  // applied code is appended to the WhatsApp payment-proof message (see
+  // whatsappDiscountSuffix below), so you can search your WhatsApp chat
+  // for the code text to count how many times it's actually been
+  // redeemed. Each code needs its own Pix/Wise QR pair encoding that
+  // exact amount (see assets/pix-qr-discount.png / wise-qr-discount.png)
+  // — regenerate those if you bring a code back with a different price.
+  discountCodes: {},
 
   // Grounds Pass — the monthly membership. Access to every event for a
   // month, plus Inner Circle, the invite-only premium WhatsApp group (day-to-day
@@ -61,10 +52,11 @@ const CONFIG = {
   // recurring billing here (no backend for that) — like Founding Member
   // spots, renewals are tracked by hand: note when someone's month is up
   // and follow up for the next payment.
-  // Dropped from R$180 to R$100 — regenerate assets/pix-qr-monthly.png +
-  // assets/wise-qr-monthly.png (and update CONFIG.gbpAmount.monthly) if
-  // this ever changes again, same as the other plans.
-  monthlyMembershipPrice: "R$100",
+  // Back to R$180 (was briefly dropped to R$100) — regenerate
+  // assets/pix-qr-monthly.png + assets/wise-qr-monthly.png (and update
+  // CONFIG.gbpAmount.monthly) if this ever changes again, same as the
+  // other plans.
+  monthlyMembershipPrice: "R$180",
 
   // Founding Member — a one-time, lifetime pass. Deliberately limited
   // (see foundingMemberSpotsTotal/Remaining below) to keep it exclusive.
@@ -107,10 +99,8 @@ const CONFIG = {
 
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
-  // both if you ever reprice. single/monthly/referral recalculated at
-  // the same ~0.15 GBP-per-Real rate when their Reais prices dropped —
-  // double-check against your real conversion rate.
-  gbpAmount: { single: 6, monthly: 15, founding: 100, referral: 5 },
+  // both if you ever reprice.
+  gbpAmount: { single: 15, monthly: 26, founding: 100, referral: 12 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -299,7 +289,7 @@ const TRANSLATIONS = {
       communityIntro: "Introduce yourself!",
       communityLink: "Common Ground Community Groupchat →",
       referralHeading: "Refer a Friend",
-      referralBody: "Refer a friend and both get 25% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
+      referralBody: "Refer a friend and both get 20% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
     },
     question: {
       back: "← Back",
@@ -380,7 +370,7 @@ const TRANSLATIONS = {
       groupNote: "Grounds Pass holders get added to Common Ground: Inner Circle, our invite-only members WhatsApp. Members get first access to our events and announcements.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
-      referralBadge: "25% off — referred by {name}",
+      referralBadge: "20% off — referred by {name}",
       whatsappReferralSuffix: "Referred by: {name}.",
       discountPlaceholder: "Discount code",
       discountApply: "Apply",
@@ -425,7 +415,7 @@ const TRANSLATIONS = {
       communityIntro: "Se apresente!",
       communityLink: "Grupo da Comunidade Common Ground →",
       referralHeading: "Indique um Amigo",
-      referralBody: "Indique um(a) amigo(a) e os dois ganham 25% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
+      referralBody: "Indique um(a) amigo(a) e os dois ganham 20% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
     },
     question: {
       back: "← Voltar",
@@ -506,7 +496,7 @@ const TRANSLATIONS = {
       groupNote: "Titulares do Grounds Pass são adicionados ao Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros. Membros têm acesso prioritário aos nossos eventos e avisos.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
-      referralBadge: "25% de desconto — indicado(a) por {name}",
+      referralBadge: "20% de desconto — indicado(a) por {name}",
       whatsappReferralSuffix: "Indicado(a) por: {name}.",
       discountPlaceholder: "Código de desconto",
       discountApply: "Aplicar",
@@ -551,7 +541,7 @@ const TRANSLATIONS = {
       communityIntro: "¡Preséntate!",
       communityLink: "Grupo Comunitario de Common Ground →",
       referralHeading: "Refiere a un Amigo",
-      referralBody: "Refiere a un amigo y ambos obtienen 25% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
+      referralBody: "Refiere a un amigo y ambos obtienen 20% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
     },
     question: {
       back: "← Atrás",
@@ -632,7 +622,7 @@ const TRANSLATIONS = {
       groupNote: "Los titulares del Grounds Pass son añadidos a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros. Los miembros tienen acceso prioritario a nuestros eventos y anuncios.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
-      referralBadge: "25% de descuento — referido/a por {name}",
+      referralBadge: "20% de descuento — referido/a por {name}",
       whatsappReferralSuffix: "Referido/a por: {name}.",
       discountPlaceholder: "Código de descuento",
       discountApply: "Aplicar",
@@ -1018,8 +1008,11 @@ function renderPlanCard() {
   }
 
   // Discount code entry only makes sense for the Single Event Pass — the
-  // Grounds Pass and Founding Member prices aren't discountable.
-  document.getElementById("discount-code-row").hidden = state.plan !== "single";
+  // Grounds Pass and Founding Member prices aren't discountable. Also
+  // hidden whenever CONFIG.discountCodes is empty (no active codes right
+  // now), rather than showing a field that can never validate anything.
+  const hasActiveCodes = Object.keys(CONFIG.discountCodes).length > 0;
+  document.getElementById("discount-code-row").hidden = state.plan !== "single" || !hasActiveCodes;
 
   renderWhatsappBtn();
 }
