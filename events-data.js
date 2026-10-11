@@ -36,7 +36,7 @@
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
-    { date: "2026-11-01", location: "TBC", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH" },
+    { date: "2026-11-01", location: "Quiosque Dumaré/Casa Fuego, Copacabana", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH" },
   ],
   pastEvents: [
     { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg", imagePosition: "top" },
