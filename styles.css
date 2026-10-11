@@ -1263,6 +1263,14 @@ button.back-link {
   object-fit: contain;
 }
 
+.event-card.featured .event-card-date {
+  font-size: 18px;
+}
+
+.event-card.featured .event-card-title {
+  font-size: 20px;
+}
+
 .event-tag {
   display: inline-block;
   font-size: 9px;

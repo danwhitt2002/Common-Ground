@@ -108,10 +108,11 @@ function renderEventsPage() {
 
   const dateFormatter = new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 
-  // Shared by both the upcoming and past-events lists below. Upcoming
-  // events render "featured" — full width, auto height, no cropping — so
+  // Shared by both the upcoming and past-events lists below. The upcoming
+  // event renders "featured" — full width, auto height, no cropping — so
   // the whole poster is visible without needing to tap into the lightbox;
-  // past events stay in the compact square recap grid.
+  // past events render as small, cropped squares in a compact recap grid —
+  // tapping one still opens the same lightbox to see the full poster.
   function buildEventCard(event, { featured = false } = {}) {
     const li = document.createElement("li");
     li.className = featured ? "event-card featured" : "event-card";
@@ -175,9 +176,9 @@ function renderEventsPage() {
     pastEventsHeadingEl.hidden = pastEvents.length === 0;
     if (pastEvents.length > 0) {
       const pastList = document.createElement("ul");
-      pastList.className = "events-cards featured";
+      pastList.className = "events-cards";
       pastEvents.forEach((event) => {
-        pastList.appendChild(buildEventCard(event, { featured: true }));
+        pastList.appendChild(buildEventCard(event, { featured: false }));
       });
       pastEventsListEl.appendChild(pastList);
     }

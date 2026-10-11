@@ -72,29 +72,23 @@ Current partner deals (not stored anywhere else — keep this list updated as yo
 
 Since there's no backend, there's no way to gate this automatically — post the code(s) in Inner Circle's group description or pinned message so Grounds Pass and Founding Member holders can find it themselves, rather than sending it out one-by-one.
 
-### Refer a friend — 20% off a Single Event Pass, automatic but honor-based
-
-The landing page has a "Refer a Friend" card (below the stats row) explaining that if an existing applicant refers a friend, both get 20% off a Single Event Pass (`CONFIG.price` → `CONFIG.referralPrice`, currently R$100 → R$80). The application's contact screen has a matching optional **"Referred by"** text field.
-
-The moment someone fills that field in, the payment screen **automatically** swaps to the discounted price and a separate discounted QR (`assets/pix-qr-referral.png` / `assets/wise-qr-referral.png`) — no need to message you first and wait for confirmation, they can pay straight away. This only applies to the Single Event Pass; picking Grounds Pass or Founding Member instead ignores the referral field entirely (`isReferralDiscountActive()` in `script.js` checks `state.plan === "single"`).
-
-**This is honor-based, deliberately** — there's no backend or accounts here, so nothing verifies the named referrer is real; anyone could type any name into that field and get the discount immediately. That trade-off was made on purpose to keep the payment flow frictionless (pay immediately, not "message first, wait for us to confirm, then pay"). The mitigation: every submitted application still records whatever was typed in "Referred by" (it flows straight into your Formspree inbox like every other field), so you can spot-check afterwards — a name that's clearly made up, or the same name showing up suspiciously often, is visible to you after the fact even though it wasn't blocked up front.
-
-The **referrer's own 20% off is not automated at all** — they aren't filling out a new application, so there's no field for them to trigger anything. You'll need to remember to honor that side by hand (a note, a tally, whatever you already use to track Founding Member spots) the next time they book a Single Event Pass.
-
-If you ever reprice, update `CONFIG.referralPrice` and `CONFIG.gbpAmount.referral` and regenerate both referral QR codes to match.
-
 ### Discount codes — checkout-entered, easy to add/swap/retire
 
-The payment screen has a discount code field (shown only for Single Event Pass, right in the price card) — but **only when at least one code is active**. Codes live in `CONFIG.discountCodes`, an object keyed by the code text (matched case-insensitively), each with its own `price` and `gbp` amount. It's currently empty (the COMMONGROUND30 code that used to live here has been retired), so the field is hidden entirely right now:
+The payment screen has a discount code field (shown only for Single Event Pass, right in the price card) — but **only when at least one code is active**. Codes live in `CONFIG.discountCodes`, an object keyed by the code text (matched case-insensitively), each with its own `price` and `gbp` amount. Currently there's one live code:
 
 ```js
-discountCodes: {},
+discountCodes: {
+  BRINGAFRIEND15: { price: "R$85", gbp: 13 },
+},
 ```
 
-To bring a code back or add a new one, add a key — e.g. `COMMONGROUND30: { price: "R$80", gbp: 12 }` — and the field reappears automatically. To retire one, delete its key (back to `{}` hides the field again). To reprice one, just edit its `price`/`gbp`. Nothing else in the code needs to change.
+`BRINGAFRIEND15` is the **"Bring a Friend"** code, featured on the landing page's Bring a Friend card (below the stats row): buy 2 tickets together and use the code at checkout for 15% off a Single Event Pass (`CONFIG.price` → R$100 → R$85).
 
-Applying a valid code swaps the price and QR (`assets/pix-qr-discount.png` / `assets/wise-qr-discount.png`) immediately, same as the referral discount above — **if you add more than one code with different prices, you'll need separate QR images per price** (the current setup assumes a single active discount price at a time; rename/duplicate the QR files and adjust `discountPixQr`/`discountWiseQr` in `script.js` if you ever run two differently-priced codes simultaneously). If someone has both a referral name and a valid code entered, the code takes priority.
+To add another code, add a key the same way. To retire one, delete its key (back to `{}` hides the field entirely). To reprice one, just edit its `price`/`gbp` and regenerate `assets/pix-qr-discount.png` / `assets/wise-qr-discount.png` to match. Nothing else in the code needs to change.
+
+Applying a valid code swaps the price and QR (`assets/pix-qr-discount.png` / `assets/wise-qr-discount.png`) immediately — **if you add more than one code with different prices, you'll need separate QR images per price** (the current setup assumes a single active discount price at a time; rename/duplicate the QR files and adjust `discountPixQr`/`discountWiseQr` in `script.js` if you ever run two differently-priced codes simultaneously).
+
+**This is honor-based, deliberately** — there's no backend here, so nothing enforces single-use per person or caps redemptions. The mitigation: whichever code was applied gets appended to the pre-filled WhatsApp payment-proof message (`approved.whatsappDiscountSuffix`) — search your WhatsApp chat for the code text to count how many times it's actually been redeemed.
 
 **Tracking redemptions**: there's no backend here, so there's no live usage counter. Instead, whichever code was applied gets appended to the pre-filled WhatsApp payment-proof message (`approved.whatsappDiscountSuffix`) — search your WhatsApp chat for the code text to count how many times it's actually been redeemed.
 
@@ -115,7 +109,7 @@ Capped at `CONFIG.foundingMemberSpotsTotal` (currently 20) to keep it exclusive 
 ### Before you go live, edit `script.js` → `CONFIG`:
 
 1. **`formEndpoint`** — already set to your Formspree endpoint (`https://formspree.io/f/mbgjrjnp`), so applications submit there automatically. They're also kept as a local-only backup in the browser's `localStorage` either way.
-2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$100` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`referralPrice`** (currently `R$80`) is the discounted Single Event Pass price for the "Refer a Friend" perk, and **`discountCodes`** holds the checkout discount codes — see both sections above.
+2. **`price`** / **`monthlyMembershipPrice`** / **`foundingMemberPrice`** — currently `R$100` per event (Single Event Pass), `R$180` for the Grounds Pass, and `R$699` for Founding Member, shown on the landing and payment screens (should match the amounts encoded in the three Pix QRs). **`discountCodes`** holds the checkout discount codes (currently just `BRINGAFRIEND15`, the "Bring a Friend" perk) — see the section above.
 3. **`instagramHandle`** — shown on the payment screen.
 4. **`questions`** — the application questions, in order. Each is `type: "choice"` (single-select, needs an `options` array, tapping one auto-advances), `type: "multi"` (multi-select — same `options` array, tap any number then hit Continue; set `hint` for a note like "Choose one or more"), or `type: "text"`/`"textarea"` (a free-response field — `"text"` is one short line like a name, `"textarea"` is a longer answer). A `"choice"` question can also set `writeIn` to the `en` value of one option (e.g. "Something else") — selecting it opens a text box instead of submitting right away, so you get a real answer instead of a vague catch-all; pair it with `writeInPlaceholder`. An optional `key` (e.g. `"name"`) surfaces that answer as its own field in the saved application, in addition to the full Q&A list.
 

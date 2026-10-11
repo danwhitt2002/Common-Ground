@@ -9,36 +9,24 @@ const CONFIG = {
   // fixed amount.
   price: "R$100",
 
-  // Referral discount — 20% off a Single Event Pass the moment someone
-  // enters a friend's name in the "Referred by" field on the contact
-  // screen. This swaps the price/QR on the payment screen automatically,
-  // no message-first step — but since there's no backend or accounts
-  // here, it's honor-based like everything else on this site: nothing
-  // verifies the named referrer is real. Every submitted application
-  // still records the name (see submitApplication()), so you can
-  // spot-check afterwards if a name looks made up or gets reused
-  // suspiciously. The referrer's own 20% off isn't automated at all —
-  // they aren't filling out a new application — so that side is always on
-  // you to remember and honor by hand next time they book.
-  //
-  // Back to R$80 (20% off the R$100 price above). Regenerate
-  // assets/pix-qr-referral.png + assets/wise-qr-referral.png to match
-  // whenever this changes.
-  referralPrice: "R$80",
-
   // Discount codes for the Single Event Pass — entered at checkout on the
   // payment screen. Add a code to switch the field on and make it live;
-  // leave this empty (as now — COMMONGROUND30 retired, no longer live) and
-  // the field stays hidden. Codes are matched case-insensitively. Like the
-  // referral discount above, this is honor-based (no backend to enforce
-  // single-use per person, and no way to auto-cap redemptions) — the
-  // applied code is appended to the WhatsApp payment-proof message (see
-  // whatsappDiscountSuffix below), so you can search your WhatsApp chat
-  // for the code text to count how many times it's actually been
-  // redeemed. Each code needs its own Pix/Wise QR pair encoding that
-  // exact amount (see assets/pix-qr-discount.png / wise-qr-discount.png)
-  // — regenerate those if you bring a code back with a different price.
-  discountCodes: {},
+  // an empty object hides the field. Codes are matched case-insensitively.
+  // This is honor-based (no backend to enforce single-use per person, and
+  // no way to auto-cap redemptions) — the applied code is appended to the
+  // WhatsApp payment-proof message (see whatsappDiscountSuffix below), so
+  // you can search your WhatsApp chat for the code text to count how many
+  // times it's actually been redeemed. Each code needs its own Pix/Wise QR
+  // pair encoding that exact amount (see assets/pix-qr-discount.png /
+  // wise-qr-discount.png) — regenerate those if you bring a code back
+  // with a different price.
+  //
+  // BRINGAFRIEND15 is the live "Bring a Friend" code, featured on the
+  // landing page: 15% off (R$85) a Single Event Pass when a pair buys
+  // tickets together.
+  discountCodes: {
+    BRINGAFRIEND15: { price: "R$85", gbp: 13 },
+  },
 
   // Grounds Pass — the monthly membership. Access to every event for a
   // month, plus Inner Circle, the invite-only premium WhatsApp group (day-to-day
@@ -100,7 +88,7 @@ const CONFIG = {
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
-  gbpAmount: { single: 15, monthly: 26, founding: 100, referral: 12 },
+  gbpAmount: { single: 15, monthly: 26, founding: 100 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -288,8 +276,8 @@ const TRANSLATIONS = {
       communityLede: "Not ready to apply yet? Join our general WhatsApp community — open to everyone, event updates and announcements.",
       communityIntro: "Introduce yourself!",
       communityLink: "Common Ground Community Groupchat →",
-      referralHeading: "Refer a Friend",
-      referralBody: "Refer a friend and both get 20% off your single-event pass. All they need to do is mention your name in the Referral section in the application.",
+      referralHeading: "Bring a Friend",
+      referralBody: "Buy 2 tickets together and use code BRINGAFRIEND15 at checkout for 15% off your single-event pass.",
     },
     question: {
       back: "← Back",
@@ -307,8 +295,6 @@ const TRANSLATIONS = {
       whatsappPlaceholder: "+55 21 91234-5678",
       instagramLabel: "Instagram handle",
       instagramPlaceholder: "@yourname",
-      referredByLabel: "Referred by",
-      referredByPlaceholder: "Friend's name",
       optional: "(optional)",
       submit: "Submit Application",
       error: "Please fill in your WhatsApp number.",
@@ -370,8 +356,6 @@ const TRANSLATIONS = {
       groupNote: "Grounds Pass holders get added to Common Ground: Inner Circle, our invite-only members WhatsApp. Members get first access to our events and announcements.",
       menuLink: "See the drinks menu →",
       finePrint: "Send your receipt on WhatsApp to lock in your spot. Questions? DM us on Instagram {handle}.",
-      referralBadge: "20% off — referred by {name}",
-      whatsappReferralSuffix: "Referred by: {name}.",
       discountPlaceholder: "Discount code",
       discountApply: "Apply",
       discountApplied: "Code applied — {price}/event",
@@ -414,8 +398,8 @@ const TRANSLATIONS = {
       communityLede: "Ainda não está pronto(a) para se inscrever? Entre no nosso grupo geral do WhatsApp — aberto a todos, com novidades e avisos de eventos.",
       communityIntro: "Se apresente!",
       communityLink: "Grupo da Comunidade Common Ground →",
-      referralHeading: "Indique um Amigo",
-      referralBody: "Indique um(a) amigo(a) e os dois ganham 20% de desconto no passe de evento único. Basta ele(a) mencionar seu nome no campo de indicação da inscrição.",
+      referralHeading: "Traga um Amigo",
+      referralBody: "Compre 2 ingressos juntos e use o código BRINGAFRIEND15 no pagamento para ganhar 15% de desconto no passe de evento único.",
     },
     question: {
       back: "← Voltar",
@@ -433,8 +417,6 @@ const TRANSLATIONS = {
       whatsappPlaceholder: "+55 21 91234-5678",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@seunome",
-      referredByLabel: "Indicado(a) por",
-      referredByPlaceholder: "Nome do(a) amigo(a)",
       optional: "(opcional)",
       submit: "Enviar Inscrição",
       error: "Preencha seu número de WhatsApp.",
@@ -496,8 +478,6 @@ const TRANSLATIONS = {
       groupNote: "Titulares do Grounds Pass são adicionados ao Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros. Membros têm acesso prioritário aos nossos eventos e avisos.",
       menuLink: "Veja o cardápio de bebidas →",
       finePrint: "Envie seu comprovante no WhatsApp para garantir sua vaga. Dúvidas? Chame no Instagram {handle}.",
-      referralBadge: "20% de desconto — indicado(a) por {name}",
-      whatsappReferralSuffix: "Indicado(a) por: {name}.",
       discountPlaceholder: "Código de desconto",
       discountApply: "Aplicar",
       discountApplied: "Código aplicado — {price}/evento",
@@ -540,8 +520,8 @@ const TRANSLATIONS = {
       communityLede: "¿Aún no estás listo/a para solicitar? Únete a nuestra comunidad general de WhatsApp — abierta a todos, con novedades y anuncios de eventos.",
       communityIntro: "¡Preséntate!",
       communityLink: "Grupo Comunitario de Common Ground →",
-      referralHeading: "Refiere a un Amigo",
-      referralBody: "Refiere a un amigo y ambos obtienen 20% de descuento en el pase de evento único. Solo tiene que mencionar tu nombre en el campo de referido de la solicitud.",
+      referralHeading: "Trae a un Amigo",
+      referralBody: "Compra 2 entradas juntos y usa el código BRINGAFRIEND15 al pagar para obtener 15% de descuento en el pase de evento único.",
     },
     question: {
       back: "← Atrás",
@@ -559,8 +539,6 @@ const TRANSLATIONS = {
       whatsappPlaceholder: "+55 21 91234-5678",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@tunombre",
-      referredByLabel: "Referido/a por",
-      referredByPlaceholder: "Nombre de tu amigo/a",
       optional: "(opcional)",
       submit: "Enviar Solicitud",
       error: "Completa tu número de WhatsApp.",
@@ -622,8 +600,6 @@ const TRANSLATIONS = {
       groupNote: "Los titulares del Grounds Pass son añadidos a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros. Los miembros tienen acceso prioritario a nuestros eventos y anuncios.",
       menuLink: "Mira el menú de bebidas →",
       finePrint: "Envía tu comprobante por WhatsApp para asegurar tu lugar. ¿Dudas? Escríbenos por Instagram {handle}.",
-      referralBadge: "20% de descuento — referido/a por {name}",
-      whatsappReferralSuffix: "Referido/a por: {name}.",
       discountPlaceholder: "Código de descuento",
       discountApply: "Aplicar",
       discountApplied: "Código aplicado — {price}/evento",
@@ -728,7 +704,7 @@ function renderNextEventStat() {
 function renderReferralSection() {
   document.getElementById("landing-referral-body").textContent = t("landing.referralBody");
   document.getElementById("referral-price-old").textContent = CONFIG.price;
-  document.getElementById("referral-price-new").textContent = CONFIG.referralPrice;
+  document.getElementById("referral-price-new").textContent = CONFIG.discountCodes.BRINGAFRIEND15.price;
 }
 
 function renderApprovedFinePrint() {
@@ -760,8 +736,6 @@ function renderWhatsappBtn() {
   const discount = getActiveSingleDiscount();
   if (discount && discount.type === "code") {
     message += " " + t("approved.whatsappDiscountSuffix").replace("{code}", discount.code);
-  } else if (discount && discount.type === "referral") {
-    message += " " + t("approved.whatsappReferralSuffix").replace("{name}", state.contact.referredBy);
   }
   whatsappBtn.href = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
@@ -917,26 +891,18 @@ const wiseQrImages = {
   founding: "assets/wise-qr-founding.png",
 };
 
-// Referral-discount and discount-code QR codes — swapped in for Single
-// Event Pass only. See CONFIG.referralPrice / CONFIG.discountCodes.
-const referralPixQr = "assets/pix-qr-referral.png";
-const referralWiseQr = "assets/wise-qr-referral.png";
+// Discount-code QR codes — swapped in for Single Event Pass only. See
+// CONFIG.discountCodes.
 const discountPixQr = "assets/pix-qr-discount.png";
 const discountWiseQr = "assets/wise-qr-discount.png";
 
-// Single Event Pass can have at most one discount active at a time: a
-// checkout discount code (state.appliedDiscountCode) takes priority over
-// the "Referred by" discount if somehow both are present, since applying
-// a code at checkout is the more deliberate, specific action. Returns
-// null when neither applies, or on any other plan.
+// Single Event Pass discount via a checkout code (state.appliedDiscountCode).
+// Returns null when no code is applied, or on any other plan.
 function getActiveSingleDiscount() {
   if (state.plan !== "single") return null;
   if (state.appliedDiscountCode) {
     const code = CONFIG.discountCodes[state.appliedDiscountCode];
     if (code) return { type: "code", code: state.appliedDiscountCode, price: code.price, gbp: code.gbp };
-  }
-  if (state.contact.referredBy) {
-    return { type: "referral", price: CONFIG.referralPrice, gbp: CONFIG.gbpAmount.referral };
   }
   return null;
 }
@@ -979,8 +945,6 @@ function renderPlanCard() {
   let badgeText;
   if (discount && discount.type === "code") {
     badgeText = t("approved.discountBadge").replace("{code}", discount.code);
-  } else if (discount && discount.type === "referral") {
-    badgeText = t("approved.referralBadge").replace("{name}", state.contact.referredBy);
   } else {
     badgeText = t(`approved.plans.${state.plan}.badge`);
   }
@@ -997,8 +961,8 @@ function renderPlanCard() {
   document.getElementById("external-pay-card").hidden = state.paymentMethod !== "paypal";
   document.getElementById("wise-card").hidden = state.paymentMethod !== "wise";
   const qrKind = discount ? discount.type : null;
-  document.getElementById("pix-qr").src = qrKind === "code" ? discountPixQr : qrKind === "referral" ? referralPixQr : planQrImages[state.plan];
-  document.getElementById("wise-qr").src = qrKind === "code" ? discountWiseQr : qrKind === "referral" ? referralWiseQr : wiseQrImages[state.plan];
+  document.getElementById("pix-qr").src = qrKind === "code" ? discountPixQr : planQrImages[state.plan];
+  document.getElementById("wise-qr").src = qrKind === "code" ? discountWiseQr : wiseQrImages[state.plan];
 
   if (state.paymentMethod === "paypal") {
     const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
@@ -1444,7 +1408,6 @@ const contactError = document.getElementById("contact-error");
 function prefillContact() {
   contactForm.whatsapp.value = state.contact.whatsapp || "";
   contactForm.instagram.value = state.contact.instagram || "";
-  contactForm.referredBy.value = state.contact.referredBy || "";
 }
 
 document.getElementById("contact-back-btn").addEventListener("click", () => {
@@ -1452,7 +1415,6 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
   state.contact = {
     whatsapp: contactForm.whatsapp.value.trim(),
     instagram: contactForm.instagram.value.trim(),
-    referredBy: contactForm.referredBy.value.trim(),
   };
   state.questionIndex = CONFIG.questions.length - 1;
   renderQuestion();
@@ -1464,7 +1426,6 @@ contactForm.addEventListener("submit", (e) => {
   const data = new FormData(contactForm);
   const whatsapp = (data.get("whatsapp") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
-  const referredBy = (data.get("referredBy") || "").toString().trim();
 
   if (!whatsapp) {
     contactError.textContent = t("contact.error");
@@ -1473,7 +1434,7 @@ contactForm.addEventListener("submit", (e) => {
   }
   contactError.hidden = true;
 
-  state.contact = { whatsapp, instagram, referredBy };
+  state.contact = { whatsapp, instagram };
   showScreen("reviewing");
   runReviewSequence();
 });
