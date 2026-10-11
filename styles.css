@@ -1312,6 +1312,7 @@ button.back-link {
   font-size: 11.5px;
   line-height: 1.15;
   color: var(--accent);
+  white-space: pre-line;
 }
 
 #past-events-heading {

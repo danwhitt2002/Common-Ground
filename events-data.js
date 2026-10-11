@@ -17,7 +17,9 @@
 // Each entry is { date: "YYYY-MM-DD", location, title?, tag?, image?,
 // imagePosition? }:
 // - `title` (optional) — a prominent headline for a special date, e.g.
-//   "LAUNCH PARTY: Bring a +1". Omit for a normal, date-only event.
+//   "LAUNCH PARTY: Bring a +1". Omit for a normal, date-only event. Use
+//   "\n" for an explicit two-line title (e.g. a co-host credit on its own
+//   line above the event name) — it wraps normally otherwise.
 // - `tag` (optional) — a short badge shown above the date, e.g. "+1 PARTY".
 // - `image` (optional) — a photo for that specific event, filling the
 //   square card (e.g. "assets/events/launch-party.jpg" — already used
@@ -34,9 +36,10 @@
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
-    { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg", imagePosition: "top" },
+    { date: "2026-11-01", location: "TBC", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH" },
   ],
   pastEvents: [
+    { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg", imagePosition: "top" },
     { date: "2026-09-06", location: "Copacabana", title: "LAUNCH PARTY: Bring a +1", image: "assets/events/launch-party.jpg" },
   ],
 };

@@ -119,7 +119,7 @@ const CONFIG = {
   // The STANDARD/general WhatsApp community group's invite link — this one
   // is public, shown directly on the landing page as a tappable link
   // (landing.communityLink), open to anyone, no payment needed. Distinct
-  // from Inner Circle, the PREMIUM group (fortnightly events + day-to-day meetups), which
+  // from Inner Circle, the PREMIUM group (events + day-to-day meetups), which
   // stays invite-only — you still hand that invite out manually to Grounds
   // Pass/Founding Member holders after confirming payment, same as before.
   standardGroupLink: "https://chat.whatsapp.com/F0Cfm69AAL6JVQpoud0Ok0?s=cl&p=i&mlu=4&ilr=4",
@@ -272,7 +272,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      bio: "A fortnightly social club in Rio de Janeiro made for connection through community. Locals, nomads, and travellers alike — everyone is welcome!",
+      bio: "A social club in Rio de Janeiro made for connection through community. Locals, nomads, and travellers alike — everyone is welcome!",
       lede: "Find your Common Ground — apply now.",
       perksHeading: "The Grounds Pass — {monthlyPrice}/month",
       perks: {
@@ -283,7 +283,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Single-Event Pass — {price}/event",
       singlePerks: {
-        access: "Access to our fortnightly social club.",
+        access: "Access to our social club.",
       },
       stats: {
         capacity: "Max people per event",
@@ -357,7 +357,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/month",
-          sub: "Every event this month, plus Inner Circle, our invite-only WhatsApp group — fortnightly events, run club, beach days, co-working, and discounts with our curated brand partners",
+          sub: "Every event this month, plus Inner Circle, our invite-only WhatsApp group — run club, beach days, co-working, and discounts with our curated brand partners",
         },
         founding: {
           label: "Founding Member",
@@ -398,7 +398,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      bio: "Um clube social quinzenal no Rio de Janeiro feito para conexão através da comunidade. Cariocas, nômades e viajantes — todos são bem-vindos!",
+      bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Cariocas, nômades e viajantes — todos são bem-vindos!",
       lede: "Find your Common Ground — inscreva-se agora.",
       perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
       perks: {
@@ -409,7 +409,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Passe de Evento Único — {price}/evento",
       singlePerks: {
-        access: "Acesso ao nosso clube social quinzenal.",
+        access: "Acesso ao nosso clube social.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -483,7 +483,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mês",
-          sub: "Todos os eventos do mês, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp — encontros quinzenais, corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
+          sub: "Todos os eventos do mês, além do Inner Circle, nosso grupo exclusivo por convite no WhatsApp — corrida em grupo, praia, coworking e descontos com nossas marcas parceiras",
         },
         founding: {
           label: "Membro Fundador",
@@ -524,7 +524,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      bio: "Un club social quincenal en Río de Janeiro creado para la conexión a través de la comunidad. Cariocas, nómadas y viajeros — ¡todos son bienvenidos!",
+      bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Cariocas, nómadas y viajeros — ¡todos son bienvenidos!",
       lede: "Find your Common Ground — solicita ahora.",
       perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
       perks: {
@@ -535,7 +535,7 @@ const TRANSLATIONS = {
       },
       singleHeading: "Pase de Evento Único — {price}/evento",
       singlePerks: {
-        access: "Acceso a nuestro club social quincenal.",
+        access: "Acceso a nuestro club social.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -609,7 +609,7 @@ const TRANSLATIONS = {
         monthly: {
           label: "Grounds Pass",
           unit: "/mes",
-          sub: "Todos los eventos de este mes, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp — eventos quincenales, running club, playa, coworking y descuentos con nuestras marcas asociadas",
+          sub: "Todos los eventos de este mes, además del Inner Circle, nuestro grupo exclusivo por invitación de WhatsApp — running club, playa, coworking y descuentos con nuestras marcas asociadas",
         },
         founding: {
           label: "Miembro Fundador",
