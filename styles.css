@@ -252,23 +252,23 @@ main {
    a different degree — a tick/cross alone would lose that distinction). */
 .plans-table {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   border-collapse: collapse;
   margin-top: 8px;
   table-layout: fixed;
   font-family: 'Architects Daughter', cursive;
 }
 
-.plans-table-feature { width: 64%; }
-.plans-table-col { width: 18%; }
+.plans-table-feature { width: 54%; }
+.plans-table-col { width: 23%; }
 
 .plans-table th,
 .plans-table td {
-  padding: 8px 6px;
+  padding: 10px 6px;
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ink-dim);
 }
 
@@ -284,13 +284,13 @@ main {
 .plans-table-col-name {
   display: block;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ink-dim);
 }
 
 .plans-table-col-price {
   display: block;
-  font-size: 9.5px;
+  font-size: 10.5px;
   font-weight: 400;
   color: var(--ink-dim);
   opacity: 0.8;
@@ -298,13 +298,13 @@ main {
 
 .plans-table-mark {
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--ink-dim);
 }
 
 .plans-table-mark.is-no { opacity: 0.4; }
-.plans-table-mark.is-value { font-size: 10.5px; font-weight: 600; }
+.plans-table-mark.is-value { font-size: 13px; font-weight: 600; }
 
 /* Handwritten photo headers (see CONFIG/renderComparePhotoLabels in
    script.js) — fall back to live translated text for pt/es, toggled via
@@ -314,7 +314,7 @@ main {
 .plans-table-col-name-img {
   display: block;
   width: 85%;
-  max-width: 85px;
+  max-width: 110px;
   height: auto;
   margin: 0 auto;
 }
@@ -422,8 +422,16 @@ h1.display { font-size: clamp(38px, 10vw, 52px); }
 h2.display { font-size: clamp(26px, 7vw, 32px); }
 
 /* Landing hero: bring the headline size down a step closer to the eyebrow
-   and lede around it, instead of the much larger default h1 scale. */
-.landing-hero h1.display { font-size: clamp(34px, 9vw, 44px); }
+   and lede around it, instead of the much larger default h1 scale. Also
+   swap in a casual handwritten script for just this one headline (the
+   rest of .display stays Instrument Serif), matching the reference
+   "What if curiosity had a place?" style. */
+.landing-hero h1.display {
+  font-family: 'Caveat', cursive;
+  font-weight: 600;
+  font-size: clamp(42px, 12vw, 56px);
+  letter-spacing: normal;
+}
 
 .lede {
   font-size: 16px;
