@@ -797,13 +797,13 @@ function renderSelectEventScreen() {
   listEl.innerHTML = "";
 
   const ul = document.createElement("ul");
-  ul.className = "events-cards";
+  ul.className = "events-cards featured";
 
   EVENTS_CONFIG.events.forEach((event) => {
     const isSelected = state.selectedEvents[0] === event.date;
 
     const li = document.createElement("li");
-    li.className = "event-card event-card-select" + (isSelected ? " is-selected" : "");
+    li.className = "event-card featured event-card-select" + (isSelected ? " is-selected" : "");
     li.setAttribute("role", "radio");
     li.setAttribute("aria-checked", String(isSelected));
     li.tabIndex = 0;
