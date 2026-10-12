@@ -442,6 +442,56 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 .btn-primary:hover { background: #ddd0a8; }
 .btn-primary:active { transform: scale(0.97); }
 
+/* Outlined variant — same shape as .btn-primary but lower visual weight,
+   for a secondary action placed right next to a primary one (e.g. "Apply
+   for the Grounds Pass" beside "Get Your Ticket" on the landing screen). */
+.btn-secondary {
+  appearance: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 340px;
+  padding: 15px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-dim);
+  background: transparent;
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.btn-secondary:hover { border-color: var(--accent); background: rgba(205, 187, 140, 0.08); }
+.btn-secondary:active { transform: scale(0.97); }
+
+/* Two CTAs side by side on the landing screen — each button shrinks to
+   share the row instead of the usual full-width/max-340px single-button
+   sizing, with a smaller font so longer translated labels (pt/es) still
+   fit on one or two lines without overflowing their half of the row. */
+.landing-cta-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.landing-cta-buttons .btn-cta {
+  flex: 1;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  padding: 14px 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* Language switch — small flag buttons, top-right of the landing screen */
 .lang-switch {
   position: absolute;
@@ -1040,24 +1090,16 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 .copy-btn:hover { border-color: var(--accent); background: #1c3fa0; }
 .copy-btn.copied { color: var(--ink); border-color: var(--accent-dim); }
 
-/* Secondary text link — also used on a few <button> elements (e.g.
-   #start-btn) for a lower-emphasis action styled the same as a link;
-   the reset properties below only matter for those, undoing default
-   button chrome (anchors don't have any to begin with). */
+/* Secondary text link */
 .link-secondary {
-  appearance: none;
-  background: none;
-  border: none;
-  border-bottom: 1px solid var(--line);
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
   display: inline-block;
   margin-top: 16px;
-  padding: 0 0 2px;
   font-size: 14px;
   font-weight: 600;
   color: var(--ink-dim);
   text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
