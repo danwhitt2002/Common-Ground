@@ -255,6 +255,7 @@ main {
   border-collapse: collapse;
   margin-top: 8px;
   table-layout: fixed;
+  font-family: 'Architects Daughter', cursive;
 }
 
 .plans-table-feature { width: 30%; }
