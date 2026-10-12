@@ -257,11 +257,15 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/event",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/month",
-        rowAccess: "Event access",
-        rowAccessGrounds: "Unlimited",
-        rowGroupchat: "Inner Circle WhatsApp",
-        rowMeetups: "Monthly meetups",
-        rowBrands: "Brand discounts",
+      },
+      perks: {
+        access: "Unlimited access to Common Ground events that month.",
+        groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
+        meetups: "Meetups throughout the month — coworking, run clubs, beach days, and more.",
+        brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
+      },
+      singlePerks: {
+        access: "Access to 1 Common Ground event.",
       },
       stats: {
         capacity: "Max people per event",
@@ -381,11 +385,15 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/evento",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mês",
-        rowAccess: "Acesso a eventos",
-        rowAccessGrounds: "Ilimitado",
-        rowGroupchat: "WhatsApp Inner Circle",
-        rowMeetups: "Encontros mensais",
-        rowBrands: "Descontos em marcas",
+      },
+      perks: {
+        access: "Acesso ilimitado aos eventos da Common Ground naquele mês.",
+        groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
+        meetups: "Encontros ao longo do mês — coworking, corrida em grupo, praia e muito mais.",
+        brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
+      },
+      singlePerks: {
+        access: "Acesso a 1 evento da Common Ground.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -505,11 +513,15 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/evento",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mes",
-        rowAccess: "Acceso a eventos",
-        rowAccessGrounds: "Ilimitado",
-        rowGroupchat: "WhatsApp Inner Circle",
-        rowMeetups: "Encuentros mensuales",
-        rowBrands: "Descuentos en marcas",
+      },
+      perks: {
+        access: "Acceso ilimitado a los eventos de Common Ground ese mes.",
+        groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
+        meetups: "Encuentros durante todo el mes — coworking, running club, playa y más.",
+        brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
+      },
+      singlePerks: {
+        access: "Acceso a 1 evento de Common Ground.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -684,16 +696,14 @@ function renderLandingSingleHeading() {
   document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
 }
 
-// The comparison table's plan-name headers and perk-row labels show as the
-// club's own handwriting (cropped from a photo, background removed) for
-// English, since that's the language it was actually written in — pt/es
-// fall back to the live translated text instead, since a photo can't be
-// translated. Each pair shares a "<base>-text"/"<base>-img" id scheme.
-const COMPARE_PHOTO_LABEL_IDS = [
-  "landing-single-heading", "landing-perks-heading",
-  "compare-row-access", "compare-row-unlimited",
-  "compare-row-innercircle", "compare-row-meetups", "compare-row-curated",
-];
+// The comparison table's plan-name headers show as the club's own
+// handwriting (cropped from a photo, background removed) for English,
+// since that's the language it was actually written in — pt/es fall back
+// to the live translated text instead, since a photo can't be translated.
+// The row content below the headers is always live text (not a photo
+// crop) so the full original wording fits and wraps normally at any
+// width. Each pair shares a "<base>-text"/"<base>-img" id scheme.
+const COMPARE_PHOTO_LABEL_IDS = ["landing-single-heading", "landing-perks-heading"];
 
 function renderComparePhotoLabels() {
   const showImage = state.lang === "en";
