@@ -294,14 +294,23 @@ const TRANSLATIONS = {
     },
     contact: {
       eyebrow: "Final Step",
-      heading: "What's your WhatsApp number, so we can reach you?",
+      heading: "Just a few details to lock in your ticket.",
+      fullNameLabel: "Full name",
+      fullNamePlaceholder: "Your full name",
       whatsappLabel: "WhatsApp number",
       whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "Email",
+      emailPlaceholder: "you@email.com",
+      documentLabel: "CPF or Passport number",
+      documentPlaceholder: "000.000.000-00",
+      tshirtLabel: "T-shirt size",
+      tshirtPlaceholder: "Select a size",
       instagramLabel: "Instagram handle",
       instagramPlaceholder: "@yourname",
       optional: "(optional)",
       submit: "Submit Application",
-      error: "Please fill in your WhatsApp number.",
+      error: "Please fill in all fields to continue.",
+      emailError: "Please enter a valid email address.",
     },
     reviewing: {
       messages: [
@@ -420,14 +429,23 @@ const TRANSLATIONS = {
     },
     contact: {
       eyebrow: "Última Etapa",
-      heading: "Qual é o seu número de WhatsApp, para conseguirmos falar com você?",
+      heading: "Só mais alguns detalhes para garantir seu ingresso.",
+      fullNameLabel: "Nome completo",
+      fullNamePlaceholder: "Seu nome completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "E-mail",
+      emailPlaceholder: "voce@email.com",
+      documentLabel: "CPF ou número do passaporte",
+      documentPlaceholder: "000.000.000-00",
+      tshirtLabel: "Tamanho da camiseta",
+      tshirtPlaceholder: "Selecione um tamanho",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@seunome",
       optional: "(opcional)",
       submit: "Enviar Inscrição",
-      error: "Preencha seu número de WhatsApp.",
+      error: "Preencha todos os campos para continuar.",
+      emailError: "Insira um e-mail válido.",
     },
     reviewing: {
       messages: [
@@ -546,14 +564,23 @@ const TRANSLATIONS = {
     },
     contact: {
       eyebrow: "Último Paso",
-      heading: "¿Cuál es tu número de WhatsApp, para poder contactarte?",
+      heading: "Solo unos detalles más para asegurar tu entrada.",
+      fullNameLabel: "Nombre completo",
+      fullNamePlaceholder: "Tu nombre completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "Correo electrónico",
+      emailPlaceholder: "tu@email.com",
+      documentLabel: "CPF o número de pasaporte",
+      documentPlaceholder: "000.000.000-00",
+      tshirtLabel: "Talla de camiseta",
+      tshirtPlaceholder: "Selecciona una talla",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@tunombre",
       optional: "(opcional)",
       submit: "Enviar Solicitud",
-      error: "Completa tu número de WhatsApp.",
+      error: "Completa todos los campos para continuar.",
+      emailError: "Ingresa un correo electrónico válido.",
     },
     reviewing: {
       messages: [
@@ -1432,14 +1459,22 @@ const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
 
 function prefillContact() {
+  contactForm.fullName.value = state.contact.fullName || "";
   contactForm.whatsapp.value = state.contact.whatsapp || "";
+  contactForm.email.value = state.contact.email || "";
+  contactForm.cpfPassport.value = state.contact.cpfPassport || "";
+  contactForm.tshirtSize.value = state.contact.tshirtSize || "";
   contactForm.instagram.value = state.contact.instagram || "";
 }
 
 document.getElementById("contact-back-btn").addEventListener("click", () => {
   // Save whatever's been typed so it's still there if they come back forward.
   state.contact = {
+    fullName: contactForm.fullName.value.trim(),
     whatsapp: contactForm.whatsapp.value.trim(),
+    email: contactForm.email.value.trim(),
+    cpfPassport: contactForm.cpfPassport.value.trim(),
+    tshirtSize: contactForm.tshirtSize.value,
     instagram: contactForm.instagram.value.trim(),
   };
   // "Get Your Ticket" skips the question flow entirely, so there's no
@@ -1456,17 +1491,26 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(contactForm);
+  const fullName = (data.get("fullName") || "").toString().trim();
   const whatsapp = (data.get("whatsapp") || "").toString().trim();
+  const email = (data.get("email") || "").toString().trim();
+  const cpfPassport = (data.get("cpfPassport") || "").toString().trim();
+  const tshirtSize = (data.get("tshirtSize") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
 
-  if (!whatsapp) {
+  if (!fullName || !whatsapp || !email || !cpfPassport || !tshirtSize) {
     contactError.textContent = t("contact.error");
+    contactError.hidden = false;
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    contactError.textContent = t("contact.emailError");
     contactError.hidden = false;
     return;
   }
   contactError.hidden = true;
 
-  state.contact = { whatsapp, instagram };
+  state.contact = { fullName, whatsapp, email, cpfPassport, tshirtSize, instagram };
   showScreen("reviewing");
   runReviewSequence();
 });

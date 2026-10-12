@@ -156,11 +156,35 @@
     <section class="screen" data-screen="contact">
       <button class="back-link" id="contact-back-btn" type="button" data-i18n="question.back">← Back</button>
       <p class="eyebrow" data-i18n="contact.eyebrow">Final Step</p>
-      <h2 class="display" data-i18n="contact.heading">What's your WhatsApp number, so we can reach you?</h2>
+      <h2 class="display" data-i18n="contact.heading">Just a few details to lock in your ticket.</h2>
       <form id="contact-form" novalidate>
+        <label class="field">
+          <span data-i18n="contact.fullNameLabel">Full name</span>
+          <input required name="fullName" type="text" autocomplete="name" data-i18n-placeholder="contact.fullNamePlaceholder" placeholder="Your full name">
+        </label>
         <label class="field">
           <span data-i18n="contact.whatsappLabel">WhatsApp number</span>
           <input required name="whatsapp" type="tel" autocomplete="tel" data-i18n-placeholder="contact.whatsappPlaceholder" placeholder="+55 21 91234-5678">
+        </label>
+        <label class="field">
+          <span data-i18n="contact.emailLabel">Email</span>
+          <input required name="email" type="email" autocomplete="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="you@email.com">
+        </label>
+        <label class="field">
+          <span data-i18n="contact.documentLabel">CPF or Passport number</span>
+          <input required name="cpfPassport" type="text" autocomplete="off" data-i18n-placeholder="contact.documentPlaceholder" placeholder="000.000.000-00">
+        </label>
+        <label class="field">
+          <span data-i18n="contact.tshirtLabel">T-shirt size</span>
+          <select required name="tshirtSize" id="tshirt-select">
+            <option value="" data-i18n="contact.tshirtPlaceholder">Select a size</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
         </label>
         <label class="field">
           <span><span data-i18n="contact.instagramLabel">Instagram handle</span> <em data-i18n="contact.optional">(optional)</em></span>
