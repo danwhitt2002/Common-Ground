@@ -693,14 +693,18 @@ function renderLandingSingleHeading() {
   document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
 }
 
-// The comparison table's plan-name headers show as the club's own
-// handwriting (cropped from a photo, background removed) for English,
-// since that's the language it was actually written in — pt/es fall back
-// to the live translated text instead, since a photo can't be translated.
-// The row content below the headers is always live text (not a photo
-// crop) so the full original wording fits and wraps normally at any
-// width. Each pair shares a "<base>-text"/"<base>-img" id scheme.
-const COMPARE_PHOTO_LABEL_IDS = ["landing-single-heading", "landing-perks-heading"];
+// The comparison table's plan-name headers and the three Grounds-only
+// perk rows (groupchat/meetups/brands — each a verbatim sentence from
+// the photo) show as the club's own handwriting (cropped from the photo,
+// background removed) for English, since that's the language it was
+// actually written in — pt/es fall back to the live translated text
+// instead, since a photo can't be translated. The "event access" row
+// stays live text always (its label is a paraphrase, not a verbatim
+// crop). Each pair shares a "<base>-text"/"<base>-img" id scheme.
+const COMPARE_PHOTO_LABEL_IDS = [
+  "landing-single-heading", "landing-perks-heading",
+  "compare-row-groupchat", "compare-row-meetups", "compare-row-brands",
+];
 
 function renderComparePhotoLabels() {
   const showImage = state.lang === "en";
