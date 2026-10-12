@@ -259,8 +259,8 @@ main {
   font-family: 'Architects Daughter', cursive;
 }
 
-.plans-table-feature { width: 59%; }
-.plans-table-col { width: 20.5%; }
+.plans-table-feature { width: 50%; }
+.plans-table-col { width: 25%; }
 
 .plans-table th,
 .plans-table td {
@@ -290,14 +290,14 @@ main {
 
 .plans-table-col-price {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--ink-dim);
   opacity: 0.8;
   overflow-wrap: anywhere;
 }
 
-.plans-table-mark {
+.plans-table td.plans-table-mark {
   text-align: center;
   font-size: 19px;
   font-weight: 700;
