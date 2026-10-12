@@ -262,7 +262,7 @@ const TRANSLATIONS = {
         rowAccessGrounds: "Unlimited",
       },
       perks: {
-        groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
+        groupchat: "Invitation into our Common Ground: Inner Circle WhatsApp group, with early access to our events.",
         meetups: "Meetups throughout the month — coworking, run clubs, beach days, and more.",
         brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
       },
@@ -388,7 +388,7 @@ const TRANSLATIONS = {
         rowAccessGrounds: "Ilimitado",
       },
       perks: {
-        groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
+        groupchat: "Convite para o nosso grupo de WhatsApp Common Ground: Inner Circle, com acesso antecipado aos nossos eventos.",
         meetups: "Encontros ao longo do mês — coworking, corrida em grupo, praia e muito mais.",
         brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
       },
@@ -514,7 +514,7 @@ const TRANSLATIONS = {
         rowAccessGrounds: "Ilimitado",
       },
       perks: {
-        groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
+        groupchat: "Invitación a nuestro grupo de WhatsApp Common Ground: Inner Circle, con acceso anticipado a nuestros eventos.",
         meetups: "Encuentros durante todo el mes — coworking, running club, playa y más.",
         brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
       },
