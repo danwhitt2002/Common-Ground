@@ -256,7 +256,7 @@ const TRANSLATIONS = {
       perks: {
         access: "Unlimited access to Common Ground events that month.",
         groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
-        meetups: "Free meetups throughout the month — beach days, run clubs, coworking, and more.",
+        meetups: "Meetups throughout the month — beach days, run clubs, coworking, and more.",
         brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
       },
       singleHeading: "Single-Event Pass — {price}/event",
@@ -378,7 +378,7 @@ const TRANSLATIONS = {
       perks: {
         access: "Acesso ilimitado aos eventos da Common Ground naquele mês.",
         groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
-        meetups: "Encontros gratuitos ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
+        meetups: "Encontros ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
         brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
       },
       singleHeading: "Passe de Evento Único — {price}/evento",
@@ -500,7 +500,7 @@ const TRANSLATIONS = {
       perks: {
         access: "Acceso ilimitado a los eventos de Common Ground ese mes.",
         groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
-        meetups: "Encuentros gratuitos durante todo el mes — playa, running club, coworking y más.",
+        meetups: "Encuentros durante todo el mes — playa, running club, coworking y más.",
         brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
       },
       singleHeading: "Pase de Evento Único — {price}/evento",
