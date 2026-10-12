@@ -259,8 +259,8 @@ main {
   font-family: 'Architects Daughter', cursive;
 }
 
-.plans-table-feature { width: 54%; }
-.plans-table-col { width: 23%; }
+.plans-table-feature { width: 52%; }
+.plans-table-col { width: 24%; }
 
 .plans-table th,
 .plans-table td {
@@ -268,7 +268,7 @@ main {
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
-  font-size: 14px;
+  font-size: 17px;
   color: var(--ink-dim);
 }
 
@@ -284,13 +284,13 @@ main {
 .plans-table-col-name {
   display: block;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 17px;
   color: var(--ink-dim);
 }
 
 .plans-table-col-price {
   display: block;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--ink-dim);
   opacity: 0.8;
@@ -298,13 +298,13 @@ main {
 
 .plans-table-mark {
   text-align: center;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--ink-dim);
 }
 
 .plans-table-mark.is-no { opacity: 0.4; }
-.plans-table-mark.is-value { font-size: 13px; font-weight: 600; }
+.plans-table-mark.is-value { font-size: 15px; font-weight: 600; }
 
 /* Handwritten photo headers (see CONFIG/renderComparePhotoLabels in
    script.js) — fall back to live translated text for pt/es, toggled via
@@ -313,8 +313,8 @@ main {
    beats the plain [hidden] attribute's UA-stylesheet display:none. */
 .plans-table-col-name-img {
   display: block;
-  width: 85%;
-  max-width: 110px;
+  width: 98%;
+  max-width: 140px;
   height: auto;
   margin: 0 auto;
 }
@@ -421,16 +421,20 @@ span[id^="compare-row-"][hidden],
 h1.display { font-size: clamp(38px, 10vw, 52px); }
 h2.display { font-size: clamp(26px, 7vw, 32px); }
 
-/* Landing hero: bring the headline size down a step closer to the eyebrow
-   and lede around it, instead of the much larger default h1 scale. Also
-   swap in a casual handwritten script for just this one headline (the
-   rest of .display stays Instrument Serif), matching the reference
-   "What if curiosity had a place?" style. */
+/* Landing hero title — a logotype image (assets/title-logo.png, cropped
+   from a reference graphic, background removed, recolored to --ink)
+   instead of live text, to match that reference's exact lettering. The
+   <h1> keeps the plain text as the <img>'s alt text for accessibility/SEO. */
 .landing-hero h1.display {
-  font-family: 'Waiting for the Sunrise', cursive;
-  font-weight: 400;
-  font-size: clamp(42px, 12vw, 56px);
-  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+
+.landing-title-img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
 }
 
 .lede {
