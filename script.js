@@ -269,7 +269,9 @@ const TRANSLATIONS = {
         founding: "Founding Member passes remaining",
         price: "Price per event",
       },
-      apply: "Apply Now",
+      buyTicket: "Get Your Ticket →",
+      buyTicketFinePrint: "Pick your date and pay — no application needed.",
+      apply: "Apply for the Grounds Pass →",
       finePrint: "Takes about a minute.",
       menuLink: "See what's included at our events — the drinks menu →",
       eventsLink: "See upcoming event dates →",
@@ -391,7 +393,9 @@ const TRANSLATIONS = {
         founding: "Passes de Membro Fundador restantes",
         price: "Preço por evento",
       },
-      apply: "Inscreva-se Agora",
+      buyTicket: "Garanta Seu Ingresso →",
+      buyTicketFinePrint: "Escolha sua data e pague — sem inscrição necessária.",
+      apply: "Inscreva-se no Grounds Pass →",
       finePrint: "Leva cerca de um minuto.",
       menuLink: "Veja o que está incluído nos nossos eventos — o cardápio de bebidas →",
       eventsLink: "Veja as próximas datas de eventos →",
@@ -513,7 +517,9 @@ const TRANSLATIONS = {
         founding: "Pases de Miembro Fundador restantes",
         price: "Precio por evento",
       },
-      apply: "Solicita Ahora",
+      buyTicket: "Consigue Tu Entrada →",
+      buyTicketFinePrint: "Elige tu fecha y paga — sin necesidad de solicitud.",
+      apply: "Solicita el Grounds Pass →",
       finePrint: "Toma cerca de un minuto.",
       menuLink: "Mira qué está incluido en nuestros eventos — el menú de bebidas →",
       eventsLink: "Mira las próximas fechas de eventos →",
@@ -630,6 +636,7 @@ const state = {
   paymentMethod: "pix", // "pix" | "paypal" | "wise" — chosen on the approved/payment screen
   questionIndex: 0,
   answers: [], // { question, answer, answerEn?, writeInText? }
+  skippedQuestions: false, // true when "Get Your Ticket" was used — skips straight to the contact screen, bypassing the question flow entirely (Single Event Pass only; keeps the contact screen's back button from trying to render a question that was never shown)
   contact: {},
   selectedEvents: [], // holds a single "YYYY-MM-DD" date picked on the select-event screen (Single Event plan only)
   appliedDiscountCode: null, // the matched key from CONFIG.discountCodes (e.g. "COMMONGROUND30") once successfully applied on the payment screen, else null
@@ -1141,9 +1148,22 @@ document.getElementById("community-link").href = CONFIG.standardGroupLink;
 document.getElementById("approved-community-link").href = CONFIG.standardGroupLink;
 
 document.getElementById("start-btn").addEventListener("click", () => {
+  state.skippedQuestions = false;
   state.questionIndex = 0;
   renderQuestion();
   showScreen("question");
+});
+
+// "Get Your Ticket" — a lower-friction path for Single Event Pass buyers
+// only: skips the application questions entirely and goes straight to the
+// contact screen, then select-event, then payment. Anyone who wants the
+// Grounds Pass or Founding Member still goes through "Apply Now" above
+// (or can switch plans later from the select-event screen either way).
+document.getElementById("buy-ticket-btn").addEventListener("click", () => {
+  state.skippedQuestions = true;
+  state.answers = [];
+  prefillContact();
+  showScreen("contact");
 });
 
 // Wordmark in the header links back to the landing screen — a full page
@@ -1416,6 +1436,12 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
     whatsapp: contactForm.whatsapp.value.trim(),
     instagram: contactForm.instagram.value.trim(),
   };
+  // "Get Your Ticket" skips the question flow entirely, so there's no
+  // question screen to go back to — return to landing instead.
+  if (state.skippedQuestions) {
+    showScreen("landing");
+    return;
+  }
   state.questionIndex = CONFIG.questions.length - 1;
   renderQuestion();
   showScreen("question");

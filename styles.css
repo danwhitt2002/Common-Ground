@@ -1040,16 +1040,24 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 .copy-btn:hover { border-color: var(--accent); background: #1c3fa0; }
 .copy-btn.copied { color: var(--ink); border-color: var(--accent-dim); }
 
-/* Secondary text link */
+/* Secondary text link — also used on a few <button> elements (e.g.
+   #start-btn) for a lower-emphasis action styled the same as a link;
+   the reset properties below only matter for those, undoing default
+   button chrome (anchors don't have any to begin with). */
 .link-secondary {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
   display: inline-block;
   margin-top: 16px;
+  padding: 0 0 2px;
   font-size: 14px;
   font-weight: 600;
   color: var(--ink-dim);
   text-decoration: none;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 2px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
