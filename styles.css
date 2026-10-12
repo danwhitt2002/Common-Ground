@@ -245,10 +245,11 @@ main {
   line-height: 1;
 }
 
-/* Single-Event Pass vs. Grounds Pass comparison table — two columns, one
-   row per perk, each cell holding that plan's actual perk text (or a
-   cross where it doesn't apply) so the full original wording is kept
-   rather than condensed into a shared row label. */
+/* Single-Event Pass vs. Grounds Pass comparison table — the full perk
+   wording sits in the left column, with a tick or cross per plan in the
+   two narrower columns beside it (plus a plain value, e.g. "1 event" vs
+   "Unlimited", for the one row where both plans include the perk but to
+   a different degree — a tick/cross alone would lose that distinction). */
 .plans-table {
   width: 100%;
   max-width: 400px;
@@ -258,7 +259,8 @@ main {
   font-family: 'Architects Daughter', cursive;
 }
 
-.plans-table-col { width: 50%; }
+.plans-table-feature { width: 56%; }
+.plans-table-col { width: 22%; }
 
 .plans-table th,
 .plans-table td {
@@ -299,8 +301,10 @@ main {
   font-size: 13px;
   font-weight: 700;
   color: var(--ink-dim);
-  opacity: 0.45;
 }
+
+.plans-table-mark.is-no { opacity: 0.4; }
+.plans-table-mark.is-value { font-size: 10.5px; font-weight: 600; }
 
 /* Handwritten photo headers (see CONFIG/renderComparePhotoLabels in
    script.js) — fall back to live translated text for pt/es, toggled via

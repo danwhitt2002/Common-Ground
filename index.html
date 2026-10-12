@@ -42,6 +42,7 @@
         <table class="plans-table">
           <thead>
             <tr>
+              <th class="plans-table-feature"></th>
               <th class="plans-table-col">
                 <span class="plans-table-col-name" id="landing-single-heading-text" data-i18n="landing.compare.singleCol"></span>
                 <img class="plans-table-col-name-img" id="landing-single-heading-img" src="assets/compare-hdr-single.png" alt="Single-Event Pass" hidden>
@@ -56,20 +57,24 @@
           </thead>
           <tbody>
             <tr>
-              <td data-i18n="landing.singlePerks.access">Access to 1 Common Ground event.</td>
-              <td data-i18n="landing.perks.access">Unlimited access to Common Ground events that month.</td>
+              <td data-i18n="landing.compare.rowAccess">Access to Common Ground events.</td>
+              <td class="plans-table-mark is-value" data-i18n="landing.compare.rowAccessSingle">1 event</td>
+              <td class="plans-table-mark is-value" data-i18n="landing.compare.rowAccessGrounds">Unlimited</td>
             </tr>
             <tr>
-              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td data-i18n="landing.perks.groupchat">Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.</td>
+              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
+              <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>
             <tr>
-              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td data-i18n="landing.perks.meetups">Meetups throughout the month — coworking, run clubs, beach days, and more.</td>
+              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
+              <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>
             <tr>
-              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td data-i18n="landing.perks.brands">Curated discounts across a handpicked lineup of brands that share our aesthetic.</td>
+              <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
+              <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>
           </tbody>
         </table>

@@ -257,15 +257,14 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/event",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/month",
+        rowAccess: "Access to Common Ground events.",
+        rowAccessSingle: "1 event",
+        rowAccessGrounds: "Unlimited",
       },
       perks: {
-        access: "Unlimited access to Common Ground events that month.",
         groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
         meetups: "Meetups throughout the month — coworking, run clubs, beach days, and more.",
         brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
-      },
-      singlePerks: {
-        access: "Access to 1 Common Ground event.",
       },
       stats: {
         capacity: "Max people per event",
@@ -385,15 +384,14 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/evento",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mês",
+        rowAccess: "Acesso aos eventos da Common Ground.",
+        rowAccessSingle: "1 evento",
+        rowAccessGrounds: "Ilimitado",
       },
       perks: {
-        access: "Acesso ilimitado aos eventos da Common Ground naquele mês.",
         groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
         meetups: "Encontros ao longo do mês — coworking, corrida em grupo, praia e muito mais.",
         brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
-      },
-      singlePerks: {
-        access: "Acesso a 1 evento da Common Ground.",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -513,15 +511,14 @@ const TRANSLATIONS = {
         singlePriceUnit: "{price}/evento",
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mes",
+        rowAccess: "Acceso a los eventos de Common Ground.",
+        rowAccessSingle: "1 evento",
+        rowAccessGrounds: "Ilimitado",
       },
       perks: {
-        access: "Acceso ilimitado a los eventos de Common Ground ese mes.",
         groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
         meetups: "Encuentros durante todo el mes — coworking, running club, playa y más.",
         brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
-      },
-      singlePerks: {
-        access: "Acceso a 1 evento de Common Ground.",
       },
       stats: {
         capacity: "Máximo de personas por evento",
