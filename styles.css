@@ -257,8 +257,8 @@ main {
   table-layout: fixed;
 }
 
-.plans-table-feature { width: 46%; }
-.plans-table-col { width: 27%; }
+.plans-table-feature { width: 30%; }
+.plans-table-col { width: 35%; }
 
 .plans-table th,
 .plans-table td {
@@ -301,6 +301,32 @@ main {
 .plans-table-mark.is-no { color: var(--ink-dim); opacity: 0.45; }
 .plans-table-mark.is-value { font-size: 12.5px; font-weight: 600; color: var(--ink-dim); }
 .plans-table-mark.is-value.is-accent { color: var(--accent); }
+
+/* Handwritten photo labels (see CONFIG/renderComparePhotoLabels in
+   script.js) — column headers get a centered image above the price line;
+   row labels get a left-aligned image in place of the row's text span.
+   Both fall back to live translated text for pt/es, toggled via [hidden];
+   the explicit [hidden] overrides are required because .plans-table-col-name
+   above sets its own `display`, which otherwise beats the plain [hidden]
+   attribute's UA-stylesheet display:none. */
+.plans-table-col-name-img {
+  display: block;
+  width: 100%;
+  max-width: 110px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.plans-table-row-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.plans-table-col-name[hidden],
+.plans-table-col-name-img[hidden],
+.plans-table-row-img[hidden],
+span[id^="compare-row-"][hidden] { display: none; }
 
 /* Landing page stat row — numbers count up from 0 on scroll-into-view
    (see the IntersectionObserver in script.js) as a small visual hook. */

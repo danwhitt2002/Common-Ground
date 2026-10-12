@@ -44,33 +44,50 @@
             <tr>
               <th class="plans-table-feature"></th>
               <th class="plans-table-col plans-table-col-muted">
-                <span class="plans-table-col-name" id="landing-single-heading"></span>
+                <span class="plans-table-col-name" id="landing-single-heading-text" data-i18n="landing.compare.singleCol"></span>
+                <img class="plans-table-col-name-img" id="landing-single-heading-img" src="assets/compare-hdr-single.png" alt="Single-Event Pass" hidden>
                 <span class="plans-table-col-price" id="landing-single-price"></span>
               </th>
               <th class="plans-table-col plans-table-col-accent">
-                <span class="plans-table-col-name" id="landing-perks-heading"></span>
+                <span class="plans-table-col-name" id="landing-perks-heading-text" data-i18n="landing.compare.groundsCol"></span>
+                <img class="plans-table-col-name-img" id="landing-perks-heading-img" src="assets/compare-hdr-grounds.png" alt="The Grounds Pass" hidden>
                 <span class="plans-table-col-price" id="landing-perks-price"></span>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td data-i18n="landing.compare.rowAccess">Event access</td>
-              <td class="plans-table-mark is-value" data-i18n="landing.compare.rowAccessSingle">1 event</td>
-              <td class="plans-table-mark is-value is-accent" data-i18n="landing.compare.rowAccessGrounds">Unlimited</td>
+              <td>
+                <span data-i18n="landing.compare.rowAccess" id="compare-row-access-text"></span>
+                <img class="plans-table-row-img" id="compare-row-access-img" src="assets/compare-row-access.png" alt="Access" hidden>
+              </td>
+              <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
+              <td class="plans-table-mark is-value is-accent">
+                <span data-i18n="landing.compare.rowAccessGrounds" id="compare-row-unlimited-text"></span>
+                <img class="plans-table-row-img" id="compare-row-unlimited-img" src="assets/compare-row-unlimited.png" alt="Unlimited" hidden>
+              </td>
             </tr>
             <tr>
-              <td data-i18n="landing.compare.rowGroupchat">Inner Circle WhatsApp</td>
+              <td>
+                <span data-i18n="landing.compare.rowGroupchat" id="compare-row-innercircle-text"></span>
+                <img class="plans-table-row-img" id="compare-row-innercircle-img" src="assets/compare-row-innercircle.png" alt="Inner Circle" hidden>
+              </td>
               <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>
             <tr>
-              <td data-i18n="landing.compare.rowMeetups">Monthly meetups</td>
+              <td>
+                <span data-i18n="landing.compare.rowMeetups" id="compare-row-meetups-text"></span>
+                <img class="plans-table-row-img" id="compare-row-meetups-img" src="assets/compare-row-meetups.png" alt="Meetups" hidden>
+              </td>
               <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>
             <tr>
-              <td data-i18n="landing.compare.rowBrands">Brand discounts</td>
+              <td>
+                <span data-i18n="landing.compare.rowBrands" id="compare-row-curated-text"></span>
+                <img class="plans-table-row-img" id="compare-row-curated-img" src="assets/compare-row-curated.png" alt="Curated discounts" hidden>
+              </td>
               <td class="plans-table-mark is-no" aria-label="Not included">✗</td>
               <td class="plans-table-mark is-yes" aria-label="Included">✓</td>
             </tr>

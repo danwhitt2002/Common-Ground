@@ -258,7 +258,6 @@ const TRANSLATIONS = {
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/month",
         rowAccess: "Event access",
-        rowAccessSingle: "1 event",
         rowAccessGrounds: "Unlimited",
         rowGroupchat: "Inner Circle WhatsApp",
         rowMeetups: "Monthly meetups",
@@ -383,7 +382,6 @@ const TRANSLATIONS = {
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mês",
         rowAccess: "Acesso a eventos",
-        rowAccessSingle: "1 evento",
         rowAccessGrounds: "Ilimitado",
         rowGroupchat: "WhatsApp Inner Circle",
         rowMeetups: "Encontros mensais",
@@ -508,7 +506,6 @@ const TRANSLATIONS = {
         groundsCol: "Grounds Pass",
         groundsPriceUnit: "{monthlyPrice}/mes",
         rowAccess: "Acceso a eventos",
-        rowAccessSingle: "1 evento",
         rowAccessGrounds: "Ilimitado",
         rowGroupchat: "WhatsApp Inner Circle",
         rowMeetups: "Encuentros mensuales",
@@ -680,13 +677,30 @@ const whatsappBtn = document.getElementById("whatsapp-btn");
 // (via [data-i18n]/[data-i18n-placeholder]) without changing screens.
 // ---------------------------------------------------------------------------
 function renderLandingPerksHeading() {
-  document.getElementById("landing-perks-heading").textContent = t("landing.compare.groundsCol");
   document.getElementById("landing-perks-price").textContent = t("landing.compare.groundsPriceUnit").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
 }
 
 function renderLandingSingleHeading() {
-  document.getElementById("landing-single-heading").textContent = t("landing.compare.singleCol");
   document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
+}
+
+// The comparison table's plan-name headers and perk-row labels show as the
+// club's own handwriting (cropped from a photo, background removed) for
+// English, since that's the language it was actually written in — pt/es
+// fall back to the live translated text instead, since a photo can't be
+// translated. Each pair shares a "<base>-text"/"<base>-img" id scheme.
+const COMPARE_PHOTO_LABEL_IDS = [
+  "landing-single-heading", "landing-perks-heading",
+  "compare-row-access", "compare-row-unlimited",
+  "compare-row-innercircle", "compare-row-meetups", "compare-row-curated",
+];
+
+function renderComparePhotoLabels() {
+  const showImage = state.lang === "en";
+  COMPARE_PHOTO_LABEL_IDS.forEach((base) => {
+    document.getElementById(`${base}-text`).hidden = showImage;
+    document.getElementById(`${base}-img`).hidden = !showImage;
+  });
 }
 
 // Landing page's stat row shows the next upcoming event's date (day + short
@@ -1125,6 +1139,7 @@ function applyLang(lang) {
 
   renderLandingPerksHeading();
   renderLandingSingleHeading();
+  renderComparePhotoLabels();
   renderNextEventStat();
   renderReferralSection();
   renderApprovedFinePrint();
