@@ -427,8 +427,8 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
    rest of .display stays Instrument Serif), matching the reference
    "What if curiosity had a place?" style. */
 .landing-hero h1.display {
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-weight: 400;
   font-size: clamp(42px, 12vw, 56px);
   letter-spacing: normal;
 }
