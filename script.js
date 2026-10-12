@@ -252,16 +252,17 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       bio: "A social club in Rio de Janeiro made for connection through community. Curated for locals and nomads alike.",
       lede: "Find your Common Ground — apply now.",
-      perksHeading: "The Grounds Pass — {monthlyPrice}/month",
-      perks: {
-        access: "Unlimited access to Common Ground events that month.",
-        groupchat: "Invitation into Common Ground: Inner Circle, our members-only WhatsApp — with first access to events and announcements.",
-        meetups: "Meetups throughout the month — beach days, run clubs, coworking, and more.",
-        brands: "Curated discounts across a handpicked lineup of brands that share our aesthetic.",
-      },
-      singleHeading: "Single-Event Pass — {price}/event",
-      singlePerks: {
-        access: "Access to 1 Common Ground event.",
+      compare: {
+        singleCol: "Single Event",
+        singlePriceUnit: "{price}/event",
+        groundsCol: "Grounds Pass",
+        groundsPriceUnit: "{monthlyPrice}/month",
+        rowAccess: "Event access",
+        rowAccessSingle: "1 event",
+        rowAccessGrounds: "Unlimited",
+        rowGroupchat: "Inner Circle WhatsApp",
+        rowMeetups: "Monthly meetups",
+        rowBrands: "Brand discounts",
       },
       stats: {
         capacity: "Max people per event",
@@ -376,16 +377,17 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Pensado para cariocas e nômades.",
       lede: "Find your Common Ground — inscreva-se agora.",
-      perksHeading: "O Grounds Pass — {monthlyPrice}/mês",
-      perks: {
-        access: "Acesso ilimitado aos eventos da Common Ground naquele mês.",
-        groupchat: "Convite para o Common Ground: Inner Circle, nosso WhatsApp exclusivo para membros — com acesso prioritário a eventos e avisos.",
-        meetups: "Encontros ao longo do mês — praia, corrida em grupo, coworking e muito mais.",
-        brands: "Descontos exclusivos com uma seleção de marcas parceiras que combinam com a nossa estética.",
-      },
-      singleHeading: "Passe de Evento Único — {price}/evento",
-      singlePerks: {
-        access: "Acesso a 1 evento da Common Ground.",
+      compare: {
+        singleCol: "Evento Único",
+        singlePriceUnit: "{price}/evento",
+        groundsCol: "Grounds Pass",
+        groundsPriceUnit: "{monthlyPrice}/mês",
+        rowAccess: "Acesso a eventos",
+        rowAccessSingle: "1 evento",
+        rowAccessGrounds: "Ilimitado",
+        rowGroupchat: "WhatsApp Inner Circle",
+        rowMeetups: "Encontros mensais",
+        rowBrands: "Descontos em marcas",
       },
       stats: {
         capacity: "Máximo de pessoas por evento",
@@ -500,16 +502,17 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Pensado para locales y nómadas por igual.",
       lede: "Find your Common Ground — solicita ahora.",
-      perksHeading: "El Grounds Pass — {monthlyPrice}/mes",
-      perks: {
-        access: "Acceso ilimitado a los eventos de Common Ground ese mes.",
-        groupchat: "Invitación a Common Ground: Inner Circle, nuestro WhatsApp exclusivo para miembros — con acceso prioritario a eventos y anuncios.",
-        meetups: "Encuentros durante todo el mes — playa, running club, coworking y más.",
-        brands: "Descuentos exclusivos con una selección de marcas asociadas que combinan con nuestra estética.",
-      },
-      singleHeading: "Pase de Evento Único — {price}/evento",
-      singlePerks: {
-        access: "Acceso a 1 evento de Common Ground.",
+      compare: {
+        singleCol: "Evento Único",
+        singlePriceUnit: "{price}/evento",
+        groundsCol: "Grounds Pass",
+        groundsPriceUnit: "{monthlyPrice}/mes",
+        rowAccess: "Acceso a eventos",
+        rowAccessSingle: "1 evento",
+        rowAccessGrounds: "Ilimitado",
+        rowGroupchat: "WhatsApp Inner Circle",
+        rowMeetups: "Encuentros mensuales",
+        rowBrands: "Descuentos en marcas",
       },
       stats: {
         capacity: "Máximo de personas por evento",
@@ -677,11 +680,13 @@ const whatsappBtn = document.getElementById("whatsapp-btn");
 // (via [data-i18n]/[data-i18n-placeholder]) without changing screens.
 // ---------------------------------------------------------------------------
 function renderLandingPerksHeading() {
-  document.getElementById("landing-perks-heading").textContent = t("landing.perksHeading").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
+  document.getElementById("landing-perks-heading").textContent = t("landing.compare.groundsCol");
+  document.getElementById("landing-perks-price").textContent = t("landing.compare.groundsPriceUnit").replace("{monthlyPrice}", CONFIG.monthlyMembershipPrice);
 }
 
 function renderLandingSingleHeading() {
-  document.getElementById("landing-single-heading").textContent = t("landing.singleHeading").replace("{price}", CONFIG.price);
+  document.getElementById("landing-single-heading").textContent = t("landing.compare.singleCol");
+  document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
 }
 
 // Landing page's stat row shows the next upcoming event's date (day + short

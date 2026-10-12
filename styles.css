@@ -226,29 +226,6 @@ main {
   max-width: 38ch;
 }
 
-/* Introduces the Grounds-Pass perks list right below it — left-aligned and
-   capped at the same 38ch as .perks-list so the heading's left edge lines
-   up with the bullets' left edge (rather than sitting centered above a
-   left-aligned list), with a thin underline reinforcing it as a header.
-   align-self: stretch is required — .landing-hero is a flex column with
-   align-items: center, so a short single-line child like this heading
-   would otherwise shrink to its own text width instead of spanning the
-   same width as .perks-list (which only reaches full width because its
-   longer bullet text wraps across multiple lines). */
-.perks-heading {
-  align-self: stretch;
-  margin: 20px 0 8px;
-  font-family: 'Architects Daughter', cursive;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: var(--accent);
-  max-width: 38ch;
-  text-align: left;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line);
-}
-
 .perks-list li {
   display: flex;
   align-items: baseline;
@@ -268,36 +245,62 @@ main {
   line-height: 1;
 }
 
-/* Single-Event Pass vs. Grounds Pass, side by side, so the sheer difference
-   in what's included is obvious at a glance. */
-.plans-compare {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
+/* Single-Event Pass vs. Grounds Pass comparison table — one row per perk,
+   a tick or cross per plan, so the difference is legible at a glance even
+   at narrow mobile widths (a prose bullet list per plan, side by side,
+   doesn't fit without shrinking text past reading size). */
+.plans-table {
   width: 100%;
   max-width: 400px;
+  border-collapse: collapse;
+  margin-top: 8px;
+  table-layout: fixed;
 }
 
-.plan-compare-col {
-  flex: 1;
-  min-width: 0;
+.plans-table-feature { width: 46%; }
+.plans-table-col { width: 27%; }
+
+.plans-table th,
+.plans-table td {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  font-size: 13px;
 }
 
-/* The Single-Event side reads as the plainer option next to the accent-gold
-   Grounds Pass heading — same box treatment, muted color. */
-.plan-compare-heading-muted {
+.plans-table-feature,
+.plans-table td:first-child {
+  text-align: left;
+  padding-left: 0;
   color: var(--ink-dim);
 }
 
-.perks-list.compact {
-  margin-top: 12px;
-  gap: 10px;
+.plans-table-col-name {
+  display: block;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink-dim);
 }
 
-.perks-list.compact li {
-  font-size: 13.5px;
-  line-height: 1.35;
+.plans-table-col-accent .plans-table-col-name { color: var(--accent); }
+
+.plans-table-col-price {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-dim);
+  opacity: 0.8;
 }
+
+.plans-table-mark {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.plans-table-mark.is-yes { color: var(--accent); }
+.plans-table-mark.is-no { color: var(--ink-dim); opacity: 0.45; }
+.plans-table-mark.is-value { font-size: 12.5px; font-weight: 600; color: var(--ink-dim); }
+.plans-table-mark.is-value.is-accent { color: var(--accent); }
 
 /* Landing page stat row — numbers count up from 0 on scroll-into-view
    (see the IntersectionObserver in script.js) as a small visual hook. */
