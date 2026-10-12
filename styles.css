@@ -498,18 +498,28 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
 .landing-cta-buttons {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   gap: 10px;
   width: 100%;
   max-width: 440px;
 }
 
-.landing-cta-buttons .btn-cta {
+.landing-cta-col {
   flex: 1;
-  width: auto;
+  min-width: 0;
+}
+
+.landing-cta-buttons .btn-cta {
+  width: 100%;
   max-width: none;
   min-width: 0;
   padding: 14px 10px;
   font-size: 14px;
+  text-align: center;
+}
+
+.landing-cta-col .fine-print {
+  margin: 10px 0 0;
   text-align: center;
 }
 
