@@ -259,8 +259,8 @@ main {
   font-family: 'Architects Daughter', cursive;
 }
 
-.plans-table-feature { width: 52%; }
-.plans-table-col { width: 24%; }
+.plans-table-feature { width: 59%; }
+.plans-table-col { width: 20.5%; }
 
 .plans-table th,
 .plans-table td {
@@ -294,6 +294,7 @@ main {
   font-weight: 400;
   color: var(--ink-dim);
   opacity: 0.8;
+  overflow-wrap: anywhere;
 }
 
 .plans-table-mark {
@@ -305,33 +306,6 @@ main {
 
 .plans-table-mark.is-no { opacity: 0.4; }
 .plans-table-mark.is-value { font-size: 15px; font-weight: 600; }
-
-/* Handwritten photo headers (see CONFIG/renderComparePhotoLabels in
-   script.js) — fall back to live translated text for pt/es, toggled via
-   [hidden]; the explicit [hidden] override is required because
-   .plans-table-col-name above sets its own `display`, which otherwise
-   beats the plain [hidden] attribute's UA-stylesheet display:none. */
-.plans-table-col-name-img {
-  display: block;
-  width: 98%;
-  max-width: 140px;
-  height: auto;
-  margin: 0 auto;
-}
-
-.plans-table-col-name[hidden],
-.plans-table-col-name-img[hidden] { display: none; }
-
-/* Handwritten photo row content (groupchat/meetups/brands) — same
-   fallback-for-pt/es toggle as the headers above, via [hidden]. */
-.plans-table-row-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-span[id^="compare-row-"][hidden],
-.plans-table-row-img[hidden] { display: none; }
 
 /* Landing page stat row — numbers count up from 0 on scroll-into-view
    (see the IntersectionObserver in script.js) as a small visual hook. */
@@ -426,7 +400,7 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
    instead of live text, to match that reference's exact lettering. The
    <h1> keeps the plain text as the <img>'s alt text for accessibility/SEO. */
 .landing-hero h1.display {
-  margin: 0 0 16px;
+  margin: 14px 0 16px;
 }
 
 .landing-title-img {

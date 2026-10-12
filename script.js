@@ -57,7 +57,7 @@ const CONFIG = {
   // 4/20!") is something you tell them yourself when you confirm their
   // payment on WhatsApp — the site can't assign that live.
   foundingMemberSpotsTotal: 20,
-  foundingMemberSpotsRemaining: 19,
+  foundingMemberSpotsRemaining: 18,
 
   // Your Pix key (shown as text, and encoded into assets/pix-qr.png,
   // assets/pix-qr-monthly.png, and assets/pix-qr-founding.png). If you ever
@@ -693,27 +693,6 @@ function renderLandingSingleHeading() {
   document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
 }
 
-// The comparison table's plan-name headers and the three Grounds-only
-// perk rows (groupchat/meetups/brands — each a verbatim sentence from
-// the photo) show as the club's own handwriting (cropped from the photo,
-// background removed) for English, since that's the language it was
-// actually written in — pt/es fall back to the live translated text
-// instead, since a photo can't be translated. The "event access" row
-// stays live text always (its label is a paraphrase, not a verbatim
-// crop). Each pair shares a "<base>-text"/"<base>-img" id scheme.
-const COMPARE_PHOTO_LABEL_IDS = [
-  "landing-single-heading", "landing-perks-heading",
-  "compare-row-groupchat", "compare-row-meetups", "compare-row-brands",
-];
-
-function renderComparePhotoLabels() {
-  const showImage = state.lang === "en";
-  COMPARE_PHOTO_LABEL_IDS.forEach((base) => {
-    document.getElementById(`${base}-text`).hidden = showImage;
-    document.getElementById(`${base}-img`).hidden = !showImage;
-  });
-}
-
 // Landing page's stat row shows the next upcoming event's date (day + short
 // month, e.g. "27 Sep") next to the capacity stat — reuses the same locale
 // key as the select-event screen's date formatting for consistency.
@@ -1150,7 +1129,6 @@ function applyLang(lang) {
 
   renderLandingPerksHeading();
   renderLandingSingleHeading();
-  renderComparePhotoLabels();
   renderNextEventStat();
   renderReferralSection();
   renderApprovedFinePrint();
