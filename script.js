@@ -250,7 +250,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      bio: "A social club in Rio de Janeiro made for connection through community. Curated for locals and nomads alike.",
+      bio: "A social club in Rio de Janeiro built on real connection. Curated for locals and nomads alike.",
       lede: "Find your Common Ground — apply now.",
       compare: {
         singleCol: "Single Event",
@@ -385,7 +385,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      bio: "Um clube social no Rio de Janeiro feito para conexão através da comunidade. Pensado para cariocas e nômades.",
+      bio: "Um clube social no Rio de Janeiro construído sobre conexões reais. Pensado para cariocas e nômades.",
       lede: "Find your Common Ground — inscreva-se agora.",
       compare: {
         singleCol: "Evento Único",
@@ -520,7 +520,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      bio: "Un club social en Río de Janeiro creado para la conexión a través de la comunidad. Pensado para locales y nómadas por igual.",
+      bio: "Un club social en Río de Janeiro construido sobre conexiones reales. Pensado para locales y nómadas por igual.",
       lede: "Find your Common Ground — solicita ahora.",
       compare: {
         singleCol: "Evento Único",
