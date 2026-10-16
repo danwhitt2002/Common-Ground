@@ -24,8 +24,13 @@ const CONFIG = {
   // BRINGAFRIEND15 is the live "Bring a Friend" code, featured on the
   // landing page: 15% off (R$85) a Single Event Pass when a pair buys
   // tickets together.
+  // DISCONNECT / DESCONECTA is a second, separately-distributed 15% off
+  // code (same R$85 price/QR pair as BRINGAFRIEND15) — English and
+  // Portuguese spellings of the same promo, both matched case-insensitively.
   discountCodes: {
     BRINGAFRIEND15: { price: "R$85", gbp: 13 },
+    DISCONNECT: { price: "R$85", gbp: 13 },
+    DESCONECTA: { price: "R$85", gbp: 13 },
   },
 
   // Grounds Pass — the monthly membership. Access to every event for a
