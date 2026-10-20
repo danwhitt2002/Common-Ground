@@ -425,6 +425,7 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   color: var(--ink-dim);
   margin: 0 0 16px;
   max-width: 42ch;
+  white-space: pre-line;
 }
 
 .fine-print {

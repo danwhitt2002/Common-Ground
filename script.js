@@ -255,7 +255,7 @@ const TRANSLATIONS = {
   en: {
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
-      bio: "A social club in Rio de Janeiro built on real connection. Curated for locals and nomads alike.",
+      bio: "A social club in Rio curated for locals and nomads alike to connect and meet IRL.\n\nIn a world where everything is online, people are craving community and real human connection. That's why we created Common Ground.",
       lede: "Find your Common Ground — apply now.",
       compare: {
         singleCol: "Single Event",
@@ -390,7 +390,7 @@ const TRANSLATIONS = {
   pt: {
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
-      bio: "Um clube social no Rio de Janeiro construído sobre conexões reais. Pensado para cariocas e nômades.",
+      bio: "Um clube social no Rio pensado para cariocas e nômades se conectarem e se encontrarem na vida real.\n\nNum mundo onde tudo é online, as pessoas estão em busca de comunidade e conexão humana de verdade. Foi por isso que criamos o Common Ground.",
       lede: "Find your Common Ground — inscreva-se agora.",
       compare: {
         singleCol: "Evento Único",
@@ -525,7 +525,7 @@ const TRANSLATIONS = {
   es: {
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
-      bio: "Un club social en Río de Janeiro construido sobre conexiones reales. Pensado para locales y nómadas por igual.",
+      bio: "Un club social en Río pensado para locales y nómadas que quieren conectar y encontrarse en la vida real.\n\nEn un mundo donde todo es online, las personas buscan comunidad y conexión humana real. Por eso creamos Common Ground.",
       lede: "Find your Common Ground — solicita ahora.",
       compare: {
         singleCol: "Evento Único",
