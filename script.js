@@ -9,6 +9,23 @@ const CONFIG = {
   // fixed amount.
   price: "R$100",
 
+  // Flash sale — drops the Single Event Pass to R$80 (from the R$100 above)
+  // until the cutoff below, then automatically reverts with no manual
+  // cleanup needed (purely a client-side Date comparison — see
+  // isFlashSaleActive()). To end a sale early, just delete this block or
+  // set endsAt to a time in the past; to run a new one, set a fresh endsAt.
+  // Needs its own Pix/Wise QR pair encoding R$80 (see
+  // assets/pix-qr-flash-sale.png / wise-qr-flash-sale.png), same pattern as
+  // the discount-code QR pair below — regenerate those if the sale price
+  // ever changes.
+  flashSale: {
+    price: "R$80",
+    gbp: 12,
+    // Sunday 25 Oct 2026, 8am America/Sao_Paulo. Brazil has had no DST
+    // since 2019, so that's a fixed UTC-3 offset — 8am BRT = 11:00 UTC.
+    endsAt: "2026-10-25T11:00:00Z",
+  },
+
   // Discount codes for the Single Event Pass — entered at checkout on the
   // payment screen. Add a code to switch the field on and make it live;
   // an empty object hides the field. Codes are matched case-insensitively.
@@ -379,6 +396,7 @@ const TRANSLATIONS = {
       discountApplied: "Code applied — {price}/event",
       discountInvalid: "That code isn't valid.",
       discountBadge: "Code applied: {code}",
+      flashSaleBadge: "Flash Sale — ends Sunday 8am",
       whatsappDiscountSuffix: "Discount code used: {code}.",
     },
     whatsappMessage: {
@@ -514,6 +532,7 @@ const TRANSLATIONS = {
       discountApplied: "Código aplicado — {price}/evento",
       discountInvalid: "Esse código não é válido.",
       discountBadge: "Código aplicado: {code}",
+      flashSaleBadge: "Promoção Relâmpago — até domingo, 8h",
       whatsappDiscountSuffix: "Código de desconto usado: {code}.",
     },
     whatsappMessage: {
@@ -649,6 +668,7 @@ const TRANSLATIONS = {
       discountApplied: "Código aplicado — {price}/evento",
       discountInvalid: "Ese código no es válido.",
       discountBadge: "Código aplicado: {code}",
+      flashSaleBadge: "Oferta Flash — hasta el domingo, 8am",
       whatsappDiscountSuffix: "Código de descuento usado: {code}.",
     },
     whatsappMessage: {
@@ -719,7 +739,20 @@ function renderLandingPerksHeading() {
 }
 
 function renderLandingSingleHeading() {
-  document.getElementById("landing-single-price").textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
+  const el = document.getElementById("landing-single-price");
+  if (isFlashSaleActive()) {
+    const strike = document.createElement("span");
+    strike.className = "price-strike";
+    strike.textContent = CONFIG.price;
+    const sale = document.createElement("span");
+    sale.className = "price-sale";
+    sale.textContent = CONFIG.flashSale.price;
+    const unitSuffix = t("landing.compare.singlePriceUnit").replace("{price}", "");
+    el.textContent = "";
+    el.append(strike, " ", sale, unitSuffix);
+  } else {
+    el.textContent = t("landing.compare.singlePriceUnit").replace("{price}", CONFIG.price);
+  }
 }
 
 // Landing page's stat row shows the next upcoming event's date (day + short
@@ -754,6 +787,18 @@ function renderReferralSection() {
 
 function renderApprovedFinePrint() {
   document.getElementById("approved-fine-print").textContent = t("approved.finePrint").replace("{handle}", CONFIG.instagramHandle);
+}
+
+// "Starting price per event" stat — counts up to CONFIG.flashSale.price
+// while the sale's running, else the regular CONFIG.price, same automatic
+// switch as everywhere else the single-event price shows. Must run before
+// the count-up animation first fires (see the IntersectionObserver setup
+// below) — called from applyLang(), itself called synchronously at load,
+// well before that observer's callback can fire.
+function renderPriceStat() {
+  const el = document.getElementById("price-stat-number");
+  const price = isFlashSaleActive() ? CONFIG.flashSale.price : CONFIG.price;
+  el.dataset.target = price.replace(/\D/g, "");
 }
 
 // Formats the dates picked on the select-event screen (e.g. "6 Sep, 13 Sep")
@@ -941,13 +986,33 @@ const wiseQrImages = {
 const discountPixQr = "assets/pix-qr-discount.png";
 const discountWiseQr = "assets/wise-qr-discount.png";
 
-// Single Event Pass discount via a checkout code (state.appliedDiscountCode).
-// Returns null when no code is applied, or on any other plan.
+// Flash-sale QR codes — swapped in for Single Event Pass only, whenever no
+// discount code is applied, while CONFIG.flashSale is running. See
+// isFlashSaleActive().
+const flashSalePixQr = "assets/pix-qr-flash-sale.png";
+const flashSaleWiseQr = "assets/wise-qr-flash-sale.png";
+
+// True from now until CONFIG.flashSale.endsAt — purely a client-side clock
+// check, so the sale starts/ends on its own with no manual flip needed (just
+// each visitor's local clock, which is what it's paying with anyway).
+function isFlashSaleActive() {
+  return !!CONFIG.flashSale && new Date() < new Date(CONFIG.flashSale.endsAt);
+}
+
+// Single Event Pass discount — either a checkout code
+// (state.appliedDiscountCode) or, lacking one, the flash sale while it's
+// running. A code always wins if both apply (its price need not even be
+// lower — codes are a separate, deliberately-tracked promo, not something
+// the flash sale should silently override). Returns null on any other plan,
+// or if neither applies.
 function getActiveSingleDiscount() {
   if (state.plan !== "single") return null;
   if (state.appliedDiscountCode) {
     const code = CONFIG.discountCodes[state.appliedDiscountCode];
     if (code) return { type: "code", code: state.appliedDiscountCode, price: code.price, gbp: code.gbp };
+  }
+  if (isFlashSaleActive()) {
+    return { type: "flash", price: CONFIG.flashSale.price, gbp: CONFIG.flashSale.gbp };
   }
   return null;
 }
@@ -990,6 +1055,8 @@ function renderPlanCard() {
   let badgeText;
   if (discount && discount.type === "code") {
     badgeText = t("approved.discountBadge").replace("{code}", discount.code);
+  } else if (discount && discount.type === "flash") {
+    badgeText = t("approved.flashSaleBadge");
   } else {
     badgeText = t(`approved.plans.${state.plan}.badge`);
   }
@@ -1006,8 +1073,8 @@ function renderPlanCard() {
   document.getElementById("external-pay-card").hidden = state.paymentMethod !== "paypal";
   document.getElementById("wise-card").hidden = state.paymentMethod !== "wise";
   const qrKind = discount ? discount.type : null;
-  document.getElementById("pix-qr").src = qrKind === "code" ? discountPixQr : planQrImages[state.plan];
-  document.getElementById("wise-qr").src = qrKind === "code" ? discountWiseQr : wiseQrImages[state.plan];
+  document.getElementById("pix-qr").src = qrKind === "code" ? discountPixQr : qrKind === "flash" ? flashSalePixQr : planQrImages[state.plan];
+  document.getElementById("wise-qr").src = qrKind === "code" ? discountWiseQr : qrKind === "flash" ? flashSaleWiseQr : wiseQrImages[state.plan];
 
   if (state.paymentMethod === "paypal") {
     const methodLabel = t(`approved.paymentMethods.${state.paymentMethod}`);
@@ -1158,6 +1225,7 @@ function applyLang(lang) {
 
   renderLandingPerksHeading();
   renderLandingSingleHeading();
+  renderPriceStat();
   renderNextEventStat();
   renderReferralSection();
   renderApprovedFinePrint();
