@@ -21,9 +21,10 @@ const CONFIG = {
   flashSale: {
     price: "R$80",
     gbp: 12,
-    // Sunday 25 Oct 2026, 8am America/Sao_Paulo. Brazil has had no DST
-    // since 2019, so that's a fixed UTC-3 offset — 8am BRT = 11:00 UTC.
-    endsAt: "2026-10-25T11:00:00Z",
+    // Extended 12h from the original 8am cutoff — now Sunday 25 Oct 2026,
+    // 8pm America/Sao_Paulo. Brazil has had no DST since 2019, so that's a
+    // fixed UTC-3 offset — 8pm BRT = 23:00 UTC.
+    endsAt: "2026-10-25T23:00:00Z",
   },
 
   // Discount codes for the Single Event Pass — entered at checkout on the
@@ -396,7 +397,7 @@ const TRANSLATIONS = {
       discountApplied: "Code applied — {price}/event",
       discountInvalid: "That code isn't valid.",
       discountBadge: "Code applied: {code}",
-      flashSaleBadge: "Flash Sale — ends Sunday 8am",
+      flashSaleBadge: "Flash Sale — ends Sunday 8pm",
       whatsappDiscountSuffix: "Discount code used: {code}.",
     },
     whatsappMessage: {
@@ -532,7 +533,7 @@ const TRANSLATIONS = {
       discountApplied: "Código aplicado — {price}/evento",
       discountInvalid: "Esse código não é válido.",
       discountBadge: "Código aplicado: {code}",
-      flashSaleBadge: "Promoção Relâmpago — até domingo, 8h",
+      flashSaleBadge: "Promoção Relâmpago — até domingo, 20h",
       whatsappDiscountSuffix: "Código de desconto usado: {code}.",
     },
     whatsappMessage: {
@@ -668,7 +669,7 @@ const TRANSLATIONS = {
       discountApplied: "Código aplicado — {price}/evento",
       discountInvalid: "Ese código no es válido.",
       discountBadge: "Código aplicado: {code}",
-      flashSaleBadge: "Oferta Flash — hasta el domingo, 8am",
+      flashSaleBadge: "Oferta Flash — hasta el domingo, 8pm",
       whatsappDiscountSuffix: "Código de descuento usado: {code}.",
     },
     whatsappMessage: {
