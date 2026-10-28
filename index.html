@@ -200,19 +200,14 @@ In a world where everything is online, people are craving community and real hum
             <option value="whatsapp" data-i18n="contact.hearAboutOptions.whatsapp">Common Ground Whatsapp Community</option>
             <option value="friend" data-i18n="contact.hearAboutOptions.friend">Through a Friend</option>
             <option value="moreipanema" data-i18n="contact.hearAboutOptions.moreipanema">MORE Ipanema Hostel</option>
+            <option value="ipanemabeach" data-i18n="contact.hearAboutOptions.ipanemabeach">Ipanema Beach Hostel</option>
+            <option value="leblonbeach" data-i18n="contact.hearAboutOptions.leblonbeach">Leblon Beach Hostel</option>
             <option value="other" data-i18n="contact.hearAboutOptions.other">Other</option>
           </select>
         </label>
         <label class="field" id="hostel-volunteer-field" hidden>
-          <span data-i18n="contact.hostelVolunteerLabel">Who at More Ipanema told you about the event?</span>
-          <select name="hostelVolunteer" id="hostel-volunteer-select">
-            <option value="" data-i18n="contact.hostelVolunteerPlaceholder">Select a name</option>
-            <option value="volunteer1" data-i18n="contact.hostelVolunteers.v1">Volunteer 1</option>
-            <option value="volunteer2" data-i18n="contact.hostelVolunteers.v2">Volunteer 2</option>
-            <option value="volunteer3" data-i18n="contact.hostelVolunteers.v3">Volunteer 3</option>
-            <option value="volunteer4" data-i18n="contact.hostelVolunteers.v4">Volunteer 4</option>
-            <option value="volunteer5" data-i18n="contact.hostelVolunteers.v5">Volunteer 5</option>
-          </select>
+          <span id="hostel-volunteer-label">Who at MORE Ipanema told you about the event?</span>
+          <input name="hostelVolunteer" type="text" autocomplete="off" data-i18n-placeholder="contact.hostelVolunteerPlaceholder" placeholder="Their name">
         </label>
         <button class="btn-primary" type="submit" data-i18n="contact.submit">Submit Application</button>
         <p class="error" id="contact-error" role="alert" hidden></p>

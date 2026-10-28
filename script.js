@@ -337,22 +337,17 @@ const TRANSLATIONS = {
         whatsapp: "Common Ground Whatsapp Community",
         friend: "Through a Friend",
         moreipanema: "MORE Ipanema Hostel",
+        ipanemabeach: "Ipanema Beach Hostel",
+        leblonbeach: "Leblon Beach Hostel",
         other: "Other",
       },
-      hostelVolunteerLabel: "Who at MORE Ipanema told you about the event?",
-      hostelVolunteerPlaceholder: "Select a name",
-      hostelVolunteers: {
-        v1: "Volunteer 1",
-        v2: "Volunteer 2",
-        v3: "Volunteer 3",
-        v4: "Volunteer 4",
-        v5: "Volunteer 5",
-      },
+      hostelVolunteerLabel: "Who at {hostel} told you about the event?",
+      hostelVolunteerPlaceholder: "Their name",
       optional: "(optional)",
       submit: "Submit Application",
       error: "Please fill in all fields to continue.",
       emailError: "Please enter a valid email address.",
-      hostelVolunteerError: "Please select who at MORE Ipanema told you.",
+      hostelVolunteerError: "Please tell us who told you about the event.",
     },
     reviewing: {
       messages: [
@@ -492,22 +487,17 @@ const TRANSLATIONS = {
         whatsapp: "Comunidade do WhatsApp da Common Ground",
         friend: "Por um amigo",
         moreipanema: "MORE Ipanema Hostel",
+        ipanemabeach: "Ipanema Beach Hostel",
+        leblonbeach: "Leblon Beach Hostel",
         other: "Outro",
       },
-      hostelVolunteerLabel: "Quem do MORE Ipanema te contou sobre o evento?",
-      hostelVolunteerPlaceholder: "Selecione um nome",
-      hostelVolunteers: {
-        v1: "Voluntário 1",
-        v2: "Voluntário 2",
-        v3: "Voluntário 3",
-        v4: "Voluntário 4",
-        v5: "Voluntário 5",
-      },
+      hostelVolunteerLabel: "Quem do {hostel} te contou sobre o evento?",
+      hostelVolunteerPlaceholder: "Nome da pessoa",
       optional: "(opcional)",
       submit: "Enviar Inscrição",
       error: "Preencha todos os campos para continuar.",
       emailError: "Insira um e-mail válido.",
-      hostelVolunteerError: "Selecione quem do MORE Ipanema te contou.",
+      hostelVolunteerError: "Conte-nos quem te contou sobre o evento.",
     },
     reviewing: {
       messages: [
@@ -647,22 +637,17 @@ const TRANSLATIONS = {
         whatsapp: "Comunidad de WhatsApp de Common Ground",
         friend: "A través de un amigo",
         moreipanema: "MORE Ipanema Hostel",
+        ipanemabeach: "Ipanema Beach Hostel",
+        leblonbeach: "Leblon Beach Hostel",
         other: "Otro",
       },
-      hostelVolunteerLabel: "¿Quién de MORE Ipanema te contó sobre el evento?",
-      hostelVolunteerPlaceholder: "Selecciona un nombre",
-      hostelVolunteers: {
-        v1: "Voluntario 1",
-        v2: "Voluntario 2",
-        v3: "Voluntario 3",
-        v4: "Voluntario 4",
-        v5: "Voluntario 5",
-      },
+      hostelVolunteerLabel: "¿Quién de {hostel} te contó sobre el evento?",
+      hostelVolunteerPlaceholder: "Su nombre",
       optional: "(opcional)",
       submit: "Enviar Solicitud",
       error: "Completa todos los campos para continuar.",
       emailError: "Ingresa un correo electrónico válido.",
-      hostelVolunteerError: "Selecciona quién de MORE Ipanema te contó.",
+      hostelVolunteerError: "Cuéntanos quién te contó sobre el evento.",
     },
     reviewing: {
       messages: [
@@ -1292,7 +1277,17 @@ function applyLang(lang) {
 }
 
 document.querySelectorAll(".lang-switch-btn").forEach((btn) => {
-  btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+  btn.addEventListener("click", () => {
+    applyLang(btn.dataset.lang);
+    // Re-render the dynamic "who at [hostel] told you" label in the new
+    // language, in case it's showing — applyLang()'s own [data-i18n] loop
+    // can't do this one, since its text is built from a template + the
+    // picked hostel's name, not a plain translation lookup. Safe to call
+    // unconditionally here (post-load, after contactForm etc. below are
+    // defined) even though applyLang() itself runs once before that, at
+    // page load, and so can't call this directly.
+    syncHostelVolunteerField();
+  });
 });
 
 // Default to English, unless we're arriving back from menu.html with its
@@ -1589,14 +1584,30 @@ textAnswerInput.addEventListener("keydown", (e) => {
 const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
 const hostelVolunteerField = document.getElementById("hostel-volunteer-field");
+const hostelVolunteerLabel = document.getElementById("hostel-volunteer-label");
 
-// The "who at MORE Ipanema told you" follow-up only makes sense once "MORE
-// Ipanema Hostel" is picked as the referral source — hidden otherwise, and
-// cleared whenever it's hidden so a stale pick never silently submits.
+// Referral sources that are a specific hostel partner — each shows the same
+// "who told you" follow-up, just naming that hostel. Keys match the
+// hearAboutUs <option> values; names are proper names, kept in English
+// across all three languages (same as "MORE Ipanema Hostel" itself).
+const HOSTEL_REFERRAL_NAMES = {
+  moreipanema: "MORE Ipanema",
+  ipanemabeach: "Ipanema Beach",
+  leblonbeach: "Leblon Beach",
+};
+
+// The "who at [hostel] told you" follow-up only makes sense once one of the
+// hostel partners above is picked as the referral source — hidden
+// otherwise, and cleared whenever it's hidden so a stale answer never
+// silently submits.
 function syncHostelVolunteerField() {
-  const show = contactForm.hearAboutUs.value === "moreipanema";
-  hostelVolunteerField.hidden = !show;
-  if (!show) contactForm.hostelVolunteer.value = "";
+  const hostelName = HOSTEL_REFERRAL_NAMES[contactForm.hearAboutUs.value];
+  hostelVolunteerField.hidden = !hostelName;
+  if (hostelName) {
+    hostelVolunteerLabel.textContent = t("contact.hostelVolunteerLabel").replace("{hostel}", hostelName);
+  } else {
+    contactForm.hostelVolunteer.value = "";
+  }
 }
 contactForm.hearAboutUs.addEventListener("change", syncHostelVolunteerField);
 
@@ -1657,10 +1668,10 @@ contactForm.addEventListener("submit", (e) => {
     contactError.hidden = false;
     return;
   }
-  // The referral source itself is optional, but once someone says "More
-  // Ipanema Hostel" sent them, naming the volunteer is the whole point of
-  // asking — don't let that half-answered.
-  if (hearAboutUs === "moreipanema" && !hostelVolunteer) {
+  // The referral source itself is optional, but once someone names a hostel
+  // partner, naming who there told them is the whole point of asking —
+  // don't let that go half-answered.
+  if (HOSTEL_REFERRAL_NAMES[hearAboutUs] && !hostelVolunteer) {
     contactError.textContent = t("contact.hostelVolunteerError");
     contactError.hidden = false;
     return;
