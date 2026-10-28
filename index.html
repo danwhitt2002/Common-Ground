@@ -192,6 +192,29 @@ In a world where everything is online, people are craving community and real hum
           <span><span data-i18n="contact.instagramLabel">Instagram handle</span> <em data-i18n="contact.optional">(optional)</em></span>
           <input name="instagram" type="text" data-i18n-placeholder="contact.instagramPlaceholder" placeholder="@yourname">
         </label>
+        <label class="field">
+          <span><span data-i18n="contact.hearAboutLabel">How did you hear about this event?</span> <em data-i18n="contact.optional">(optional)</em></span>
+          <select name="hearAboutUs" id="hear-about-us-select">
+            <option value="" data-i18n="contact.hearAboutPlaceholder">Select an option</option>
+            <option value="instagram" data-i18n="contact.hearAboutOptions.instagram">Instagram</option>
+            <option value="commonground" data-i18n="contact.hearAboutOptions.commonground">Common Ground</option>
+            <option value="whatsapp" data-i18n="contact.hearAboutOptions.whatsapp">WhatsApp Community</option>
+            <option value="friend" data-i18n="contact.hearAboutOptions.friend">Through a Friend</option>
+            <option value="moreipanema" data-i18n="contact.hearAboutOptions.moreipanema">More Ipanema Hostel</option>
+            <option value="other" data-i18n="contact.hearAboutOptions.other">Other</option>
+          </select>
+        </label>
+        <label class="field" id="hostel-volunteer-field" hidden>
+          <span data-i18n="contact.hostelVolunteerLabel">Who at More Ipanema told you about the event?</span>
+          <select name="hostelVolunteer" id="hostel-volunteer-select">
+            <option value="" data-i18n="contact.hostelVolunteerPlaceholder">Select a name</option>
+            <option value="volunteer1" data-i18n="contact.hostelVolunteers.v1">Volunteer 1</option>
+            <option value="volunteer2" data-i18n="contact.hostelVolunteers.v2">Volunteer 2</option>
+            <option value="volunteer3" data-i18n="contact.hostelVolunteers.v3">Volunteer 3</option>
+            <option value="volunteer4" data-i18n="contact.hostelVolunteers.v4">Volunteer 4</option>
+            <option value="volunteer5" data-i18n="contact.hostelVolunteers.v5">Volunteer 5</option>
+          </select>
+        </label>
         <button class="btn-primary" type="submit" data-i18n="contact.submit">Submit Application</button>
         <p class="error" id="contact-error" role="alert" hidden></p>
       </form>

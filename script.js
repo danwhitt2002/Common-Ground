@@ -330,10 +330,30 @@ const TRANSLATIONS = {
       tshirtPlaceholder: "Select a size",
       instagramLabel: "Instagram handle",
       instagramPlaceholder: "@yourname",
+      hearAboutLabel: "How did you hear about this event?",
+      hearAboutPlaceholder: "Select an option",
+      hearAboutOptions: {
+        instagram: "Instagram",
+        commonground: "Common Ground",
+        whatsapp: "WhatsApp Community",
+        friend: "Through a Friend",
+        moreipanema: "More Ipanema Hostel",
+        other: "Other",
+      },
+      hostelVolunteerLabel: "Who at More Ipanema told you about the event?",
+      hostelVolunteerPlaceholder: "Select a name",
+      hostelVolunteers: {
+        v1: "Volunteer 1",
+        v2: "Volunteer 2",
+        v3: "Volunteer 3",
+        v4: "Volunteer 4",
+        v5: "Volunteer 5",
+      },
       optional: "(optional)",
       submit: "Submit Application",
       error: "Please fill in all fields to continue.",
       emailError: "Please enter a valid email address.",
+      hostelVolunteerError: "Please select who at More Ipanema told you.",
     },
     reviewing: {
       messages: [
@@ -466,10 +486,30 @@ const TRANSLATIONS = {
       tshirtPlaceholder: "Selecione um tamanho",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@seunome",
+      hearAboutLabel: "Como você ficou sabendo desse evento?",
+      hearAboutPlaceholder: "Selecione uma opção",
+      hearAboutOptions: {
+        instagram: "Instagram",
+        commonground: "Common Ground",
+        whatsapp: "Comunidade do WhatsApp",
+        friend: "Por um amigo",
+        moreipanema: "More Ipanema Hostel",
+        other: "Outro",
+      },
+      hostelVolunteerLabel: "Quem do More Ipanema te contou sobre o evento?",
+      hostelVolunteerPlaceholder: "Selecione um nome",
+      hostelVolunteers: {
+        v1: "Voluntário 1",
+        v2: "Voluntário 2",
+        v3: "Voluntário 3",
+        v4: "Voluntário 4",
+        v5: "Voluntário 5",
+      },
       optional: "(opcional)",
       submit: "Enviar Inscrição",
       error: "Preencha todos os campos para continuar.",
       emailError: "Insira um e-mail válido.",
+      hostelVolunteerError: "Selecione quem do More Ipanema te contou.",
     },
     reviewing: {
       messages: [
@@ -602,10 +642,30 @@ const TRANSLATIONS = {
       tshirtPlaceholder: "Selecciona una talla",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@tunombre",
+      hearAboutLabel: "¿Cómo te enteraste de este evento?",
+      hearAboutPlaceholder: "Selecciona una opción",
+      hearAboutOptions: {
+        instagram: "Instagram",
+        commonground: "Common Ground",
+        whatsapp: "Comunidad de WhatsApp",
+        friend: "A través de un amigo",
+        moreipanema: "More Ipanema Hostel",
+        other: "Otro",
+      },
+      hostelVolunteerLabel: "¿Quién de More Ipanema te contó sobre el evento?",
+      hostelVolunteerPlaceholder: "Selecciona un nombre",
+      hostelVolunteers: {
+        v1: "Voluntario 1",
+        v2: "Voluntario 2",
+        v3: "Voluntario 3",
+        v4: "Voluntario 4",
+        v5: "Voluntario 5",
+      },
       optional: "(opcional)",
       submit: "Enviar Solicitud",
       error: "Completa todos los campos para continuar.",
       emailError: "Ingresa un correo electrónico válido.",
+      hostelVolunteerError: "Selecciona quién de More Ipanema te contó.",
     },
     reviewing: {
       messages: [
@@ -1531,6 +1591,17 @@ textAnswerInput.addEventListener("keydown", (e) => {
 // ---------------------------------------------------------------------------
 const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
+const hostelVolunteerField = document.getElementById("hostel-volunteer-field");
+
+// The "who at More Ipanema told you" follow-up only makes sense once "More
+// Ipanema Hostel" is picked as the referral source — hidden otherwise, and
+// cleared whenever it's hidden so a stale pick never silently submits.
+function syncHostelVolunteerField() {
+  const show = contactForm.hearAboutUs.value === "moreipanema";
+  hostelVolunteerField.hidden = !show;
+  if (!show) contactForm.hostelVolunteer.value = "";
+}
+contactForm.hearAboutUs.addEventListener("change", syncHostelVolunteerField);
 
 function prefillContact() {
   contactForm.fullName.value = state.contact.fullName || "";
@@ -1539,6 +1610,9 @@ function prefillContact() {
   contactForm.cpfPassport.value = state.contact.cpfPassport || "";
   contactForm.tshirtSize.value = state.contact.tshirtSize || "";
   contactForm.instagram.value = state.contact.instagram || "";
+  contactForm.hearAboutUs.value = state.contact.hearAboutUs || "";
+  contactForm.hostelVolunteer.value = state.contact.hostelVolunteer || "";
+  syncHostelVolunteerField();
 }
 
 document.getElementById("contact-back-btn").addEventListener("click", () => {
@@ -1550,6 +1624,8 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
     cpfPassport: contactForm.cpfPassport.value.trim(),
     tshirtSize: contactForm.tshirtSize.value,
     instagram: contactForm.instagram.value.trim(),
+    hearAboutUs: contactForm.hearAboutUs.value,
+    hostelVolunteer: contactForm.hostelVolunteer.value,
   };
   // "Get Your Ticket" skips the question flow entirely, so there's no
   // question screen to go back to — return to landing instead.
@@ -1571,6 +1647,8 @@ contactForm.addEventListener("submit", (e) => {
   const cpfPassport = (data.get("cpfPassport") || "").toString().trim();
   const tshirtSize = (data.get("tshirtSize") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
+  const hearAboutUs = (data.get("hearAboutUs") || "").toString().trim();
+  const hostelVolunteer = (data.get("hostelVolunteer") || "").toString().trim();
 
   if (!fullName || !whatsapp || !email || !cpfPassport || !tshirtSize) {
     contactError.textContent = t("contact.error");
@@ -1582,9 +1660,17 @@ contactForm.addEventListener("submit", (e) => {
     contactError.hidden = false;
     return;
   }
+  // The referral source itself is optional, but once someone says "More
+  // Ipanema Hostel" sent them, naming the volunteer is the whole point of
+  // asking — don't let that half-answered.
+  if (hearAboutUs === "moreipanema" && !hostelVolunteer) {
+    contactError.textContent = t("contact.hostelVolunteerError");
+    contactError.hidden = false;
+    return;
+  }
   contactError.hidden = true;
 
-  state.contact = { fullName, whatsapp, email, cpfPassport, tshirtSize, instagram };
+  state.contact = { fullName, whatsapp, email, cpfPassport, tshirtSize, instagram, hearAboutUs, hostelVolunteer };
   showScreen("reviewing");
   runReviewSequence();
 });

@@ -714,6 +714,8 @@ h2.display { font-size: clamp(26px, 7vw, 32px); }
   color: var(--ink-dim);
 }
 
+.field[hidden] { display: none; }
+
 .field em {
   font-style: normal;
   font-weight: 400;
