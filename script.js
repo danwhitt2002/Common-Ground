@@ -334,13 +334,12 @@ const TRANSLATIONS = {
       hearAboutPlaceholder: "Select an option",
       hearAboutOptions: {
         instagram: "Instagram",
-        commonground: "Common Ground",
-        whatsapp: "WhatsApp Community",
+        whatsapp: "Common Ground Whatsapp Community",
         friend: "Through a Friend",
-        moreipanema: "More Ipanema Hostel",
+        moreipanema: "MORE Ipanema Hostel",
         other: "Other",
       },
-      hostelVolunteerLabel: "Who at More Ipanema told you about the event?",
+      hostelVolunteerLabel: "Who at MORE Ipanema told you about the event?",
       hostelVolunteerPlaceholder: "Select a name",
       hostelVolunteers: {
         v1: "Volunteer 1",
@@ -353,7 +352,7 @@ const TRANSLATIONS = {
       submit: "Submit Application",
       error: "Please fill in all fields to continue.",
       emailError: "Please enter a valid email address.",
-      hostelVolunteerError: "Please select who at More Ipanema told you.",
+      hostelVolunteerError: "Please select who at MORE Ipanema told you.",
     },
     reviewing: {
       messages: [
@@ -490,13 +489,12 @@ const TRANSLATIONS = {
       hearAboutPlaceholder: "Selecione uma opção",
       hearAboutOptions: {
         instagram: "Instagram",
-        commonground: "Common Ground",
-        whatsapp: "Comunidade do WhatsApp",
+        whatsapp: "Comunidade do WhatsApp da Common Ground",
         friend: "Por um amigo",
-        moreipanema: "More Ipanema Hostel",
+        moreipanema: "MORE Ipanema Hostel",
         other: "Outro",
       },
-      hostelVolunteerLabel: "Quem do More Ipanema te contou sobre o evento?",
+      hostelVolunteerLabel: "Quem do MORE Ipanema te contou sobre o evento?",
       hostelVolunteerPlaceholder: "Selecione um nome",
       hostelVolunteers: {
         v1: "Voluntário 1",
@@ -509,7 +507,7 @@ const TRANSLATIONS = {
       submit: "Enviar Inscrição",
       error: "Preencha todos os campos para continuar.",
       emailError: "Insira um e-mail válido.",
-      hostelVolunteerError: "Selecione quem do More Ipanema te contou.",
+      hostelVolunteerError: "Selecione quem do MORE Ipanema te contou.",
     },
     reviewing: {
       messages: [
@@ -646,13 +644,12 @@ const TRANSLATIONS = {
       hearAboutPlaceholder: "Selecciona una opción",
       hearAboutOptions: {
         instagram: "Instagram",
-        commonground: "Common Ground",
-        whatsapp: "Comunidad de WhatsApp",
+        whatsapp: "Comunidad de WhatsApp de Common Ground",
         friend: "A través de un amigo",
-        moreipanema: "More Ipanema Hostel",
+        moreipanema: "MORE Ipanema Hostel",
         other: "Otro",
       },
-      hostelVolunteerLabel: "¿Quién de More Ipanema te contó sobre el evento?",
+      hostelVolunteerLabel: "¿Quién de MORE Ipanema te contó sobre el evento?",
       hostelVolunteerPlaceholder: "Selecciona un nombre",
       hostelVolunteers: {
         v1: "Voluntario 1",
@@ -665,7 +662,7 @@ const TRANSLATIONS = {
       submit: "Enviar Solicitud",
       error: "Completa todos los campos para continuar.",
       emailError: "Ingresa un correo electrónico válido.",
-      hostelVolunteerError: "Selecciona quién de More Ipanema te contó.",
+      hostelVolunteerError: "Selecciona quién de MORE Ipanema te contó.",
     },
     reviewing: {
       messages: [
@@ -1593,7 +1590,7 @@ const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
 const hostelVolunteerField = document.getElementById("hostel-volunteer-field");
 
-// The "who at More Ipanema told you" follow-up only makes sense once "More
+// The "who at MORE Ipanema told you" follow-up only makes sense once "MORE
 // Ipanema Hostel" is picked as the referral source — hidden otherwise, and
 // cleared whenever it's hidden so a stale pick never silently submits.
 function syncHostelVolunteerField() {
