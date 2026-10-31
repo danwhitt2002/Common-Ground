@@ -1829,8 +1829,7 @@ function submitApplication() {
 const waitlistForm = document.getElementById("waitlist-form");
 const waitlistError = document.getElementById("waitlist-error");
 
-document.getElementById("membership-banner-link").addEventListener("click", (e) => {
-  e.preventDefault();
+document.getElementById("membership-banner-link").addEventListener("click", () => {
   showScreen("waitlist");
 });
 
