@@ -280,7 +280,6 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       bio: "A social club in Rio curated for locals and nomads alike to connect and meet IRL.\n\nIn a world where everything is online, people are craving community and real human connection. That's why we created Common Ground.",
       lede: "Find your Common Ground — apply now.",
-      groundsUpdateNote: "Apply for the Grounds Pass now — available through December. In January, it's upgrading to monthly memberships: more events, curated discounts around the city, and more.",
       compare: {
         singleCol: "Single Event",
         singlePriceUnit: "{price}/event",
@@ -454,7 +453,6 @@ const TRANSLATIONS = {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       bio: "Um clube social no Rio pensado para cariocas e nômades se conectarem e se encontrarem na vida real.\n\nNum mundo onde tudo é online, as pessoas estão em busca de comunidade e conexão humana de verdade. Foi por isso que criamos o Common Ground.",
       lede: "Find your Common Ground — inscreva-se agora.",
-      groundsUpdateNote: "Inscreva-se no Grounds Pass agora — disponível até dezembro. Em janeiro, ele se transforma na assinatura mensal: mais eventos, descontos selecionados pela cidade e muito mais.",
       compare: {
         singleCol: "Evento Único",
         singlePriceUnit: "{price}/evento",
@@ -628,7 +626,6 @@ const TRANSLATIONS = {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       bio: "Un club social en Río pensado para locales y nómadas que quieren conectar y encontrarse en la vida real.\n\nEn un mundo donde todo es online, las personas buscan comunidad y conexión humana real. Por eso creamos Common Ground.",
       lede: "Find your Common Ground — solicita ahora.",
-      groundsUpdateNote: "Solicita el Grounds Pass ahora — disponible hasta diciembre. En enero, se convierte en la membresía mensual: más eventos, descuentos exclusivos por la ciudad y mucho más.",
       compare: {
         singleCol: "Evento Único",
         singlePriceUnit: "{price}/evento",
