@@ -365,7 +365,8 @@ const TRANSLATIONS = {
       emailLabel: "Email",
       emailPlaceholder: "you@email.com",
       submit: "Join the Waitlist",
-      error: "Please fill in your name and WhatsApp number.",
+      error: "Please fill in your name, WhatsApp number, and email.",
+      emailError: "Please enter a valid email address.",
       confirmedEyebrow: "You're In!",
       confirmedHeading: "You're on the list.",
       confirmedLede: "We'll reach out as soon as monthly memberships open in January — as one of our first members, you'll get early access.",
@@ -537,7 +538,8 @@ const TRANSLATIONS = {
       emailLabel: "E-mail",
       emailPlaceholder: "voce@email.com",
       submit: "Entrar na Lista de Espera",
-      error: "Preencha seu nome e número de WhatsApp.",
+      error: "Preencha seu nome, número de WhatsApp e e-mail.",
+      emailError: "Insira um e-mail válido.",
       confirmedEyebrow: "Você Entrou!",
       confirmedHeading: "Você está na lista.",
       confirmedLede: "Entraremos em contato assim que as assinaturas mensais abrirem em janeiro — como um dos primeiros membros, você terá acesso antecipado.",
@@ -709,7 +711,8 @@ const TRANSLATIONS = {
       emailLabel: "Correo electrónico",
       emailPlaceholder: "tu@email.com",
       submit: "Unirme a la Lista de Espera",
-      error: "Completa tu nombre y número de WhatsApp.",
+      error: "Completa tu nombre, número de WhatsApp y correo electrónico.",
+      emailError: "Ingresa un correo electrónico válido.",
       confirmedEyebrow: "¡Estás Dentro!",
       confirmedHeading: "Estás en la lista.",
       confirmedLede: "Te contactaremos en cuanto se abran las membresías mensuales en enero — como uno de los primeros miembros, tendrás acceso anticipado.",
@@ -1848,8 +1851,13 @@ waitlistForm.addEventListener("submit", (e) => {
   const whatsapp = (data.get("whatsapp") || "").toString().trim();
   const email = (data.get("email") || "").toString().trim();
 
-  if (!fullName || !whatsapp) {
+  if (!fullName || !whatsapp || !email) {
     waitlistError.textContent = t("waitlist.error");
+    waitlistError.hidden = false;
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    waitlistError.textContent = t("waitlist.emailError");
     waitlistError.hidden = false;
     return;
   }
