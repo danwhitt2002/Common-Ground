@@ -357,7 +357,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Monthly Membership · Starting January 2027",
       heading: "Be first in line.",
-      lede: "Join the waitlist for early access when Common Ground monthly memberships launch — spots are limited.",
+      lede: "Join the waitlist for early access when Common Ground monthly memberships launch — spots are limited. From January, most events are members-only: one monthly price unlocks every event, for far better value than paying per ticket, plus a monthly open taster day for newcomers to try us out first.",
       fullNameLabel: "Full name",
       fullNamePlaceholder: "Your full name",
       whatsappLabel: "WhatsApp number",
@@ -529,7 +529,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Assinatura Mensal · A partir de janeiro de 2027",
       heading: "Seja um dos primeiros.",
-      lede: "Entre na lista de espera para ter acesso antecipado quando as assinaturas mensais da Common Ground forem lançadas — vagas limitadas.",
+      lede: "Entre na lista de espera para ter acesso antecipado quando as assinaturas mensais da Common Ground forem lançadas — vagas limitadas. A partir de janeiro, a maioria dos eventos será exclusiva para assinantes: um valor mensal dá acesso a todos os eventos, com um custo-benefício muito melhor do que pagar por evento, além de um dia aberto por mês para quem é novo conhecer a Common Ground.",
       fullNameLabel: "Nome completo",
       fullNamePlaceholder: "Seu nome completo",
       whatsappLabel: "Número de WhatsApp",
@@ -701,7 +701,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Membresía Mensual · A partir de enero de 2027",
       heading: "Sé de los primeros.",
-      lede: "Únete a la lista de espera para tener acceso anticipado cuando se lancen las membresías mensuales de Common Ground — cupos limitados.",
+      lede: "Únete a la lista de espera para tener acceso anticipado cuando se lancen las membresías mensuales de Common Ground — cupos limitados. A partir de enero, la mayoría de los eventos serán exclusivos para miembros: un solo pago mensual te da acceso a todos los eventos, con mucho mejor valor que pagar por evento, además de un día abierto al mes para que los nuevos prueben Common Ground.",
       fullNameLabel: "Nombre completo",
       fullNamePlaceholder: "Tu nombre completo",
       whatsappLabel: "Número de WhatsApp",
