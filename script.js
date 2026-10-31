@@ -274,7 +274,7 @@ const TRANSLATIONS = {
     membershipBanner: {
       eyebrow: "Starting January 2027",
       title: "Join the Monthly Membership Waitlist →",
-      desc: "Every event, exclusive discounts around the city & more. Limited spots.",
+      desc: "Every event, exclusive discounts & more. Limited spots.",
     },
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
@@ -446,7 +446,7 @@ const TRANSLATIONS = {
     membershipBanner: {
       eyebrow: "A partir de janeiro de 2027",
       title: "Entre na Lista de Espera da Assinatura Mensal →",
-      desc: "Todos os eventos, descontos exclusivos pela cidade e mais. Vagas limitadas.",
+      desc: "Todos os eventos, descontos exclusivos e mais. Vagas limitadas.",
     },
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
@@ -618,7 +618,7 @@ const TRANSLATIONS = {
     membershipBanner: {
       eyebrow: "A partir de enero de 2027",
       title: "Únete a la Lista de Espera de la Membresía Mensual →",
-      desc: "Todos los eventos, descuentos exclusivos por la ciudad y más. Cupos limitados.",
+      desc: "Todos los eventos, descuentos exclusivos y más. Cupos limitados.",
     },
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
