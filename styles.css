@@ -372,6 +372,23 @@ main {
   color: var(--ink-dim);
 }
 
+/* Flags that the Grounds Pass shown above is the pre-January version —
+   still live/purchasable through December, upgrading into the full
+   monthly membership in January (see the waitlist banner at the very
+   top of the page for that). */
+.grounds-update-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-dim);
+  text-align: left;
+}
+
 .plans-table-mark.is-no { opacity: 0.4; }
 .plans-table-mark.is-value { font-size: 15px; font-weight: 600; }
 
