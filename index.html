@@ -19,6 +19,12 @@
 
   <img class="center-graphic" src="assets/community-graphic.png" alt="" aria-hidden="true">
 
+  <a class="membership-banner" href="#" id="membership-banner-link">
+    <span class="membership-banner-eyebrow" data-i18n="membershipBanner.eyebrow">Starting January 2027</span>
+    <span class="membership-banner-title" data-i18n="membershipBanner.title">Join the Monthly Membership Waitlist →</span>
+    <span class="membership-banner-desc" data-i18n="membershipBanner.desc">Every event, exclusive discounts around the city & more. Limited spots.</span>
+  </a>
+
   <header class="topbar">
     <a href="index.html" id="logo-link" aria-label="Common Ground — home">
       <img class="wordmark-img" src="assets/logo-common-ground.png" alt="Common Ground">
@@ -313,6 +319,40 @@ In a world where everything is online, people are craving community and real hum
       <a class="link-secondary" id="approved-community-link" href="#" target="_blank" rel="noopener" data-i18n="landing.communityLink">Common Ground Community Groupchat →</a>
       <a class="link-secondary" href="menu.html" data-menu-link data-i18n="approved.menuLink">See the drinks menu →</a>
       <p class="fine-print" id="approved-fine-print"></p>
+    </section>
+
+    <!-- MONTHLY MEMBERSHIP WAITLIST — reached via the banner at the top of
+         the page (see #membership-banner-link), not part of the ticket/
+         Grounds Pass funnel below it. -->
+    <section class="screen" data-screen="waitlist">
+      <button class="back-link" id="waitlist-back-btn" type="button" data-i18n="question.back">← Back</button>
+      <p class="eyebrow" data-i18n="waitlist.eyebrow">Monthly Membership · Starting January 2027</p>
+      <h2 class="display" data-i18n="waitlist.heading">Be first in line.</h2>
+      <p class="lede" data-i18n="waitlist.lede">Join the waitlist for early access when Common Ground monthly memberships launch — spots are limited.</p>
+      <form id="waitlist-form" novalidate>
+        <label class="field">
+          <span data-i18n="waitlist.fullNameLabel">Full name</span>
+          <input required name="fullName" type="text" autocomplete="name" data-i18n-placeholder="waitlist.fullNamePlaceholder" placeholder="Your full name">
+        </label>
+        <label class="field">
+          <span data-i18n="waitlist.whatsappLabel">WhatsApp number</span>
+          <input required name="whatsapp" type="tel" autocomplete="tel" data-i18n-placeholder="waitlist.whatsappPlaceholder" placeholder="+55 21 91234-5678">
+        </label>
+        <label class="field">
+          <span><span data-i18n="waitlist.emailLabel">Email</span> <em data-i18n="contact.optional">(optional)</em></span>
+          <input name="email" type="email" autocomplete="email" data-i18n-placeholder="waitlist.emailPlaceholder" placeholder="you@email.com">
+        </label>
+        <button class="btn-primary" type="submit" data-i18n="waitlist.submit">Join the Waitlist</button>
+        <p class="error" id="waitlist-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- WAITLIST CONFIRMED -->
+    <section class="screen" data-screen="waitlist-confirmed">
+      <p class="eyebrow" data-i18n="waitlist.confirmedEyebrow">You're In!</p>
+      <h1 class="display" data-i18n="waitlist.confirmedHeading">You're on the list.</h1>
+      <p class="lede" data-i18n="waitlist.confirmedLede">We'll reach out as soon as monthly memberships open in January — as one of our first members, you'll get early access before spots fill up.</p>
+      <button class="btn-primary" id="waitlist-confirmed-back-btn" type="button" data-i18n="waitlist.confirmedBackBtn">Back to Common Ground</button>
     </section>
 
   </main>

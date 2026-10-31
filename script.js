@@ -271,6 +271,11 @@ const CONFIG = {
 // ---------------------------------------------------------------------------
 const TRANSLATIONS = {
   en: {
+    membershipBanner: {
+      eyebrow: "Starting January 2027",
+      title: "Join the Monthly Membership Waitlist →",
+      desc: "Every event, exclusive discounts around the city & more. Limited spots.",
+    },
     landing: {
       eyebrow: "Rio de Janeiro · Applications Open Now",
       bio: "A social club in Rio curated for locals and nomads alike to connect and meet IRL.\n\nIn a world where everything is online, people are craving community and real human connection. That's why we created Common Ground.",
@@ -349,6 +354,23 @@ const TRANSLATIONS = {
       emailError: "Please enter a valid email address.",
       hostelVolunteerError: "Please tell us who told you about the event.",
     },
+    waitlist: {
+      eyebrow: "Monthly Membership · Starting January 2027",
+      heading: "Be first in line.",
+      lede: "Join the waitlist for early access when Common Ground monthly memberships launch — spots are limited.",
+      fullNameLabel: "Full name",
+      fullNamePlaceholder: "Your full name",
+      whatsappLabel: "WhatsApp number",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "Email",
+      emailPlaceholder: "you@email.com",
+      submit: "Join the Waitlist",
+      error: "Please fill in your name and WhatsApp number.",
+      confirmedEyebrow: "You're In!",
+      confirmedHeading: "You're on the list.",
+      confirmedLede: "We'll reach out as soon as monthly memberships open in January — as one of our first members, you'll get early access before spots fill up.",
+      confirmedBackBtn: "Back to Common Ground",
+    },
     reviewing: {
       messages: [
         "Saving your answers…",
@@ -421,6 +443,11 @@ const TRANSLATIONS = {
     },
   },
   pt: {
+    membershipBanner: {
+      eyebrow: "A partir de janeiro de 2027",
+      title: "Entre na Lista de Espera da Assinatura Mensal →",
+      desc: "Todos os eventos, descontos exclusivos pela cidade e mais. Vagas limitadas.",
+    },
     landing: {
       eyebrow: "Rio de Janeiro · Inscrições Abertas",
       bio: "Um clube social no Rio pensado para cariocas e nômades se conectarem e se encontrarem na vida real.\n\nNum mundo onde tudo é online, as pessoas estão em busca de comunidade e conexão humana de verdade. Foi por isso que criamos o Common Ground.",
@@ -499,6 +526,23 @@ const TRANSLATIONS = {
       emailError: "Insira um e-mail válido.",
       hostelVolunteerError: "Conte-nos quem te contou sobre o evento.",
     },
+    waitlist: {
+      eyebrow: "Assinatura Mensal · A partir de janeiro de 2027",
+      heading: "Seja um dos primeiros.",
+      lede: "Entre na lista de espera para ter acesso antecipado quando as assinaturas mensais da Common Ground forem lançadas — vagas limitadas.",
+      fullNameLabel: "Nome completo",
+      fullNamePlaceholder: "Seu nome completo",
+      whatsappLabel: "Número de WhatsApp",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "E-mail",
+      emailPlaceholder: "voce@email.com",
+      submit: "Entrar na Lista de Espera",
+      error: "Preencha seu nome e número de WhatsApp.",
+      confirmedEyebrow: "Você Entrou!",
+      confirmedHeading: "Você está na lista.",
+      confirmedLede: "Entraremos em contato assim que as assinaturas mensais abrirem em janeiro — como um dos primeiros membros, você terá acesso antecipado antes que as vagas se esgotem.",
+      confirmedBackBtn: "Voltar para a Common Ground",
+    },
     reviewing: {
       messages: [
         "Salvando suas respostas…",
@@ -571,6 +615,11 @@ const TRANSLATIONS = {
     },
   },
   es: {
+    membershipBanner: {
+      eyebrow: "A partir de enero de 2027",
+      title: "Únete a la Lista de Espera de la Membresía Mensual →",
+      desc: "Todos los eventos, descuentos exclusivos por la ciudad y más. Cupos limitados.",
+    },
     landing: {
       eyebrow: "Río de Janeiro · Inscripciones Abiertas",
       bio: "Un club social en Río pensado para locales y nómadas que quieren conectar y encontrarse en la vida real.\n\nEn un mundo donde todo es online, las personas buscan comunidad y conexión humana real. Por eso creamos Common Ground.",
@@ -648,6 +697,23 @@ const TRANSLATIONS = {
       error: "Completa todos los campos para continuar.",
       emailError: "Ingresa un correo electrónico válido.",
       hostelVolunteerError: "Cuéntanos quién te contó sobre el evento.",
+    },
+    waitlist: {
+      eyebrow: "Membresía Mensual · A partir de enero de 2027",
+      heading: "Sé de los primeros.",
+      lede: "Únete a la lista de espera para tener acceso anticipado cuando se lancen las membresías mensuales de Common Ground — cupos limitados.",
+      fullNameLabel: "Nombre completo",
+      fullNamePlaceholder: "Tu nombre completo",
+      whatsappLabel: "Número de WhatsApp",
+      whatsappPlaceholder: "+55 21 91234-5678",
+      emailLabel: "Correo electrónico",
+      emailPlaceholder: "tu@email.com",
+      submit: "Unirme a la Lista de Espera",
+      error: "Completa tu nombre y número de WhatsApp.",
+      confirmedEyebrow: "¡Estás Dentro!",
+      confirmedHeading: "Estás en la lista.",
+      confirmedLede: "Te contactaremos en cuanto se abran las membresías mensuales en enero — como uno de los primeros miembros, tendrás acceso anticipado antes de que se agoten los cupos.",
+      confirmedBackBtn: "Volver a Common Ground",
     },
     reviewing: {
       messages: [
@@ -1714,6 +1780,7 @@ function runReviewSequence() {
 // ---------------------------------------------------------------------------
 function submitApplication() {
   const payload = {
+    type: "ticket",
     submittedAt: new Date().toISOString(),
     language: state.lang,
     ...state.contact,
@@ -1746,6 +1813,80 @@ function submitApplication() {
     body: JSON.stringify(payload),
   }).catch(() => {
     // Never block the applicant's flow on a network/save failure.
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Monthly Membership waitlist — reached via the banner at the very top of
+// the page (#membership-banner-link), not part of the ticket/Grounds Pass
+// funnel. Deliberately separate from state.contact/submitApplication()
+// above: different fields, and someone should be able to join the waitlist
+// without it touching an in-progress ticket application, or vice versa.
+// Saves the same way (local backup + CONFIG.formEndpoint POST), tagged
+// type: "waitlist" so entries are distinguishable once they land in the
+// same sheet/inbox as ticket applications.
+// ---------------------------------------------------------------------------
+const waitlistForm = document.getElementById("waitlist-form");
+const waitlistError = document.getElementById("waitlist-error");
+
+document.getElementById("membership-banner-link").addEventListener("click", (e) => {
+  e.preventDefault();
+  showScreen("waitlist");
+});
+
+document.getElementById("waitlist-back-btn").addEventListener("click", () => {
+  showScreen("landing");
+});
+
+document.getElementById("waitlist-confirmed-back-btn").addEventListener("click", () => {
+  showScreen("landing");
+});
+
+waitlistForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const data = new FormData(waitlistForm);
+  const fullName = (data.get("fullName") || "").toString().trim();
+  const whatsapp = (data.get("whatsapp") || "").toString().trim();
+  const email = (data.get("email") || "").toString().trim();
+
+  if (!fullName || !whatsapp) {
+    waitlistError.textContent = t("waitlist.error");
+    waitlistError.hidden = false;
+    return;
+  }
+  waitlistError.hidden = true;
+
+  submitWaitlistEntry({ fullName, whatsapp, email });
+  waitlistForm.reset();
+  showScreen("waitlist-confirmed");
+});
+
+function submitWaitlistEntry(entry) {
+  const payload = {
+    type: "waitlist",
+    submittedAt: new Date().toISOString(),
+    language: state.lang,
+    ...entry,
+  };
+
+  // Local backup so nothing is lost even without a remote endpoint configured.
+  try {
+    const key = "commonground-waitlist";
+    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    existing.push(payload);
+    localStorage.setItem(key, JSON.stringify(existing));
+  } catch (err) {
+    // localStorage can fail in private browsing / storage-full states — non-fatal.
+  }
+
+  if (!CONFIG.formEndpoint) return;
+
+  fetch(CONFIG.formEndpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(payload),
+  }).catch(() => {
+    // Never block the signup on a network/save failure.
   });
 }
 

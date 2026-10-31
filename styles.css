@@ -132,6 +132,56 @@ body {
   pointer-events: none;
 }
 
+/* Monthly membership waitlist banner — the very first thing on the page,
+   above the logo, so it's unmissable for anyone landing via the event QR
+   code. Solid accent fill (same gold used for every primary CTA) against
+   the dark app background makes it read as "new announcement" at a glance. */
+.membership-banner {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 14px 24px;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.15s ease;
+}
+
+.membership-banner:hover,
+.membership-banner:active {
+  background: #ddd0a8;
+}
+
+.membership-banner-eyebrow {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 3px;
+}
+
+.membership-banner-title {
+  display: block;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.membership-banner-desc {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
 .topbar {
   position: relative;
   z-index: 1;
