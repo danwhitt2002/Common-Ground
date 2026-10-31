@@ -357,7 +357,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Monthly Membership · Starting January 2027",
       heading: "Get early access.",
-      lede: "Join the waitlist for early access when monthly memberships launch in January. Most events will be members-only — way better value than paying per ticket — with a monthly open day for newcomers to try us out.",
+      lede: "Join the waitlist for early access when monthly memberships launch in January.",
       fullNameLabel: "Full name",
       fullNamePlaceholder: "Your full name",
       whatsappLabel: "WhatsApp number",
@@ -529,7 +529,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Assinatura Mensal · A partir de janeiro de 2027",
       heading: "Tenha acesso antecipado.",
-      lede: "Entre na lista de espera para ter acesso antecipado quando as assinaturas mensais forem lançadas em janeiro. A maioria dos eventos será exclusiva para assinantes — um custo-benefício muito melhor do que pagar por evento — com um dia aberto por mês para quem é novo conhecer a Common Ground.",
+      lede: "Entre na lista de espera para ter acesso antecipado quando as assinaturas mensais forem lançadas em janeiro.",
       fullNameLabel: "Nome completo",
       fullNamePlaceholder: "Seu nome completo",
       whatsappLabel: "Número de WhatsApp",
@@ -701,7 +701,7 @@ const TRANSLATIONS = {
     waitlist: {
       eyebrow: "Membresía Mensual · A partir de enero de 2027",
       heading: "Obtén acceso anticipado.",
-      lede: "Únete a la lista de espera para tener acceso anticipado cuando se lancen las membresías mensuales en enero. La mayoría de los eventos serán exclusivos para miembros — mucho mejor valor que pagar por evento — con un día abierto al mes para que los nuevos prueben Common Ground.",
+      lede: "Únete a la lista de espera para tener acceso anticipado cuando se lancen las membresías mensuales en enero.",
       fullNameLabel: "Nombre completo",
       fullNamePlaceholder: "Tu nombre completo",
       whatsappLabel: "Número de WhatsApp",
