@@ -378,7 +378,7 @@ const TRANSLATIONS = {
       backToSelectEvent: "← Select Your Event",
       eyebrow: "You're In!",
       heading: "Welcome to the Common Ground Social Club.",
-      lede: "You're in. Choose your plan below — coffee & matcha‑based mocktails included every time.",
+      lede: "You're in. Choose your plan below.",
       recommendedLabel: "Recommended",
       plans: {
         single: {
@@ -538,7 +538,7 @@ const TRANSLATIONS = {
       backToSelectEvent: "← Escolha Seu Evento",
       eyebrow: "Você Está Dentro!",
       heading: "Bem-vindo(a) ao Common Ground Social Club.",
-      lede: "Você entrou. Escolha seu plano abaixo — mocktails de café e matchá incluídos sempre.",
+      lede: "Você entrou. Escolha seu plano abaixo.",
       recommendedLabel: "Recomendado",
       plans: {
         single: {
@@ -698,7 +698,7 @@ const TRANSLATIONS = {
       backToSelectEvent: "← Elige Tu Evento",
       eyebrow: "¡Ya Estás Dentro!",
       heading: "Bienvenido/a al Common Ground Social Club.",
-      lede: "Ya estás dentro. Elige tu plan abajo — mocktails de café y matcha incluidos siempre.",
+      lede: "Ya estás dentro. Elige tu plan abajo.",
       recommendedLabel: "Recomendado",
       plans: {
         single: {
