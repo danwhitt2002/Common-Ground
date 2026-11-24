@@ -3,11 +3,11 @@
 // ---------------------------------------------------------------------------
 const CONFIG = {
   // Single Event Pass — one specific date, picked on the select-event screen.
-  // Back to R$100 (was briefly dropped to R$40 for the Oct 4 beach event).
+  // R$35 (was R$100, until the Nov 28 speed dating/speed friending event).
   // Update this (and regenerate assets/pix-qr.png + assets/wise-qr.png)
   // whenever the event price changes, since those QR images each encode a
   // fixed amount.
-  price: "R$100",
+  price: "R$35",
 
   // Flash sale — drops the Single Event Pass to R$80 (from the R$100 above)
   // until the cutoff below, then automatically reverts with no manual
@@ -40,15 +40,15 @@ const CONFIG = {
   // with a different price.
   //
   // BRINGAFRIEND15 is the live "Bring a Friend" code, featured on the
-  // landing page: 15% off (R$85) a Single Event Pass when a pair buys
-  // tickets together.
+  // landing page: 15% off (R$30, rounded from R$29.75) a Single Event Pass
+  // when a pair buys tickets together.
   // DISCONNECT / DESCONECTA is a second, separately-distributed 15% off
-  // code (same R$85 price/QR pair as BRINGAFRIEND15) — English and
+  // code (same R$30 price/QR pair as BRINGAFRIEND15) — English and
   // Portuguese spellings of the same promo, both matched case-insensitively.
   discountCodes: {
-    BRINGAFRIEND15: { price: "R$85", gbp: 13 },
-    DISCONNECT: { price: "R$85", gbp: 13 },
-    DESCONECTA: { price: "R$85", gbp: 13 },
+    BRINGAFRIEND15: { price: "R$30", gbp: 4 },
+    DISCONNECT: { price: "R$30", gbp: 4 },
+    DESCONECTA: { price: "R$30", gbp: 4 },
   },
 
   // Grounds Pass — the monthly membership. Access to every event for a
@@ -111,7 +111,7 @@ const CONFIG = {
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
-  gbpAmount: { single: 15, monthly: 26, founding: 100 },
+  gbpAmount: { single: 5, monthly: 26, founding: 100 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -327,32 +327,19 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Your full name",
       whatsappLabel: "WhatsApp number",
       whatsappPlaceholder: "+55 21 91234-5678",
-      emailLabel: "Email",
-      emailPlaceholder: "you@email.com",
-      documentLabel: "CPF or Passport number",
-      documentPlaceholder: "000.000.000-00",
-      tshirtLabel: "T-shirt size",
-      tshirtPlaceholder: "Select a size",
       instagramLabel: "Instagram handle",
       instagramPlaceholder: "@yourname",
       hearAboutLabel: "How did you hear about this event?",
       hearAboutPlaceholder: "Select an option",
       hearAboutOptions: {
-        instagram: "Instagram",
         whatsapp: "Common Ground Whatsapp Community",
         friend: "Through a Friend",
-        moreipanema: "MORE Ipanema Hostel",
-        ipanemabeach: "Ipanema Beach Hostel",
-        leblonbeach: "Leblon Beach Hostel",
-        other: "Other",
+        instagram: "Instagram",
+        frc: "FRC",
       },
-      hostelVolunteerLabel: "Who at {hostel} told you about the event?",
-      hostelVolunteerPlaceholder: "Their name",
       optional: "(optional)",
       submit: "Submit Application",
-      error: "Please fill in all fields to continue.",
-      emailError: "Please enter a valid email address.",
-      hostelVolunteerError: "Please tell us who told you about the event.",
+      error: "Please fill in your name and WhatsApp number.",
     },
     waitlist: {
       eyebrow: "Monthly Membership · Starting January 2027",
@@ -500,32 +487,19 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Seu nome completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
-      emailLabel: "E-mail",
-      emailPlaceholder: "voce@email.com",
-      documentLabel: "CPF ou número do passaporte",
-      documentPlaceholder: "000.000.000-00",
-      tshirtLabel: "Tamanho da camiseta",
-      tshirtPlaceholder: "Selecione um tamanho",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@seunome",
       hearAboutLabel: "Como você ficou sabendo desse evento?",
       hearAboutPlaceholder: "Selecione uma opção",
       hearAboutOptions: {
-        instagram: "Instagram",
         whatsapp: "Comunidade do WhatsApp da Common Ground",
         friend: "Por um amigo",
-        moreipanema: "MORE Ipanema Hostel",
-        ipanemabeach: "Ipanema Beach Hostel",
-        leblonbeach: "Leblon Beach Hostel",
-        other: "Outro",
+        instagram: "Instagram",
+        frc: "FRC",
       },
-      hostelVolunteerLabel: "Quem do {hostel} te contou sobre o evento?",
-      hostelVolunteerPlaceholder: "Nome da pessoa",
       optional: "(opcional)",
       submit: "Enviar Inscrição",
-      error: "Preencha todos os campos para continuar.",
-      emailError: "Insira um e-mail válido.",
-      hostelVolunteerError: "Conte-nos quem te contou sobre o evento.",
+      error: "Preencha seu nome e número de WhatsApp.",
     },
     waitlist: {
       eyebrow: "Assinatura Mensal · A partir de janeiro de 2027",
@@ -673,32 +647,19 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Tu nombre completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
-      emailLabel: "Correo electrónico",
-      emailPlaceholder: "tu@email.com",
-      documentLabel: "CPF o número de pasaporte",
-      documentPlaceholder: "000.000.000-00",
-      tshirtLabel: "Talla de camiseta",
-      tshirtPlaceholder: "Selecciona una talla",
       instagramLabel: "Instagram",
       instagramPlaceholder: "@tunombre",
       hearAboutLabel: "¿Cómo te enteraste de este evento?",
       hearAboutPlaceholder: "Selecciona una opción",
       hearAboutOptions: {
-        instagram: "Instagram",
         whatsapp: "Comunidad de WhatsApp de Common Ground",
         friend: "A través de un amigo",
-        moreipanema: "MORE Ipanema Hostel",
-        ipanemabeach: "Ipanema Beach Hostel",
-        leblonbeach: "Leblon Beach Hostel",
-        other: "Otro",
+        instagram: "Instagram",
+        frc: "FRC",
       },
-      hostelVolunteerLabel: "¿Quién de {hostel} te contó sobre el evento?",
-      hostelVolunteerPlaceholder: "Su nombre",
       optional: "(opcional)",
       submit: "Enviar Solicitud",
-      error: "Completa todos los campos para continuar.",
-      emailError: "Ingresa un correo electrónico válido.",
-      hostelVolunteerError: "Cuéntanos quién te contó sobre el evento.",
+      error: "Completa tu nombre y número de WhatsApp.",
     },
     waitlist: {
       eyebrow: "Membresía Mensual · A partir de enero de 2027",
@@ -1002,7 +963,7 @@ function renderSelectEventScreen() {
     const dateEl = document.createElement("p");
     dateEl.className = "event-card-date";
     const [y, m, d] = event.date.split("-").map(Number);
-    dateEl.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d)));
+    dateEl.textContent = formatter.format(new Date(Date.UTC(y, m - 1, d))) + (event.time ? ` · ${event.time}` : "");
     li.appendChild(dateEl);
 
     const select = () => {
@@ -1028,29 +989,38 @@ function renderSelectEventScreen() {
 document.getElementById("select-event-continue").addEventListener("click", () => {
   if (state.selectedEvents.length === 0) return;
   state.plan = "single";
-  showScreen("approved");
-  renderPlanCard();
+  prefillContact();
+  showScreen("contact");
 });
 
 document.getElementById("select-event-monthly-link").addEventListener("click", (e) => {
   e.preventDefault();
   state.plan = "monthly";
   state.selectedEvents = [];
-  showScreen("approved");
-  renderPlanCard();
+  prefillContact();
+  showScreen("contact");
 });
 
 document.getElementById("select-event-founding-link").addEventListener("click", (e) => {
   e.preventDefault();
   state.plan = "founding";
   state.selectedEvents = [];
-  showScreen("approved");
-  renderPlanCard();
-});
-
-document.getElementById("select-event-back-btn").addEventListener("click", () => {
   prefillContact();
   showScreen("contact");
+});
+
+// select-event now comes before contact (see buy-ticket-btn/advanceQuestion
+// above), so going back from it means leaving the application entirely —
+// same branching contact-back-btn used to do when it sat in this spot:
+// landing for the no-questions ticket path, the last question otherwise.
+document.getElementById("select-event-back-btn").addEventListener("click", () => {
+  if (state.skippedQuestions) {
+    showScreen("landing");
+    return;
+  }
+  state.questionIndex = CONFIG.questions.length - 1;
+  renderQuestion();
+  showScreen("question");
 });
 
 // Lets someone recheck/change their picked date from the payment screen
@@ -1383,15 +1353,15 @@ document.getElementById("start-btn").addEventListener("click", () => {
 });
 
 // "Get Your Ticket" — a lower-friction path for Single Event Pass buyers
-// only: skips the application questions entirely and goes straight to the
-// contact screen, then select-event, then payment. Anyone who wants the
-// Grounds Pass or Founding Member still goes through "Apply Now" above
-// (or can switch plans later from the select-event screen either way).
+// only: skips the application questions entirely and goes straight to
+// select-event, then contact, then payment. Anyone who wants the Grounds
+// Pass or Founding Member still goes through "Apply Now" above (or can
+// switch plans later from the select-event screen either way).
 document.getElementById("buy-ticket-btn").addEventListener("click", () => {
   state.skippedQuestions = true;
   state.answers = [];
-  prefillContact();
-  showScreen("contact");
+  renderSelectEventScreen();
+  showScreen("select-event");
 });
 
 // Wordmark in the header links back to the landing screen — a full page
@@ -1574,8 +1544,8 @@ function advanceQuestion() {
     state.questionIndex += 1;
     renderQuestion();
   } else {
-    prefillContact();
-    showScreen("contact");
+    renderSelectEventScreen();
+    showScreen("select-event");
   }
 }
 
@@ -1652,44 +1622,12 @@ textAnswerInput.addEventListener("keydown", (e) => {
 // ---------------------------------------------------------------------------
 const contactForm = document.getElementById("contact-form");
 const contactError = document.getElementById("contact-error");
-const hostelVolunteerField = document.getElementById("hostel-volunteer-field");
-const hostelVolunteerLabel = document.getElementById("hostel-volunteer-label");
-
-// Referral sources that are a specific hostel partner — each shows the same
-// "who told you" follow-up, just naming that hostel. Keys match the
-// hearAboutUs <option> values; names are proper names, kept in English
-// across all three languages (same as "MORE Ipanema Hostel" itself).
-const HOSTEL_REFERRAL_NAMES = {
-  moreipanema: "MORE Ipanema",
-  ipanemabeach: "Ipanema Beach",
-  leblonbeach: "Leblon Beach",
-};
-
-// The "who at [hostel] told you" follow-up only makes sense once one of the
-// hostel partners above is picked as the referral source — hidden
-// otherwise, and cleared whenever it's hidden so a stale answer never
-// silently submits.
-function syncHostelVolunteerField() {
-  const hostelName = HOSTEL_REFERRAL_NAMES[contactForm.hearAboutUs.value];
-  hostelVolunteerField.hidden = !hostelName;
-  if (hostelName) {
-    hostelVolunteerLabel.textContent = t("contact.hostelVolunteerLabel").replace("{hostel}", hostelName);
-  } else {
-    contactForm.hostelVolunteer.value = "";
-  }
-}
-contactForm.hearAboutUs.addEventListener("change", syncHostelVolunteerField);
 
 function prefillContact() {
   contactForm.fullName.value = state.contact.fullName || "";
   contactForm.whatsapp.value = state.contact.whatsapp || "";
-  contactForm.email.value = state.contact.email || "";
-  contactForm.cpfPassport.value = state.contact.cpfPassport || "";
-  contactForm.tshirtSize.value = state.contact.tshirtSize || "";
   contactForm.instagram.value = state.contact.instagram || "";
   contactForm.hearAboutUs.value = state.contact.hearAboutUs || "";
-  contactForm.hostelVolunteer.value = state.contact.hostelVolunteer || "";
-  syncHostelVolunteerField();
 }
 
 document.getElementById("contact-back-btn").addEventListener("click", () => {
@@ -1697,22 +1635,13 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
   state.contact = {
     fullName: contactForm.fullName.value.trim(),
     whatsapp: contactForm.whatsapp.value.trim(),
-    email: contactForm.email.value.trim(),
-    cpfPassport: contactForm.cpfPassport.value.trim(),
-    tshirtSize: contactForm.tshirtSize.value,
     instagram: contactForm.instagram.value.trim(),
     hearAboutUs: contactForm.hearAboutUs.value,
-    hostelVolunteer: contactForm.hostelVolunteer.value,
   };
-  // "Get Your Ticket" skips the question flow entirely, so there's no
-  // question screen to go back to — return to landing instead.
-  if (state.skippedQuestions) {
-    showScreen("landing");
-    return;
-  }
-  state.questionIndex = CONFIG.questions.length - 1;
-  renderQuestion();
-  showScreen("question");
+  // select-event now always precedes contact (ticket-buy and apply-for-
+  // Grounds-Pass alike), so going back always lands there.
+  renderSelectEventScreen();
+  showScreen("select-event");
 });
 
 contactForm.addEventListener("submit", (e) => {
@@ -1720,34 +1649,17 @@ contactForm.addEventListener("submit", (e) => {
   const data = new FormData(contactForm);
   const fullName = (data.get("fullName") || "").toString().trim();
   const whatsapp = (data.get("whatsapp") || "").toString().trim();
-  const email = (data.get("email") || "").toString().trim();
-  const cpfPassport = (data.get("cpfPassport") || "").toString().trim();
-  const tshirtSize = (data.get("tshirtSize") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
   const hearAboutUs = (data.get("hearAboutUs") || "").toString().trim();
-  const hostelVolunteer = (data.get("hostelVolunteer") || "").toString().trim();
 
-  if (!fullName || !whatsapp || !email || !cpfPassport || !tshirtSize) {
+  if (!fullName || !whatsapp) {
     contactError.textContent = t("contact.error");
-    contactError.hidden = false;
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    contactError.textContent = t("contact.emailError");
-    contactError.hidden = false;
-    return;
-  }
-  // The referral source itself is optional, but once someone names a hostel
-  // partner, naming who there told them is the whole point of asking —
-  // don't let that go half-answered.
-  if (HOSTEL_REFERRAL_NAMES[hearAboutUs] && !hostelVolunteer) {
-    contactError.textContent = t("contact.hostelVolunteerError");
     contactError.hidden = false;
     return;
   }
   contactError.hidden = true;
 
-  state.contact = { fullName, whatsapp, email, cpfPassport, tshirtSize, instagram, hearAboutUs, hostelVolunteer };
+  state.contact = { fullName, whatsapp, instagram, hearAboutUs };
   showScreen("reviewing");
   runReviewSequence();
 });
@@ -1773,8 +1685,8 @@ function runReviewSequence() {
 
   setTimeout(() => {
     clearInterval(interval);
-    renderSelectEventScreen();
-    showScreen("select-event");
+    renderPlanCard();
+    showScreen("approved");
   }, messages.length * 850 + 250);
 }
 
@@ -1786,6 +1698,7 @@ function submitApplication() {
     type: "ticket",
     submittedAt: new Date().toISOString(),
     language: state.lang,
+    eventDate: state.selectedEvents[0] || "",
     ...state.contact,
     answers: state.answers,
   };

@@ -156,7 +156,7 @@ function renderEventsPage() {
     // Date-only parse (no time) is treated as UTC midnight by JS — read the
     // Y/M/D back out in UTC too, so the formatted day-of-week never shifts.
     const [y, m, d] = event.date.split("-").map(Number);
-    dateEl.textContent = dateFormatter.format(new Date(Date.UTC(y, m - 1, d)));
+    dateEl.textContent = dateFormatter.format(new Date(Date.UTC(y, m - 1, d))) + (event.time ? ` · ${event.time}` : "");
     li.appendChild(dateEl);
 
     return li;

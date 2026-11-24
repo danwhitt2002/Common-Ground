@@ -14,13 +14,15 @@
 // - `pastEvents` — dates that already happened. Shown on events.html as a
 //   recap section only — never selectable in the application flow.
 //
-// Each entry is { date: "YYYY-MM-DD", location, title?, tag?, image?,
+// Each entry is { date: "YYYY-MM-DD", location, title?, tag?, time?, image?,
 // imagePosition? }:
 // - `title` (optional) — a prominent headline for a special date, e.g.
 //   "LAUNCH PARTY: Bring a +1". Omit for a normal, date-only event. Use
 //   "\n" for an explicit two-line title (e.g. a co-host credit on its own
 //   line above the event name) — it wraps normally otherwise.
 // - `tag` (optional) — a short badge shown above the date, e.g. "+1 PARTY".
+// - `time` (optional) — shown after the date, e.g. "8pm" — plain display
+//   text, not parsed, so any wording works ("8pm", "8-11pm", etc.).
 // - `image` (optional) — a photo for that specific event (drop the file in
 //   assets/events/ and reference it here, e.g.
 //   "assets/events/launch-party.jpg"). On events.html, the upcoming event
@@ -37,7 +39,9 @@
 //   to "center" if omitted.
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
-  events: [],
+  events: [
+    { date: "2026-11-28", time: "8pm", location: "blue by MORE", title: "Common Ground x blue by MORE\nFind Your Match: Speed Dating + Friending" },
+  ],
   pastEvents: [
     { date: "2026-11-01", location: "Quiosque Dumaré/Casa Fuego, Copacabana", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH", image: "assets/events/wellness-morning.jpg" },
     { date: "2026-10-04", location: "Ipanema, Posto 9", title: "SUNDAY SOCIALS: Common Ground on the Beach", image: "assets/events/beach-social.jpg", imagePosition: "top" },
