@@ -40,7 +40,7 @@
 // ---------------------------------------------------------------------------
 const EVENTS_CONFIG = {
   events: [
-    { date: "2026-11-28", time: "8pm", location: "blue by MORE", title: "Common Ground x blue by MORE\nFIND YOUR MATCH: SPEED DATING + FRIENDING" },
+    { date: "2026-11-28", time: "8pm", location: "blue by MORE", title: "Common Ground x blue by MORE\nFIND YOUR MATCH: SPEED DATING + FRIENDING", image: "assets/events/find-your-match.jpg" },
   ],
   pastEvents: [
     { date: "2026-11-01", location: "Quiosque Dumaré/Casa Fuego, Copacabana", title: "Common Ground x Track & Field\nWellness Morning: COMMON GROUND ON THE BEACH", image: "assets/events/wellness-morning.jpg" },
