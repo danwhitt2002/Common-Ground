@@ -39,16 +39,13 @@ const CONFIG = {
   // wise-qr-discount.png) — regenerate those if you bring a code back
   // with a different price.
   //
-  // BRINGAFRIEND15 is the live "Bring a Friend" code, featured on the
-  // landing page: 15% off (R$30, rounded from R$29.75) a Single Event Pass
-  // when a pair buys tickets together.
-  // DISCONNECT / DESCONECTA is a second, separately-distributed 15% off
-  // code (same R$30 price/QR pair as BRINGAFRIEND15) — English and
-  // Portuguese spellings of the same promo, both matched case-insensitively.
+  // BRINGAFRIEND is the only live discount code — the "Bring a Friend"
+  // promo featured on the landing page: R$25 each (flat, not a percentage)
+  // on a Single Event Pass when a pair buys tickets together. DISCONNECT /
+  // DESCONECTA (a separately-distributed pair of codes for the same promo)
+  // have been retired — remove the whole key to retire BRINGAFRIEND too.
   discountCodes: {
-    BRINGAFRIEND15: { price: "R$30", gbp: 4 },
-    DISCONNECT: { price: "R$30", gbp: 4 },
-    DESCONECTA: { price: "R$30", gbp: 4 },
+    BRINGAFRIEND: { price: "R$25", gbp: 4 },
   },
 
   // Grounds Pass — the monthly membership. Access to every event for a
@@ -63,11 +60,10 @@ const CONFIG = {
   // recurring billing here (no backend for that) — like Founding Member
   // spots, renewals are tracked by hand: note when someone's month is up
   // and follow up for the next payment.
-  // Back to R$180 (was briefly dropped to R$100) — regenerate
-  // assets/pix-qr-monthly.png + assets/wise-qr-monthly.png (and update
-  // CONFIG.gbpAmount.monthly) if this ever changes again, same as the
-  // other plans.
-  monthlyMembershipPrice: "R$180",
+  // R$100 (was R$180) — regenerate assets/pix-qr-monthly.png +
+  // assets/wise-qr-monthly.png (and update CONFIG.gbpAmount.monthly) if
+  // this ever changes again, same as the other plans.
+  monthlyMembershipPrice: "R$100",
 
   // Founding Member — a one-time, lifetime pass. Deliberately limited
   // (see foundingMemberSpotsTotal/Remaining below) to keep it exclusive.
@@ -111,7 +107,7 @@ const CONFIG = {
   // GBP amount for each plan, shown on the PayPal button/Wise QR and built
   // into their links. Independent from the Reais prices above — update
   // both if you ever reprice.
-  gbpAmount: { single: 5, monthly: 26, founding: 100 },
+  gbpAmount: { single: 5, monthly: 15, founding: 100 },
 
   // WhatsApp number applicants send payment proof to, digits only with
   // country code, no "+", spaces, or leading 0 (e.g. UK 07830 067043 -> 447830067043).
@@ -309,7 +305,7 @@ const TRANSLATIONS = {
       communityIntro: "Introduce yourself!",
       communityLink: "Common Ground Community Groupchat →",
       referralHeading: "Bring a Friend",
-      referralBody: "Buy 2 tickets together and use code BRINGAFRIEND15 at checkout for 15% off your single-event pass.",
+      referralBody: "Buy 2 tickets together and use code BRINGAFRIEND at checkout — R$25 each.",
     },
     question: {
       back: "← Back",
@@ -469,7 +465,7 @@ const TRANSLATIONS = {
       communityIntro: "Se apresente!",
       communityLink: "Grupo da Comunidade Common Ground →",
       referralHeading: "Traga um Amigo",
-      referralBody: "Compre 2 ingressos juntos e use o código BRINGAFRIEND15 no pagamento para ganhar 15% de desconto no passe de evento único.",
+      referralBody: "Compre 2 ingressos juntos e use o código BRINGAFRIEND no pagamento — R$25 cada um.",
     },
     question: {
       back: "← Voltar",
@@ -629,7 +625,7 @@ const TRANSLATIONS = {
       communityIntro: "¡Preséntate!",
       communityLink: "Grupo Comunitario de Common Ground →",
       referralHeading: "Trae a un Amigo",
-      referralBody: "Compra 2 entradas juntos y usa el código BRINGAFRIEND15 al pagar para obtener 15% de descuento en el pase de evento único.",
+      referralBody: "Compra 2 entradas juntos y usa el código BRINGAFRIEND al pagar — R$25 cada una.",
     },
     question: {
       back: "← Atrás",
@@ -855,7 +851,7 @@ function renderNextEventStat() {
 function renderReferralSection() {
   document.getElementById("landing-referral-body").textContent = t("landing.referralBody");
   document.getElementById("referral-price-old").textContent = CONFIG.price;
-  document.getElementById("referral-price-new").textContent = CONFIG.discountCodes.BRINGAFRIEND15.price;
+  document.getElementById("referral-price-new").textContent = CONFIG.discountCodes.BRINGAFRIEND.price;
 }
 
 function renderApprovedFinePrint() {
@@ -1009,18 +1005,12 @@ document.getElementById("select-event-founding-link").addEventListener("click", 
   showScreen("contact");
 });
 
-// select-event now comes before contact (see buy-ticket-btn/advanceQuestion
-// above), so going back from it means leaving the application entirely —
-// same branching contact-back-btn used to do when it sat in this spot:
-// landing for the no-questions ticket path, the last question otherwise.
+// select-event is reached only via "Get Your Ticket" (buy-ticket-btn) —
+// applying for the Grounds Pass is a separate flow that never shows this
+// screen (see start-btn/advanceQuestion) — so going back always means
+// leaving the ticket flow entirely, back to landing.
 document.getElementById("select-event-back-btn").addEventListener("click", () => {
-  if (state.skippedQuestions) {
-    showScreen("landing");
-    return;
-  }
-  state.questionIndex = CONFIG.questions.length - 1;
-  renderQuestion();
-  showScreen("question");
+  showScreen("landing");
 });
 
 // Lets someone recheck/change their picked date from the payment screen
@@ -1347,6 +1337,12 @@ document.getElementById("approved-community-link").href = CONFIG.standardGroupLi
 
 document.getElementById("start-btn").addEventListener("click", () => {
   state.skippedQuestions = false;
+  // Applying for the Grounds Pass is entirely separate from buying a
+  // Single Event Pass ticket — it never touches select-event (not tied to
+  // one date), so make sure neither a stale plan nor a stale picked date
+  // from an earlier, abandoned ticket attempt leaks into this flow.
+  state.plan = "monthly";
+  state.selectedEvents = [];
   state.questionIndex = 0;
   renderQuestion();
   showScreen("question");
@@ -1544,8 +1540,10 @@ function advanceQuestion() {
     state.questionIndex += 1;
     renderQuestion();
   } else {
-    renderSelectEventScreen();
-    showScreen("select-event");
+    // Grounds Pass application — separate from ticket buying, so this
+    // never goes through select-event (see start-btn above).
+    prefillContact();
+    showScreen("contact");
   }
 }
 
@@ -1638,10 +1636,17 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
     instagram: contactForm.instagram.value.trim(),
     hearAboutUs: contactForm.hearAboutUs.value,
   };
-  // select-event now always precedes contact (ticket-buy and apply-for-
-  // Grounds-Pass alike), so going back always lands there.
-  renderSelectEventScreen();
-  showScreen("select-event");
+  // Ticket buying goes through select-event right before this screen, so
+  // back returns there; Grounds Pass applying never does (see start-btn/
+  // advanceQuestion above), so back returns to the last question instead.
+  if (state.skippedQuestions) {
+    renderSelectEventScreen();
+    showScreen("select-event");
+    return;
+  }
+  state.questionIndex = CONFIG.questions.length - 1;
+  renderQuestion();
+  showScreen("question");
 });
 
 contactForm.addEventListener("submit", (e) => {
