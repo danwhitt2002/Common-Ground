@@ -323,6 +323,12 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Your full name",
       whatsappLabel: "WhatsApp number",
       whatsappPlaceholder: "+55 21 91234-5678",
+      intentLabel: "Are you here to make new friends or open to dating?",
+      intentPlaceholder: "Select an option",
+      intentOptions: {
+        friends: "💙 Making new friends",
+        dating: "❤️ Open to dating",
+      },
       instagramLabel: "Instagram handle",
       instagramPlaceholder: "@yourname",
       hearAboutLabel: "How did you hear about this event?",
@@ -335,7 +341,7 @@ const TRANSLATIONS = {
       },
       optional: "(optional)",
       submit: "Submit Application",
-      error: "Please fill in your name and WhatsApp number.",
+      error: "Please fill in your name, WhatsApp number, and whether you're here for friends or dating.",
     },
     waitlist: {
       eyebrow: "Monthly Membership · Starting January 2027",
@@ -483,6 +489,12 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Seu nome completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
+      intentLabel: "Você está aqui para fazer novos amigos ou aberto(a) a paquerar?",
+      intentPlaceholder: "Selecione uma opção",
+      intentOptions: {
+        friends: "💙 Fazer novos amigos",
+        dating: "❤️ Aberto(a) a paquerar",
+      },
       instagramLabel: "Instagram",
       instagramPlaceholder: "@seunome",
       hearAboutLabel: "Como você ficou sabendo desse evento?",
@@ -495,7 +507,7 @@ const TRANSLATIONS = {
       },
       optional: "(opcional)",
       submit: "Enviar Inscrição",
-      error: "Preencha seu nome e número de WhatsApp.",
+      error: "Preencha seu nome, número de WhatsApp e se você veio para fazer amigos ou paquerar.",
     },
     waitlist: {
       eyebrow: "Assinatura Mensal · A partir de janeiro de 2027",
@@ -643,6 +655,12 @@ const TRANSLATIONS = {
       fullNamePlaceholder: "Tu nombre completo",
       whatsappLabel: "Número de WhatsApp",
       whatsappPlaceholder: "+55 21 91234-5678",
+      intentLabel: "¿Vienes a hacer nuevos amigos o estás abierto/a a tener citas?",
+      intentPlaceholder: "Selecciona una opción",
+      intentOptions: {
+        friends: "💙 Hacer nuevos amigos",
+        dating: "❤️ Abierto/a a tener citas",
+      },
       instagramLabel: "Instagram",
       instagramPlaceholder: "@tunombre",
       hearAboutLabel: "¿Cómo te enteraste de este evento?",
@@ -655,7 +673,7 @@ const TRANSLATIONS = {
       },
       optional: "(opcional)",
       submit: "Enviar Solicitud",
-      error: "Completa tu nombre y número de WhatsApp.",
+      error: "Completa tu nombre, número de WhatsApp, y si vienes a hacer amigos o a tener citas.",
     },
     waitlist: {
       eyebrow: "Membresía Mensual · A partir de enero de 2027",
@@ -1624,6 +1642,7 @@ const contactError = document.getElementById("contact-error");
 function prefillContact() {
   contactForm.fullName.value = state.contact.fullName || "";
   contactForm.whatsapp.value = state.contact.whatsapp || "";
+  contactForm.intent.value = state.contact.intent || "";
   contactForm.instagram.value = state.contact.instagram || "";
   contactForm.hearAboutUs.value = state.contact.hearAboutUs || "";
 }
@@ -1633,6 +1652,7 @@ document.getElementById("contact-back-btn").addEventListener("click", () => {
   state.contact = {
     fullName: contactForm.fullName.value.trim(),
     whatsapp: contactForm.whatsapp.value.trim(),
+    intent: contactForm.intent.value,
     instagram: contactForm.instagram.value.trim(),
     hearAboutUs: contactForm.hearAboutUs.value,
   };
@@ -1654,17 +1674,18 @@ contactForm.addEventListener("submit", (e) => {
   const data = new FormData(contactForm);
   const fullName = (data.get("fullName") || "").toString().trim();
   const whatsapp = (data.get("whatsapp") || "").toString().trim();
+  const intent = (data.get("intent") || "").toString().trim();
   const instagram = (data.get("instagram") || "").toString().trim();
   const hearAboutUs = (data.get("hearAboutUs") || "").toString().trim();
 
-  if (!fullName || !whatsapp) {
+  if (!fullName || !whatsapp || !intent) {
     contactError.textContent = t("contact.error");
     contactError.hidden = false;
     return;
   }
   contactError.hidden = true;
 
-  state.contact = { fullName, whatsapp, instagram, hearAboutUs };
+  state.contact = { fullName, whatsapp, intent, instagram, hearAboutUs };
   showScreen("reviewing");
   runReviewSequence();
 });
