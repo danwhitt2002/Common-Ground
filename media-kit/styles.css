@@ -357,6 +357,16 @@ section {
   position: relative;
 }
 
+.portfolio-thumb.has-image {
+  padding: 0;
+}
+
+.portfolio-thumb.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .portfolio-thumb::after {
   content: "▶";
   position: absolute;
