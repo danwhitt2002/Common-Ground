@@ -418,6 +418,13 @@ section {
   font-size: 0.95rem;
 }
 
+.testimonial-card .quote-translation {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.75;
+}
+
 .testimonial-card .who {
   margin-top: 18px;
   color: var(--accent);
