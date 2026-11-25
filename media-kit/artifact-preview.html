@@ -1,8 +1,13 @@
-<title>Dan's Media Kit</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="UGC creator based in London, with a proven track record creating content for hospitality and food &amp; beverage brands across Brazil, Colombia, and Panama." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<title>DAN — @dansdigitaldiaries | UGC Creator, London</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy-900: #102b82;
@@ -584,9 +589,13 @@ footer {
     padding-bottom: 20px;
   }
 }
-</style>
 
-<header id="site-header">
+</style>
+</head>
+<body>
+
+
+  <header id="site-header">
     <nav class="wrap">
       <a href="#top" class="brand">DAN<span>.</span></a>
       <div class="nav-links">
@@ -701,7 +710,9 @@ footer {
             </div>
           </a>
           <a class="portfolio-card" href="https://www.instagram.com/reel/DfIjsjmS9Ih/?hvrq=MTAxcG14MmdkbHpsYQ==" target="_blank" rel="noopener">
-            <div class="portfolio-thumb">ASA A&ccedil;a&iacute; &times; Rio</div>
+            <div class="portfolio-thumb has-image">
+              <img src="images/asa-acai.jpg" alt="Gringo vs. Açaí Toppings — Dan and a friend with a tray of açaí toppings for ASA Açaí" />
+            </div>
             <div class="portfolio-info">
               <div class="cap">ASA A&ccedil;a&iacute; &mdash; UGC Campaign</div>
               <div class="meta">Instagram Reel &middot; Food &amp; Beverage UGC</div>
@@ -893,7 +904,9 @@ footer {
     <div class="wrap">&copy; <span id="year"></span> Dan &middot; @dansdigitaldiaries</div>
   </footer>
 
-  <script>
+  <script src="script.js"></script>
+
+<script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const header = document.getElementById("site-header");
@@ -906,4 +919,7 @@ menuToggle.addEventListener("click", () => {
 document.querySelectorAll(".nav-links a").forEach((link) => {
   link.addEventListener("click", () => header.classList.remove("open"));
 });
+
 </script>
+</body>
+</html>
