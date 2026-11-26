@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="UGC creator based in London, with a proven track record creating content for hospitality and food &amp; beverage brands across Brazil, Colombia, and Panama." />
+<title>DAN — @dansdigitaldiaries | Content Creator Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #102b82;
+  --navy-800: #16358f;
+  --navy-700: #1c3fa0;
+  --navy-600: #234aad;
+  --navy-500: #2c4bab;
+  --line: rgba(230, 225, 210, 0.14);
+  --cream: #e6e1d2;
+  --cream-dim: rgba(230, 225, 210, 0.68);
+  --accent: #cdbb8c;
+  --accent-dim: rgba(205, 187, 140, 0.18);
+  --max-w: 1100px;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--navy-900);
+  color: var(--cream);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.placeholder {
+  color: var(--cream-dim);
+  font-style: italic;
+}
+
+/* Nav */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(16, 43, 130, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+nav.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.brand span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a {
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.nav-cta {
+  border: 1px solid var(--accent);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.nav-cta:hover {
+  background: var(--accent);
+  color: var(--navy-900);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  padding: 110px 0 90px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(224, 185, 120, 0.12), transparent 55%),
+    var(--navy-900);
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 22px;
+  border: 1px solid var(--accent-dim);
+  background: var(--accent-dim);
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1.05;
+}
+
+.hero .handle {
+  color: var(--accent);
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  margin-top: 14px;
+  font-weight: 500;
+}
+
+.hero .tagline {
+  max-width: 560px;
+  margin: 26px auto 0;
+  color: var(--cream-dim);
+  font-size: 1.08rem;
+}
+
+.hero-ctas {
+  margin-top: 38px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--navy-900);
+}
+
+.btn-secondary {
+  border: 1px solid var(--line);
+  color: var(--cream);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Stats */
+.stats {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--navy-800);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 40px 0;
+}
+
+.stat {
+  text-align: center;
+  padding: 10px 12px;
+  border-right: 1px solid var(--line);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat .num {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.9rem;
+  color: var(--accent);
+}
+
+.stat .label {
+  font-size: 0.82rem;
+  color: var(--cream-dim);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Section shared */
+section {
+  padding: 90px 0;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.section-head .eyebrow {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+}
+
+.section-head h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-top: 12px;
+}
+
+.section-head p {
+  color: var(--cream-dim);
+  max-width: 520px;
+  margin: 16px auto 0;
+}
+
+/* About */
+.about-photo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.about-photo img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 22%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.about-body {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.08rem;
+  color: var(--cream-dim);
+}
+
+.about-body + .about-body {
+  margin-top: 18px;
+}
+
+.about-note {
+  max-width: 520px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--cream-dim);
+}
+
+.niche-tags {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.niche-tags span {
+  border: 1px solid var(--line);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--cream);
+}
+
+.niche-specialty {
+  border-color: var(--accent) !important;
+  background: var(--accent-dim);
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+/* Portfolio */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.portfolio-card {
+  background: var(--navy-800);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.portfolio-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.portfolio-thumb {
+  aspect-ratio: 9 / 12;
+  background: linear-gradient(160deg, var(--navy-600), var(--navy-700));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.portfolio-thumb.has-image {
+  padding: 0;
+}
+
+.portfolio-thumb.has-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.portfolio-thumb::after {
+  content: "▶";
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--navy-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.portfolio-info {
+  padding: 16px 18px 20px;
+}
+
+.portfolio-info .cap {
+  font-size: 0.92rem;
+  color: var(--cream);
+}
+
+.portfolio-info .meta {
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+/* Testimonials */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.testimonial-card {
+  background: var(--navy-800);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.testimonial-card .quote {
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+}
+
+.testimonial-card .quote-translation {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+.testimonial-card .who {
+  margin-top: 18px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Packages */
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.package-card {
+  background: var(--navy-800);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.package-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--navy-700), var(--navy-800));
+}
+
+.package-card h3 {
+  font-size: 1.25rem;
+}
+
+.package-card .price {
+  color: var(--accent);
+  font-size: 1rem;
+  margin: 10px 0 20px;
+  font-weight: 600;
+}
+
+.package-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px;
+  flex-grow: 1;
+}
+
+.package-card li {
+  color: var(--cream-dim);
+  font-size: 0.92rem;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+.package-card li:first-child {
+  border-top: none;
+}
+
+.package-card .btn {
+  text-align: center;
+}
+
+.packages-note {
+  max-width: 620px;
+  margin: 36px auto 0;
+  text-align: center;
+  color: var(--cream-dim);
+  font-size: 0.85rem;
+}
+
+/* Contact */
+.contact {
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, rgba(224, 185, 120, 0.1), transparent 60%);
+}
+
+.contact-email {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-family: "Fraunces", Georgia, serif;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent-dim);
+  padding-bottom: 6px;
+}
+
+.social-row {
+  margin-top: 34px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-row a {
+  border: 1px solid var(--line);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+}
+
+.social-row a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+  text-align: center;
+  color: var(--cream-dim);
+  font-size: 0.82rem;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .portfolio-grid,
+  .testimonial-grid,
+  .package-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  header.open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--navy-800);
+    padding: 20px 24px 26px;
+    border-bottom: 1px solid var(--line);
+    gap: 18px;
+  }
+  header.open .nav-cta {
+    display: none;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .portfolio-grid,
+  .testimonial-grid,
+  .package-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: none !important;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 20px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+
+  <header id="site-header">
+    <nav class="wrap">
+      <a href="#top" class="brand">DAN<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+      </div>
+      <a href="#contact" class="nav-cta">Work With Me</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">UGC Creator &middot; London, UK</span>
+        <h1>DAN</h1>
+        <div class="handle">@dansdigitaldiaries</div>
+        <p class="tagline">
+          International UGC creator with a proven track record across Brazil and
+          LATAM &mdash; now based in London, bringing that same raw, authentic
+          storytelling to every project.
+        </p>
+        <div class="hero-ctas">
+          <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="wrap stats-grid">
+        <!-- TODO: fill in remaining numbers, or delete stats you don't want to show -->
+        <div class="stat">
+          <div class="num">9,000+</div>
+          <div class="label">Combined Followers (Instagram + TikTok)</div>
+        </div>
+        <div class="stat">
+          <div class="num">150,000+</div>
+          <div class="label">Views (Last 30 Days)</div>
+        </div>
+        <div class="stat">
+          <div class="num">250+</div>
+          <div class="label">Common Ground Members</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-photo">
+          <img src="images/about-photo.jpg" alt="Dan hosting a street interview on the beach in Rio de Janeiro" />
+        </div>
+        <div class="section-head">
+          <span class="eyebrow">About</span>
+          <h2>Hey, I'm Dan</h2>
+        </div>
+        <p class="about-body">
+          I spent several years living and creating content in Rio de Janeiro before
+          relocating to London. I film, edit, and present short-form video for
+          Instagram and TikTok. In Brazil, I created paid UGC for brands including
+          Naveia, ASA A&ccedil;a&iacute;, and KHOR Cosmetics, plus high-end restaurants
+          like Gurum&ecirc;, alongside building my own content brand,
+          @dansdigitaldiaries, through street interviews and highlight reels.
+        </p>
+        <p class="about-body">
+          I'm also the founder and host of Common Ground, a 250+ member social club
+          in Rio de Janeiro, where I create event content and manage brand partnerships.
+          My signature format is street interviews: stopping real people for raw,
+          unfiltered reactions and opinions on camera. That same energy and eye for
+          authentic storytelling is what I bring to every project, wherever I am.
+        </p>
+        <p class="about-note">
+          Prefer more control? I can also run guided street interviews with prompted
+          questions to hit specific talking points.
+        </p>
+        <div class="niche-tags">
+          <span class="niche-specialty">Street Interviews</span>
+          <span>Coffee Shops &amp; Restaurants</span>
+          <span>Hotels &amp; Travel</span>
+          <span>Food &amp; Beverage</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Portfolio</span>
+          <h2>Recent Work</h2>
+          <p>A selection of UGC content created for past collaborations.</p>
+        </div>
+        <div class="portfolio-grid">
+          <!--
+            TODO: repeat this card for each piece of content.
+            Swap the <a href> for the real video/post link, and replace the thumb text
+            with a background-image (or an embedded <iframe> for TikTok/YouTube).
+          -->
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DfIjsjmS9Ih/?hvrq=MTAxcG14MmdkbHpsYQ==" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/asa-acai.jpg" alt="Gringo vs. Açaí Toppings — Dan and a friend with a tray of açaí toppings for ASA Açaí" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">ASA A&ccedil;a&iacute; &mdash; UGC Campaign</div>
+              <div class="meta">Instagram Reel &middot; Food &amp; Beverage UGC</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DeZMuOWSxI6/?jplx=ZDN0OG1sOGdib25m" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/run-club.jpg" alt="Common Ground Run Club, powered by Naveia, group run along the Rio waterfront" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Common Ground Run Club &mdash; Sponsored by Naveia</div>
+              <div class="meta">Instagram Reel &middot; Event &amp; Brand Sponsorship</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/Dfap5sQhSQ2/?knvt=dmx6dmtxdDZqaGp2" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/khor.jpg" alt="Applying KHOR Cosmetics sunscreen on the beach, UGC collab" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">KHOR Cosmetics &mdash; UGC Campaign</div>
+              <div class="meta">Instagram Reel &middot; Beauty &amp; Skincare UGC</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DcV8kQiJ_xF/?stkn=dXg3em9vYXdtbnZu" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/naveia-coffee-crawl.jpg" alt="Holding a latte at one of the cafes on the Naveia Rio coffee crawl" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Naveia &mdash; UGC Campaign for World Plant-Based Milk Day</div>
+              <div class="meta">Instagram Reel &middot; 5,000+ Views</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/Dc1n9Q_y5s_/?jplx=Yzd3ZXZlcWZxMjdy" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/rock-in-rio.jpg" alt="Dan at Rock in Rio with the festival ferris wheel and Common Ground sign behind him" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Rock in Rio &mdash; Street Interviews for Common Ground</div>
+              <div class="meta">Instagram Reel &middot; Event Street Interviews</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DbN8LhvyVzY/?gwpx=MWlobTFpODdrNGFqcA==" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/coffee-chats.jpg" alt="Coffee Chats with Common Ground, a series powered by Naveia, filmed on Copacabana beach" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Coffee Chats with Common Ground &mdash; Powered by Naveia</div>
+              <div class="meta">Instagram Reel Series</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DadVj8aSujp/?hvrq=eWVoeDluNDVndTc=" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/iced-coffee-opinion.jpg" alt="Dan interviewing someone on their opinion of iced coffee, street interview style" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">What Makes You a Regular? &mdash; Coffee Shop Street Interviews</div>
+              <div class="meta">Instagram Reel &middot; Street Interviews</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DZxbI_6ySsY/?cnvx=NXN3NHdzdjE2Z3F6" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/vascon.jpg" alt="Dan and Brazilian influencer @vascon_on introducing Common Ground" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Local Influencer Collab &mdash; @vascon_on</div>
+              <div class="meta">Instagram Reel &middot; 18,600+ Views</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/Db5sVARS_AE/?stkn=MWN2d3IxZzF5ZnFydg==" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/unique-coffee.jpg" alt="Dan outside UNIQUE Cafés Especiais in São Lourenço, Minas Gerais" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">UNIQUE Coffee &mdash; Educational UGC Series</div>
+              <div class="meta">Instagram Reel &middot; Farm &amp; Roastery Tour</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DC9V8kOu9NS/?stkn=MWdoemQwd2xtZWt5Mg==" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/ecorali.jpg" alt="Sunset over the water at Ecorali Ecolodge, Colombia" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Ecorali Ecolodge Review &mdash; Amenities &amp; Recommendation</div>
+              <div class="meta">Instagram Reel &middot; 15,000+ Views</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DIyXXO2RkKg/?stkn=MTg4cnplMnRvcWhzaQ==" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/meio-do-mundo.jpg" alt="Dan and friends celebrating at the Meio do Mundo (Equator line) monument in Macapá" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Meio do Mundo &mdash; Collab with the Mayor of Macap&aacute;</div>
+              <div class="meta">Instagram Reel &middot; 95,000+ Views</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DcdtFJly0Lu/?evlk=eDI1YTNiajA1dHBu" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/third-space.jpg" alt="Dan asking where the cool people who live here go, searching for a third space in Rio" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Searching for a Third Space in Rio</div>
+              <div class="meta">Instagram Reel &middot; Street Interviews</div>
+            </div>
+          </a>
+          <a class="portfolio-card" href="https://www.instagram.com/reel/DYIaSvtv-GI/?stkn=bzMyYXdreHN0azNq" target="_blank" rel="noopener">
+            <div class="portfolio-thumb has-image">
+              <img src="images/cocos-new-ipanema.jpg" alt="Dan presenting hostel amenities for Cocos &amp; New Ipanema Hostels" />
+            </div>
+            <div class="portfolio-info">
+              <div class="cap">Cocos &amp; New Ipanema Hostels &mdash; 2-Month Collaboration</div>
+              <div class="meta">Instagram Reel Series &middot; 10+ Videos</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS (optional — delete this whole <section> if you don't have quotes yet) -->
+    <section id="testimonials">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Testimonials</span>
+          <h2>What Brands Say</h2>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p class="quote">&ldquo;I love Dan&rsquo;s content because he brings such a fresh, young
+            perspective to Brazil and the incredible lifestyle we have here. He has a great eye
+            for what&rsquo;s new and interesting, while still appreciating what makes Rio so
+            special. I especially love seeing how Naveia naturally fits into his everyday life
+            and becomes part of the lifestyle he shares.&rdquo;</p>
+            <div class="who">Naveia</div>
+          </div>
+          <div class="testimonial-card">
+            <p class="quote">&ldquo;A espontaneidade do Daniel para trabalhar com as c&acirc;meras &eacute;
+            maravilhosa. A capacidade de mostrar os atrativos dos lugares. Habilidade de poder
+            integrar outras pessoas a colaborar com a ideia que ele tem.&rdquo;</p>
+            <p class="quote quote-translation">&ldquo;Daniel&rsquo;s spontaneity working with cameras
+            is wonderful. His ability to show off what makes a place special. His ability to bring
+            other people in to collaborate on the idea he has.&rdquo;</p>
+            <div class="who">Maria &mdash; Cocos Hostel</div>
+          </div>
+          <div class="testimonial-card">
+            <p class="quote">&ldquo;Dan, thank you so much for delivering the content! It turned
+            out incredible, everyone in the team here at ASA loved it :)&rdquo;</p>
+            <div class="who">ASA A&ccedil;a&iacute;</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Contact</span>
+          <h2>Let's Work Together</h2>
+          <p>Have a campaign in mind? Reach out and I'll get back to you within 48 hours.</p>
+        </div>
+        <a href="mailto:danwhitt2002@gmail.com" class="contact-email">danwhitt2002@gmail.com</a>
+        <div class="social-row">
+          <a href="https://instagram.com/dansdigitaldiaries" target="_blank" rel="noopener">Instagram</a>
+          <!-- TODO: add/remove other platforms -->
+          <a href="#" class="placeholder" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">&copy; <span id="year"></span> Dan &middot; @dansdigitaldiaries</div>
+  </footer>
+
+  <script src="../script.js"></script>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const header = document.getElementById("site-header");
+const menuToggle = document.getElementById("menu-toggle");
+
+menuToggle.addEventListener("click", () => {
+  header.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => header.classList.remove("open"));
+});
+
+</script>
+</body>
+</html>
